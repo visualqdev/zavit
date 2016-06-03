@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>zavit</title>
+
+
+</script>
+	<link rel="stylesheet/less" type="text/css" href="css.less" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/2.6.1/less.min.js"crossorigin="anonymous"></script>
+  <script>
+  less = {
+    env: "development",
+    async: false,
+    fileAsync: false,
+    poll: 1000,
+    functions: {},
+    dumpLineNumbers: "comments",
+    relativeUrls: false,
+    rootpath: ":/a.com/"
+  };
+  </script>
+	<script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+  <script   src="https://code.jquery.com/ui/1.12.0-rc.1/jquery-ui.min.js"   integrity="sha256-mFypf4R+nyQVTrc8dBd0DKddGB5AedThU73sLmLWdc0="   crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.23/gmaps.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBl9MCFadEGy-nQU9d1S2WisAdFMJv42XY&libraries=places"></script>
+	<script type="text/javascript" src="test.js"></script>
+
+  <script type="text/javascript" src="snap.svg-min.js"></script>
+</head>
+
+<body id="home">
+  <svg width="0" height="0"
+xmlns="http://www.w3.org/2000/svg"></svg>
+	<nav class="navbar navbar-inverse" id="mainNav">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">ZAVIT</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <!--<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>-->
+      <ul class="nav navbar-nav navbar-left">
+        <li class="active"><a href="#">Map</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Login</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+	<div id="map"></div>
+  <div class="container-fluid" id="search">
+    <a href="#" id="searchBtn">Search</a>
+    <form id="searchForm">
+  <div class="form-group">
+    <label for="postcode">Area</label>
+    <input type="text" class="form-control" id="postcode" placeholder="Postcode or town">
+  </div>
+  <div class="form-group">
+    <label for="nameOfGym">Name of gym</label>
+    <input type="text" class="form-control" id="postcode" placeholder="Name of gym or place">
+  </div>
+  <button type="submit" class="btn btn-default pull-right">Search</button>
+</form>
+  </div>
+  <div id="members">
+      <div id='mask'></div>
+      <div id="topPanel">
+        <a href="#">next</a>
+        <h3>Bar Raphaeli</h3>
+      </div>
+      <div id="leftPanel">
+          <ul>
+            <li class="selected"><a href="#">Details</a></li>
+            <li><a href="#">Info</a></li>
+            <li><a href="#">Calendar</a></li>
+          </ul>
+          <div>
+            
+              <h4>Available to play</h4>
+              <ul>
+                <li>
+                  <span class="squash">Squash</span>
+                  (club player)
+                </li>
+                <li><span class="tennis">Tennis</span> Novice</li>
+              </ul>
+              <p>Regular of this gym and looking for people to play my two favorite sports</p>
+          </div>
+          <div style="display:none">
+            
+          </div>
+      </div>
+      <img src="bar2.jpg" />
+  </div>
+</body>
+</html>
