@@ -162,3 +162,6 @@ $RECYCLE.BIN/
 *.crunchsolution.cache
 *.ncrunchproject
 *.ncrunchsolution
+
+#visual studio
+.vs/
