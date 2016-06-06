@@ -148,6 +148,14 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
+      <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
+      <Name>zavit.Domain.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
+      <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>
+      <Name>zavit.Infrastructure.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Api\zavit.Web.Api.csproj">
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>
       <Name>zavit.Web.Api</Name>
