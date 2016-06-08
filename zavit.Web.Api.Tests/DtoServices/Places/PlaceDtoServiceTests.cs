@@ -15,16 +15,18 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
     {
         class When_providing_suggesting_place_dtos
         {
-            Because of = () => _result = Subject.SuggestPlaces();
+            Because of = () => _result = Subject.SuggestPlaces(_placeSearchCriteriaDto);
 
             It should_return_a_dto_for_each_of_the_places_suggested_by_the_place_service = () => _result.ShouldContainOnlyOrdered(_placeDto, _otherPlaceDto);
 
             Establish context = () =>
             {
+                _placeSearchCriteriaDto = NewInstanceOf<PlaceSearchCriteriaDto>();
+
                 var place = NewInstanceOf<IPlace>();
                 var otherPlace = NewInstanceOf<IPlace>();
 
-                Injected<IPlaceService>().Stub(s => s.Suggest()).Return(new[] { place, otherPlace });
+                Injected<IPlaceService>().Stub(s => s.Suggest(_placeSearchCriteriaDto)).Return(new[] { place, otherPlace });
 
                 _placeDto = NewInstanceOf<PlaceDto>();
                 Injected<IPlaceDtoFactory>().Stub(f => f.CreateItem(place)).Return(_placeDto);
@@ -35,6 +37,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
 
             static IEnumerable<PlaceDto> _result;
 
+            static PlaceSearchCriteriaDto _placeSearchCriteriaDto;
             static PlaceDto _placeDto;
             static PlaceDto _otherPlaceDto;
         }

@@ -15,9 +15,9 @@ namespace zavit.Web.Api.Controllers
             _placeDtoService = placeDtoService;
         }
 
-        public IEnumerable<PlaceDto> Get()
+        public IEnumerable<PlaceDto> Get([FromUri] PlaceSearchCriteriaDto placeSearchCriteriaDto)
         {
-            return _placeDtoService.SuggestPlaces();
+            return _placeDtoService.SuggestPlaces(placeSearchCriteriaDto);
         }
     }
 }

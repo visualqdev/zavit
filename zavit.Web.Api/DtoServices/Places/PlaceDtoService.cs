@@ -17,9 +17,9 @@ namespace zavit.Web.Api.DtoServices.Places
             _placeDtoFactory = placeDtoFactory;
         }
 
-        public IEnumerable<PlaceDto> SuggestPlaces()
+        public IEnumerable<PlaceDto> SuggestPlaces(PlaceSearchCriteriaDto placeSearchCriteriaDto)
         {
-            var places = _placeService.Suggest();
+            var places = _placeService.Suggest(placeSearchCriteriaDto);
             var placeDtos = places.Select(p => _placeDtoFactory.CreateItem(p));
             return placeDtos;
         }

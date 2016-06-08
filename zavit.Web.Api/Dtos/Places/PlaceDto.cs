@@ -6,5 +6,6 @@ namespace zavit.Web.Api.Dtos.Places
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string PlaceId { get; set; }
     }
 }

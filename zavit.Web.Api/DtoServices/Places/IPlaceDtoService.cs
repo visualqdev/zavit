@@ -5,6 +5,6 @@ namespace zavit.Web.Api.DtoServices.Places
 {
     public interface IPlaceDtoService
     {
-        IEnumerable<PlaceDto> SuggestPlaces();
+        IEnumerable<PlaceDto> SuggestPlaces(PlaceSearchCriteriaDto placeSearchCriteriaDto);
     }
 }
