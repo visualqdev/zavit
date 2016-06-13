@@ -165,3 +165,6 @@ $RECYCLE.BIN/
 
 #visual studio
 .vs/
+
+#secure settings
+AppSettings/

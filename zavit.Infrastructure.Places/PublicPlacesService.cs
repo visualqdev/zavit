@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
 using zavit.Infrastructure.Places.PublicPlacesApis;

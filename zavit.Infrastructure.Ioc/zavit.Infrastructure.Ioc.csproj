@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureCoreInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructurePlacesInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +60,14 @@
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
       <Name>zavit.Domain.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Places\zavit.Infrastructure.Places.csproj">
+      <Project>{644f8521-635e-4ccb-a256-96b17cb37894}</Project>
+      <Name>zavit.Infrastructure.Places</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

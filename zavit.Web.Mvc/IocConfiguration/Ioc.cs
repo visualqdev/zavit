@@ -3,7 +3,9 @@ using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using zavit.Infrastructure.Ioc.DomainInstallers;
+using zavit.Infrastructure.Ioc.Infrastructure;
 using zavit.Web.Api.IocConfiguration.Installers;
+using zavit.Web.Mvc.IocConfiguration.Installers;
 
 namespace zavit.Web.Mvc.IocConfiguration
 {
@@ -23,8 +25,11 @@ namespace zavit.Web.Mvc.IocConfiguration
 
             Container.Install(
                 new WebApiInstaller(),
-                new PlacesInstaller()
-                );
+                new PlacesInstaller(),
+                new WebMvcInstaller(),
+                new InfrastructurePlacesInstaller(),
+                new InfrastructureCoreInstaller()
+            );
             return Container;
         }
     }

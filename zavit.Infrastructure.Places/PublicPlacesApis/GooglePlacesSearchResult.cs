@@ -4,7 +4,7 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
 {
     public class GooglePlacesSearchResult
     {
-         public IEnumerable<GooglePlace> result { get; set; }
+         public IEnumerable<GooglePlace> results { get; set; }
     }
 
     public class GooglePlace
