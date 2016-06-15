@@ -18,6 +18,10 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis
 
             It should_set_the_longitude_to_be_the_lng_of_a_google_place = () => _result.Longitude.ShouldEqual(_googlePlace.geometry.location.lng);
 
+            It should_set_the_address_to_be_the_vicinity_of_a_google_place = () => _result.Address.ShouldEqual(_googlePlace.vicinity);
+
+            It should_set_the_name_to_be_the_name_of_a_google_place = () => _result.Name.ShouldEqual(_googlePlace.name);
+
             Establish context = () =>
             {
                 _googlePlace = NewInstanceOf<GooglePlace>();

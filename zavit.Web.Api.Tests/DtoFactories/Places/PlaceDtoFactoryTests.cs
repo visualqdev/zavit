@@ -17,6 +17,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Places
             It should_set_the_longitude_to_be_the_same_as_that_of_the_place = () => _result.Longitude.ShouldEqual(_place.Longitude);
             It should_set_the_latitude_to_be_the_same_as_that_of_the_place = () => _result.Latitude.ShouldEqual(_place.Latitude);
             It should_set_the_place_id_to_be_the_same_as_that_of_the_place = () => _result.PlaceId.ShouldEqual(_place.PlaceId);
+            It should_set_the_name_to_be_the_same_as_that_of_the_place = () => _result.Name.ShouldEqual(_place.Name);
+            It should_set_the_address_to_be_the_same_as_that_of_the_place = () => _result.Address.ShouldEqual(_place.Address);
 
             Establish context = () =>
             {
@@ -24,6 +26,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Places
                 _place.Stub(p => p.Longitude).Return(0.0003);
                 _place.Stub(p => p.Latitude).Return(1.222);
                 _place.Stub(p => p.PlaceId).Return("fdsa56");
+                _place.Stub(p => p.Name).Return("Test name");
+                _place.Stub(p => p.Address).Return("Test address");
             };
 
             static IPlace _place;

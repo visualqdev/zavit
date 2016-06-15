@@ -11,7 +11,9 @@ namespace zavit.Web.Api.DtoFactories.Places
             {
                 Longitude = place.Longitude,
                 Latitude = place.Latitude,
-                PlaceId = place.PlaceId
+                PlaceId = place.PlaceId,
+                Address = place.Address,
+                Name = place.Name
             };
         }
     }

@@ -10,7 +10,9 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             {
                 PlaceId = googlePlace.place_id,
                 Latitude = googlePlace.geometry.location.lat,
-                Longitude = googlePlace.geometry.location.lng
+                Longitude = googlePlace.geometry.location.lng,
+                Name = googlePlace.name,
+                Address = googlePlace.vicinity
             };
 
             return publicPlace;
