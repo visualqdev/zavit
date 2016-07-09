@@ -11,7 +11,7 @@ namespace zavit.Web.Api
             config.DependencyResolver = new WindsorDependencyResolver(container);
             
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new {id = RouteParameter.Optional});
+            config.Routes.MapHttpRoute(CommonRoutes.Default, "api/{controller}/{id}", new {id = RouteParameter.Optional});
         }
     }
 }

@@ -65,14 +65,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CommonRoutes.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
     <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
+    <Compile Include="DtoServices\Venues\IVenueDtoService.cs" />
+    <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
+    <Compile Include="Dtos\Venues\VenueDto.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyScope.cs" />
     <Compile Include="IocConfiguration\Installers\WebApiInstaller.cs" />

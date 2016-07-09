@@ -76,8 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PlacesControllerTests.cs" />
+    <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoServiceTests.cs" />
+    <Compile Include="DtoServices\Venues\VenueDtoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
