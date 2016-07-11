@@ -4,6 +4,8 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
+using zavit.Domain.Venues;
+using zavit.Domain.Venues.NewVenueCreation;
 
 namespace zavit.Domain.Places.Tests 
 {
@@ -27,6 +29,19 @@ namespace zavit.Domain.Places.Tests
             static IPlaceSearchCriteria _placeSearchCriteria;
             static IEnumerable<IPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
+        }
+
+        class When_adding_a_new_venue
+        {
+            Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId);
+
+            It should_ = () => ;
+
+            Establish context = () => {};
+
+            static Venue _result;
+            static INewVenue _newVenue;
+            const string PlaceId = "Place ID";
         }
     }
 }

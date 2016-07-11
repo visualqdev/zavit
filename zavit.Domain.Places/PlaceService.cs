@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
+using zavit.Domain.Venues;
+using zavit.Domain.Venues.NewVenueCreation;
 
 namespace zavit.Domain.Places
 {
@@ -17,6 +19,11 @@ namespace zavit.Domain.Places
         {
             var publicPlaces = _publicPlacesService.GetPublicPlaces(placeSearchCriteria);
             return publicPlaces;
+        }
+
+        public Venue AddVenue(INewVenue newVenue, string placeId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

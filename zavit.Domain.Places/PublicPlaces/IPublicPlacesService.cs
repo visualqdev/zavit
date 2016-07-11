@@ -6,5 +6,6 @@ namespace zavit.Domain.Places.PublicPlaces
     public interface IPublicPlacesService
     {
         IEnumerable<PublicPlace> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria);
+        PublicPlace GetPublicPlace(string placeId);
     }
 }
