@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
+using zavit.Domain.Places.VenuePlaces;
 using zavit.Domain.Venues;
 using zavit.Domain.Venues.NewVenueCreation;
 
@@ -9,10 +10,16 @@ namespace zavit.Domain.Places
     public class PlaceService : IPlaceService
     {
         readonly IPublicPlacesService _publicPlacesService;
+        readonly IVenuePlaceRepository _venuePlaceRepository;
+        readonly IVenueService _venueService;
+        readonly IVenuePlaceCreator _venuePlaceCreator;
 
-        public PlaceService(IPublicPlacesService publicPlacesService)
+        public PlaceService(IPublicPlacesService publicPlacesService, IVenuePlaceRepository venuePlaceRepository, IVenueService venueService, IVenuePlaceCreator venuePlaceCreator)
         {
             _publicPlacesService = publicPlacesService;
+            _venuePlaceRepository = venuePlaceRepository;
+            _venueService = venueService;
+            _venuePlaceCreator = venuePlaceCreator;
         }
 
         public IEnumerable<IPlace> Suggest(IPlaceSearchCriteria placeSearchCriteria)
@@ -23,7 +30,18 @@ namespace zavit.Domain.Places
 
         public Venue AddVenue(INewVenue newVenue, string placeId)
         {
-            throw new System.NotImplementedException();
+            var place = _venuePlaceRepository.Get(placeId);
+            if (place == null)
+            {
+                place = _venuePlaceCreator.Create(placeId);
+            }
+
+            var venue = _venueService.CreateVenue(newVenue);
+            place.AddVenue(venue);
+
+            _venuePlaceRepository.Save(place);
+
+            return venue;
         }
     }
 }

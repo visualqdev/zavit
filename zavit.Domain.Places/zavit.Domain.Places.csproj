@@ -47,6 +47,9 @@
     <Compile Include="PublicPlaces\IPublicPlacesService.cs" />
     <Compile Include="PublicPlaces\PublicPlace.cs" />
     <Compile Include="Search\IPlaceSearchCriteria.cs" />
+    <Compile Include="VenuePlaces\IVenuePlaceRepository.cs" />
+    <Compile Include="VenuePlaces\IVenuePlaceCreator.cs" />
+    <Compile Include="VenuePlaces\VenuePlace.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
