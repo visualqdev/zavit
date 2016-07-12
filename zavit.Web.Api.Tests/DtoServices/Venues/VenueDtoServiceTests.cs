@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Threading.Tasks;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Places;
@@ -14,7 +15,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
     {
         class When_adding_a_venue
         {
-            Because of = () => _result = Subject.AddVenue(_venueDto, PlaceId);
+            Because of = () => _result = Subject.AddVenue(_venueDto, PlaceId).Result;
 
             It should_return_a_venue_dto_for_a_newly_created_venue = () => _result.ShouldEqual(_newVenueDto);
 
@@ -22,7 +23,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             {
                 _venueDto = NewInstanceOf<VenueDto>();
                 _venue = NewInstanceOf<Venue>();
-                Injected<IPlaceService>().Stub(s => s.AddVenue(_venueDto, PlaceId)).Return(_venue);
+                Injected<IPlaceService>().Stub(s => s.AddVenue(_venueDto, PlaceId)).Return(Task.FromResult(_venue));
 
                 _newVenueDto = NewInstanceOf<VenueDto>();
                 Injected<IVenueDtoFactory>().Stub(f => f.Create(_venue)).Return(_newVenueDto);

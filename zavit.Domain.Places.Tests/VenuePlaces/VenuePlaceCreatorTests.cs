@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Threading.Tasks;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Places.PublicPlaces;
@@ -11,7 +12,7 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
     {
         class When_creating_a_venue_place
         {
-            Because of = () => _result = Subject.Create(PlaceId);
+            Because of = () => _result = Subject.Create(PlaceId).Result;
 
             It should_set_the_place_id_to_be_the_place_id_of_the_public_place = () => _result.PlaceId.ShouldEqual(_publicPlace.PlaceId);
 
@@ -31,7 +32,7 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
                 _publicPlace.Latitude = 0.1;
                 _publicPlace.Longitude = -0.2;
 
-                Injected<IPublicPlacesService>().Stub(s => s.GetPublicPlace(PlaceId)).Return(_publicPlace);
+                Injected<IPublicPlacesService>().Stub(s => s.GetPublicPlace(PlaceId)).Return(Task.FromResult(_publicPlace));
             };
 
             static VenuePlace _result;

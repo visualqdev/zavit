@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
 using Rhino.Mocks;
@@ -14,7 +15,7 @@ namespace zavit.Web.Api.Tests.Controllers
     {
         class When_posting_a_new_venue_dto
         {
-            Because of = () => _result = Subject.Post(_venueDto, PlaceId);
+            Because of = () => _result = Subject.Post(_venueDto, PlaceId).Result;
 
             It should_return_http_result_specifying_the_default_route =
                 () => ((CreatedAtRouteNegotiatedContentResult<VenueDto>) _result).RouteName.ShouldEqual(CommonRoutes.Default);
@@ -30,7 +31,7 @@ namespace zavit.Web.Api.Tests.Controllers
                 _venueDto = NewInstanceOf<VenueDto>();
                 _createdVenue = NewInstanceOf<VenueDto>();
                 _createdVenue.Id = 123;
-                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDto, PlaceId)).Return(_createdVenue);
+                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDto, PlaceId)).Return(Task.FromResult(_createdVenue));
             };
 
             static VenueDto _createdVenue;

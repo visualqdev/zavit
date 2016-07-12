@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Places;
+﻿using System.Threading.Tasks;
+using zavit.Domain.Places;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.Venues;
 
@@ -15,9 +16,9 @@ namespace zavit.Web.Api.DtoServices.Venues
             _venueDtoFactory = venueDtoFactory;
         }
 
-        public VenueDto AddVenue(VenueDto venueDto, string placeId)
+        public async Task<VenueDto> AddVenue(VenueDto venueDto, string placeId)
         {
-            var venue = _placeService.AddVenue(venueDto, placeId);
+            var venue = await _placeService.AddVenue(venueDto, placeId);
             var newVenueDto = _venueDtoFactory.Create(venue);
             return newVenueDto;
         }

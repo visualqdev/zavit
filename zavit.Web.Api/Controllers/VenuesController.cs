@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
@@ -19,9 +20,9 @@ namespace zavit.Web.Api.Controllers
 
         [HttpPost]
         [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
-        public IHttpActionResult Post(VenueDto venueDto, string placeId)
+        public async Task<IHttpActionResult> Post(VenueDto venueDto, string placeId)
         {
-            var venue = _venueDtoService.AddVenue(venueDto, placeId);
+            var venue = await _venueDtoService.AddVenue(venueDto, placeId);
             return CreatedAtRoute(CommonRoutes.Default, new { controller = "venues", id = venue.Id }, venue);
         }
 
