@@ -145,7 +145,7 @@
     <Compile Include="IocConfiguration\Installers\WebMvcInstaller.cs" />
     <Compile Include="IocConfiguration\Ioc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\GoogleApiSearchSettings.cs" />
+    <Compile Include="Settings\GoogleApiSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

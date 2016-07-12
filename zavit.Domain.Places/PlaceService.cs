@@ -30,11 +30,7 @@ namespace zavit.Domain.Places
 
         public Venue AddVenue(INewVenue newVenue, string placeId)
         {
-            var place = _venuePlaceRepository.Get(placeId);
-            if (place == null)
-            {
-                place = _venuePlaceCreator.Create(placeId);
-            }
+            var place = _venuePlaceRepository.Get(placeId) ?? _venuePlaceCreator.Create(placeId);
 
             var venue = _venueService.CreateVenue(newVenue);
             place.AddVenue(venue);

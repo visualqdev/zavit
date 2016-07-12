@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="PlaceServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VenuePlaces\VenuePlaceCreatorTests.cs" />
+    <Compile Include="VenuePlaces\VenuePlaceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

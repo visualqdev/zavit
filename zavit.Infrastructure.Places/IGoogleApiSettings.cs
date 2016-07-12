@@ -1,8 +1,8 @@
 ﻿namespace zavit.Infrastructure.Places
 {
-    public interface IGoogleApiSearchSettings
+    public interface IGoogleApiSettings
     {
-        string PlaceSearchUri { get; }
+        string PlaceUri { get; }
         string ServerKey { get; }
     }
 }

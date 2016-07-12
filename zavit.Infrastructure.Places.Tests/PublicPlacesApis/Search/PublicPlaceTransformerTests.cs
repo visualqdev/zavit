@@ -1,12 +1,12 @@
 ﻿using Machine.Specifications;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Places.PublicPlaces;
-using zavit.Infrastructure.Places.PublicPlacesApis;
+using zavit.Infrastructure.Places.PublicPlacesApis.Search;
 
-namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis 
+namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis.Search 
 {
-    [Subject("PublicPlaceTransformer")]
-    public class PublicPlaceTransformerTests : TestOf<PublicPlaceTransformer>
+    [Subject("PlaceSearchTransformer")]
+    public class PublicPlaceTransformerTests : TestOf<PlaceSearchTransformer>
     {
         class When_transforming_a_google_place_to_a_public_place
         {
@@ -24,11 +24,13 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis
 
             Establish context = () =>
             {
-                _googlePlace = NewInstanceOf<GooglePlace>();
+                _googlePlace = NewInstanceOf<GooglePlaceSearch>();
                 _googlePlace.place_id = "test_place_id";
-                _googlePlace.geometry = new GoogleGeometry
+                _googlePlace.name = "Name of place";
+                _googlePlace.vicinity = "Vicinity";
+                _googlePlace.geometry = new GooglePlaceSearchGeometry
                 {
-                    location = new GoogleLocation
+                    location = new GooglePlaceSearchLocation
                     {
                         lat = 0.01,
                         lng = -0.02
@@ -36,7 +38,7 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis
                 };
             };
 
-            static GooglePlace _googlePlace;
+            static GooglePlaceSearch _googlePlace;
             static PublicPlace _result;
         }
     }
