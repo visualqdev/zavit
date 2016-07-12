@@ -32,7 +32,7 @@ namespace zavit.Domain.Places.Tests
             static IEnumerable<PublicPlace> _publicPlaces;
         }
 
-        class When_adding_a_new_venue_to_a_place_that_is_regsitered_as_a_venue_place
+        class When_adding_a_new_venue_to_a_place_that_is_registered_as_a_venue_place
         {
             Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId);
 
@@ -60,7 +60,7 @@ namespace zavit.Domain.Places.Tests
             const string PlaceId = "Place ID";
         }
 
-        class When_adding_a_new_venue_to_a_place_that_has_not_been_regsitered_as_a_venue_place
+        class When_adding_a_new_venue_to_a_place_that_has_not_been_registered_as_a_venue_place
         {
             Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId);
 

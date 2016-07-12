@@ -12,7 +12,7 @@ namespace zavit.Domain.Venues.Tests.NewVenueCreation
         {
             Because of = () => _result = Subject.Create(_newVenue);
 
-            It should_set_the_venue_name_to_be_the_same_as_namspecified_in_new_venue_request = 
+            It should_set_the_venue_name_to_be_the_same_as_the_name_specified_in_new_venue_request = 
                 () => _result.Name.ShouldEqual(_newVenue.Name);
 
             Establish context = () =>

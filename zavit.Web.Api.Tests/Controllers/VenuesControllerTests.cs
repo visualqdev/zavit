@@ -16,7 +16,7 @@ namespace zavit.Web.Api.Tests.Controllers
         {
             Because of = () => _result = Subject.Post(_venueDto, PlaceId);
 
-            It should_return_http_result_specifying_the_default_routed =
+            It should_return_http_result_specifying_the_default_route =
                 () => ((CreatedAtRouteNegotiatedContentResult<VenueDto>) _result).RouteName.ShouldEqual(CommonRoutes.Default);
 
             It should_return_http_result_specifying_venues_controller_as_a_route_value =

@@ -8,7 +8,7 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis.Details
     [Subject("PlaceDetailsResultTransformer")]
     public class PlaceDetailsResultTransformerTests : TestOf<PlaceDetailsResultTransformer>
     {
-        class When_transforming_a_google_place_details_to_a_public_place
+        class When_transforming_google_place_details_to_a_public_place
         {
             Because of = () => _result = Subject.Transform(_googlePlaceDetailsResults);
 
