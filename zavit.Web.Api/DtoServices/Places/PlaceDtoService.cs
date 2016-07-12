@@ -1,13 +1,27 @@
 using System.Collections.Generic;
+using System.Linq;
+using zavit.Domain.Places;
+using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.Dtos.Places;
 
 namespace zavit.Web.Api.DtoServices.Places
 {
     public class PlaceDtoService : IPlaceDtoService
     {
-        public IEnumerable<PlaceDto> SuggestPlaces()
+        readonly IPlaceService _placeService;
+        readonly IPlaceDtoFactory _placeDtoFactory;
+
+        public PlaceDtoService(IPlaceService placeService, IPlaceDtoFactory placeDtoFactory)
         {
-            throw new System.NotImplementedException();
+            _placeService = placeService;
+            _placeDtoFactory = placeDtoFactory;
+        }
+
+        public IEnumerable<PlaceDto> SuggestPlaces(PlaceSearchCriteriaDto placeSearchCriteriaDto)
+        {
+            var places = _placeService.Suggest(placeSearchCriteriaDto);
+            var placeDtos = places.Select(p => _placeDtoFactory.CreateItem(p));
+            return placeDtos;
         }
     }
 }

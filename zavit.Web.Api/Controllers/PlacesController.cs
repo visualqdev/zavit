@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Web.Http;
 using zavit.Web.Api.Dtos.Places;
 using zavit.Web.Api.DtoServices.Places;
@@ -15,9 +16,9 @@ namespace zavit.Web.Api.Controllers
             _placeDtoService = placeDtoService;
         }
 
-        public IEnumerable<PlaceDto> Get()
+        public IEnumerable<PlaceDto> Get([FromUri] PlaceSearchCriteriaDto placeSearchCriteriaDto)
         {
-            return _placeDtoService.SuggestPlaces();
+            return _placeDtoService.SuggestPlaces(placeSearchCriteriaDto);
         }
     }
 }
