@@ -26,6 +26,7 @@ namespace zavit.Web.Mvc.IocConfiguration
             Container.Install(
                 new WebApiInstaller(),
                 new PlacesInstaller(),
+                new VenuesInstaller(),
                 new WebMvcInstaller(),
                 new InfrastructurePlacesInstaller(),
                 new InfrastructureCoreInstaller()

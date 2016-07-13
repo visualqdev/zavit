@@ -1,12 +1,12 @@
 ﻿using Machine.Specifications;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Places.PublicPlaces;
-using zavit.Infrastructure.Places.PublicPlacesApis;
+using zavit.Infrastructure.Places.PublicPlacesApis.Search;
 
-namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis 
+namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis.Search 
 {
-    [Subject("PublicPlaceTransformer")]
-    public class PublicPlaceTransformerTests : TestOf<PublicPlaceTransformer>
+    [Subject("PlaceSearchTransformer")]
+    public class PublicPlaceTransformerTests : TestOf<PlaceSearchTransformer>
     {
         class When_transforming_a_google_place_to_a_public_place
         {
@@ -18,13 +18,19 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis
 
             It should_set_the_longitude_to_be_the_lng_of_a_google_place = () => _result.Longitude.ShouldEqual(_googlePlace.geometry.location.lng);
 
+            It should_set_the_address_to_be_the_vicinity_of_a_google_place = () => _result.Address.ShouldEqual(_googlePlace.vicinity);
+
+            It should_set_the_name_to_be_the_name_of_a_google_place = () => _result.Name.ShouldEqual(_googlePlace.name);
+
             Establish context = () =>
             {
-                _googlePlace = NewInstanceOf<GooglePlace>();
+                _googlePlace = NewInstanceOf<GooglePlaceSearch>();
                 _googlePlace.place_id = "test_place_id";
-                _googlePlace.geometry = new GoogleGeometry
+                _googlePlace.name = "Name of place";
+                _googlePlace.vicinity = "Vicinity";
+                _googlePlace.geometry = new GooglePlaceSearchGeometry
                 {
-                    location = new GoogleLocation
+                    location = new GooglePlaceSearchLocation
                     {
                         lat = 0.01,
                         lng = -0.02
@@ -32,7 +38,7 @@ namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis
                 };
             };
 
-            static GooglePlace _googlePlace;
+            static GooglePlaceSearch _googlePlace;
             static PublicPlace _result;
         }
     }

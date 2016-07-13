@@ -5,6 +5,8 @@ using Rhino.Mspec.Contrib;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
 using zavit.Infrastructure.Places.PublicPlacesApis;
+using zavit.Infrastructure.Places.PublicPlacesApis.Details;
+using zavit.Infrastructure.Places.PublicPlacesApis.Search;
 
 namespace zavit.Infrastructure.Places.Tests 
 {
@@ -21,18 +23,40 @@ namespace zavit.Infrastructure.Places.Tests
             {
                 _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
 
-                var googlePlacesSearchResult = NewInstanceOf<GooglePlacesSearchResult>();
-                Injected<IGooglePlaceSearchApi>()
+                var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
+                Injected<IGooglePlacesApi>()
                     .Stub(a => a.NearbySearch(_placeSearchCriteria))
                     .Return(googlePlacesSearchResult);
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
-                Injected<IPublicPlacesTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
+                Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
             };
 
             static IPlaceSearchCriteria _placeSearchCriteria;
             static IEnumerable<PublicPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
+        }
+
+        class When_getting_public_place_by_place_id
+        {
+            Because of = () => _result = Subject.GetPublicPlace(PlaceId);
+
+            It should_return_a_public_place_provided_by_google_places_api = () => _result.ShouldEqual(_publicPlace);
+
+            Establish context = () =>
+            {
+                var googlePlacesDetailsResult = NewInstanceOf<GooglePlaceDetailsResult>();
+                Injected<IGooglePlacesApi>().Stub(a => a.GetDetails(PlaceId)).Return(googlePlacesDetailsResult);
+
+                _publicPlace = NewInstanceOf<PublicPlace>();
+                Injected<IPlaceDetailsResultTransformer>()
+                    .Stub(t => t.Transform(googlePlacesDetailsResult))
+                    .Return(_publicPlace);
+            };
+
+            static PublicPlace _result;
+            static PublicPlace _publicPlace;
+            const string PlaceId = "Place ID";
         }
     }
 }

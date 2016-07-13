@@ -10,7 +10,7 @@ namespace zavit.Web.Mvc.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Classes.FromThisAssembly().InSameNamespaceAs<GoogleApiSearchSettings>().WithServiceFirstInterface().LifestyleSingleton()
+                Classes.FromThisAssembly().InSameNamespaceAs<GoogleApiSettings>().WithServiceFirstInterface().LifestyleSingleton()
             );
         }
     }

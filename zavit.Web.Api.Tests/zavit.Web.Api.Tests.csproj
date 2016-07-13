@@ -42,8 +42,8 @@
       <HintPath>..\packages\Machine.Specifications.Should.0.9.0\lib\net45\Machine.Specifications.Should.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
@@ -76,8 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\PlacesControllerTests.cs" />
+    <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\Venues\VenueDtoFactoryTests.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoServiceTests.cs" />
+    <Compile Include="DtoServices\Venues\VenueDtoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +91,10 @@
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
       <Name>zavit.Domain.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
+      <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
+      <Name>zavit.Domain.Venues</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Api\zavit.Web.Api.csproj">
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>
