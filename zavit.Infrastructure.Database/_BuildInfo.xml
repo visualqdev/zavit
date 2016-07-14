@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<buildInfo>
+  <projectName>zavit</projectName>
+  <companyName>VisualQ</companyName>
+  <versionMajor>1</versionMajor>
+  <versionMinor>0</versionMinor>
+  <versionPatch>0</versionPatch>
+  <buildNumber>0</buildNumber>
+  <revision>0</revision>
+  <version>1.0.0.0</version>
+  <repositoryPath></repositoryPath>
+  <microsoftNetFramework>net-4.5</microsoftNetFramework>
+  <msbuildConfiguration>Release</msbuildConfiguration>
+  <msbuildPlatform>Any CPU</msbuildPlatform>
+  <builtWith>UppercuT v. 1.4.2.0</builtWith>
+</buildInfo>

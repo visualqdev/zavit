@@ -11,7 +11,7 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<NhibernateWebInstaller>().LifestyleSingleton(),
+                Component.For<SessionFactoryProvider>().LifestyleSingleton(),
                 Component.For<ISessionFactory>().LifeStyle.Singleton.UsingFactoryMethod(kernel => kernel.Resolve<SessionFactoryProvider>().Provide()),
                 Component.For<ISession>().LifeStyle.PerWebRequest.UsingFactoryMethod(kernel => kernel.Resolve<ISessionFactory>().OpenSession()));
         }

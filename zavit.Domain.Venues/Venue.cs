@@ -1,8 +1,10 @@
-﻿namespace zavit.Domain.Venues
+﻿using zavit.Domain.Shared;
+
+namespace zavit.Domain.Venues
 {
-    public class Venue
+    public class Venue : IEntity<int>
     {
-         public string Name { get; set; }
-        public int Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual int Id { get; set; }
     }
 }

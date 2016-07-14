@@ -168,3 +168,5 @@ $RECYCLE.BIN/
 
 #secure settings
 AppSettings/
+/zavit.Infrastructure.Database/LOCAL.DBDeployment.bat
+/zavit.Infrastructure.Database/LOCAL.DBDropAndDeployment.bat

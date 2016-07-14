@@ -7,7 +7,9 @@ using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
-using zavit.Infrastructure.Orm.Entities;
+using NHibernate.Tool.hbm2ddl;
+using zavit.Domain.Shared;
+using zavit.Infrastructure.Orm.Conventions;
 
 namespace zavit.Infrastructure.Orm
 {
@@ -22,9 +24,22 @@ namespace zavit.Infrastructure.Orm
 
         public ISessionFactory Provide()
         {
+            var mappingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("zavit.Domain.")).ToArray();
+
+            var entityInterface = typeof (IEntity<>);
+
             var sessionfactory = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(_databaseSettings.ConnectionString))
-                .Mappings(m => m.AutoMappings.Add(AutoMap.AssemblyOf<TestEntity>().Where(a => a.Namespace.EndsWith("Entities"))))
+                .Mappings(m => m.AutoMappings.Add(AutoMap
+                    .Assemblies(mappingAssemblies)
+                    .Where(entity => 
+                    {
+                        var entityInterfaces = entity.GetInterfaces();
+                        var isEntity = entityInterfaces.Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == entityInterface);
+                        return isEntity;
+                    })
+                    .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()))
+                .ExposeConfiguration(config => new SchemaExport(config).Execute(true, true, false))
                 .BuildSessionFactory();
 
             return sessionfactory;
