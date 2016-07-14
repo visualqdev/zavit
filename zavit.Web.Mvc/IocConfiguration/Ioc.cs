@@ -29,7 +29,8 @@ namespace zavit.Web.Mvc.IocConfiguration
                 new VenuesInstaller(),
                 new WebMvcInstaller(),
                 new InfrastructurePlacesInstaller(),
-                new InfrastructureCoreInstaller()
+                new InfrastructureCoreInstaller(),
+                new NhibernateWebInstaller()
             );
             return Container;
         }

@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Domain.Venues", "zavi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Domain.Venues.Tests", "zavit.Domain.Venues.Tests\zavit.Domain.Venues.Tests.csproj", "{3EC23D3F-9D60-462B-B978-740740505117}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Infrastructure.Orm", "zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj", "{67C23B94-0318-4507-AD94-08BD1E288FB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,22 @@ Global
 		{3EC23D3F-9D60-462B-B978-740740505117}.Release|x64.Build.0 = Release|Any CPU
 		{3EC23D3F-9D60-462B-B978-740740505117}.Release|x86.ActiveCfg = Release|Any CPU
 		{3EC23D3F-9D60-462B-B978-740740505117}.Release|x86.Build.0 = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|ARM.Build.0 = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|x64.Build.0 = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Debug|x86.Build.0 = Debug|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|ARM.Build.0 = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|x64.ActiveCfg = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|x64.Build.0 = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|x86.ActiveCfg = Release|Any CPU
+		{67C23B94-0318-4507-AD94-08BD1E288FB9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,5 +264,6 @@ Global
 		{0197D1C2-74B2-4B94-8DB7-97AF3976F1E1} = {B6124150-90BB-4DE1-87F6-925197544E2C}
 		{7A07D33B-2647-47D3-A948-BAA42E78B1E9} = {ED41EFEC-6FE0-4519-A1FA-C9C658168E1A}
 		{3EC23D3F-9D60-462B-B978-740740505117} = {30D2A33B-4668-4E3D-B2E9-C2408A4AE798}
+		{67C23B94-0318-4507-AD94-08BD1E288FB9} = {B6124150-90BB-4DE1-87F6-925197544E2C}
 	EndGlobalSection
 EndGlobal
