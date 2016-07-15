@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\CascadeConvention.cs" />
     <Compile Include="Conventions\ForeignKeyConvention.cs" />
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="IDatabaseSettings.cs" />
