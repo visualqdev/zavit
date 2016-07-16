@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
@@ -88,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
       <Name>zavit.Domain.Places</Name>

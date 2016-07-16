@@ -17,6 +17,8 @@ namespace zavit.Web.Api
             var config = new HttpConfiguration();
             WebApiConfig.Register(config, container);
             app.UseWebApi(config);
+
+            OAuthConfig.Register(app, container);
         }
     }
 }

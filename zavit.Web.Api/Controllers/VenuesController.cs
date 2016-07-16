@@ -17,6 +17,7 @@ namespace zavit.Web.Api.Controllers
             _venueDtoService = venueDtoService;
         }
 
+        [Authorize]
         [HttpPost]
         [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
         public async Task<IHttpActionResult> Post(VenueDto venueDto, string placeId)
