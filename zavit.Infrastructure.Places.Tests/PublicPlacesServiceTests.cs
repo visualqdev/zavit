@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
@@ -15,7 +16,7 @@ namespace zavit.Infrastructure.Places.Tests
     {
         class When_requesting_public_places
         {
-            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria);
+            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria).Result;
 
             It should_return_a_list_of_public_places = () => _result.ShouldEqual(_publicPlaces);
 
@@ -26,7 +27,7 @@ namespace zavit.Infrastructure.Places.Tests
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
                     .Stub(a => a.NearbySearch(_placeSearchCriteria))
-                    .Return(googlePlacesSearchResult);
+                    .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
                 Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
@@ -39,14 +40,14 @@ namespace zavit.Infrastructure.Places.Tests
 
         class When_getting_public_place_by_place_id
         {
-            Because of = () => _result = Subject.GetPublicPlace(PlaceId);
+            Because of = () => _result = Subject.GetPublicPlace(PlaceId).Result;
 
             It should_return_a_public_place_provided_by_google_places_api = () => _result.ShouldEqual(_publicPlace);
 
             Establish context = () =>
             {
                 var googlePlacesDetailsResult = NewInstanceOf<GooglePlaceDetailsResult>();
-                Injected<IGooglePlacesApi>().Stub(a => a.GetDetails(PlaceId)).Return(googlePlacesDetailsResult);
+                Injected<IGooglePlacesApi>().Stub(a => a.GetDetails(PlaceId)).Return(Task.FromResult(googlePlacesDetailsResult));
 
                 _publicPlace = NewInstanceOf<PublicPlace>();
                 Injected<IPlaceDetailsResultTransformer>()

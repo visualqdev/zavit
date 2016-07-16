@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Venues;
 
@@ -13,9 +14,9 @@ namespace zavit.Domain.Places.VenuePlaces
             _publicPlacesService = publicPlacesService;
         }
 
-        public VenuePlace Create(string placeId)
+        public async Task<VenuePlace> Create(string placeId)
         {
-            var publicPlace = _publicPlacesService.GetPublicPlace(placeId);
+            var publicPlace =  await _publicPlacesService.GetPublicPlace(placeId);
             var venuePlace = new VenuePlace
             {
                 Venues = new List<Venue>(),

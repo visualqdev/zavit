@@ -1,7 +1,9 @@
-﻿namespace zavit.Domain.Places.VenuePlaces
+﻿using System.Threading.Tasks;
+
+namespace zavit.Domain.Places.VenuePlaces
 {
     public interface IVenuePlaceCreator
     {
-        VenuePlace Create(string placeId);
+        Task<VenuePlace> Create(string placeId);
     }
 }

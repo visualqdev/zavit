@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
@@ -15,7 +16,7 @@ namespace zavit.Domain.Places.Tests
     {
         class When_suggesting_places
         {
-            Because of = () => _result = Subject.Suggest(_placeSearchCriteria);
+            Because of = () => _result = Subject.Suggest(_placeSearchCriteria).Result;
 
             It should_return_all_places_suggested_by_public_places_service = () => _result.ShouldEqual(_publicPlaces);
 
@@ -24,7 +25,7 @@ namespace zavit.Domain.Places.Tests
                 _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
                 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>() };
-                Injected<IPublicPlacesService>().Stub(p => p.GetPublicPlaces(_placeSearchCriteria)).Return(_publicPlaces);
+                Injected<IPublicPlacesService>().Stub(p => p.GetPublicPlaces(_placeSearchCriteria)).Return(Task.FromResult(_publicPlaces));
             };
 
             static IPlaceSearchCriteria _placeSearchCriteria;
@@ -34,7 +35,7 @@ namespace zavit.Domain.Places.Tests
 
         class When_adding_a_new_venue_to_a_place_that_is_registered_as_a_venue_place
         {
-            Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId);
+            Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId).Result;
 
             It should_add_the_venue_to_the_place = () => _place.AssertWasCalled(p => p.AddVenue(_venue));
 
@@ -62,7 +63,7 @@ namespace zavit.Domain.Places.Tests
 
         class When_adding_a_new_venue_to_a_place_that_has_not_been_registered_as_a_venue_place
         {
-            Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId);
+            Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId).Result;
 
             It should_add_the_venue_to_the_place = () => _place.AssertWasCalled(p => p.AddVenue(_venue));
 
@@ -78,7 +79,7 @@ namespace zavit.Domain.Places.Tests
                 Injected<IVenueService>().Stub(s => s.CreateVenue(_newVenue)).Return(_venue);
 
                 _place = NewInstanceOf<VenuePlace>();
-                Injected<IVenuePlaceCreator>().Stub(r => r.Create(PlaceId)).Return(_place);
+                Injected<IVenuePlaceCreator>().Stub(r => r.Create(PlaceId)).Return(Task.FromResult(_place));
             };
 
             static Venue _result;

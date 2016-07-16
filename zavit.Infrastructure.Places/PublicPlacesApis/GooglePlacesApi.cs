@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using zavit.Domain.Places.Search;
 using zavit.Infrastructure.Core.Serialization;
 using zavit.Infrastructure.Places.PublicPlacesApis.Details;
@@ -24,27 +25,27 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             _httpClient = new HttpClient();
         }
 
-        public GooglePlaceSearchResult NearbySearch(IPlaceSearchCriteria placeSearchCriteria)
+        public async Task<GooglePlaceSearchResult> NearbySearch(IPlaceSearchCriteria placeSearchCriteria)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
             message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchCriteria.Latitude},{placeSearchCriteria.Longitude}&radius={placeSearchCriteria.Radius}");
-            var httpResponse = _httpClient.SendAsync(message).Result;
-            var json = httpResponse.Content.ReadAsStringAsync();
-            var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json.Result);
+            var httpResponse = await _httpClient.SendAsync(message);
+            var json = await httpResponse.Content.ReadAsStringAsync();
+            var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);
             return result;
         }
 
-        public GooglePlaceDetailsResult GetDetails(string placeId)
+        public async Task<GooglePlaceDetailsResult> GetDetails(string placeId)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
             message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{DetailsPath}?key={_googleApiSearchSettings.ServerKey}&placeid={placeId}");
-            var httpResponse = _httpClient.SendAsync(message).Result;
-            var json = httpResponse.Content.ReadAsStringAsync();
-            var result = _jsonSerializer.Deserialize<GooglePlaceDetailsResult>(json.Result);
+            var httpResponse = await _httpClient.SendAsync(message);
+            var json = await httpResponse.Content.ReadAsStringAsync();
+            var result = _jsonSerializer.Deserialize<GooglePlaceDetailsResult>(json);
             return result;
         }
     }

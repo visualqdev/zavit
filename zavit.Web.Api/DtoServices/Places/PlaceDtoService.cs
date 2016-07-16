@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using zavit.Domain.Places;
 using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.Dtos.Places;
@@ -17,9 +18,9 @@ namespace zavit.Web.Api.DtoServices.Places
             _placeDtoFactory = placeDtoFactory;
         }
 
-        public IEnumerable<PlaceDto> SuggestPlaces(PlaceSearchCriteriaDto placeSearchCriteriaDto)
+        public async Task<IEnumerable<PlaceDto>> SuggestPlaces(PlaceSearchCriteriaDto placeSearchCriteriaDto)
         {
-            var places = _placeService.Suggest(placeSearchCriteriaDto);
+            var places = await _placeService.Suggest(placeSearchCriteriaDto);
             var placeDtos = places.Select(p => _placeDtoFactory.CreateItem(p));
             return placeDtos;
         }
