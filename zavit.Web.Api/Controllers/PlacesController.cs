@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Dtos.Places;
 using zavit.Web.Api.DtoServices.Places;
@@ -16,9 +15,9 @@ namespace zavit.Web.Api.Controllers
             _placeDtoService = placeDtoService;
         }
 
-        public IEnumerable<PlaceDto> Get([FromUri] PlaceSearchCriteriaDto placeSearchCriteriaDto)
+        public async Task<IEnumerable<PlaceDto>> Get([FromUri] PlaceSearchCriteriaDto placeSearchCriteriaDto)
         {
-            return _placeDtoService.SuggestPlaces(placeSearchCriteriaDto);
+            return await _placeDtoService.SuggestPlaces(placeSearchCriteriaDto);
         }
     }
 }

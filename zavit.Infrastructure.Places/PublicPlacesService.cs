@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
 using zavit.Infrastructure.Places.PublicPlacesApis;
@@ -20,17 +21,17 @@ namespace zavit.Infrastructure.Places
             _placeDetailsResultTransformer = placeDetailsResultTransformer;
         }
 
-        public IEnumerable<PublicPlace> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria)
+        public async Task<IEnumerable<PublicPlace>> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria)
         {
-            var searchResult = _googlePlacesApi.NearbySearch(placeSearchCriteria);
+            var searchResult = await _googlePlacesApi.NearbySearch(placeSearchCriteria);
             var publicPlaces = _publicPlacesTransformer.Transform(searchResult);
 
             return publicPlaces;
         }
 
-        public PublicPlace GetPublicPlace(string placeId)
+        public async Task<PublicPlace> GetPublicPlace(string placeId)
         {
-            var placeDetailsResult = _googlePlacesApi.GetDetails(placeId);
+            var placeDetailsResult = await _googlePlacesApi.GetDetails(placeId);
             var publicPlace = _placeDetailsResultTransformer.Transform(placeDetailsResult);
 
             return publicPlace;

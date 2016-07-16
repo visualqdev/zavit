@@ -1,9 +1,10 @@
-﻿using zavit.Web.Api.Dtos.Venues;
+﻿using System.Threading.Tasks;
+using zavit.Web.Api.Dtos.Venues;
 
 namespace zavit.Web.Api.DtoServices.Venues
 {
     public interface IVenueDtoService
     {
-        VenueDto AddVenue(VenueDto venueDto, string placeId);
+        Task<VenueDto> AddVenue(VenueDto venueDto, string placeId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
@@ -15,7 +16,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
     {
         class When_providing_suggesting_place_dtos
         {
-            Because of = () => _result = Subject.SuggestPlaces(_placeSearchCriteriaDto);
+            Because of = () => _result = Subject.SuggestPlaces(_placeSearchCriteriaDto).Result;
 
             It should_return_a_dto_for_each_of_the_places_suggested_by_the_place_service = () => _result.ShouldContainOnlyOrdered(_placeDto, _otherPlaceDto);
 
@@ -26,7 +27,9 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
                 var place = NewInstanceOf<IPlace>();
                 var otherPlace = NewInstanceOf<IPlace>();
 
-                Injected<IPlaceService>().Stub(s => s.Suggest(_placeSearchCriteriaDto)).Return(new[] { place, otherPlace });
+                Injected<IPlaceService>()
+                    .Stub(s => s.Suggest(_placeSearchCriteriaDto))
+                    .Return(Task.FromResult<IEnumerable<IPlace>>(new[] { place, otherPlace }));
 
                 _placeDto = NewInstanceOf<PlaceDto>();
                 Injected<IPlaceDtoFactory>().Stub(f => f.CreateItem(place)).Return(_placeDto);
