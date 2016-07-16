@@ -12,7 +12,6 @@ namespace zavit.Web.Mvc
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            var container = Ioc.Configure();
         }
     }
 }

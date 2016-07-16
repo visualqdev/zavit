@@ -116,6 +116,10 @@
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
       <Name>zavit.Domain.Venues</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
+      <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>
+      <Name>zavit.Infrastructure.Ioc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
       <Project>{67c23b94-0318-4507-ad94-08bd1e288fb9}</Project>
       <Name>zavit.Infrastructure.Orm</Name>

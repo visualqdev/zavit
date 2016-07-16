@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container.cs" />
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureCoreInstaller.cs" />
