@@ -3,6 +3,8 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
+using zavit.Infrastructure.Accounts;
 using zavit.Infrastructure.Accounts.Repositories;
 
 namespace zavit.Infrastructure.Ioc.Infrastructure
@@ -12,7 +14,8 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IAccountRepository>().ImplementedBy<AccountRepository>().LifestyleTransient());
+                Component.For<IAccountRepository>().ImplementedBy<AccountRepository>().LifestyleTransient(),
+                Component.For<IAccountSecurity>().ImplementedBy<AccountSecurity>().LifestyleSingleton());
         }
     }
 }

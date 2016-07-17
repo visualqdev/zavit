@@ -3,5 +3,6 @@
     public interface IAccountRepository
     {
         Account Get(string userName);
+        void Save(Account account);
     }
 }

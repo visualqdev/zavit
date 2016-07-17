@@ -4,6 +4,6 @@ namespace zavit.Domain.Accounts
 {
     public interface IAccountService
     {
-        AccountRegistrationResult Register(IAccountRegistration accountDto);
+        AccountRegistrationResult Register(IAccountRegistration accountRegistration);
     }
 }

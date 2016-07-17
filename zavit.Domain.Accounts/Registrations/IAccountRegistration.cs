@@ -2,6 +2,7 @@
 {
     public interface IAccountRegistration
     {
-         
+        string Username { get; }
+        string Password { get; }
     }
 }

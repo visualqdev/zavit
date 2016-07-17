@@ -16,5 +16,11 @@ namespace zavit.Infrastructure.Accounts.Repositories
         {
             return _session.QueryOver<Account>().Where(a => a.Username == userName).SingleOrDefault();
         }
+
+        public void Save(Account account)
+        {
+            _session.Save(account);
+            _session.Flush();
+        }
     }
 }

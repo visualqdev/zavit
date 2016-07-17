@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Shared;
+﻿using zavit.Domain.Accounts.Registrations;
+using zavit.Domain.Shared;
 
 namespace zavit.Domain.Accounts
 {
@@ -7,11 +8,10 @@ namespace zavit.Domain.Accounts
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
         public virtual string Password { get; set; }
-        public virtual string Salt { get; set; }
-
-        public virtual bool VerifyPassword(string password)
+        
+        public virtual bool VerifyPassword(string password, IAccountSecurity accountSecurity)
         {
-            return password == Password;
+            return accountSecurity.ValidatePassword(password, Password);
         }
     }
 }
