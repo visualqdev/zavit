@@ -47,10 +47,12 @@
     <Compile Include="IAccountRepository.cs" />
     <Compile Include="IAccountService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrations\AccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountCreator.cs" />
     <Compile Include="Registrations\IAccountRegistration.cs" />
     <Compile Include="Registrations\IAccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountSecurity.cs" />
+    <Compile Include="Registrations\Validators\UsernameValidator.cs" />
     <Compile Include="Registrations\Validators\IAccountRegistrationValidator.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Container.cs" />
+    <Compile Include="DomainInstallers\AccountsInstaller.cs" />
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureAccountsInstaller.cs" />

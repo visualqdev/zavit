@@ -14,11 +14,10 @@ namespace zavit.Web.Api
             var container = Container.Instance;
             container.Install(new WebApiInstaller());
 
+            OAuthConfig.Register(app, container);
             var config = new HttpConfiguration();
             WebApiConfig.Register(config, container);
             app.UseWebApi(config);
-
-            OAuthConfig.Register(app, container);
         }
     }
 }

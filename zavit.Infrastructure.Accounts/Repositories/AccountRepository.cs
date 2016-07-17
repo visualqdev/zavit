@@ -22,5 +22,12 @@ namespace zavit.Infrastructure.Accounts.Repositories
             _session.Save(account);
             _session.Flush();
         }
+
+        public bool AccountExists(string username)
+        {
+            return _session.QueryOver<Account>()
+                .Where(a => a.Username == username)
+                .RowCount() > 0;
+        }
     }
 }

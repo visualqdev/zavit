@@ -1,17 +1,19 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.OAuth;
-using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
 
 namespace zavit.Web.Core.Authorization
 {
     public class AccessAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
         readonly IAccountRepositoryFactory _accountRepositoryFactory;
-        
-        public AccessAuthorizationServerProvider(IAccountRepositoryFactory accountRepositoryFactory)
+        readonly IAccountSecurity _accountSecurity;
+
+        public AccessAuthorizationServerProvider(IAccountRepositoryFactory accountRepositoryFactory, IAccountSecurity accountSecurity)
         {
             _accountRepositoryFactory = accountRepositoryFactory;
+            _accountSecurity = accountSecurity;
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -29,7 +31,7 @@ namespace zavit.Web.Core.Authorization
             var account = accountRepository.Get(context.UserName);
             _accountRepositoryFactory.Release(accountRepository);
 
-            if (account == null || account.VerifyPassword(context.Password))
+            if (account == null || !account.VerifyPassword(context.Password, _accountSecurity))
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return Task.FromResult(0);

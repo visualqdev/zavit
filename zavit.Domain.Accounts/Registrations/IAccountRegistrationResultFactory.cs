@@ -3,5 +3,6 @@
     public interface IAccountRegistrationResultFactory
     {
         AccountRegistrationResult CreateSuccessful();
+        AccountRegistrationResult CreateFailed(string message);
     }
 }

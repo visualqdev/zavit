@@ -1,6 +1,7 @@
 ﻿using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using zavit.Infrastructure.Ioc.DomainInstallers;
 using zavit.Infrastructure.Ioc.Infrastructure;
@@ -15,6 +16,7 @@ namespace zavit.Infrastructure.Ioc
         Container()
         {
             AddFacility<TypedFactoryFacility>();
+            Kernel.Resolver.AddSubResolver(new CollectionResolver(Kernel));
 
             Register(
                 Component.For<IKernel>().Instance(Kernel),
@@ -26,7 +28,9 @@ namespace zavit.Infrastructure.Ioc
                 new VenuesInstaller(),
                 new InfrastructurePlacesInstaller(),
                 new InfrastructureCoreInstaller(),
-                new NhibernateWebInstaller());
+                new NhibernateWebInstaller(),
+                new AccountsInstaller(),
+                new InfrastructureAccountsInstaller());
         }
 
         public static Container Instance

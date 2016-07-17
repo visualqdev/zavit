@@ -4,5 +4,6 @@
     {
         Account Get(string userName);
         void Save(Account account);
+        bool AccountExists(string username);
     }
 }

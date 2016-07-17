@@ -13,6 +13,7 @@ namespace zavit.Web.Api.Controllers
             _accountService = accountService;
         }
 
+        [HttpPost]
         public IHttpActionResult Post(AccountRegistrationDto accountDto)
         {
             var registrationResult = _accountService.Register(accountDto);

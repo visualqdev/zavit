@@ -22,7 +22,6 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IPlaceDtoFactory>().ImplementedBy<PlaceDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueDtoService>().ImplementedBy<VenueDtoService>().LifestyleTransient(),
                 Component.For<IVenueDtoFactory>().ImplementedBy<VenueDtoFactory>().LifestyleTransient(),
-                Component.For<AccessAuthorizationServerProvider>().LifestyleSingleton(),
                 Component.For<IAccountRepositoryFactory>().AsFactory()
                 );
         }
