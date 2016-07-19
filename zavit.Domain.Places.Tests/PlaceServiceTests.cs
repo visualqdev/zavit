@@ -40,7 +40,7 @@ namespace zavit.Domain.Places.Tests
             It should_add_the_venue_to_the_place = () => _place.AssertWasCalled(p => p.AddVenue(_venue));
 
             It should_save_the_venue_place_in_the_repository =
-                () => Injected<IVenuePlaceRepository>().AssertWasCalled(r => r.Save(_place));
+                () => Injected<IVenuePlaceRepository>().AssertWasCalled(r => r.Update(_place));
 
             It should_return_the_new_venue = () => _result.ShouldEqual(_venue);
 

@@ -38,6 +38,10 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +56,7 @@
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureCoreInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructurePlacesInstaller.cs" />
+    <Compile Include="Infrastructure\NhibernateWebInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +74,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
       <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
       <Name>zavit.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
+      <Project>{67c23b94-0318-4507-ad94-08bd1e288fb9}</Project>
+      <Name>zavit.Infrastructure.Orm</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Places\zavit.Infrastructure.Places.csproj">
       <Project>{644f8521-635e-4ccb-a256-96b17cb37894}</Project>

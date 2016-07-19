@@ -31,12 +31,22 @@ namespace zavit.Domain.Places
 
         public async Task<Venue> AddVenue(INewVenue newVenue, string placeId)
         {
-            var place = _venuePlaceRepository.Get(placeId) ?? await _venuePlaceCreator.Create(placeId);
+            var place = _venuePlaceRepository.Get(placeId);
+
+            var isNewPlace = false;
+            if (place == null)
+            {
+                isNewPlace = true;
+                place = await _venuePlaceCreator.Create(placeId);
+            }
 
             var venue = _venueService.CreateVenue(newVenue);
             place.AddVenue(venue);
 
-            _venuePlaceRepository.Save(place);
+            if (isNewPlace)
+                _venuePlaceRepository.Save(place);
+            else
+                _venuePlaceRepository.Update(place);
 
             return venue;
         }

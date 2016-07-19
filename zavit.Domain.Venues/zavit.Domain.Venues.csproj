@@ -48,6 +48,12 @@
     <Compile Include="Venue.cs" />
     <Compile Include="VenueService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
+      <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
+      <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

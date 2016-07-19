@@ -8,35 +8,35 @@ var topPoint;
 var count =0;
 
 $(function(){
-  var startPos;
-  var geoSuccess = function(position) {
-    startPos = position;
-    initialize(startPos.coords.latitude,startPos.coords.longitude);
-  }
-  navigator.geolocation.getCurrentPosition(geoSuccess);
-$('#home').delegate('#nextGym','click', function(e){
-      e.preventDefault();
-      var clickCount = getCount();
-      google.maps.event.trigger(gMarkers[clickCount],'click', gMarkers[clickCount].position);
-  });
-$('#home').delegate('#prevGym','click', function(e){
-      e.preventDefault();
-      var clickCount = getPrevCount();
-      google.maps.event.trigger(gMarkers[clickCount -1],'click', gMarkers[clickCount -1].position);
-  });
+	 var startPos;
+	 var geoSuccess = function(position) {
+		startPos = position;
+		initialize(startPos.coords.latitude,startPos.coords.longitude);
+	 }
+	navigator.geolocation.getCurrentPosition(geoSuccess);
+	$('#home').delegate('#nextGym','click', function(e){
+		  e.preventDefault();
+		  var clickCount = getCount();
+		  google.maps.event.trigger(gMarkers[clickCount],'click', gMarkers[clickCount].position);
+	  });
+	$('#home').delegate('#prevGym','click', function(e){
+		  e.preventDefault();
+		  var clickCount = getPrevCount();
+		  google.maps.event.trigger(gMarkers[clickCount -1],'click', gMarkers[clickCount -1].position);
+	  });
 
-$('#searchBtn').on("click", function(e){
-  e.preventDefault();
-  $(this).parent().toggleClass('searchOpen', 300);
-});
+	$('#searchBtn').on("click", function(e){
+	  e.preventDefault();
+	  $(this).parent().toggleClass('searchOpen', 300);
+	});
 
-$('#home').delegate('#gymInfo button', "click", function(e){
-  e.preventDefault();
-  gMarkers.forEach(removeMarker);
-  map.setZoom(14);
-  map.panBy(345, 0);
-  openLocationHighlight();
-});
+	$('#home').delegate('#gymInfo button', "click", function(e){
+	  e.preventDefault();
+	  gMarkers.forEach(removeMarker);
+	  map.setZoom(14);
+	  map.panBy(345, 0);
+	  openLocationHighlight();
+	});
 
 });
 function showPanel(){
