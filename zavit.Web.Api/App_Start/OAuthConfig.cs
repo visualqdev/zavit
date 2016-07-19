@@ -5,6 +5,7 @@ using Owin;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Infrastructure.Ioc;
 using zavit.Web.Core.Authorization;
+using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api
 {
@@ -12,7 +13,11 @@ namespace zavit.Web.Api
     {
         public static void Register(IAppBuilder app, Container container)
         {
-            var accessAuthorizationServerProvider = new AccessAuthorizationServerProvider(container.Resolve<IAccountRepositoryFactory>(), container.Resolve<IAccountSecurity>());
+            var accessAuthorizationServerProvider = 
+                new AccessAuthorizationServerProvider(
+                    container.Resolve<IAccountRepositoryFactory>(), 
+                    container.Resolve<IAccountSecurity>(), 
+                    container.Resolve<IUserContextIocFactory>());
 
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {

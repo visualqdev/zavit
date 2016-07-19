@@ -62,7 +62,10 @@
   <ItemGroup>
     <Compile Include="Authorization\AccessAuthorizationServerProvider.cs" />
     <Compile Include="Authorization\IAccountRepositoryFactory.cs" />
+    <Compile Include="Context\IUserContext.cs" />
+    <Compile Include="Context\IUserContextIocFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Context\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

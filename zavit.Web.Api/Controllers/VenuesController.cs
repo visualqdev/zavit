@@ -22,6 +22,8 @@ namespace zavit.Web.Api.Controllers
         [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
         public async Task<IHttpActionResult> Post(VenueDto venueDto, string placeId)
         {
+            var identity = RequestContext.Principal.Identity;
+
             var venue = await _venueDtoService.AddVenue(venueDto, placeId);
             return CreatedAtRoute(CommonRoutes.Default, new { controller = "venues", id = venue.Id }, venue);
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using zavit.Domain.Accounts;
 using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
 using zavit.Domain.Places.VenuePlaces;
@@ -29,7 +30,7 @@ namespace zavit.Domain.Places
             return publicPlaces;
         }
 
-        public async Task<Venue> AddVenue(INewVenue newVenue, string placeId)
+        public async Task<Venue> AddVenue(INewVenue newVenue, string placeId, Account venueOwnerAccount)
         {
             var place = _venuePlaceRepository.Get(placeId);
 
@@ -40,7 +41,7 @@ namespace zavit.Domain.Places
                 place = await _venuePlaceCreator.Create(placeId);
             }
 
-            var venue = _venueService.CreateVenue(newVenue);
+            var venue = _venueService.CreateVenue(newVenue, venueOwnerAccount);
             place.AddVenue(venue);
 
             if (isNewPlace)

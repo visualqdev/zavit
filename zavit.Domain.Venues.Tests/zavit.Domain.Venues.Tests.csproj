@@ -64,6 +64,14 @@
     <Compile Include="VenueServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
+      <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
+      <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
       <Name>zavit.Domain.Venues</Name>
