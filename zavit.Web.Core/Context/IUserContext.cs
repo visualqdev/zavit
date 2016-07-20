@@ -4,6 +4,6 @@ namespace zavit.Web.Core.Context
 {
     public interface IUserContext
     {
-        Account Account { get; set; }
+        Account Account { get; }
     }
 }

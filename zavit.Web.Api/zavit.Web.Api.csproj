@@ -93,6 +93,11 @@
     <Compile Include="App_Start\CommonRoutes.cs" />
     <Compile Include="App_Start\OAuthConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authorization\AccessAuthorizationFilter.cs" />
+    <Compile Include="Authorization\ClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\IClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\IClaimsIdentityProviderFactory.cs" />
+    <Compile Include="Authorization\UserContext.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />

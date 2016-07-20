@@ -9,7 +9,7 @@ namespace zavit.Domain.Venues.NewVenueCreation
             return new Venue
             {
                 Name = newVenue.Name,
-                Account = venueOwnerAccount
+                OwnerAccount = venueOwnerAccount
             };
         }
     }

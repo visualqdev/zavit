@@ -17,7 +17,7 @@ namespace zavit.Domain.Venues.Tests.NewVenueCreation
                 () => _result.Name.ShouldEqual(_newVenue.Name);
 
             It should_set_the_owner_of_the_new_venue_to_be_the_provided_venue_owner_account =
-                () => _result.Account.ShouldEqual(_venueOwnerAccount);
+                () => _result.OwnerAccount.ShouldEqual(_venueOwnerAccount);
 
             Establish context = () =>
             {

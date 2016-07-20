@@ -24,7 +24,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             Establish context = () =>
             {
                 var venueOwnerAccount = NewInstanceOf<Account>();
-                Injected<IUserContext>().Account = venueOwnerAccount;
+                Injected<IUserContext>().Stub(c => c.Account).Return(venueOwnerAccount);
 
                 _venueDto = NewInstanceOf<VenueDto>();
                 _venue = NewInstanceOf<Venue>();

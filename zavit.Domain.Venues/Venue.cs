@@ -7,6 +7,6 @@ namespace zavit.Domain.Venues
     {
         public virtual string Name { get; set; }
         public virtual int Id { get; set; }
-        public virtual Account Account { get; set; }
+        public virtual Account OwnerAccount { get; set; }
     }
 }

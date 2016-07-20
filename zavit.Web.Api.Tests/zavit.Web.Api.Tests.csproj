@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\UserContextTests.cs" />
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />

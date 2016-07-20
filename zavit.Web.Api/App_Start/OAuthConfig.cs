@@ -16,8 +16,7 @@ namespace zavit.Web.Api
             var accessAuthorizationServerProvider = 
                 new AccessAuthorizationServerProvider(
                     container.Resolve<IAccountRepositoryFactory>(), 
-                    container.Resolve<IAccountSecurity>(), 
-                    container.Resolve<IUserContextIocFactory>());
+                    container.Resolve<IAccountSecurity>());
 
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
