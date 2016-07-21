@@ -77,6 +77,11 @@ namespace zavit.Domain.Places.Tests.Suggestions
 
             static PublicPlace _publicPlace;
         }
+
+        class When_getting_venues
+        {
+            It should_always_return_an_empty_collection = () => Subject.Venues.ShouldBeEmpty();
+        }
     }
 }
 

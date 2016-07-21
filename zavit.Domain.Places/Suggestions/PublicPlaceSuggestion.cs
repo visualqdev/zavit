@@ -1,4 +1,6 @@
-﻿using zavit.Domain.Places.PublicPlaces;
+﻿using System.Collections.Generic;
+using zavit.Domain.Places.PublicPlaces;
+using zavit.Domain.Venues;
 
 namespace zavit.Domain.Places.Suggestions
 {
@@ -11,5 +13,6 @@ namespace zavit.Domain.Places.Suggestions
         public string PlaceId => PublicPlace.PlaceId;
         public string Name => PublicPlace.Name;
         public string Address => PublicPlace.Address;
+        public IList<Venue> Venues => new List<Venue>();
     }
 }
