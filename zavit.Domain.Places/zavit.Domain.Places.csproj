@@ -47,6 +47,11 @@
     <Compile Include="PublicPlaces\IPublicPlacesService.cs" />
     <Compile Include="PublicPlaces\PublicPlace.cs" />
     <Compile Include="Search\IPlaceSearchCriteria.cs" />
+    <Compile Include="Suggestions\IPlaceSuggestionsMerger.cs" />
+    <Compile Include="Suggestions\IPublicPlaceSuggestionFactory.cs" />
+    <Compile Include="Suggestions\PlaceSuggestionsMerger.cs" />
+    <Compile Include="Suggestions\PublicPlaceSuggestion.cs" />
+    <Compile Include="Suggestions\PublicPlaceSuggestionFactory.cs" />
     <Compile Include="VenuePlaces\IVenuePlaceRepository.cs" />
     <Compile Include="VenuePlaces\IVenuePlaceCreator.cs" />
     <Compile Include="VenuePlaces\VenuePlace.cs" />
