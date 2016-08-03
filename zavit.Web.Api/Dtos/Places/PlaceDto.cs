@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using zavit.Web.Api.Dtos.Venues;
 
 namespace zavit.Web.Api.Dtos.Places
 {
@@ -9,5 +11,6 @@ namespace zavit.Web.Api.Dtos.Places
         public string PlaceId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public IEnumerable<VenueDto> Venues { get; set; }
     }
 }

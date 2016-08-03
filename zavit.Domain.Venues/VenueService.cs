@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Venues.NewVenueCreation;
+﻿using zavit.Domain.Accounts;
+using zavit.Domain.Venues.NewVenueCreation;
 
 namespace zavit.Domain.Venues
 {
@@ -11,9 +12,9 @@ namespace zavit.Domain.Venues
             _venueCreator = venueCreator;
         }
 
-        public Venue CreateVenue(INewVenue newVenue)
+        public Venue CreateVenue(INewVenue newVenue, Account venueOwnerAccount)
         {
-            var venue = _venueCreator.Create(newVenue);
+            var venue = _venueCreator.Create(newVenue, venueOwnerAccount);
             return venue;
         }
     }

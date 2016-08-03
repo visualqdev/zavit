@@ -39,7 +39,7 @@ namespace zavit.Infrastructure.Orm
                         return isEntity;
                     })
                     .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()))
-                .ExposeConfiguration(config => new SchemaExport(config).Execute(true, true, false))
+                .ExposeConfiguration(config => new SchemaUpdate(config).Execute(true, true))
                 .BuildSessionFactory();
 
             return sessionfactory;

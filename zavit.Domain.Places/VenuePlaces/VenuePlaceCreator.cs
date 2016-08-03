@@ -20,6 +20,7 @@ namespace zavit.Domain.Places.VenuePlaces
             var venuePlace = new VenuePlace
             {
                 Venues = new List<Venue>(),
+                Name = publicPlace.Name,
                 PlaceId = publicPlace.PlaceId,
                 Address = publicPlace.Address,
                 Latitude = publicPlace.Latitude,
