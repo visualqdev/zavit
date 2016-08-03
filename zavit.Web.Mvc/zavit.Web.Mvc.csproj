@@ -123,12 +123,42 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.js" />
+    <Content Include="App\Libraries\jquery-3.1.0.min.js" />
+    <Content Include="App\Modules\specs\test-spec.js" />
+    <Content Include="App\Modules\test.js" />
+    <Content Include="CSS\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="CSS\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="CSS\bootstrap\css\bootstrap.css" />
+    <Content Include="CSS\bootstrap\css\bootstrap.min.css" />
+    <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CSS\bootstrap\js\bootstrap.js" />
+    <Content Include="CSS\bootstrap\js\bootstrap.min.js" />
+    <Content Include="CSS\bootstrap\js\npm.js" />
+    <Content Include="CSS\production\styles.css" />
+    <Content Include="gulpfile.js" />
     <Content Include="packages.config" />
+    <Content Include="Routing\crossroads.min.js" />
+    <Content Include="Routing\hasher.min.js" />
+    <Content Include="Routing\signals.min.js" />
+    <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="AppSettings\appSettings.config" />
+    <Content Include=".babelrc" />
+    <Content Include="karma.conf.js" />
+    <Content Include="CSS\styles.less" />
+    <Content Include="CSS\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="CSS\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="CSS\bootstrap\css\bootstrap.css.map" />
+    <Content Include="CSS\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="CSS\libraries\colours.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

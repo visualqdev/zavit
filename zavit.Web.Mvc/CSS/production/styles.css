@@ -1,0 +1,16 @@
+body {
+  background: red;
+}
+body p {
+  background: red;
+}
+body h2 {
+  background: red;
+  color: white;
+}
+div#otherTitle h1 {
+  background: white;
+}
+div#otherTitle h1 span {
+  color: green;
+}
