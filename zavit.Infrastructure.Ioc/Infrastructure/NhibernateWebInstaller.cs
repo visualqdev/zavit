@@ -12,8 +12,8 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         {
             container.Register(
                 Component.For<SessionFactoryProvider>().LifestyleSingleton(),
-                Component.For<ISessionFactory>().LifeStyle.Singleton.UsingFactoryMethod(kernel => kernel.Resolve<SessionFactoryProvider>().Provide()),
-                Component.For<ISession>().LifeStyle.PerWebRequest.UsingFactoryMethod(kernel => kernel.Resolve<ISessionFactory>().OpenSession()));
+                Component.For<ISessionFactory>().UsingFactoryMethod(kernel => kernel.Resolve<SessionFactoryProvider>().Provide()).LifestyleSingleton(),
+                Component.For<ISession>().UsingFactoryMethod(kernel => kernel.Resolve<ISessionFactory>().OpenSession()).LifestylePerWebRequest());
         }
     }
 }

@@ -47,12 +47,21 @@
     <Compile Include="PublicPlaces\IPublicPlacesService.cs" />
     <Compile Include="PublicPlaces\PublicPlace.cs" />
     <Compile Include="Search\IPlaceSearchCriteria.cs" />
+    <Compile Include="Suggestions\IPlaceSuggestionsMerger.cs" />
+    <Compile Include="Suggestions\IPublicPlaceSuggestionFactory.cs" />
+    <Compile Include="Suggestions\PlaceSuggestionsMerger.cs" />
+    <Compile Include="Suggestions\PublicPlaceSuggestion.cs" />
+    <Compile Include="Suggestions\PublicPlaceSuggestionFactory.cs" />
     <Compile Include="VenuePlaces\IVenuePlaceRepository.cs" />
     <Compile Include="VenuePlaces\IVenuePlaceCreator.cs" />
     <Compile Include="VenuePlaces\VenuePlace.cs" />
     <Compile Include="VenuePlaces\VenuePlaceCreator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>

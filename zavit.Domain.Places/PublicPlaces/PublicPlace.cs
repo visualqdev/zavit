@@ -1,6 +1,6 @@
 ﻿namespace zavit.Domain.Places.PublicPlaces
 {
-    public class PublicPlace : IPlace
+    public class PublicPlace
     {
         public double Longitude { get; set; }
         public double Latitude { get; set; }
