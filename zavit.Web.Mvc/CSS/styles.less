@@ -1,21 +1,40 @@
 ﻿@import '.\libraries\colours';
 
-body{
-    background:@body-bg;
-    p {
-        background:@body-bg;
-    }
-    h2 {
-        background:@body-bg;
-        color:@main-font;
-    }
+html, body {
+	height: 100%;
+	width:100%;
 }
-
-div#otherTitle {
-    h1 {
-        background:@home-bg;
-        span {
-            color:@font-green;
-        }
+#map {
+	width:100%;
+	height: 100%;
+	background: @map-background;
+	padding-top:40px;
+	z-index: 1;
+}
+#mainNav.navbar {
+	margin-bottom: 0px;
+	border-radius: 0;
+	border: 1px solid @nav-bar-border;
+	background: @nav-bg;
+    position: absolute;
+    top: 0;
+    left:0;
+    width:100%;
+    z-index: 2;
+    -webkit-box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+	box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+    li.active a {
+	    background: @nav-button-bg;
+	    border: 1px solid @nav-divider;
+	    border-width: 0px 1px;
     }
+    a {
+	    color:@text-link;
+    }
+    .navbar-header a {
+	
+	    color: @logo;
+	    font-size: 30px;
+    }  
 }
