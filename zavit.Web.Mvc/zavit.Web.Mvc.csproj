@@ -132,10 +132,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Controllers\homeController.js" />
     <Content Include="App\Libraries\jquery-3.1.0.min.js" />
     <Content Include="App\Modules\specs\test-spec.js" />
     <Content Include="App\Modules\test.js" />
-    <Content Include="App\routing.js" />
+    <Content Include="App\Routing\routing.js" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.css" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="CSS\bootstrap\css\bootstrap.css" />
@@ -149,6 +150,7 @@
     <Content Include="Routing\crossroads.min.js" />
     <Content Include="Routing\hasher.min.js" />
     <Content Include="Routing\signals.min.js" />
+    <Content Include="Specs\homeController-spec.js" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
