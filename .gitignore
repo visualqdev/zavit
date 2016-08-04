@@ -170,3 +170,10 @@ $RECYCLE.BIN/
 AppSettings/
 /zavit.Infrastructure.Database/LOCAL.DBDeployment.bat
 /zavit.Infrastructure.Database/LOCAL.DBDropAndDeployment.bat
+
+#node modules
+node_modules/
+
+#ignore auto generated files
+
+/zavit.Web.Mvc/bundle.js

@@ -36,5 +36,7 @@
   "presets": [
     "es2015"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "gulp-install": "^0.6.0"
+  }
 }
