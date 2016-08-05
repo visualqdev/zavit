@@ -1,15 +1,26 @@
-﻿using zavit.Domain.Shared;
+﻿using System;
+using zavit.Domain.Shared;
 
 namespace zavit.Domain.Clients
 {
-    public class Client : IEntity<string>
+    public class Client : IEntity<int>
     {
-        public string Id { get; set; }
-        public string Secret { get; set; }
-        public string Name { get; set; }
-        public ApplicationTypes ApplicationType { get; set; }
-        public bool Active { get; set; }
-        public int RefreshTokenLifeTime { get; set; }
-        public string AllowedOrigin { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Secret { get; set; }
+        public virtual string Name { get; set; }
+        public virtual bool CanProvideSecret { get; set; }
+        public virtual bool Active { get; set; }
+        public virtual int RefreshTokenLifeTime { get; set; }
+        public virtual string AllowedOrigin { get; set; }
+
+        public virtual bool ValidateSecret(string clientSecret)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual DateTime CalculateTokenExpiry(DateTime issueDateUtc)
+        {
+            return issueDateUtc.AddMinutes(RefreshTokenLifeTime);
+        }
     }
 }

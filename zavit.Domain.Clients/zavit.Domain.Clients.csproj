@@ -41,7 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="IClientRepository.cs" />
+    <Compile Include="Tokens\IRefreshTokenProvider.cs" />
+    <Compile Include="Tokens\IRefreshTokenRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tokens\ITokenSecurity.cs" />
+    <Compile Include="Tokens\RefreshToken.cs" />
+    <Compile Include="Tokens\RefreshTokenProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
