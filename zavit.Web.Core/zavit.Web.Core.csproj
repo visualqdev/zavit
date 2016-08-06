@@ -62,6 +62,10 @@
   <ItemGroup>
     <Compile Include="Authorization\AccessAuthorizationServerProvider.cs" />
     <Compile Include="Authorization\IAccountRepositoryFactory.cs" />
+    <Compile Include="Authorization\IClientRepositoryFactory.cs" />
+    <Compile Include="Authorization\IRefreshTokenProviderFactory.cs" />
+    <Compile Include="Authorization\IRefreshTokenRepositoryFactory.cs" />
+    <Compile Include="Authorization\AccessRefreshTokenProvider.cs" />
     <Compile Include="Context\IUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +77,10 @@
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
       <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Clients\zavit.Domain.Clients.csproj">
+      <Project>{ff10bc40-a0aa-42b1-9560-d9d5df1f2871}</Project>
+      <Name>zavit.Domain.Clients</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
