@@ -3,9 +3,9 @@ using zavit.Domain.Shared;
 
 namespace zavit.Domain.Clients.Tokens
 {
-    public class RefreshToken : IEntity<int>
+    public class RefreshToken : IEntity<Guid>
     {
-        public virtual int Id { get; set; }
+        public virtual Guid Id { get; set; }
         public virtual string HashedTokenId { get; set; }
         public virtual string Subject { get; set; }
         public virtual Client Client { get; set; }

@@ -2,6 +2,8 @@
 {
     public interface IRefreshTokenRepository
     {
-        void Save(RefreshToken token);
+        void Save(RefreshToken refreshToken);
+        void Remove(RefreshToken refreshToken);
+        RefreshToken Find(string hashedRefreshTokenId);
     }
 }

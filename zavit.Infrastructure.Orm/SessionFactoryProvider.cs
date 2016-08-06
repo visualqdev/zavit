@@ -22,22 +22,33 @@ namespace zavit.Infrastructure.Orm
         public ISessionFactory Provide()
         {
             var mappingAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("zavit.Domain.")).ToArray();
+            var overrideAssemblies = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.StartsWith("zavit.Infrastructure."));
 
             var entityInterface = typeof (IEntity<>);
 
-            var sessionfactory = Fluently.Configure()
+            var fluentConfiguration = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2012.ConnectionString(_databaseSettings.ConnectionString))
-                .Mappings(m => m.AutoMappings.Add(AutoMap
-                    .Assemblies(mappingAssemblies)
-                    .Where(entity => 
+                .Mappings(m => m.AutoMappings.Add(() =>
+                {
+                    var autoPersistanceModel = AutoMap.Assemblies(mappingAssemblies)
+                        .Where(entity =>
+                        {
+                            var entityInterfaces = entity.GetInterfaces();
+                            var isEntity = entityInterfaces.Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == entityInterface);
+                            return isEntity;
+                        });
+                    autoPersistanceModel.Conventions.AddFromAssemblyOf<PrimaryKeyConvention>();
+
+                    foreach (var overrideAssembly in overrideAssemblies)
                     {
-                        var entityInterfaces = entity.GetInterfaces();
-                        var isEntity = entityInterfaces.Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == entityInterface);
-                        return isEntity;
-                    })
-                    .Conventions.AddFromAssemblyOf<PrimaryKeyConvention>()))
-                .ExposeConfiguration(config => new SchemaUpdate(config).Execute(true, true))
-                .BuildSessionFactory();
+                        autoPersistanceModel.UseOverridesFromAssembly(overrideAssembly);
+                    }
+
+                    return autoPersistanceModel;
+                }))
+                .ExposeConfiguration(config => new SchemaUpdate(config).Execute(true, true));
+
+            var sessionfactory = fluentConfiguration.BuildSessionFactory();
 
             return sessionfactory;
         }

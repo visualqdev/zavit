@@ -121,5 +121,27 @@ namespace zavit.Web.Core.Authorization
 
             return Task.FromResult(0);
         }
+
+        public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
+        {
+            //read original client id - this is client id from protected ticket stored against refresh token
+            var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
+            //this is client id from the incoming refresh request
+            var currentClient = context.ClientId;
+
+            if (originalClient != currentClient)
+            {
+                context.SetError("invalid_clientId", "Refresh token is issued to a different clientId.");
+                return Task.FromResult(0);
+            }
+
+            // Change auth ticket for refresh token requests
+            var newIdentity = new ClaimsIdentity(context.Ticket.Identity);
+            
+            var newTicket = new AuthenticationTicket(newIdentity, context.Ticket.Properties);
+            context.Validated(newTicket);
+
+            return Task.FromResult(0);
+        }
     }
 }

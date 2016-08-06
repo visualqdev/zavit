@@ -51,6 +51,26 @@ namespace zavit.Domain.Clients.Tests
             const string UserName = "Username";
             const string ProtectedTicket = "Protected Ticket";
         }
+
+        class When_finding_an_exisitng_refresh_token
+        {
+            Because of = () => _result = Subject.FindExisting(RefreshTokenId);
+
+            It should_return_the_refresh_token_retrieved_using_hashed_token_id = () => _result.ShouldEqual(_refreshToken);
+
+            Establish context = () =>
+            {
+                const string hashedTokenId = "Hashed Refresh Token ID";
+                Injected<ITokenSecurity>().Stub(s => s.HashTokenId(RefreshTokenId)).Return(hashedTokenId);
+
+                _refreshToken = NewInstanceOf<RefreshToken>();
+                Injected<IRefreshTokenRepository>().Stub(r => r.Find(hashedTokenId)).Return(_refreshToken);
+            };
+
+            static RefreshToken _result;
+            static RefreshToken _refreshToken;
+            const string RefreshTokenId = "Refresh Token ID";
+        }
     }
 }
 
