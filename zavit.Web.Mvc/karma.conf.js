@@ -1,6 +1,6 @@
 ﻿module.exports = function(config) {
     config.set({
-        browsers: ['PhantomJS'],
+        browsers: ['PhantomJS', 'Chrome', 'Chrome_without_security'],
         files: [
             { pattern: 'test-context.js', watched: false }
         ],
@@ -18,6 +18,12 @@
         },
         webpackServer: {
             noInfo: true
+        },
+        customLaunchers: {
+            Chrome_without_security: {
+                base: 'Chrome',
+                flags: ['--disable-web-security']
+            }
         }
     });
 };

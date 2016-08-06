@@ -5,6 +5,10 @@ export function registerRoutes() {
     crossroads.addRoute("/", () => {
          HomeController.explore();
     });
+
+    crossroads.addRoute("/login", () => {
+        LoginController.login();
+    });
    
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);
