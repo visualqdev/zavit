@@ -1,3 +1,3 @@
-﻿export function show() {
-    
+﻿export function show(name) {
+    return name + "_B";
 }
