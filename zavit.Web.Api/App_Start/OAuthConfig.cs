@@ -5,7 +5,6 @@ using Owin;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Infrastructure.Ioc;
 using zavit.Web.Core.Authorization;
-using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api
 {
@@ -16,14 +15,21 @@ namespace zavit.Web.Api
             var accessAuthorizationServerProvider = 
                 new AccessAuthorizationServerProvider(
                     container.Resolve<IAccountRepositoryFactory>(), 
+                    container.Resolve<IClientRepositoryFactory>(),
                     container.Resolve<IAccountSecurity>());
+
+            var accessRefreshTokenProvider = 
+                new AccessRefreshTokenProvider(
+                    container.Resolve<IRefreshTokenRepositoryFactory>(), 
+                    container.Resolve<IRefreshTokenProviderFactory>());
 
             var oAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = accessAuthorizationServerProvider
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
+                Provider = accessAuthorizationServerProvider,
+                RefreshTokenProvider = accessRefreshTokenProvider
             };
 
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
