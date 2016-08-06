@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="RoundhousE\rh.exe" />
+    <Content Include="runAfterCreateDatabase\LOCAL.0002.populate_lookup_tables.sql" />
     <Content Include="runAfterCreateDatabase\0001.create_tables.sql" />
     <Content Include="_BuildInfo.xml" />
   </ItemGroup>
