@@ -1,5 +1,18 @@
-﻿import * as LoginModal from "../Modules/account/loginModal"
+﻿(function($) {
+    $.loginController = function (options) {
 
-export function login(name) {
-    return LoginModal.show(name);
-}
+        const opts = {
+            loginModal:null
+        };
+
+        $.extend(opts, options);
+
+        function login() {
+            opts.loginModal.show();
+        }
+
+        return {
+            login :login
+        }
+    }
+}(jQuery))

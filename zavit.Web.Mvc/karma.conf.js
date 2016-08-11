@@ -2,6 +2,8 @@
     config.set({
         browsers: ['PhantomJS', 'Chrome', 'Chrome_without_security'],
         files: [
+            'app/libraries/jquery-3.1.0.min.js',
+            'app/Controllers/loginController.js',
             { pattern: 'test-context.js', watched: false }
         ],
         frameworks: ['jasmine'],
