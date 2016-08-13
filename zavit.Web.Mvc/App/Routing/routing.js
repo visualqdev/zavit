@@ -1,20 +1,16 @@
-﻿import * as HomeController from "../controllers/homeController";
-
-export function registerRoutes() {
-
+﻿(function() {
     crossroads.addRoute("/", () => {
-         HomeController.explore();
     });
 
     crossroads.addRoute("/login", () => {
-        LoginController.login();
+        $.loginController().login();
     });
-   
+
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);
     }
 
     hasher.initialized.add(parseHash);
-    hasher.changed.add(parseHash); 
+    hasher.changed.add(parseHash);
     hasher.init();
-}
+})();

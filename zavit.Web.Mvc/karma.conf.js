@@ -1,9 +1,14 @@
 ﻿module.exports = function(config) {
     config.set({
-        browsers: ['PhantomJS', 'Chrome', 'Chrome_without_security'],
+        browsers: [
+            'PhantomJS',
+            //'Chrome',
+            'Chrome_without_security'],
         files: [
             'app/libraries/jquery-3.1.0.min.js',
-            'app/Controllers/loginController.js',
+            'CSS/bootstrap/js/bootstrap.min.js',
+            'app/controllers/*.js',
+            'app/modules/**/*.js',
             { pattern: 'test-context.js', watched: false }
         ],
         frameworks: ['jasmine'],

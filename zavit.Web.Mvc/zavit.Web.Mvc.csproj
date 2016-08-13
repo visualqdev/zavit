@@ -131,14 +131,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\app.js" />
-    <Content Include="App\Controllers\homeController.js" />
-    <Content Include="App\Controllers\loginController.js" />
-    <Content Include="App\Libraries\jquery-3.1.0.min.js" />
-    <Content Include="App\Modules\account\loginModal.js" />
-    <Content Include="App\Modules\specs\test-spec.js" />
-    <Content Include="App\Modules\test.js" />
-    <Content Include="App\Routing\routing.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\libraries\jquery-3.1.0.min.js" />
+    <Content Include="app\modules\account\loginModal.js" />
+    <Content Include="app\routing\routing.js" />
     <Content Include="bundle.js" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.css" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.min.css" />
@@ -154,8 +152,9 @@
     <Content Include="Routing\crossroads.min.js" />
     <Content Include="Routing\hasher.min.js" />
     <Content Include="Routing\signals.min.js" />
-    <Content Include="Specs\homeController-spec.js" />
-    <Content Include="Specs\loginController-spec.js" />
+    <Content Include="specs\Controllers\homeController-spec.js" />
+    <Content Include="specs\Controllers\loginController-spec.js" />
+    <Content Include="specs\Modules\account\loginModal-spec.js" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />

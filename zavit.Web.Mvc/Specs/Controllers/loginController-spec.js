@@ -5,13 +5,9 @@ describe("loginController", function () {
         var loginController,
             loginModal;
         beforeEach(function() {
-            loginModal = { 
-                show :function() {}
-            }
-
-            loginController = $.loginController({ loginModal: loginModal });
-
-            spyOn(loginModal, "show");
+            loginModal = jasmine.createSpyObj("loginModal", ["show"]);
+            spyOn($, "loginModal").and.returnValue(loginModal);
+            loginController = $.loginController();
         });
         
         it("should display the login form modal", function () {

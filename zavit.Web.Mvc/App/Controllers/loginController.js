@@ -1,14 +1,12 @@
 ﻿(function($) {
     $.loginController = function (options) {
 
-        const opts = {
-            loginModal:null
-        };
+        var opts = {};
 
         $.extend(opts, options);
 
         function login() {
-            opts.loginModal.show();
+            $.loginModal().show();
         }
 
         return {
