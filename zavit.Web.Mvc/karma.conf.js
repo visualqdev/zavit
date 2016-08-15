@@ -1,14 +1,16 @@
 ﻿module.exports = function(config) {
     config.set({
         browsers: [
-            'PhantomJS',
+            //'PhantomJS',
             //'Chrome',
             'Chrome_without_security'],
         files: [
-            'app/libraries/jquery-3.1.0.js',
+            'libraries/jquery-3.1.0.js',
             'CSS/bootstrap/js/bootstrap.min.js',
-            'app/controllers/*.js',
-            'app/modules/**/*.js',
+            "routing/signals.min.js",
+            "routing/crossroads.min.js",
+            "routing/hasher.min.js",
+            'app/**/*.js',
             { pattern: 'test-context.js', watched: false }
         ],
         frameworks: ['jasmine'],

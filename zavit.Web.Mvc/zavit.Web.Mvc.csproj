@@ -131,11 +131,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
-    <Content Include="app\libraries\jquery-3.1.0.js" />
-    <Content Include="app\libraries\jquery-3.1.0.min.js" />
+    <Content Include="libraries\jquery-3.1.0.js" />
+    <Content Include="libraries\jquery-3.1.0.min.js" />
     <Content Include="app\modules\account\accountService.js" />
     <Content Include="app\modules\account\loginModal.js" />
     <Content Include="app\routing\routing.js" />
@@ -156,7 +155,9 @@
     <Content Include="Routing\signals.min.js" />
     <Content Include="specs\Controllers\homeController-spec.js" />
     <Content Include="specs\Controllers\loginController-spec.js" />
+    <Content Include="specs\Modules\account\accountService-spec.js" />
     <Content Include="specs\Modules\account\loginModal-spec.js" />
+    <Content Include="app\modules\map\map.js" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />

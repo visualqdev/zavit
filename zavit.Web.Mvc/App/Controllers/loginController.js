@@ -1,5 +1,5 @@
 ﻿(function($) {
-    $.loginController = function (options) {
+    $.loginController = function(options) {
 
         var opts = {};
 
@@ -10,7 +10,7 @@
         }
 
         return {
-            login :login
+            login: login
         }
     }
-}(jQuery))
+}(jQuery));

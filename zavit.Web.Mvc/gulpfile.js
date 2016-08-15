@@ -9,27 +9,21 @@ var gulp = require("gulp"),
     gutil = require("gulp-util"),
     less = require('gulp-less'),
     path = require('path'),
-    watchLess = require('gulp-watch-less');
+    watchLess = require('gulp-watch-less'),
+    concat = require('gulp-concat'),
+    uglify = require('gulp-uglify');
 
-
-gulp.task("es6", function () {
-    browserify({ debug: true })
-		.transform(babelify)
-		.require("./app/app.js", { entry: true })
-		.bundle()
-		.on("error", gutil.log)
-		.pipe(source("bundle.js"))
-    	.pipe(gulp.dest("./"));
+gulp.task("concat", function () {
+    return gulp.src("./app/**/*.js")
+        .pipe(concat("app-bundled.js"))
+        //.pipe(uglify())
+        .pipe(gulp.dest("./"));
 });
+
 gulp.task("watch", function () {
-    gulp.watch(["./app/**/*.js"], ["es6"]);
+    gulp.watch(["./app/**/*.js"], ["concat"]);
 });
 
-//gulp.task('build-less', function () {
-//    return gulp.src('./CSS/styles.less')
-//        .pipe(less())
-//        .pipe(gulp.dest('./CSS/production'));
-//});
 gulp.task('less-watch', ['less'], function() {
     return gulp.src('./CSS/styles.less')
         .pipe(watchLess('./CSS/styles.less', function() {
@@ -43,7 +37,4 @@ gulp.task('less', function() {
         .pipe(gulp.dest('./CSS/production'));
 });
 
-gulp.task("default", [
-    //"es6",
-    //"watch",
-    "less-watch"]);
+gulp.task("default", [ "less-watch", "watch", "concat"]);

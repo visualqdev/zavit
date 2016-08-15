@@ -1,8 +1,9 @@
 ﻿(function() {
-    crossroads.addRoute("/", () => {
+    crossroads.addRoute("/", function () {
+        $.homeController().explore();
     });
 
-    crossroads.addRoute("/login", () => {
+    crossroads.addRoute("/login", function () {
         $.loginController().login();
     });
 
@@ -13,4 +14,4 @@
     hasher.initialized.add(parseHash);
     hasher.changed.add(parseHash);
     hasher.init();
-})();
+}());
