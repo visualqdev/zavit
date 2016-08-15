@@ -5,7 +5,7 @@
             //'Chrome',
             'Chrome_without_security'],
         files: [
-            'app/libraries/jquery-3.1.0.min.js',
+            'app/libraries/jquery-3.1.0.js',
             'CSS/bootstrap/js/bootstrap.min.js',
             'app/controllers/*.js',
             'app/modules/**/*.js',

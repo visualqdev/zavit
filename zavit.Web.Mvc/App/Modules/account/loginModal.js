@@ -24,10 +24,22 @@
         $.extend(opts, options);
 
         return {
-            show: function() {
-                this.form.modal("show");
+            show: function () {
+                var existingModal = $("#loginModal");
+                if (existingModal.length > 0) {
+                    existingModal[0].modal("toggle");
+                } else {
+                    this.form.modal("show");
+                    this.form.on("#loginSubmit", "click", this.submitLogin);
+                }
             },
-            form: form
+            form: form,
+            submitLogin: function () {
+                var emailValue = this.form.find("#loginEmail").val();
+                var passwordValue = this.form.find("#loginPassword").val();
+
+                $.accountService().logIn(emailValue, passwordValue);
+            }
         }
     }
 }(jQuery))

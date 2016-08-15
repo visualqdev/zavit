@@ -9,7 +9,11 @@ describe("loginController", function () {
             spyOn($, "loginModal").and.returnValue(loginModal);
             loginController = $.loginController();
         });
-        
+
+        afterEach(function() {
+            $.loginModal.and.callThrough();
+        });
+
         it("should display the login form modal", function () {
             loginController.login();
             expect(loginModal.show).toHaveBeenCalled();
