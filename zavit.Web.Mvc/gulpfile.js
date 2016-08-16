@@ -27,8 +27,8 @@ gulp.task("watch", function () {
 gulp.task('less-watch', ['less'], function() {
     return gulp.src('./CSS/styles.less')
         .pipe(watchLess('./CSS/styles.less', function() {
-            gulp.start('less');
-        }));
+        gulp.start('less');
+    }));
 });
 
 gulp.task('less', function() {

@@ -29,7 +29,7 @@
             show: function() {
                 var existingModal = $("#loginModal");
                 if (existingModal.length > 0) {
-                    existingModal[0].modal("toggle");
+                    $(existingModal)[0].modal("toggle");
                 } else {
                     this.form.modal("show");
                     this.form.on("#loginSubmit", "click", this.submitLogin);
