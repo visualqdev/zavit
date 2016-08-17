@@ -1,16 +1,5 @@
-﻿(function($) {
-    $.loginController = function(options) {
+﻿import * as LoginModal from "../modules/account/loginModal";
 
-        var opts = {};
-
-        $.extend(opts, options);
-
-        function login() {
-            $.loginModal().show();
-        }
-
-        return {
-            login: login
-        }
-    }
-}(jQuery));
+export function login() {
+    LoginModal.show();
+}

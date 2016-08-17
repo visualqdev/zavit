@@ -1,7 +1,5 @@
 ﻿import { Map } from '../modules/map/map';
 
-
-
 export function explore() {
 
     var map = new Map({zoom:17});
