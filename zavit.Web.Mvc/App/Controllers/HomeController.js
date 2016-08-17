@@ -1,13 +1,12 @@
-﻿(function($) {
-    $.homeController = function() {
+﻿import { Map } from '../modules/map/map';
 
-        return {
-            explore: function() {
-                navigator.geolocation.getCurrentPosition(this.centerMapAtLocation);
-            },
-            centerMapAtLocation: function(position) {
-                $.map().initialise(position.coords.latitude, position.coords.longitude);
-            }
-        };
-    };
-}(jQuery));
+var Map = new Map();
+
+export function explore() {
+
+    navigator.geolocation.getCurrentPosition(centerMapAtLocation);
+
+    function centerMapAtLocation(position) {
+        Map.initialise(position.coords.latitude, position.coords.longitude);
+    }
+}
