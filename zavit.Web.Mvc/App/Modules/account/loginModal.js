@@ -25,12 +25,14 @@ export function show() {
         existingModal.modal("toggle");
     } else {
         let modalForm = $(form);
-        modalForm.modal("show");
-        modalForm.on("#loginSubmit", "click", () => {
-            let emailValue = this.form.find("#loginEmail").val();
-            let passwordValue = this.form.find("#loginPassword").val();
+
+        modalForm.on("shown.bs.modal",() => $("#loginSubmit").click(() => {
+            let emailValue = modalForm.find("#loginEmail").val();
+            let passwordValue = modalForm.find("#loginPassword").val();
 
             AccountService.logIn(emailValue, passwordValue);
-        });
+        }));
+
+        modalForm.modal("show");
     }
 }

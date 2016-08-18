@@ -134,7 +134,9 @@
     <Content Include="app\app.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\modules\account\accountClient.js" />
     <Content Include="app\modules\navigation\topNav.js" />
+    <Content Include="app\modules\settings\apiSettings.js" />
     <Content Include="libraries\jquery-3.1.0.js" />
     <Content Include="libraries\jquery-3.1.0.min.js" />
     <Content Include="app\modules\account\accountService.js" />
