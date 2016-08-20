@@ -1,13 +1,39 @@
 ﻿import * as AccountClient from "./accountClient";
+import * as Storage from "../storage/storage";
+
+const tokenStorageKey = "userAuthenticationToken";
 
 export function logIn(email, password) {
-    AccountClient
-        .getAuthenticationTokens(email, password)
-        .then(authenticationSuccess, authenticationError);
+    return new Promise((resolve, reject) => {
+        AccountClient
+            .getAuthenticationTokens(email, password)
+            .then(
+                (data) => {
+                    authenticationSuccess(data);
+                    resolve();
+                },
+                (error) => {
+                    authenticationError(error);
+                    reject(error);
+                });
+    });
+}
+
+export function logOut() {
+    Storage.removeItem(tokenStorageKey);
+}
+
+export function currentUserAccount() {
+    const tokenData = Storage.getObject(tokenStorageKey);
+    if (tokenData) {
+        return {
+            email: tokenData.userName
+        };
+    }
 }
 
 function authenticationSuccess(tokenData) {
-    debugger;
+    Storage.storeObject(tokenStorageKey, tokenData);
 }
 
 function authenticationError(error) {

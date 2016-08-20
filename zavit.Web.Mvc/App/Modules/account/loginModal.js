@@ -19,18 +19,20 @@ const form = `
             </div>`;
 
 export function show() {
-    let existingModal = $("#loginModal");
-    
+    const existingModal = $("#loginModal");
     if (existingModal.length > 0) {
         existingModal.modal("toggle");
     } else {
-        let modalForm = $(form);
-
+        const modalForm = $(form);
+        
         modalForm.on("shown.bs.modal",() => $("#loginSubmit").click(() => {
-            let emailValue = modalForm.find("#loginEmail").val();
-            let passwordValue = modalForm.find("#loginPassword").val();
-
-            AccountService.logIn(emailValue, passwordValue);
+            const emailValue = modalForm.find("#loginEmail").val();
+            const passwordValue = modalForm.find("#loginPassword").val();
+        
+            AccountService.logIn(emailValue, passwordValue)
+                .then(() => {
+                    modalForm.modal("toggle");
+                });
         }));
 
         modalForm.modal("show");

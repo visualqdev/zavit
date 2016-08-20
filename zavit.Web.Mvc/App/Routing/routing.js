@@ -10,6 +10,10 @@ export function registerRoutes() {
     crossroads.addRoute("/login", function () {
         LoginController.login();
     });
+
+    crossroads.addRoute("/logout", function () {
+        LoginController.logout();
+    });
    
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);
