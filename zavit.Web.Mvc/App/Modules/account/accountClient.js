@@ -26,7 +26,8 @@ export function getAuthenticationTokens(email, password) {
 export function register(displayName, email, password) {
     var data = {
         username: email,
-        password
+        password,
+        displayName
     };
 
     return new Promise((resolve, reject) => 

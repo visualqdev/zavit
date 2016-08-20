@@ -14,6 +14,7 @@
             var account = new Account
             {
                 Username = accountRegistration.Username,
+                DisplayName = accountRegistration.DisplayName
             };
 
             var password = _accountSecurity.HashPassword(accountRegistration.Password);

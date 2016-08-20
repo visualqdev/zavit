@@ -38,7 +38,8 @@ export function currentUserAccount() {
     const tokenData = Storage.getObject(tokenStorageKey);
     if (tokenData) {
         return {
-            email: tokenData.userName
+            email: tokenData.userName,
+            displayName: tokenData.displayName
         };
     }
 }

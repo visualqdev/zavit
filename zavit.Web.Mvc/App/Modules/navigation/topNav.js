@@ -15,7 +15,7 @@ export function refresh() {
     if (userAccount) {
         $("#topnavAccount").show();
         $("#topnavLogin").hide();
-        $("#topnavAccount a").text(userAccount.email);
+        $("#topnavAccount a").text(userAccount.displayName);
     } else {
         $("#topnavAccount").hide();
         $("#topnavLogin").show();

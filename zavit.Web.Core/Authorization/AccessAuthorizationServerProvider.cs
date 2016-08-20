@@ -97,16 +97,12 @@ namespace zavit.Web.Core.Authorization
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()));
-
-
+            
             var authenticationProperties = new AuthenticationProperties(new Dictionary<string, string>
                 {
-                    {
-                        "as:client_id", context.ClientId ?? string.Empty
-                    },
-                    {
-                        "userName", context.UserName
-                    }
+                    { "as:client_id", context.ClientId ?? string.Empty },
+                    { "userName", context.UserName },
+                    { "displayName", account.DisplayName }
                 });
             context.Validated(new AuthenticationTicket(identity, authenticationProperties));
             return Task.FromResult(0);
