@@ -135,6 +135,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\modules\account\accountClient.js" />
+    <Content Include="app\modules\account\registerModal.js" />
     <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\settings\apiSettings.js" />
     <Content Include="app\modules\storage\storage.js" />

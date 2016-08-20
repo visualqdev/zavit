@@ -3,6 +3,16 @@ import * as Storage from "../storage/storage";
 
 const tokenStorageKey = "userAuthenticationToken";
 
+export function register(displayName, email, password) {
+    return new Promise((resolve, reject) => {
+        AccountClient
+            .register(displayName, email, password)
+            .then(() => { return logIn(email, password); })
+            .then(() => resolve())
+            .catch((error) => reject(error));
+    });
+}
+
 export function logIn(email, password) {
     return new Promise((resolve, reject) => {
         AccountClient
@@ -11,7 +21,8 @@ export function logIn(email, password) {
                 (data) => {
                     authenticationSuccess(data);
                     resolve();
-                },
+                })
+            .catch(
                 (error) => {
                     authenticationError(error);
                     reject(error);

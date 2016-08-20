@@ -2,8 +2,16 @@
 import * as AccountService from "../account/accountService";
 
 export function initialize() {
-    var userAccount = AccountService.currentUserAccount();
-    
+    refresh();
+   
+    $("#topnavLogin a").click((e) => {
+        e.preventDefault();
+        LoginModal.show(refresh);
+    });
+}
+
+export function refresh() {
+    const userAccount = AccountService.currentUserAccount();
     if (userAccount) {
         $("#topnavAccount").show();
         $("#topnavLogin").hide();
@@ -12,8 +20,4 @@ export function initialize() {
         $("#topnavAccount").hide();
         $("#topnavLogin").show();
     }
-   
-    $("#topnavLogin a").click(() => {
-        LoginModal.show();
-    });
 }

@@ -13,6 +13,7 @@ export function registerRoutes() {
 
     crossroads.addRoute("/logout", function () {
         LoginController.logout();
+        window.location.href = "/";
     });
    
     function parseHash(newHash, oldHash) {

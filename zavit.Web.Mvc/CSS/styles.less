@@ -41,19 +41,22 @@ html, body {
 
 #loginModal{
     .loginModalContainer{
-        padding: 30px;
         max-width: 350px;
         width: 100%;
         background-color: @login-bg;
         margin: 0 auto;
         border-radius: 2px;
-        overflow: hidden;        
+        overflow: hidden;
+        padding: 30px 0;        
     }
     h2{
         text-align: center;
         font-size: 1.8em;
     }
-    input[type=button] {
+    form{
+        padding: 0 30px;
+    }
+    input[type=submit] {
         width: 100%;
         display: block;
         margin-bottom: 10px;
@@ -78,5 +81,65 @@ html, body {
         padding: 0 8px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+    }
+    #loginWarning{
+        text-align: center;
+        background-color: @warning-bg;
+        color: @warning-text-color;
+    }
+    .loginHelp{
+        text-align: center;
+    }
+}
+#registerModal{
+    .registerModalContainer{
+        max-width: 350px;
+        width: 100%;
+        background-color: @login-bg;
+        margin: 0 auto;
+        border-radius: 2px;
+        overflow: hidden;
+        padding: 30px 0;        
+    }
+    h2{
+        text-align: center;
+        font-size: 1.8em;
+    }
+    form{
+        padding: 0 30px;
+    }
+    input[type=submit] {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        position: relative;
+        border: 0px;
+        color: @login-button-text-color;
+        background-color: @login-button-bg;
+        padding: 17px 0px;
+        font-size: 14px;
+        &:hover {
+            background-color: @login-button-hover-bg;
+        }
+    }
+    input[type=text], input[type=password] {
+        height: 44px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+        -webkit-appearance: none;
+        background: @login-input-text-bg;
+        border: 1px solid @login-input-text-border;                
+        padding: 0 8px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    #registerWarning{
+        text-align: center;
+        background-color: @warning-bg;
+        color: @warning-text-color;
+    }
+    .registerHelp{
+        text-align: center;
     }
 }
