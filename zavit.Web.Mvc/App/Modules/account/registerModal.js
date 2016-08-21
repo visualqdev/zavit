@@ -26,24 +26,27 @@ export function show(userHasLoggedInCallback) {
     modalForm.on("hidden.bs.modal", () => {
         modalForm.remove();
     });
-    modalForm.on("shown.bs.modal",() => $("#registerSubmitForm").submit((e) => {
-        e.preventDefault();
-        const displayName = modalForm.find("#registerDisplayName").val();
-        const emailValue = modalForm.find("#registerEmail").val();
-        const passwordValue = modalForm.find("#registerPassword").val();
-        
-        AccountService.register(displayName, emailValue, passwordValue)
-            .then(() => {
-                modalForm.modal("hide");
-                userHasLoggedInCallback();
-            })
-            .catch((err) => {
-                const warning = $("#registerWarning");
-                warning.text(err);
-                warning.show();
-            }
-            );
-    }));
+    modalForm.on("shown.bs.modal", () => {
+        $("#registerDisplayName").focus();
+        $("#registerSubmitForm").submit((e) => {
+            e.preventDefault();
+            const displayName = modalForm.find("#registerDisplayName").val();
+            const emailValue = modalForm.find("#registerEmail").val();
+            const passwordValue = modalForm.find("#registerPassword").val();
+
+            AccountService.register(displayName, emailValue, passwordValue)
+                .then(() => {
+                    modalForm.modal("hide");
+                    userHasLoggedInCallback();
+                })
+                .catch((err) => {
+                        const warning = $("#registerWarning");
+                        warning.text(err);
+                        warning.show();
+                    }
+                );
+        });
+    });
 
     modalForm.modal("show");
 }

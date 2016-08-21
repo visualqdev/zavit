@@ -27,6 +27,7 @@ export function show(userHasLoggedInCallback) {
         modalForm.remove();
     });
     modalForm.on("shown.bs.modal", () => {
+        $("#loginEmail").focus();
         $("#loginSubmitForm").submit((e) => {
             e.preventDefault();
             const emailValue = modalForm.find("#loginEmail").val();
