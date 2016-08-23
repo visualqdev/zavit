@@ -80,3 +80,79 @@ html, body {
         -moz-box-sizing: border-box;
     }
 }
+
+#mapModal {
+	position: absolute;
+	width: 300px;
+	height: auto;
+	padding-bottom: 20px;
+	color: white;
+	z-index: 2;
+	background-color: @login-bg;
+	border-radius: 5px;
+	-webkit-box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+	box-shadow: -1px 1px 13px 0px rgba(0,0,0,0.75);
+    :after {
+	    right: 100%;
+	    top: 30px;
+	    border: solid transparent;
+	    content: " ";
+	    height: 0;
+	    width: 0;
+	    position: absolute;
+	    pointer-events: none;
+	    border-color: rgba(51, 48, 0, 0);
+	    border-right-color: @login-bg;
+	    border-width: 15px;
+	    margin-top: -15px;
+    }
+    p {
+	    margin:2px 10px 0 20px;
+	    padding: 0;
+	    color: @text-link;
+	    font-size: 14px;
+    }
+    h3 {
+	    margin:10px 0px 0 20px;
+	    padding: 0 20px 0 0;
+	    color: #808080;
+	    font-size: 20px;
+    }
+}
+
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: @call-to-action;
+
+  position: fixed;
+  z-index: 1031;
+  top: 50px;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+  z-index:100;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

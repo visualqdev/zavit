@@ -79,7 +79,7 @@ function initialize(lat, long) {
 	
   var area = new google.maps.LatLng(lat, long);
 
-    map = new google.maps.Map(document.getElementById('map'), {
+   map = new google.maps.Map(document.getElementById('map'), {
     center: area,
     zoom: 12,
     scrollwheel: false

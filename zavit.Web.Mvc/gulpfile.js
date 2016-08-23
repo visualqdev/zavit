@@ -46,4 +46,4 @@ gulp.task('less', function() {
         .pipe(gulp.dest('./CSS/production'));
 });
 
-gulp.task("default", [ "less-watch", "watch", "es6"]);
+gulp.task("default", [ "less-watch", "watch"]);
