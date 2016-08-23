@@ -131,12 +131,18 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\app.js" />
-    <Content Include="App\Controllers\homeController.js" />
-    <Content Include="App\Libraries\jquery-3.1.0.min.js" />
-    <Content Include="App\Modules\specs\test-spec.js" />
-    <Content Include="App\Modules\test.js" />
-    <Content Include="App\Routing\routing.js" />
+    <Content Include="app\app.js" />
+    <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\modules\loading\progress.js" />
+    <Content Include="app\modules\map\places.js" />
+    <Content Include="libraries\fetch-ie8.js" />
+    <Content Include="libraries\jquery-3.1.0.js" />
+    <Content Include="libraries\jquery-3.1.0.min.js" />
+    <Content Include="app\modules\account\accountService.js" />
+    <Content Include="app\modules\account\loginModal.js" />
+    <Content Include="app\routing\routing.js" />
+    <Content Include="bundle.js" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.css" />
     <Content Include="CSS\bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="CSS\bootstrap\css\bootstrap.css" />
@@ -145,12 +151,18 @@
     <Content Include="CSS\bootstrap\js\bootstrap.js" />
     <Content Include="CSS\bootstrap\js\bootstrap.min.js" />
     <Content Include="CSS\bootstrap\js\npm.js" />
+    <Content Include="CSS\production\styles.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="libraries\nprogress.js" />
     <Content Include="packages.config" />
     <Content Include="Routing\crossroads.min.js" />
     <Content Include="Routing\hasher.min.js" />
     <Content Include="Routing\signals.min.js" />
-    <Content Include="Specs\homeController-spec.js" />
+    <Content Include="specs\Controllers\homeController-spec.js" />
+    <Content Include="specs\Controllers\loginController-spec.js" />
+    <Content Include="specs\Modules\account\accountService-spec.js" />
+    <Content Include="specs\Modules\account\loginModal-spec.js" />
+    <Content Include="app\modules\map\map.js" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -169,6 +181,7 @@
     <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="CSS\libraries\colours.less" />
+    <Content Include="appSettings.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,7 +206,6 @@
     <Compile Include="Settings\GoogleApiSettings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CSS\production\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

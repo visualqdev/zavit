@@ -2,8 +2,10 @@
 
 export function registerRoutes() {
 
-    crossroads.addRoute("/", () => {
-         HomeController.explore();
+    crossroads.addRoute("/", () => HomeController.explore());
+
+    crossroads.addRoute("/login", function () {
+        $.loginController().login();
     });
    
     function parseHash(newHash, oldHash) {

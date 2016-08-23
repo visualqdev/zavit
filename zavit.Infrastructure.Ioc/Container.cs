@@ -30,7 +30,9 @@ namespace zavit.Infrastructure.Ioc
                 new InfrastructureCoreInstaller(),
                 new NhibernateWebInstaller(),
                 new AccountsInstaller(),
-                new InfrastructureAccountsInstaller());
+                new InfrastructureAccountsInstaller(),
+                new ClientsInstaller(),
+                new InfrastructureClientsInstaller());
         }
 
         public static Container Instance
