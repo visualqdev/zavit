@@ -177,3 +177,4 @@ node_modules/
 #ignore auto generated files
 /zavit.Web.Mvc/bundle.js
 /zavit.Web.Mvc/CSS/production/styles.css
+/zavit.Web.Mvc/npm-debug.log.*

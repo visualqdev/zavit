@@ -4,14 +4,29 @@
     ViewBag.Title = "title";
 }
 
+<nav class="navbar navbar-inverse" id="mainNav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">zavit</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="#">Explore</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" onclick="$.loginModal().show(); return false;">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="map"></div>
 
 
-<h2>title</h2>
-<div id="otherTitle">
-    <h1>Heading <span>This should be pink</span></h1>
-    <a href="#/">Home</a>
-    <a href="#/about">About</a>
-</div>
-<div id="home"></div>
 
-<ul id="names"></ul>
