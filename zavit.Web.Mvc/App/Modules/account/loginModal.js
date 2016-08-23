@@ -20,6 +20,8 @@ const form = `
                 </div>
             </div>`;
 
+let isLoggingIn;
+
 export function show(userHasLoggedInCallback) {
     const modalForm = $(form);
 
@@ -30,6 +32,10 @@ export function show(userHasLoggedInCallback) {
         $("#loginEmail").focus();
         $("#loginSubmitForm").submit((e) => {
             e.preventDefault();
+
+            if (isLoggingIn === true) return;
+
+            onLoginStarted();
             const emailValue = modalForm.find("#loginEmail").val();
             const passwordValue = modalForm.find("#loginPassword").val();
 
@@ -37,11 +43,12 @@ export function show(userHasLoggedInCallback) {
                 .then(() => {
                     modalForm.modal("hide");
                     userHasLoggedInCallback();
+                    onLoginCompleted();
                 })
                 .catch(() => {
-                        $("#loginWarning").show();
-                    }
-                );
+                    $("#loginWarning").show();
+                    onLoginCompleted();
+                });
         });
         $("#loginRegisterLink").click((e) => {
             e.preventDefault();
@@ -51,4 +58,12 @@ export function show(userHasLoggedInCallback) {
     });
 
     modalForm.modal("show");
+}
+
+function onLoginStarted() {
+    isLoggingIn = true;
+}
+
+function onLoginCompleted() {
+    isLoggingIn = false;
 }

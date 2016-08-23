@@ -20,6 +20,8 @@ const form = `
                 </div>
             </div>`;
 
+let isRegistering;
+
 export function show(userHasLoggedInCallback) {
     const modalForm = $(form);
 
@@ -30,6 +32,10 @@ export function show(userHasLoggedInCallback) {
         $("#registerDisplayName").focus();
         $("#registerSubmitForm").submit((e) => {
             e.preventDefault();
+
+            if (isRegistering === true) return;
+
+            onRegisteringStarted();
             const displayName = modalForm.find("#registerDisplayName").val();
             const emailValue = modalForm.find("#registerEmail").val();
             const passwordValue = modalForm.find("#registerPassword").val();
@@ -38,15 +44,25 @@ export function show(userHasLoggedInCallback) {
                 .then(() => {
                     modalForm.modal("hide");
                     userHasLoggedInCallback();
+                    onRegisteringCompleted();
                 })
                 .catch((err) => {
                         const warning = $("#registerWarning");
                         warning.text(err);
                         warning.show();
+                        onRegisteringCompleted();
                     }
                 );
         });
     });
 
     modalForm.modal("show");
+}
+
+function onRegisteringStarted() {
+    isRegistering = true;
+}
+
+function onRegisteringCompleted() {
+    isRegistering = false;
 }
