@@ -3,19 +3,17 @@ import { Places } from "../modules/map/places"
 
 export function explore() {
 
-    let _position;
-
-    navigator.geolocation.getCurrentPosition(centerMapAtLocation);
-
     const map = new Map({ executeWhenMapFullyLoaded: getPlaces});
 
+    navigator.geolocation.watchPosition(centerMapAtLocation, map.initialise());
+
     function centerMapAtLocation(position) {
-        _position = position;
-        map.initialise(position.coords.latitude, position.coords.longitude);
+        map.position = position;
+        map.initialise();
     }
 
     function getPlaces() {
-        const places = new Places({ map:map, position: _position });
+        const places = new Places({ map:map });
         places.getPlaces();
     }
 

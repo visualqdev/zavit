@@ -7,11 +7,12 @@
         this.marker = null;
         this.markerPoint = null;
         this.overlay = null;
+        this.position = options.position || { coords: { latitude: 51.508530, longitude: -0.076132 } };
     }
    
-    initialise(lat, lng) {
+    initialise() {
         
-        const area = new google.maps.LatLng(lat, lng);
+        const area = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
 
         const map = new google.maps.Map(document.getElementById("map"), {
             center: area,

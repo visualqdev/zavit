@@ -136,6 +136,7 @@
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\modules\loading\progress.js" />
     <Content Include="app\modules\map\places.js" />
+    <Content Include="app\navigation\search.js" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="libraries\jquery-3.1.0.js" />
     <Content Include="libraries\jquery-3.1.0.min.js" />

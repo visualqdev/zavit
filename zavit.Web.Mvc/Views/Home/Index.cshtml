@@ -19,6 +19,24 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li class="active"><a href="#">Explore</a></li>
+                <li id="search">
+                    <div class="input-group">
+                        <div class="input-group-btn search-panel">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span id="search_concept">Place</span> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" data-type="Area" data-value="Choose another area by name or postcode...">Area search</a></li>
+                                <li><a href="#" data-type="Place" data-value="Search for a place in this area by name...">Place search</a></li>
+                            </ul>
+                        </div>
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control" name="x" placeholder="Search for a place in this area by name..." id="search_input">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#" onclick="$.loginModal().show(); return false;">Login</a></li>

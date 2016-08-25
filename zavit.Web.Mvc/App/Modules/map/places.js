@@ -4,13 +4,12 @@ export class Places {
 
     constructor(options = {}) {
         this.map = options.map || null,
-        this.position = options.position || {}
         this.radius = options.radius || 5000;
     }
 
     getPlaces() {
-        const latitude = this.position.coords.latitude,
-            longitude = this.position.coords.longitude,
+        const latitude = this.map.position.coords.latitude,
+            longitude = this.map.position.coords.longitude,
             url = `/api/places?latitude=${latitude}&longitude=${longitude}&radius=${this.radius}`;
         Progress.start();
         fetch(url).then(response => {  return response.json(); }).then(json => this.addPlaces(json));
