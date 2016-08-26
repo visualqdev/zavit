@@ -1,17 +1,29 @@
 ﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Facebook;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Infrastructure.Ioc;
 using zavit.Web.Core.Authorization;
+using zavit.Web.Core.Authorization.ExternalLogins;
+using zavit.Web.Core.Authorization.ExternalLogins.AuthenticationProviders;
 
 namespace zavit.Web.Api
 {
     public class OAuthConfig
     {
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        public static GoogleOAuth2AuthenticationOptions GoogleAuthOptions { get; private set; }
+        public static FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
+
         public static void Register(IAppBuilder app, Container container)
         {
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+
             var accessAuthorizationServerProvider = 
                 new AccessAuthorizationServerProvider(
                     container.Resolve<IAccountRepositoryFactory>(), 
@@ -34,6 +46,10 @@ namespace zavit.Web.Api
 
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+
+            var authenticationOptionsFactory = container.Resolve<IAuthenticationOptionsFactory>();
+            app.UseGoogleAuthentication(authenticationOptionsFactory.CreateGoogleOAuth2AuthenticationOptions());
+            app.UseFacebookAuthentication(authenticationOptionsFactory.CreateFacebookAuthenticationOptions());
         }
     }
 }

@@ -10,6 +10,7 @@ using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.Venues;
 using zavit.Web.Core.Authorization;
+using zavit.Web.Core.Authorization.ExternalLogins;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.IocConfiguration.Installers
@@ -31,7 +32,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IUserContext>().ImplementedBy<UserContext>().LifestylePerWebRequest(),
                 Component.For<IClaimsIdentityProvider>().ImplementedBy<ClaimsIdentityProvider>().LifestylePerWebRequest(),
                 Component.For<IClaimsIdentityProviderFactory>().AsFactory(),
-                Component.For<AccessAuthorizationFilter>().LifestyleSingleton()
+                Component.For<AccessAuthorizationFilter>().LifestyleSingleton(),
+                Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton()
                 );
         }
     }

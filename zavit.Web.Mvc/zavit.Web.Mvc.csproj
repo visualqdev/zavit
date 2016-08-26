@@ -135,6 +135,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\modules\account\accountClient.js" />
+    <Content Include="app\modules\account\externalAccountService.js" />
     <Content Include="app\modules\account\registerModal.js" />
     <Content Include="app\modules\navigation\sideNav.js" />
     <Content Include="app\modules\navigation\topNav.js" />
@@ -200,6 +201,7 @@
     <Compile Include="MvcStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\DatabaseSettings.cs" />
+    <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +227,10 @@
     <ProjectReference Include="..\zavit.Web.Api\zavit.Web.Api.csproj">
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>
       <Name>zavit.Web.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Web.Core\zavit.Web.Core.csproj">
+      <Project>{0E38A1F3-78ED-4F45-B696-A71E178878EF}</Project>
+      <Name>zavit.Web.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
