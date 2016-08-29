@@ -45,7 +45,7 @@ namespace zavit.Web.Api
             };
 
             app.UseOAuthAuthorizationServer(oAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
             var authenticationOptionsFactory = container.Resolve<IAuthenticationOptionsFactory>();
             app.UseGoogleAuthentication(authenticationOptionsFactory.CreateGoogleOAuth2AuthenticationOptions());

@@ -44,7 +44,7 @@ export function currentUserAccount() {
     }
 }
 
-function authenticationSuccess(tokenData) {
+export function authenticationSuccess(tokenData) {
     Storage.storeObject(tokenStorageKey, tokenData);
 }
 

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -38,8 +40,8 @@ namespace zavit.Web.Api.Controllers
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
-        public IHttpActionResult GetExternalLogin(string provider, string error = null)
+        [HttpGet]
+        public IHttpActionResult ExternalLogin(string provider, string error = null)
         {
             var redirectUri = string.Empty;
 
@@ -77,20 +79,15 @@ namespace zavit.Web.Api.Controllers
             var hasRegistered = _externalAccountsRepository.CheckIfExists(externalLogin.LoginProvider, externalLogin.ProviderKey);
 
             redirectUri =
-                $"{redirectUri}#external_access_token={externalLogin.ExternalAccessToken}&provider={externalLogin.LoginProvider}&haslocalaccount={hasRegistered.ToString()}&external_user_name={externalLogin.UserName}";
+                $"{redirectUri}#/externallogin?externalaccesstoken={externalLogin.ExternalAccessToken}&provider={externalLogin.LoginProvider}&haslocalaccount={hasRegistered}&externalusername={externalLogin.UserName}&externalemail={externalLogin.UserEmail}";
 
             return Redirect(redirectUri);
 
         }
 
-        [AllowAnonymous]
+        [HttpPost]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
@@ -98,14 +95,14 @@ namespace zavit.Web.Api.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            var hasRegistered = _externalAccountsRepository.CheckIfExists(model.Provider, verifiedAccessToken.user_id);
+             var hasRegistered = _externalAccountsRepository.CheckIfExists(model.Provider, verifiedAccessToken.user_id);
 
             if (hasRegistered)
             {
-                return BadRequest("External user is already registered");
+                return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "External user is already registered", this);
             }
 
-            var account = new Account { Username = model.UserName, DisplayName = model.UserName };
+            var account = new Account { Username = model.Email, DisplayName = model.DisplayName };
             _accountRepository.Save(account);
 
             var externalAccount = new ExternalAccount
@@ -117,12 +114,11 @@ namespace zavit.Web.Api.Controllers
 
             _externalAccountsRepository.Save(externalAccount);
 
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(model.UserName);
+            var accessTokenResponse = GenerateLocalAccessTokenResponse(account);
 
             return Ok(accessTokenResponse);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken)
         {
@@ -140,7 +136,7 @@ namespace zavit.Web.Api.Controllers
 
             var externalAccount = _externalAccountsRepository.Find(provider, verifiedAccessToken.user_id);
 
-            bool hasRegistered = externalAccount != null;
+            var hasRegistered = externalAccount != null;
 
             if (!hasRegistered)
             {
@@ -148,20 +144,20 @@ namespace zavit.Web.Api.Controllers
             }
 
             //generate access token response
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(externalAccount.Account.Username);
+            var accessTokenResponse = GenerateLocalAccessTokenResponse(externalAccount.Account);
 
             return Ok(accessTokenResponse);
 
         }
 
-        private JObject GenerateLocalAccessTokenResponse(string userName)
+        private JObject GenerateLocalAccessTokenResponse(Account account)
         {
 
             var tokenExpiration = TimeSpan.FromDays(1);
 
             var identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, userName));
+            identity.AddClaim(new Claim(ClaimTypes.Name, account.Username));
             identity.AddClaim(new Claim("role", "user"));
 
             var props = new AuthenticationProperties()
@@ -172,10 +168,19 @@ namespace zavit.Web.Api.Controllers
 
             var ticket = new AuthenticationTicket(identity, props);
 
-            var accessToken = OAuthConfig.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            string accessToken;
+            try
+            {
+                accessToken = OAuthConfig.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             var tokenResponse = new JObject(
-                                        new JProperty("userName", userName),
+                                        new JProperty("userName", account.Username),
+                                        new JProperty("displayName", account.DisplayName),
                                         new JProperty("access_token", accessToken),
                                         new JProperty("token_type", "bearer"),
                                         new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
@@ -207,7 +212,7 @@ namespace zavit.Web.Api.Controllers
             var clientIdString = GetQueryString(Request, "client_id");
             int clientId;
 
-            if (string.IsNullOrWhiteSpace(clientIdString) || int.TryParse(clientIdString, out clientId))
+            if (string.IsNullOrWhiteSpace(clientIdString) || !int.TryParse(clientIdString, out clientId))
             {
                 return "client_id is required";
             }
@@ -219,7 +224,7 @@ namespace zavit.Web.Api.Controllers
                 return $"Client_id '{clientId}' is not registered in the system.";
             }
 
-            if (!string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
+            if (!client.AllowedOrigin.Equals("*") && !string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
             {
                 return $"The given URL is not allowed by Client_id '{clientId}' configuration.";
             }
@@ -311,6 +316,7 @@ namespace zavit.Web.Api.Controllers
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
             public string ExternalAccessToken { get; set; }
+            public string UserEmail { get; set; }
 
             public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
             {
@@ -336,6 +342,7 @@ namespace zavit.Web.Api.Controllers
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
                     UserName = identity.FindFirstValue(ClaimTypes.Name),
+                    UserEmail = identity.FindFirstValue(ClaimTypes.Email),
                     ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
                 };
             }
