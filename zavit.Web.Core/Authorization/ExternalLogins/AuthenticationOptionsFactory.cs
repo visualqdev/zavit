@@ -25,12 +25,16 @@ namespace zavit.Web.Core.Authorization.ExternalLogins
 
         public FacebookAuthenticationOptions CreateFacebookAuthenticationOptions()
         {
-            return new FacebookAuthenticationOptions()
+            var facebookOptions = new FacebookAuthenticationOptions()
             {
                 AppId = _externalLoginsSettings.FacebookAppId,
                 AppSecret = _externalLoginsSettings.FacebookAppSecret,
                 Provider = new FacebookAuthProvider()
             };
+
+            facebookOptions.Scope.Add("email");
+
+            return facebookOptions;
         }
     }
 }

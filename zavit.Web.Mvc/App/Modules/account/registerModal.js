@@ -1,5 +1,6 @@
 ﻿import * as AccountService from "./accountService";
 import * as ExternalAccountService from "./externalAccountService";
+import * as LoginModal from "./loginModal";
 
 const form = `
             <div class='modal fade' id='registerModal' tabindex='-1' role='dialog'>
@@ -7,9 +8,13 @@ const form = `
                     <div class='registerModalContainer'>
                         <h2>Register</h2>                        
                         <p style="display: none;" id="registerWarning"></p>
-                        <div>
-                            <a id="registerFacebook" href="#" class="btn">Register with Facebook</a>
-                            <a id="registerGoogle" href="#" class="btn">Register with Google</a>
+                        <div class="socialLogins">
+                            <a id="registerFacebook" class="btn btn-block btn-social btn-facebook">
+                                <i class="fa fa-facebook fa-l"></i> Register with Facebook
+                            </a>
+                            <a id="registerGoogle" class="btn btn-block btn-social btn-google-plus">
+                                <i class="fa fa-google-plus fa-l"></i> Register with Google
+                            </a>                        
                         </div>
                         <form id="registerSubmitForm">                            
                             <input type='text' id='registerDisplayName' placeholder='Display name'>
@@ -65,6 +70,11 @@ export function show(userHasLoggedInCallback) {
         $("#registerGoogle").click((e) => {
             e.preventDefault();
             ExternalAccountService.googleLogin();
+        });
+        $("#registerLoginLink").click((e) => {
+            e.preventDefault();
+            modalForm.modal("hide");
+            LoginModal.show(userHasLoggedInCallback);
         });
     });
 

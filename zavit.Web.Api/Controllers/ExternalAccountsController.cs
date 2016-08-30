@@ -102,7 +102,7 @@ namespace zavit.Web.Api.Controllers
                 return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "External user is already registered", this);
             }
 
-            var account = new Account { Username = model.Email, DisplayName = model.DisplayName };
+            var account = new Account { Username = verifiedAccessToken.user_id, DisplayName = model.DisplayName, Email = model.Email};
             _accountRepository.Save(account);
 
             var externalAccount = new ExternalAccount

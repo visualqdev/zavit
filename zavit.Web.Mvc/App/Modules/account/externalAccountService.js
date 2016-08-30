@@ -13,7 +13,7 @@ export function googleLogin() {
 }
 
 export function processExternalLogin(options) {
-    if (options.hasLocalAccount) {
+    if (options.hasLocalAccount.toLowerCase() === "true") {
         return processLogin(options);
     } else {
         return processRegistration(options);

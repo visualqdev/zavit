@@ -8,9 +8,22 @@ CREATE TABLE [dbo].[Account](
 	[Username] [nvarchar](255) NULL,
 	[DisplayName] [nvarchar](255) NULL,
 	[Password] [nvarchar](255) NULL,
+	[Email] [nvarchar](255) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[AccountId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+GO
+
+CREATE TABLE [dbo].[ExternalAccount](
+	[ExternalAccountId] [int] IDENTITY(1,1) NOT NULL,
+	[LoginProvider] [nvarchar](255) NULL,
+	[ProviderKey] [nvarchar](255) NULL,
+	[AccountId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ExternalAccountId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 )
 
