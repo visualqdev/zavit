@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataHandler.Serializer;
 using Microsoft.Owin.Security.Infrastructure;
 
 namespace zavit.Web.Core.Authorization
@@ -33,7 +35,7 @@ namespace zavit.Web.Core.Authorization
             context.Ticket.Properties.IssuedUtc = token.IssuedDateUtc;
             context.Ticket.Properties.ExpiresUtc = token.ExpectedExpiryDateUtc;
             
-            token.ProtectedTicket = context.SerializeTicket();
+            token.ProtectedTicket = SerializeTicket(context);
 
             var refreshTokenRepository = _refreshTokenRepositoryFactory.Create();
             refreshTokenRepository.Save(token);
@@ -55,7 +57,8 @@ namespace zavit.Web.Core.Authorization
             if (refreshToken == null) return Task.FromResult(0);
 
             //Get protectedTicket from refreshToken class
-            context.DeserializeTicket(refreshToken.ProtectedTicket);
+            var ticket = DeserializeTicket(refreshToken.ProtectedTicket);
+            context.SetTicket(ticket);
 
             //remove the refresh token to only allow one refresh token per user per client
             var refreshTokenRepository = _refreshTokenRepositoryFactory.Create();
@@ -73,6 +76,18 @@ namespace zavit.Web.Core.Authorization
         public void Receive(AuthenticationTokenReceiveContext context)
         {
             ReceiveAsync(context);
+        }
+
+        string SerializeTicket(AuthenticationTokenCreateContext context)
+        {
+            var serializer = new TicketSerializer();
+            return System.Text.Encoding.Default.GetString(serializer.Serialize(context.Ticket));
+        }
+
+        AuthenticationTicket DeserializeTicket(string protectedTicket)
+        {
+            var serializer = new TicketSerializer();
+            return serializer.Deserialize(System.Text.Encoding.Default.GetBytes(protectedTicket));
         }
     }
 }

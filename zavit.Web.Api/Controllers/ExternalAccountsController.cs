@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -166,7 +167,15 @@ namespace zavit.Web.Api.Controllers
                 ExpiresUtc = DateTime.UtcNow.Add(tokenExpiration),
             };
 
+            var clientId = 1;
+
             var ticket = new AuthenticationTicket(identity, props);
+            ticket.Properties.Dictionary.Add("as:client_id", clientId.ToString());
+            
+
+            var context = new Microsoft.Owin.Security.Infrastructure.AuthenticationTokenCreateContext(Request.GetOwinContext(), OAuthConfig.OAuthAuthorizationServerOptions.AccessTokenFormat, ticket);
+            context.Ticket.Properties.Dictionary.Add("client_id", clientId.ToString());
+            OAuthConfig.AccessRefreshTokenProvider.Create(context);
 
             string accessToken;
             try
@@ -184,8 +193,9 @@ namespace zavit.Web.Api.Controllers
                                         new JProperty("access_token", accessToken),
                                         new JProperty("token_type", "bearer"),
                                         new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
-                                        new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
-                                        new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()));
+                                        new JProperty(".issued", context.Ticket.Properties.IssuedUtc.ToString()),
+                                        new JProperty(".expires", context.Ticket.Properties.ExpiresUtc.ToString()),
+                                        new JProperty("refresh_token", context.Token));
 
             return tokenResponse;
         }

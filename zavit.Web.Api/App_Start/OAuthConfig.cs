@@ -16,8 +16,9 @@ namespace zavit.Web.Api
     public class OAuthConfig
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
-        public static GoogleOAuth2AuthenticationOptions GoogleAuthOptions { get; private set; }
-        public static FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
+        public static AccessRefreshTokenProvider AccessRefreshTokenProvider { get; private set; }
+
+        public static OAuthAuthorizationServerOptions OAuthAuthorizationServerOptions { get; private set; }
 
         public static void Register(IAppBuilder app, Container container)
         {
@@ -30,21 +31,21 @@ namespace zavit.Web.Api
                     container.Resolve<IClientRepositoryFactory>(),
                     container.Resolve<IAccountSecurity>());
 
-            var accessRefreshTokenProvider = 
+            AccessRefreshTokenProvider = 
                 new AccessRefreshTokenProvider(
                     container.Resolve<IRefreshTokenRepositoryFactory>(), 
                     container.Resolve<IRefreshTokenProviderFactory>());
 
-            var oAuthServerOptions = new OAuthAuthorizationServerOptions()
+            OAuthAuthorizationServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
                 Provider = accessAuthorizationServerProvider,
-                RefreshTokenProvider = accessRefreshTokenProvider
+                RefreshTokenProvider = AccessRefreshTokenProvider
             };
 
-            app.UseOAuthAuthorizationServer(oAuthServerOptions);
+            app.UseOAuthAuthorizationServer(OAuthAuthorizationServerOptions);
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
             var authenticationOptionsFactory = container.Resolve<IAuthenticationOptionsFactory>();
