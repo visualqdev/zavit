@@ -5,16 +5,19 @@ export function explore() {
 
     const map = new Map({ executeWhenMapFullyLoaded: getPlaces});
 
-    navigator.geolocation.watchPosition(centerMapAtLocation, map.initialise());
+    navigator.geolocation.getCurrentPosition(centerMapAtLocation, getDefaultMap);
 
     function centerMapAtLocation(position) {
         map.position = position;
         map.initialise();
     }
 
-    function getPlaces() {
-        const places = new Places({ map:map });
-        places.getPlaces();
+    function getDefaultMap() {
+        map.initialise();
     }
 
+    function getPlaces() {
+        const places = new Places({ map:map });
+        places.initialise();
+    }
 }

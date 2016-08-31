@@ -2,12 +2,15 @@
 
     constructor(options = {}) 
     {
-        this.zoom = options.zoom || 12;
+        this.zoom = options.zoom || 14;
         this.executeWhenMapFullyLoaded = options.executeWhenMapFullyLoaded || null;
         this.marker = null;
         this.markerPoint = null;
         this.overlay = null;
         this.position = options.position || { coords: { latitude: 51.508530, longitude: -0.076132 } };
+        this.dragged = [];
+        this.zoomed = [];
+        this.markers = [];
     }
    
     initialise() {
@@ -44,14 +47,39 @@
             reason => {
                 console.log(reason);
             }
-       );
+        );
+
+        google.maps.event.addListener(map, "drag", () => {
+            this.dragged.forEach(func => func());
+            this.updatePosition(this.map.center);
+        });
+
+        google.maps.event.addListener(map, "zoom_changed", () => {
+            this.zoomed.forEach(func => func());
+            this.updatePosition(this.map.center);
+        });
+    }
+
+    setZoom(level) {
+        this.map.setZoom(level);
+    }
+
+    updatePosition(mapCenter) {
+        this.position = { coords: { latitude: mapCenter.lat(), longitude: mapCenter.lng()} };
     }
 
     addMarker(latLng) {
+
         this.marker = new google.maps.Marker({
             map: this.map,
             position: latLng
         });
+
+        this.markers.push(this.marker);
+    }
+
+    removeMarker(marker) {
+        marker.setMap(null);
     }
 
     addPlaceMarkerClickEvent(marker, callback, place) {
