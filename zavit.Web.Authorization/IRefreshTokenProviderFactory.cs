@@ -1,7 +1,6 @@
-﻿using zavit.Domain.Clients;
-using zavit.Domain.Clients.Tokens;
+﻿using zavit.Domain.Clients.Tokens;
 
-namespace zavit.Web.Core.Authorization
+namespace zavit.Web.Authorization
 {
     public interface IRefreshTokenProviderFactory
     {

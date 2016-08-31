@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Controllers;
 using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
@@ -18,8 +15,7 @@ using zavit.Domain.Clients;
 using zavit.Domain.ExternalAccounts;
 using zavit.Web.Api.Dtos.ExternalAccounts;
 using zavit.Web.Api.HttpActionResults;
-using zavit.Web.Core.Authorization;
-using zavit.Web.Core.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins;
 
 namespace zavit.Web.Api.Controllers
 {

@@ -266,6 +266,10 @@
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>
       <Name>zavit.Web.Api</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Web.Authorization\zavit.Web.Authorization.csproj">
+      <Project>{B036D724-C8E6-4649-8706-31FB52AB799B}</Project>
+      <Name>zavit.Web.Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Core\zavit.Web.Core.csproj">
       <Project>{0E38A1F3-78ED-4F45-B696-A71E178878EF}</Project>
       <Name>zavit.Web.Core</Name>

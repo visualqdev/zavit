@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Facebook;
 
-namespace zavit.Web.Core.Authorization.ExternalLogins.AuthenticationProviders
+namespace zavit.Web.Authorization.ExternalLogins.AuthenticationProviders
 {
     public class FacebookAuthProvider : FacebookAuthenticationProvider
     {

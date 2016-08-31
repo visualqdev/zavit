@@ -4,7 +4,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Serializer;
 using Microsoft.Owin.Security.Infrastructure;
 
-namespace zavit.Web.Core.Authorization
+namespace zavit.Web.Authorization
 {
     public class AccessRefreshTokenProvider : IAuthenticationTokenProvider
     {

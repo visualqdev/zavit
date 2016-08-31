@@ -4,9 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using zavit.Domain.Accounts.Registrations;
-using zavit.Domain.Clients;
 
-namespace zavit.Web.Core.Authorization
+namespace zavit.Web.Authorization
 {
     public class AccessAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

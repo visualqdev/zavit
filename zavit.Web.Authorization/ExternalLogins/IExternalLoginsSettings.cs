@@ -1,4 +1,4 @@
-﻿namespace zavit.Web.Core.Authorization.ExternalLogins
+﻿namespace zavit.Web.Authorization.ExternalLogins
 {
     public interface IExternalLoginsSettings
     {

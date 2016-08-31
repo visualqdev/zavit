@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using zavit.Web.Core.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins;
 
 namespace zavit.Web.Mvc.Settings
 {

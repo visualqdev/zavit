@@ -1,6 +1,6 @@
 ﻿using zavit.Domain.Accounts;
 
-namespace zavit.Web.Core.Authorization
+namespace zavit.Web.Authorization
 {
     public interface IAccountRepositoryFactory
     {

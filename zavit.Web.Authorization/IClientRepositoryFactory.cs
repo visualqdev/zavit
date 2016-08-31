@@ -1,6 +1,6 @@
 ﻿using zavit.Domain.Clients;
 
-namespace zavit.Web.Core.Authorization
+namespace zavit.Web.Authorization
 {
     public interface IClientRepositoryFactory
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
-using zavit.Web.Core.Authorization.ExternalLogins.AuthenticationProviders;
+using zavit.Web.Authorization.ExternalLogins.AuthenticationProviders;
 
-namespace zavit.Web.Core.Authorization.ExternalLogins
+namespace zavit.Web.Authorization.ExternalLogins
 {
     public class AuthenticationOptionsFactory : IAuthenticationOptionsFactory
     {

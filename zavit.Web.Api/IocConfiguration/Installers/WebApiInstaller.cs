@@ -9,8 +9,8 @@ using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.Venues;
-using zavit.Web.Core.Authorization;
-using zavit.Web.Core.Authorization.ExternalLogins;
+using zavit.Web.Authorization;
+using zavit.Web.Authorization.ExternalLogins;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.IocConfiguration.Installers

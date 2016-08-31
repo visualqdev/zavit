@@ -7,9 +7,8 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Infrastructure.Ioc;
-using zavit.Web.Core.Authorization;
-using zavit.Web.Core.Authorization.ExternalLogins;
-using zavit.Web.Core.Authorization.ExternalLogins.AuthenticationProviders;
+using zavit.Web.Authorization;
+using zavit.Web.Authorization.ExternalLogins;
 
 namespace zavit.Web.Api
 {

@@ -182,6 +182,10 @@
       <Project>{67c23b94-0318-4507-ad94-08bd1e288fb9}</Project>
       <Name>zavit.Infrastructure.Orm</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Web.Authorization\zavit.Web.Authorization.csproj">
+      <Project>{b036d724-c8e6-4649-8706-31fb52ab799b}</Project>
+      <Name>zavit.Web.Authorization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Core\zavit.Web.Core.csproj">
       <Project>{0e38a1f3-78ed-4f45-b696-a71e178878ef}</Project>
       <Name>zavit.Web.Core</Name>
