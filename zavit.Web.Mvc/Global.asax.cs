@@ -12,12 +12,6 @@ namespace zavit.Web.Mvc
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-            AreaRegistration.RegisterAllAreas();
-
-            var container = Ioc.Configure();
-
-            GlobalConfiguration.Configure(config => WebApiConfig.Register(config, container));
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
 }
