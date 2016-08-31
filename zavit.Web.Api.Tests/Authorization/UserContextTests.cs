@@ -3,7 +3,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Web.Api.Authorization;
-using zavit.Web.Core.Authorization;
+using zavit.Web.Authorization;
 
 namespace zavit.Web.Api.Tests.Authorization
 {

@@ -1,5 +1,5 @@
 ﻿using zavit.Domain.Accounts;
-using zavit.Web.Core.Authorization;
+using zavit.Web.Authorization;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.Authorization

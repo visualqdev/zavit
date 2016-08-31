@@ -1,16 +1,16 @@
-﻿(function($) {
-    $.loginController = function(options) {
+﻿import * as LoginModal from "../modules/account/loginModal";
+import * as AccountService from "../modules/account/accountService";
+import * as TopNav from "../modules/navigation/topNav";
 
-        var opts = {};
+export function login() {
+    LoginModal.show(userHasLoggedIn);
+}
 
-        $.extend(opts, options);
+export function logout() {
+    AccountService.logOut();
+    TopNav.refresh();
+}
 
-        function login() {
-            $.loginModal().show();
-        }
-
-        return {
-            login: login
-        }
-    }
-}(jQuery));
+function userHasLoggedIn() {
+    TopNav.refresh();
+}

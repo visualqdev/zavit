@@ -18,11 +18,15 @@ namespace zavit.Domain.Accounts.Tests.Registrations
             It should_set_the_password_to_be_the_hashed_password_with_salt =
                 () => _result.Password.ShouldEqual(HashedPassword);
 
+            It should_set_the_display_name_to_be_the_same_as_registration_display_name =
+                () => _result.DisplayName.ShouldEqual(_accountRegistration.DisplayName);
+
             Establish context = () =>
             {
                 _accountRegistration = NewInstanceOf<IAccountRegistration>();
                 _accountRegistration.Stub(r => r.Password).Return("Password");
                 _accountRegistration.Stub(r => r.Username).Return("User name");
+                _accountRegistration.Stub(r => r.DisplayName).Return("Display name");
 
                 Injected<IAccountSecurity>()
                     .Stub(h => h.HashPassword(_accountRegistration.Password))

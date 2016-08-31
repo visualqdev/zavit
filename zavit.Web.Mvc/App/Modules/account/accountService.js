@@ -1,17 +1,53 @@
-﻿(function($) {
-    $.accountService = function(options) {
-        var opts = {
-        
-        };
+﻿import * as AccountClient from "./accountClient";
+import * as Storage from "../storage/storage";
 
-        $.extend(opts, options);
+const tokenStorageKey = "userAuthenticationToken";
 
-        function logIn(email, password) {
+export function register(displayName, email, password) {
+    return new Promise((resolve, reject) => {
+        AccountClient
+            .register(displayName, email, password)
+            .then(() => { return logIn(email, password); })
+            .then(() => resolve())
+            .catch((error) => reject(error));
+    });
+}
 
-        };
+export function logIn(email, password) {
+    return new Promise((resolve, reject) => {
+        AccountClient
+            .getAuthenticationTokens(email, password)
+            .then(
+                (data) => {
+                    authenticationSuccess(data);
+                    resolve();
+                })
+            .catch(
+                (error) => {
+                    authenticationError(error);
+                    reject(error);
+                });
+    });
+}
 
+export function logOut() {
+    Storage.removeItem(tokenStorageKey);
+}
+
+export function currentUserAccount() {
+    const tokenData = Storage.getObject(tokenStorageKey);
+    if (tokenData) {
         return {
-            logIn: logIn
-        }
+            email: tokenData.userName,
+            displayName: tokenData.displayName
+        };
     }
-}(jQuery));
+}
+
+export function authenticationSuccess(tokenData) {
+    Storage.storeObject(tokenStorageKey, tokenData);
+}
+
+function authenticationError(error) {
+    debugger;
+}
