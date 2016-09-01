@@ -1,16 +1,13 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Facebook;
-using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using zavit.Domain.Accounts.Registrations;
-using zavit.Infrastructure.Ioc;
-using zavit.Web.Authorization;
+using zavit.Infrastructure.Core;
 using zavit.Web.Authorization.ExternalLogins;
 
-namespace zavit.Web.Api
+namespace zavit.Web.Authorization
 {
     public class OAuthConfig
     {
@@ -19,7 +16,7 @@ namespace zavit.Web.Api
 
         public static OAuthAuthorizationServerOptions OAuthAuthorizationServerOptions { get; private set; }
 
-        public static void Register(IAppBuilder app, Container container)
+        public static void Register(IAppBuilder app, IContainer container)
         {
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();

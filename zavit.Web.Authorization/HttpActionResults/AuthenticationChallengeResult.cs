@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace zavit.Web.Api.HttpActionResults
+namespace zavit.Web.Authorization.HttpActionResults
 {
     public class AuthenticationChallengeResult : IHttpActionResult
     {

@@ -10,7 +10,9 @@ using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.Venues;
 using zavit.Web.Authorization;
+using zavit.Web.Authorization.Controllers;
 using zavit.Web.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins.LoginData;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.IocConfiguration.Installers
@@ -20,7 +22,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Classes.FromAssemblyContaining<PlacesController>().BasedOn<IHttpController>().LifestyleTransient(),
+                Classes.FromAssemblyContaining<PlacesController>().BasedOn<IHttpController>().LifestyleTransient(), 
+                Component.For<ExternalAccountsController>().LifestyleTransient(),
                 Component.For<IPlaceDtoService>().ImplementedBy<PlaceDtoService>().LifestyleTransient(),
                 Component.For<IPlaceDtoFactory>().ImplementedBy<PlaceDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueDtoService>().ImplementedBy<VenueDtoService>().LifestyleTransient(),
@@ -33,7 +36,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IClaimsIdentityProvider>().ImplementedBy<ClaimsIdentityProvider>().LifestylePerWebRequest(),
                 Component.For<IClaimsIdentityProviderFactory>().AsFactory(),
                 Component.For<AccessAuthorizationFilter>().LifestyleSingleton(),
-                Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton()
+                Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
+                Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton()
                 );
         }
     }

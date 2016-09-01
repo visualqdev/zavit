@@ -6,7 +6,6 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using zavit.Domain.Accounts;
 using zavit.Web.Api.Dtos.Accounts;
-using zavit.Web.Api.HttpActionResults;
 
 namespace zavit.Web.Api.Controllers
 {
