@@ -160,7 +160,42 @@ html, body {
 	    margin-left: -18px;
     }
     h3 {
-        font-size:21px;
+        font-size:18px;
+        float:left;
+        margin:10px 10px 5px 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    address {
+        float:left;
+        margin:0 0 0 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    button {
+        background-color:@call-to-action;
+        border:@call-to-action;
+        margin:10px 0 0 10px;
+        color:@nav-bg;
+        float:left;
+        width:93%;
+
+    }
+    span {
+        float:right;
+        clear:left;
+        margin:15px;
+        font-size:16px;
+        a {
+            font-weight:bold;
+            color:@text-link;
+        }
     }
 }
 
@@ -171,7 +206,7 @@ html, body {
 
       position: fixed;
       z-index: 1031;
-      top: 50px;
+      top: 52px;
       left: 0;
 
       width: 100%;

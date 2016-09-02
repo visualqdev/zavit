@@ -1,4 +1,5 @@
 ﻿import * as Progress from "../loading/progress";
+import * as PlaceModal from "../map/placeModal";
 
 export class Places {
 
@@ -11,17 +12,33 @@ export class Places {
 
         this.getPlaces();
         this.registerWithMapEvents();
+        this.registerPlaceEvents();
+    }
+
+    registerPlaceEvents() {
 
         $('#loadPlaces').on("click", (e) => {
             e.preventDefault();
-            this.removeMarkers();
+            this.map.markers.forEach(marker => this.map.removeMarker(marker));
+            this.map.markers = [];
             this.getPlaces();
             this.map.setZoom(this.map.zoom);
+        });
+
+        $('#home').delegate("#placeModal a[data-nextMarker]", "click", (e) => {
+            e.preventDefault();
+            const marker = this.map.markers[$(e.currentTarget).attr("data-nextMarker")];
+            this.map.triggerMarkerClick(marker);
+        });
+
+        $('#home').delegate("#placeModal a[data-prevMarker]", "click", (e) => {
+            e.preventDefault();
+            const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
+            this.map.triggerMarkerClick(marker);
         });
     }
 
     getPlaces() {
-
         const latitude = this.map.position.coords.latitude,
             longitude = this.map.position.coords.longitude,
             url = `/api/places?latitude=${latitude}&longitude=${longitude}&radius=${this.radius}`;
@@ -41,30 +58,18 @@ export class Places {
     }
 
     addPlaces(places) {
-        places.forEach(place => this.addPlaceMarker(place));
+        places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
         Progress.done();
+        this.map.triggerMarkerClick(this.map.markers[0]);
     }
 
-    addPlaceMarker(place) {
+    addPlaceMarker(place, placeIndex, amountOfPlaces) {
         this.map.addMarker({ lat: place.Latitude, lng: place.Longitude });
-        this.map.addPlaceMarkerClickEvent(this.map.marker, this.showPlaceInfo, place, this.map.overlay);
+        this.map.addPlaceMarkerClickEvent(this.map, this.showPlaceInfo, place, placeIndex, amountOfPlaces);
     }
 
-    showPlaceInfo(place, map) {
-        const left = (map.markerPoint.x + -150) + "px",
-            topPoint = (map.markerPoint.y - 195) + "px";
-
-        $("#placeModal").remove();
-
-        const placeModal = `<div id="placeModal" style="left:${left}; top:${topPoint};"> 
-                                <h3>${place.Name}</h3>
-                                <address>${place.Address}</address>
-                            </div>`;
-
+    showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
+        const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
         $(placeModal).appendTo("#home");
-    }
-
-    removeMarkers() {
-        this.map.markers.forEach(marker => this.map.removeMarker(marker));
     }
 }

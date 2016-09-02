@@ -2,7 +2,7 @@
 
     constructor(options = {}) 
     {
-        this.zoom = options.zoom || 14;
+        this.zoom = options.zoom || 13;
         this.executeWhenMapFullyLoaded = options.executeWhenMapFullyLoaded || null;
         this.marker = null;
         this.markerPoint = null;
@@ -69,12 +69,10 @@
     }
 
     addMarker(latLng) {
-
         this.marker = new google.maps.Marker({
             map: this.map,
             position: latLng
         });
-
         this.markers.push(this.marker);
     }
 
@@ -82,12 +80,28 @@
         marker.setMap(null);
     }
 
-    addPlaceMarkerClickEvent(marker, callback, place) {
-        google.maps.event.addListener(marker, "click", function(e) {
-            this.map.setCenter(e.latLng);
-            this.map.markerPoint = this.map.overlay.getProjection().fromLatLngToContainerPixel(e.latLng);
-            callback(place, this.map);
+    addPlaceMarkerClickEvent(mapClass, callback, place, placeIndex, amountOfPlaces) {
+
+        let latLng;
+        const map = mapClass.map;
+
+        google.maps.event.addListener(mapClass.marker, "click", function(e) {
+            
+                if (e.latLng) {
+                    latLng = e.latLng;
+                } 
+                else {
+                    latLng = new google.maps.LatLng(e.lat(), e.lng());
+                }
+
+                map.setCenter(latLng);
+                map.markerPoint = map.overlay.getProjection().fromLatLngToContainerPixel(latLng);
+                callback(place, placeIndex, amountOfPlaces, mapClass.map);
         });
+    }
+
+    triggerMarkerClick(marker) {
+        google.maps.event.trigger(marker,'click', marker.position);
     }
 
 }
