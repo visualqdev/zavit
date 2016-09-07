@@ -9,6 +9,7 @@ CREATE TABLE [dbo].[Account](
 	[DisplayName] [nvarchar](255) NULL,
 	[Password] [nvarchar](255) NULL,
 	[Email] [nvarchar](255) NULL,
+	[AccountType] [int] DEFAULT 0
 PRIMARY KEY CLUSTERED 
 (
 	[AccountId] ASC

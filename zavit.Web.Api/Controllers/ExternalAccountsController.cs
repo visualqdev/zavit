@@ -25,13 +25,15 @@ namespace zavit.Web.Api.Controllers
         readonly IExternalAccountsRepository _externalAccountsRepository;
         readonly IExternalLoginsSettings _externalLoginsSettings;
         readonly IAccountRepository _accountRepository;
+        readonly IExternalAccountService _externalAccountService;
 
-        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IAccountRepository accountRepository)
+        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IAccountRepository accountRepository, IExternalAccountService externalAccountService)
         {
             _clientRepository = clientRepository;
             _externalAccountsRepository = externalAccountsRepository;
             _externalLoginsSettings = externalLoginsSettings;
             _accountRepository = accountRepository;
+            _externalAccountService = externalAccountService;
         }
 
         [OverrideAuthentication]
@@ -99,19 +101,9 @@ namespace zavit.Web.Api.Controllers
                 return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "External user is already registered", this);
             }
 
-            var account = new Account { Username = verifiedAccessToken.user_id, DisplayName = model.DisplayName, Email = model.Email};
-            _accountRepository.Save(account);
+            var externalAccount = _externalAccountService.CreateExternalAccount(model.Provider, verifiedAccessToken.user_id, model.DisplayName, model.Email);
 
-            var externalAccount = new ExternalAccount
-            {
-                Account = account,
-                LoginProvider = model.Provider,
-                ProviderKey = verifiedAccessToken.user_id
-            };
-
-            _externalAccountsRepository.Save(externalAccount);
-
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(account);
+            var accessTokenResponse = GenerateLocalAccessTokenResponse(externalAccount.Account);
 
             return Ok(accessTokenResponse);
         }

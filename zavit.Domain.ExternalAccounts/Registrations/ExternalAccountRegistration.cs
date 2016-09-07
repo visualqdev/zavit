@@ -1,14 +1,14 @@
 ﻿using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 
-namespace zavit.Web.Api.Dtos.Accounts
+namespace zavit.Domain.ExternalAccounts.Registrations
 {
-    public class AccountRegistrationDto : IAccountRegistration
+    public class ExternalAccountRegistration : IAccountRegistration
     {
         public string DisplayName { get; set; }
         public string Username { get; set; }
-        public string Password { get; set; }
         public string Email { get; set; }
-        public AccountType AccountType => AccountType.Internal;
+        public string Password => null;
+        public AccountType AccountType => AccountType.External;
     }
 }

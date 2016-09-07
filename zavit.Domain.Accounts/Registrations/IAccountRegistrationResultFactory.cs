@@ -2,7 +2,7 @@
 {
     public interface IAccountRegistrationResultFactory
     {
-        AccountRegistrationResult CreateSuccessful();
+        AccountRegistrationResult CreateSuccessful(Account account);
         AccountRegistrationResult CreateFailed(string message);
     }
 }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="AccountService.cs" />
+    <Compile Include="AccountType.cs" />
     <Compile Include="Registrations\AccountCreator.cs" />
     <Compile Include="Registrations\AccountRegistrationResult.cs" />
     <Compile Include="IAccountRepository.cs" />

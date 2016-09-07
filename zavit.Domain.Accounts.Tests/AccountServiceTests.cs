@@ -23,13 +23,13 @@ namespace zavit.Domain.Accounts.Tests
             {
                 _accountRegistration = NewInstanceOf<IAccountRegistration>();
 
-                _successRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
-                Injected<IAccountRegistrationResultFactory>()
-                    .Stub(f => f.CreateSuccessful())
-                    .Return(_successRegistrationResult);
-
                 _account = NewInstanceOf<Account>();
                 Injected<IAccountCreator>().Stub(c => c.Create(_accountRegistration)).Return(_account);
+
+                _successRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
+                Injected<IAccountRegistrationResultFactory>()
+                    .Stub(f => f.CreateSuccessful(_account))
+                    .Return(_successRegistrationResult);
             };
 
             static AccountRegistrationResult _result;

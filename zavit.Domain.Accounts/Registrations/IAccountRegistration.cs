@@ -5,5 +5,7 @@
         string DisplayName { get; }
         string Username { get; }
         string Password { get; }
+        string Email { get; }
+        AccountType AccountType { get; }
     }
 }

@@ -14,11 +14,17 @@
             var account = new Account
             {
                 Username = accountRegistration.Username,
-                DisplayName = accountRegistration.DisplayName
+                DisplayName = accountRegistration.DisplayName,
+                Email = accountRegistration.Email,
+                AccountType = accountRegistration.AccountType
             };
 
-            var password = _accountSecurity.HashPassword(accountRegistration.Password);
-            account.Password = password;
+            if (accountRegistration.AccountType == AccountType.Internal)
+            {
+                var password = _accountSecurity.HashPassword(accountRegistration.Password);
+                account.Password = password;
+            }
+
             return account;
         }
     }
