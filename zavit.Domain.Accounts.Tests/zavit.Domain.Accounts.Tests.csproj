@@ -63,6 +63,7 @@
     <Compile Include="Registrations\AccountCreatorTests.cs" />
     <Compile Include="Registrations\AccountRegistrationResultFactoryTests.cs" />
     <Compile Include="Registrations\Validators\DisplayNameValidatorTests.cs" />
+    <Compile Include="Registrations\Validators\PasswordValidatorTests.cs" />
     <Compile Include="Registrations\Validators\UsernameValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
