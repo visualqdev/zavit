@@ -24,15 +24,13 @@ namespace zavit.Web.Api.Controllers
         readonly IClientRepository _clientRepository;
         readonly IExternalAccountsRepository _externalAccountsRepository;
         readonly IExternalLoginsSettings _externalLoginsSettings;
-        readonly IAccountRepository _accountRepository;
         readonly IExternalAccountService _externalAccountService;
 
-        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IAccountRepository accountRepository, IExternalAccountService externalAccountService)
+        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService)
         {
             _clientRepository = clientRepository;
             _externalAccountsRepository = externalAccountsRepository;
             _externalLoginsSettings = externalLoginsSettings;
-            _accountRepository = accountRepository;
             _externalAccountService = externalAccountService;
         }
 
