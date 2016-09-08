@@ -144,7 +144,6 @@
     <Content Include="app\modules\account\externalAccountClient.js" />
     <Content Include="app\modules\account\externalAccountService.js" />
     <Content Include="app\modules\account\registerModal.js" />
-    <Content Include="app\modules\navigation\sideNav.js" />
     <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\settings\apiSettings.js" />
     <Content Include="app\modules\storage\storage.js" />

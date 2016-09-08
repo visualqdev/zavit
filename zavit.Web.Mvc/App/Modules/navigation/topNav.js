@@ -1,6 +1,5 @@
 ﻿import * as LoginModal from "../account/loginModal";
 import * as AccountService from "../account/accountService";
-import * as SideNav from "./sideNav";
 
 export function initialize() {
     refresh();
@@ -10,8 +9,10 @@ export function initialize() {
         LoginModal.show(refresh);
     });
 
-    SideNav.initialize({
-        onLogout: () => refresh()
+    $("#topnavLogout").click((e) => {
+        e.preventDefault();
+        AccountService.logOut();
+        refresh();
     });
 
     $("#topnavShowSideNav a").click((e) => {
@@ -25,11 +26,9 @@ export function refresh() {
     if (userAccount) {
         $("#topnavAccount").show();
         $("#topnavLogin").hide();
-        $("#topnavAccount span").text(userAccount.displayName);
-        $("#topnavShowSideNav").show();
+        $("#topnavAccountDisplayName").text(userAccount.displayName);
     } else {
         $("#topnavAccount").hide();
-        $("#topnavShowSideNav").hide();
         $("#topnavLogin").show();
     }
 }

@@ -43,15 +43,15 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li id="topnavLogin"><a href="#">Login</a></li>
-                <li id="topnavAccount"><span class="navbar-text"></span></li>
-                <li id="topnavShowSideNav"><a href="#"><span class='glyphicon glyphicon-menu-hamburger'></span></a></li>
+                <li class="dropdown" id="topnavAccount">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="topnavAccountDisplayName"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" id="topnavLogout">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-<div id="sidenav">
-    <a id="sidenavClose" href="#"><span class="glyphicon glyphicon-remove"></span></a>
-    <a href="#" id="sidenavLogout">Logout</a>
-</div>
 <div id="map"></div>
 

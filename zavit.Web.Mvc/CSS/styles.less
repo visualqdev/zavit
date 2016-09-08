@@ -32,20 +32,15 @@ html, body {
 	    color:@text-link;
         font-size:18px;
     }
+    a span{
+	    color:@text-link;
+        font-size:18px;
+    }
     .navbar-header a {
 	
 	    color: @logo;
 	    font-size: 30px;
-    }
-    #topnavAccount {
-        span{
-            line-height: 100%;
-            vertical-align: middle;
-            display: inline-block;
-            color: @nav-font-color;
-            font-size:18px;            
-        }
-    }
+    }    
     .input-group {
         .search-panel {
             a {
@@ -234,8 +229,6 @@ html, body {
   100% { transform: rotate(360deg); }
 }
 
-
-
 #registerModal{
     .registerModalContainer{
         max-width: 350px;
@@ -286,35 +279,6 @@ html, body {
     }
     .registerHelp{
         text-align: center;
-    }
-}
-
-#sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 99;
-    top: 0;    
-    right: -250px;
-    background-color: @sidenav-bg;
-    overflow-x: hidden;
-    padding-top: 60px;
-    transition: right 0.5s;
-    a {
-        color:@text-link;
-        font-size:18px;
-        display: block;
-        padding: 8px 8px 8px 32px;
-        &:hover{
-            text-decoration: none;
-        }
-    }
-    #sidenavClose {
-        position: absolute;
-        top: 10px;
-        right: 25px;
-        font-size: 18px;
-        margin-left: 50px;
     }
 }
 
