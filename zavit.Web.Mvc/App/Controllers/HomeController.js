@@ -1,11 +1,17 @@
 ﻿import { Map } from "../modules/map/map";
-import { Places } from "../modules/map/places"
+import { Places } from "../modules/map/places";
 
-export function explore() {
+export function explore(position) {
 
     const map = new Map({ executeWhenMapFullyLoaded: getPlaces});
 
-    navigator.geolocation.getCurrentPosition(centerMapAtLocation, getDefaultMap);
+    if (typeof position === 'undefined') {
+        navigator.geolocation.getCurrentPosition(centerMapAtLocation, getDefaultMap);
+    } 
+    else {
+        map.position = position;
+        map.initialise();
+    }
 
     function centerMapAtLocation(position) {
         map.position = position;
@@ -20,4 +26,5 @@ export function explore() {
         const places = new Places({ map:map });
         places.initialise();
     }
+
 }
