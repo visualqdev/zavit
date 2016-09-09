@@ -49,23 +49,54 @@ html, body {
             }
         }
     }
-    .navbar-left {
+    /*.navbar-left {
         width:70%;
-        #search {
-            width:50%;
-            margin: 8px 8px 0 8px;
+        
+    }*/
+
+    /*#search {
+        width:50%;
+        margin: 8px 8px 0 8px;
+    }*/
+
+    .navbar-form {
+        padding: 0;
+        margin-right: 0;
+        margin-left: 0;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    @media screen and (max-width: 767px) {
+        .navbar-form {
+            width: 75%;
+            padding-left:0;
+            padding-right:0;
+        }        
+    }
+    @media screen and (max-width: 474px) {
+        .navbar-form {
+            width: 65%;
+            padding-left:0;
+            padding-right:0;
+        }        
+    }
+    @media screen and (min-width: 768px) {
+        .navbar-form {
+            width: 60%;
         }
     }
 
     @media screen and (max-width: 800px) {
-        .navbar-left {
+        /*.navbar-left {
             width:auto;
             #search {
                 width:auto;
                 float:left;
                 margin: 8px 8px 10px 8px;
             }
-        }
+        }*/
         li.active a {
 	        border: none;
         }
