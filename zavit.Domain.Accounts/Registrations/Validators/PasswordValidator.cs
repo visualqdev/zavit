@@ -13,7 +13,8 @@
 
         public AccountRegistrationResult Validate(IAccountRegistration accountRegistration)
         {
-            if (accountRegistration.Password != null && accountRegistration.Password.Length > 5) return null;
+            if (accountRegistration.AccountType != AccountType.Internal || (accountRegistration.Password != null && accountRegistration.Password.Length > 5))
+                return null;
 
             return _accountRegistrationResultFactory.CreateFailed(PassworddTooShort);
         }
