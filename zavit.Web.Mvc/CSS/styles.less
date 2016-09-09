@@ -36,11 +36,24 @@ html, body {
 	    color:@text-link;
         font-size:18px;
     }
-    .navbar-header a {
-	
-	    color: @logo;
-	    font-size: 30px;
-    }    
+    .navbar-header {
+        width:70%;
+        a {
+	        color: @logo;
+	        font-size: 30px;
+        }
+        #search {
+            .input-group {
+                width:100%;
+                .input-group-btn {
+                    width:1%;
+                }
+            }
+        }  
+    }
+
+   
+    
     .input-group {
         .search-panel {
             a {
@@ -49,15 +62,6 @@ html, body {
             }
         }
     }
-    /*.navbar-left {
-        width:70%;
-        
-    }*/
-
-    /*#search {
-        width:50%;
-        margin: 8px 8px 0 8px;
-    }*/
 
     .navbar-form {
         padding: 0;
@@ -68,35 +72,48 @@ html, body {
         box-shadow: none;
     }
 
-    @media screen and (max-width: 767px) {
-        .navbar-form {
-            width: 75%;
-            padding-left:0;
-            padding-right:0;
-        }        
-    }
-    @media screen and (max-width: 474px) {
-        .navbar-form {
-            width: 65%;
-            padding-left:0;
-            padding-right:0;
-        }        
-    }
-    @media screen and (min-width: 768px) {
-        .navbar-form {
-            width: 60%;
+    @media screen and (max-width: 1340px){
+        .navbar-header {
+        width:60%;
+        }
+        #mainNav.navbar .navbar-form {
+             width:60%;
         }
     }
 
+   
+    @media screen and (max-width: 1010px){
+        .navbar-header {
+        width:50%;
+        }
+        .navbar-form {
+             width:75%;
+        }
+    }
+
+   
+   
+    @media screen and (min-width: 768px) {
+        .navbar-form {
+            width: 85%;
+        }
+    }
+    @media screen and (min-width: 0px ) and (max-width:800px) {
+        .navbar-header {
+        width:100%;
+        margin:0;
+        padding:0;
+        }
+        .container-fluid {
+            margin:0;
+            padding:0;
+        }
+        .navbar-form {
+            width: 80%;
+        }
+    }
     @media screen and (max-width: 800px) {
-        /*.navbar-left {
-            width:auto;
-            #search {
-                width:auto;
-                float:left;
-                margin: 8px 8px 10px 8px;
-            }
-        }*/
+       
         li.active a {
 	        border: none;
         }
