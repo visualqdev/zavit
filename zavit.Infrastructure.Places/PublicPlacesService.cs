@@ -13,6 +13,7 @@ namespace zavit.Infrastructure.Places
         readonly IGooglePlacesApi _googlePlacesApi;
         readonly IPlaceSearchResultsTransformer _publicPlacesTransformer;
         readonly IPlaceDetailsResultTransformer _placeDetailsResultTransformer;
+        public static string[] Keywords = { "sport", "gym", "tennis", "football", "suqash", "rugby", "cricket", "golf", "basketball" };
 
         public PublicPlacesService(IGooglePlacesApi googlePlacesApi, IPlaceSearchResultsTransformer publicPlacesTransformer, IPlaceDetailsResultTransformer placeDetailsResultTransformer)
         {
@@ -23,7 +24,7 @@ namespace zavit.Infrastructure.Places
 
         public async Task<IEnumerable<PublicPlace>> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria)
         {
-            var searchResult = await _googlePlacesApi.NearbySearch(placeSearchCriteria);
+            var searchResult = await _googlePlacesApi.NearbySearch(placeSearchCriteria, Keywords);
             var publicPlaces = _publicPlacesTransformer.Transform(searchResult);
 
             return publicPlaces;
