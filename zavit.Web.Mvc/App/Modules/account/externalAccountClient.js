@@ -8,7 +8,8 @@ export function registerExternal(externalAccessToken, provider, displayName, ema
         externalAccessToken, 
         provider, 
         displayName, 
-        email
+        email,
+        clientid: ApiSettings.clientId
     };
 
     return new Promise((resolve, reject) => 
@@ -26,7 +27,7 @@ export function registerExternal(externalAccessToken, provider, displayName, ema
 export function obtainLocalAccessToken(externalAccessToken, provider) {
     return new Promise((resolve, reject) => 
         $.ajax({
-            url: `${obtainLocalAccessTokenUrl}?provider=${provider}&externalaccesstoken=${externalAccessToken}`,
+            url: `${obtainLocalAccessTokenUrl}?provider=${provider}&externalaccesstoken=${externalAccessToken}&clientid=${ApiSettings.clientId}`,
             type: "get",
             contentType: "application/json; charset=utf-8",
             success: resolve,

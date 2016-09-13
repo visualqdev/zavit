@@ -3,6 +3,7 @@ using Microsoft.Owin;
 using Owin;
 using zavit.Infrastructure.Ioc;
 using zavit.Web.Api.IocConfiguration.Installers;
+using zavit.Web.Authorization;
 
 [assembly: OwinStartup("ApiStartup", typeof(zavit.Web.Api.ApiStartup))]
 namespace zavit.Web.Api
