@@ -24,5 +24,12 @@ namespace zavit.Web.Api.DtoServices.Places
             var placeDtos = places.Select(p => _placeDtoFactory.CreateItem(p));
             return placeDtos;
         }
+
+        public async Task<IEnumerable<PlaceDto>> SuggestPlacesByName(PlaceSearchByNameCriteriaDto placeSearchByNameCriteriaDto)
+        {
+            var places = await _placeService.SuggestByName(placeSearchByNameCriteriaDto);
+            var placeDtos = places.Select(p => _placeDtoFactory.CreateItem(p));
+            return placeDtos;
+        }
     }
 }

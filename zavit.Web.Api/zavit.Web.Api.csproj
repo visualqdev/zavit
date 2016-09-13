@@ -136,6 +136,7 @@
     <Compile Include="Dtos\ExternalAccounts\ParsedExternalAccessToken.cs" />
     <Compile Include="Dtos\ExternalAccounts\RegisterExternalBindingModel.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
+    <Compile Include="Dtos\Places\PlaceSearchByNameCriteriaDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
     <Compile Include="HttpActionResults\AuthenticationChallengeResult.cs" />

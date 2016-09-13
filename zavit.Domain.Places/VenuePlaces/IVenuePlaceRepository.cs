@@ -10,5 +10,6 @@ namespace zavit.Domain.Places.VenuePlaces
         void Update(VenuePlace place);
         VenuePlace Get(string placeId);
         Task<IEnumerable<VenuePlace>> SearchPlaces(IPlaceSearchCriteria placeSearchCriteria);
+        Task<IEnumerable<VenuePlace>> SearchPlacesByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria); 
     }
 }

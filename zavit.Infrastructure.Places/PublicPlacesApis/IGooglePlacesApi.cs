@@ -9,5 +9,6 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
     {
         Task<GooglePlaceSearchResult> NearbySearch(IPlaceSearchCriteria placeSearchCriteria);
         Task<GooglePlaceDetailsResult> GetDetails(string placeId);
-    }
+        Task<GooglePlaceSearchResult> NearbySearchByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria);
+    }   
 }

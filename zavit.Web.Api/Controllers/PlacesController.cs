@@ -19,5 +19,10 @@ namespace zavit.Web.Api.Controllers
         {
             return await _placeDtoService.SuggestPlaces(placeSearchCriteriaDto);
         }
+
+        public async Task<IEnumerable<PlaceDto>> GetPlaceByName(PlaceSearchByNameCriteriaDto placeSearchByNameCriteriaDto)
+        {
+            return await _placeDtoService.SuggestPlacesByName(placeSearchByNameCriteriaDto);
+        }
     }
 }

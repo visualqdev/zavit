@@ -30,6 +30,25 @@ namespace zavit.Web.Api.Tests.Controllers
             static IEnumerable<PlaceDto> _places;
             static PlaceSearchCriteriaDto _placeSearchCriteriaDto;
         }
+
+        class When_getting_a_list_of_places_by_name
+        {
+            Because of = () => _result = Subject.GetPlaceByName(_placeSearchByNameCriteriaDto).Result;
+
+            It should_return_a_list_of_places = () => _result.ShouldNotBeNull();
+
+            Establish context = () =>
+            {
+                _placeSearchByNameCriteriaDto = NewInstanceOf<PlaceSearchByNameCriteriaDto>();
+
+                _places = new[] { NewInstanceOf<PlaceDto>() };
+                Injected<IPlaceDtoService>().Stub(s => s.SuggestPlacesByName(_placeSearchByNameCriteriaDto)).Return(Task.FromResult(_places));
+            };
+
+            static IEnumerable<PlaceDto> _result;
+            static IEnumerable<PlaceDto> _places;
+            static PlaceSearchByNameCriteriaDto _placeSearchByNameCriteriaDto;
+        }
     }
 }
 
