@@ -47,10 +47,5 @@ namespace zavit.Infrastructure.Places.Repositories
 
             return Task.FromResult((IEnumerable<VenuePlace>)queryOver);
         }
-
-        public Task<IEnumerable<VenuePlace>> SearchPlacesByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

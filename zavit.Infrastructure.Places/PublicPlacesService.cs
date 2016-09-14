@@ -25,7 +25,7 @@ namespace zavit.Infrastructure.Places
         public async Task<IEnumerable<PublicPlace>> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria)
         {
 
-            var searchResult = placeSearchCriteria.Name != null
+            var searchResult = !string.IsNullOrEmpty(placeSearchCriteria.Name)
                 ? await _googlePlacesApi.NearbySearchByName(placeSearchCriteria, Keywords)
                 : await _googlePlacesApi.NearbySearch(placeSearchCriteria, Keywords);
 
