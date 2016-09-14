@@ -49,5 +49,17 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             var result = _jsonSerializer.Deserialize<GooglePlaceDetailsResult>(json);
             return result;
         }
+
+        public async Task<GooglePlaceSearchResult> NearbySearchByName(IPlaceSearchCriteria placeSearchByNameCriteria, IEnumerable<string> keywords)
+        {
+            var message = new HttpRequestMessage();
+            message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            message.Method = HttpMethod.Get;
+            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchByNameCriteria.Latitude},{placeSearchByNameCriteria.Longitude}&radius={placeSearchByNameCriteria.Radius}&name={placeSearchByNameCriteria.Name}");
+            var httpResponse = await _httpClient.SendAsync(message);
+            var json = await httpResponse.Content.ReadAsStringAsync();
+            var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);
+            return result;
+        }
     }
 }
