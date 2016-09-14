@@ -40,7 +40,7 @@ namespace zavit.Domain.Accounts.Tests.Registrations.Validators
 
                 _accountRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
                 Injected<IAccountRegistrationResultFactory>()
-                    .Stub(v => v.CreateFailed(PasswordValidator.PassworddTooShort))
+                    .Stub(v => v.CreateFailed(PasswordValidator.PasswordTooShort))
                     .Return(_accountRegistrationResult);
             };
 
