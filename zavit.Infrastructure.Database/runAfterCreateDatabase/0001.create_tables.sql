@@ -6,6 +6,7 @@ GO
 CREATE TABLE [dbo].[Account](
 	[AccountId] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [nvarchar](255) NULL,
+	[DisplayName] [nvarchar](255) NULL,
 	[Password] [nvarchar](255) NULL,
 PRIMARY KEY CLUSTERED 
 (

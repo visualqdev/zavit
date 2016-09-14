@@ -32,7 +32,7 @@ namespace zavit.Web.Core.Authorization
 
             context.Ticket.Properties.IssuedUtc = token.IssuedDateUtc;
             context.Ticket.Properties.ExpiresUtc = token.ExpectedExpiryDateUtc;
-
+            
             token.ProtectedTicket = context.SerializeTicket();
 
             var refreshTokenRepository = _refreshTokenRepositoryFactory.Create();

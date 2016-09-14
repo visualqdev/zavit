@@ -36,24 +36,36 @@ html, body {
 	
 	    color: @logo;
 	    font-size: 30px;
-    }  
+    }
+    #topnavAccount {
+        span{
+            line-height: 100%;
+            vertical-align: middle;
+            display: inline-block;
+            color: @nav-font-color;
+            font-size:18px;            
+        }
+    }
 }
 
 #loginModal{
     .loginModalContainer{
-        padding: 30px;
         max-width: 350px;
         width: 100%;
         background-color: @login-bg;
         margin: 0 auto;
         border-radius: 2px;
-        overflow: hidden;        
+        overflow: hidden;
+        padding: 30px 0;        
     }
     h2{
         text-align: center;
         font-size: 1.8em;
     }
-    input[type=button] {
+    form{
+        padding: 0 30px;
+    }
+    input[type=submit] {
         width: 100%;
         display: block;
         margin-bottom: 10px;
@@ -78,5 +90,94 @@ html, body {
         padding: 0 8px;
         box-sizing: border-box;
         -moz-box-sizing: border-box;
+    }
+    #loginWarning{
+        text-align: center;
+        background-color: @warning-bg;
+        color: @warning-text-color;
+    }
+    .loginHelp{
+        text-align: center;
+    }
+}
+#registerModal{
+    .registerModalContainer{
+        max-width: 350px;
+        width: 100%;
+        background-color: @login-bg;
+        margin: 0 auto;
+        border-radius: 2px;
+        overflow: hidden;
+        padding: 30px 0;        
+    }
+    h2{
+        text-align: center;
+        font-size: 1.8em;
+    }
+    form{
+        padding: 0 30px;
+    }
+    input[type=submit] {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        position: relative;
+        border: 0px;
+        color: @login-button-text-color;
+        background-color: @login-button-bg;
+        padding: 17px 0px;
+        font-size: 14px;
+        &:hover {
+            background-color: @login-button-hover-bg;
+        }
+    }
+    input[type=text], input[type=password] {
+        height: 44px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+        -webkit-appearance: none;
+        background: @login-input-text-bg;
+        border: 1px solid @login-input-text-border;                
+        padding: 0 8px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    #registerWarning{
+        text-align: center;
+        background-color: @warning-bg;
+        color: @warning-text-color;
+    }
+    .registerHelp{
+        text-align: center;
+    }
+}
+
+#sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 99;
+    top: 0;    
+    right: -250px;
+    background-color: @sidenav-bg;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: right 0.5s;
+    a {
+        color:@text-link;
+        font-size:18px;
+        display: block;
+        padding: 8px 8px 8px 32px;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+    #sidenavClose {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 18px;
+        margin-left: 50px;
     }
 }

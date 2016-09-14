@@ -21,12 +21,16 @@
                 <li class="active"><a href="#">Explore</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" onclick="$.loginModal().show(); return false;">Login</a></li>
+                <li id="topnavLogin"><a href="#">Login</a></li>
+                <li id="topnavAccount"><span class="navbar-text"></span></li>
+                <li id="topnavShowSideNav"><a href="#"><span class='glyphicon glyphicon-menu-hamburger'></span></a></li>
             </ul>
         </div>
     </div>
 </nav>
+<div id="sidenav">
+    <a id="sidenavClose" href="#"><span class="glyphicon glyphicon-remove"></span></a>
+    <a href="#" id="sidenavLogout">Logout</a>
+</div>
 <div id="map"></div>
-
-
 

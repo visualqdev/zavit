@@ -1,4 +1,5 @@
 ﻿import * as HomeController from "../controllers/homeController";
+import * as LoginController from "../controllers/loginController"
 
 export function registerRoutes() {
 
@@ -7,7 +8,12 @@ export function registerRoutes() {
     });
 
     crossroads.addRoute("/login", function () {
-        $.loginController().login();
+        LoginController.login();
+    });
+
+    crossroads.addRoute("/logout", function () {
+        LoginController.logout();
+        window.location.href = "/";
     });
    
     function parseHash(newHash, oldHash) {
