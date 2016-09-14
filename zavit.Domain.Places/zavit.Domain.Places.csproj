@@ -46,7 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicPlaces\IPublicPlacesService.cs" />
     <Compile Include="PublicPlaces\PublicPlace.cs" />
-    <Compile Include="Search\IPlaceSearchByNameCriteria.cs" />
     <Compile Include="Search\IPlaceSearchCriteria.cs" />
     <Compile Include="Suggestions\IPlaceSuggestionsMerger.cs" />
     <Compile Include="Suggestions\IPublicPlaceSuggestionFactory.cs" />

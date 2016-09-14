@@ -24,7 +24,11 @@ namespace zavit.Infrastructure.Places
 
         public async Task<IEnumerable<PublicPlace>> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria)
         {
-            var searchResult = await _googlePlacesApi.NearbySearch(placeSearchCriteria, Keywords);
+
+            var searchResult = placeSearchCriteria.Name != null
+                ? await _googlePlacesApi.NearbySearchByName(placeSearchCriteria, Keywords)
+                : await _googlePlacesApi.NearbySearch(placeSearchCriteria, Keywords);
+
             var publicPlaces = _publicPlacesTransformer.Transform(searchResult);
 
             return publicPlaces;
@@ -36,14 +40,6 @@ namespace zavit.Infrastructure.Places
             var publicPlace = _placeDetailsResultTransformer.Transform(placeDetailsResult);
 
             return publicPlace;
-        }
-
-        public async Task<IEnumerable<PublicPlace>> GetPublicPlacesByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria)
-        {
-            var placeDetailsResult = await _googlePlacesApi.NearbySearchByName(placeSearchByNameCriteria);
-            var publicPlaces = _publicPlacesTransformer.Transform(placeDetailsResult);
-
-            return publicPlaces;
         }
     }
 }

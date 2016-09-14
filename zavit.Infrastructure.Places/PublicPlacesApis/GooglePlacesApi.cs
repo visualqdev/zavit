@@ -50,7 +50,7 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             return result;
         }
 
-        public async Task<GooglePlaceSearchResult> NearbySearchByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria)
+        public async Task<GooglePlaceSearchResult> NearbySearchByName(IPlaceSearchCriteria placeSearchByNameCriteria, IEnumerable<string> keywords)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

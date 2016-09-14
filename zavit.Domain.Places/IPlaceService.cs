@@ -11,7 +11,6 @@ namespace zavit.Domain.Places
     {
         Task<IEnumerable<IPlace>> Suggest(IPlaceSearchCriteria placeSearchCriteria);
         Task<Venue> AddVenue(INewVenue newVenue, string placeId, Account venueOwnerAccount);
-        Task<IEnumerable<IPlace>> SuggestByName(IPlaceSearchByNameCriteria placeSearchCriteriaDto);
         Task<Venue> GetDefaultVenue(string placeId);
     }
 }

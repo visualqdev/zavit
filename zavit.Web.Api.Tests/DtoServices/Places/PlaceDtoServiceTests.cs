@@ -45,37 +45,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
             static PlaceDto _otherPlaceDto;
         }
 
-        class When_providing_place_dto_suggestions_by_name
-        {
-            Because of = () => _result = Subject.SuggestPlacesByName(_placeSearchByNameCriteriaDto).Result;
-
-            It should_return_a_dto_for_each_of_the_places_suggested_by_the_place_service = () => _result.ShouldContainOnlyOrdered(_placeDto, _otherPlaceDto);
-
-            Establish context = () =>
-            {
-                _placeSearchByNameCriteriaDto = NewInstanceOf<PlaceSearchByNameCriteriaDto>();
-
-                _placeSearchByNameCriteriaDto = NewInstanceOf<PlaceSearchByNameCriteriaDto>();
-
-                var place = NewInstanceOf<IPlace>();
-                var otherPlace = NewInstanceOf<IPlace>();
-
-                Injected<IPlaceService>()
-                    .Stub(s => s.SuggestByName(_placeSearchByNameCriteriaDto))
-                    .Return(Task.FromResult<IEnumerable<IPlace>>(new[] { place, otherPlace }));
-
-                _placeDto = NewInstanceOf<PlaceDto>();
-                Injected<IPlaceDtoFactory>().Stub(f => f.CreateItem(place)).Return(_placeDto);
-
-                _otherPlaceDto = NewInstanceOf<PlaceDto>();
-                Injected<IPlaceDtoFactory>().Stub(f => f.CreateItem(otherPlace)).Return(_otherPlaceDto);
-            };
-
-            static PlaceSearchByNameCriteriaDto _placeSearchByNameCriteriaDto;
-            static IEnumerable<PlaceDto> _result;
-            static PlaceDto _placeDto;
-            static PlaceDto _otherPlaceDto;
-        }
+        
     }
 }
 

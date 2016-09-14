@@ -135,7 +135,6 @@
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
-    <Compile Include="Dtos\Places\PlaceSearchByNameCriteriaDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />

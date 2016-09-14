@@ -42,32 +42,6 @@ namespace zavit.Domain.Places.Tests
             static IEnumerable<IPlace> _suggestedPlaces;
         }
 
-        class When_suggesting_places_by_name
-        {
-            Because of = () => _result = Subject.SuggestByName(_placeSearchByNameCriteria).Result;
-
-            It should_return_all_places_suggested_by_public_places_service = () => _result.ShouldEqual(_suggestedPlaces);
-
-            Establish context = () =>
-            {
-                _placeSearchByNameCriteria = NewInstanceOf<IPlaceSearchByNameCriteria>();
-
-                var publicPlaces = (IEnumerable<PublicPlace>)new[] { NewInstanceOf<PublicPlace>() };
-                Injected<IPublicPlacesService>().Stub(p => p.GetPublicPlacesByName(_placeSearchByNameCriteria)).Return(Task.FromResult(publicPlaces));
-
-                var venuePlaces = (IEnumerable<VenuePlace>)new[] { NewInstanceOf<VenuePlace>() };
-                Injected<IVenuePlaceRepository>().Stub(r => r.SearchPlacesByName(_placeSearchByNameCriteria)).Return(Task.FromResult(venuePlaces));
-
-                _suggestedPlaces = new[] { NewInstanceOf<IPlace>() };
-                //Injected<IPlaceSuggestionsMerger>().Stub(t => t.Merge(publicPlaces, venuePlaces)).Return(_suggestedPlaces);
-                Injected<IPlaceSuggestionsMerger>().Stub(t => t.Merge(publicPlaces, null)).Return(_suggestedPlaces);
-            };
-
-            static IPlaceSearchByNameCriteria _placeSearchByNameCriteria;
-            static IEnumerable<IPlace> _result;
-            static IEnumerable<IPlace> _suggestedPlaces;
-        }
-
         class When_adding_a_new_venue_to_a_place_that_is_registered_as_a_venue_place
         {
             Because of = () => _result = Subject.AddVenue(_newVenue, PlaceId, _venueOwnerAccount).Result;

@@ -40,24 +40,25 @@ namespace zavit.Infrastructure.Places.Tests
 
         class When_requesting_public_places_by_name
         {
-            Because of = () => _result = Subject.GetPublicPlacesByName(_placeSearchByNameCriteria).Result;
+            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria).Result;
 
-            It should_return_a_list_of_public_places = () => _result.ShouldEqual(_publicPlaces);
+            It should_return_a_list_of_public_places_by_name = () => _result.ShouldEqual(_publicPlaces);
 
             Establish context = () =>
             {
-                _placeSearchByNameCriteria = NewInstanceOf<IPlaceSearchByNameCriteria>();
+                _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
+                _placeSearchCriteria.Stub(x => x.Name).Return("Name");
 
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
-                    .Stub(a => a.NearbySearchByName(_placeSearchByNameCriteria))
+                    .Stub(a => a.NearbySearchByName(_placeSearchCriteria, PublicPlacesService.Keywords))
                     .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
                 Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
             };
 
-            static IPlaceSearchByNameCriteria _placeSearchByNameCriteria;
+            static IPlaceSearchCriteria _placeSearchCriteria;
             static IEnumerable<PublicPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
         }

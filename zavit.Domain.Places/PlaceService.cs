@@ -64,18 +64,6 @@ namespace zavit.Domain.Places
             return venue;
         }
 
-        public async Task<IEnumerable<IPlace>> SuggestByName(IPlaceSearchByNameCriteria placeSearchByNameCriteria)
-        {
-            var publicPlacesTask = _publicPlacesService.GetPublicPlacesByName(placeSearchByNameCriteria);
-            //var venuePlacesTask = _venuePlaceRepository.SearchPlacesByName(placeSearchByNameCriteria);
-
-            await Task.WhenAll(publicPlacesTask/*, venuePlacesTask*/);
-
-            var placeSuggestions = _placeSuggestionsMerger.Merge(publicPlacesTask.Result,/*, venuePlacesTask.Result*/null);
-
-            return placeSuggestions;
-        }
-
         public async Task<Venue> GetDefaultVenue(string placeId)
         {
             var venuePlace = _venuePlaceRepository.Get(placeId);
