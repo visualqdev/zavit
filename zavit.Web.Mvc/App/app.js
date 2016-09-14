@@ -5,5 +5,5 @@ import * as TopNav from "./modules/navigation/topNav";
 (function() {
     TopNav.initialize();
     Routing.registerRoutes();
-    Search.search();
+    Search.initialise();
 }())

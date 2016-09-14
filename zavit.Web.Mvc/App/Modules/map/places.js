@@ -68,6 +68,7 @@ export class Places {
 
     clearPlaceInfo() {
         $('#placeModal').remove();
+        $('[data-name=placeModal]').remove();
     }
 
     addPlaces(places) {
@@ -82,6 +83,7 @@ export class Places {
     }
 
     showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
+        $('[data-name=placeModal]').remove();
         const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
         $(placeModal).appendTo("#home");
     }

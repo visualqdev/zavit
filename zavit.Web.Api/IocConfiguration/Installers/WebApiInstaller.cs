@@ -10,7 +10,9 @@ using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.Venues;
 using zavit.Web.Authorization;
+using zavit.Web.Authorization.Controllers;
 using zavit.Web.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins.LoginData;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.IocConfiguration.Installers
@@ -20,7 +22,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Classes.FromAssemblyContaining<PlacesController>().BasedOn<IHttpController>().LifestyleTransient(),
+                Classes.FromAssemblyContaining<PlacesController>().BasedOn<IHttpController>().LifestyleTransient(), 
+                Component.For<ExternalAccountsController>().LifestyleTransient(),
                 Component.For<IPlaceDtoService>().ImplementedBy<PlaceDtoService>().LifestyleTransient(),
                 Component.For<IPlaceDtoFactory>().ImplementedBy<PlaceDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueDtoService>().ImplementedBy<VenueDtoService>().LifestyleTransient(),
@@ -37,7 +40,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<ILocalAccessTokenProvider>().ImplementedBy<LocalAccessTokenProvider>().LifestyleTransient(),
                 Component.For<IVenueDetailsDtoFactory>().ImplementedBy<VenueDetailsDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueActivityDtoFactory>().ImplementedBy<VenueActivityDtoFactory>().LifestyleTransient()
-                );
+                Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
+                Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton()                );
         }
     }
 }

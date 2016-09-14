@@ -11,11 +11,12 @@ using Newtonsoft.Json.Linq;
 using zavit.Domain.Clients;
 using zavit.Domain.ExternalAccounts;
 using zavit.Web.Api.Dtos.ExternalAccounts;
-using zavit.Web.Api.HttpActionResults;
 using zavit.Web.Authorization;
 using zavit.Web.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins.LoginData;
+using zavit.Web.Authorization.HttpActionResults;
 
-namespace zavit.Web.Api.Controllers
+namespace zavit.Web.Authorization.Controllers
 {
     public class ExternalAccountsController : ApiController
     {
@@ -24,6 +25,7 @@ namespace zavit.Web.Api.Controllers
         readonly IExternalLoginsSettings _externalLoginsSettings;
         readonly IExternalAccountService _externalAccountService;
         readonly ILocalAccessTokenProvider _localAccessTokenProvider;
+        readonly IExternalLoginDataProvider _externalLoginDataProvider;
 
         public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider)
         {
@@ -32,6 +34,7 @@ namespace zavit.Web.Api.Controllers
             _externalLoginsSettings = externalLoginsSettings;
             _externalAccountService = externalAccountService;
             _localAccessTokenProvider = localAccessTokenProvider;
+            _externalLoginDataProvider = externalLoginDataProvider;
         }
 
         [OverrideAuthentication]
@@ -59,28 +62,28 @@ namespace zavit.Web.Api.Controllers
                 return BadRequest(redirectUriValidationResult);
             }
 
-            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLoginData = _externalLoginDataProvider.Provide(User.Identity as ClaimsIdentity);
 
-            if (externalLogin == null)
+            if (externalLoginData == null)
             {
                 return InternalServerError();
             }
 
-            if (externalLogin.LoginProvider != provider)
+            if (externalLoginData.LoginProvider != provider)
             {
                 var authentication = Request.GetOwinContext().Authentication;
                 authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 return new AuthenticationChallengeResult(provider, this);
             }
 
-            var hasRegistered = _externalAccountsRepository.CheckIfExists(externalLogin.LoginProvider, externalLogin.ProviderKey);
+            var hasRegistered = _externalAccountsRepository.CheckIfExists(externalLoginData.LoginProvider, externalLoginData.ProviderKey);
 
             redirectUri =
-                $"{redirectUri}#/externallogin?externalaccesstoken={externalLogin.ExternalAccessToken}&provider={externalLogin.LoginProvider}&haslocalaccount={hasRegistered}&externalusername={externalLogin.UserName}&externalemail={externalLogin.UserEmail}";
+                $"{redirectUri}#/externallogin?externalaccesstoken={externalLoginData.ExternalAccessToken}&provider={externalLoginData.LoginProvider}&haslocalaccount={hasRegistered}&externalusername={externalLoginData.UserName}&externalemail={externalLoginData.UserEmail}";
 
             return Redirect(redirectUri);
-
         }
+
 
         [HttpPost]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
@@ -112,7 +115,7 @@ namespace zavit.Web.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken)
+        public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken, int clientId)
         {
 
             if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
@@ -258,9 +261,7 @@ namespace zavit.Web.Api.Controllers
                     {
                         return null;
                     }
-
                 }
-
             }
 
             return parsedToken;

@@ -112,14 +112,12 @@
   <ItemGroup>
     <Compile Include="ApiStartup.cs" />
     <Compile Include="App_Start\CommonRoutes.cs" />
-    <Compile Include="App_Start\OAuthConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authorization\AccessAuthorizationFilter.cs" />
     <Compile Include="Authorization\ClaimsIdentityProvider.cs" />
     <Compile Include="Authorization\IClaimsIdentityProvider.cs" />
     <Compile Include="Authorization\IClaimsIdentityProviderFactory.cs" />
     <Compile Include="Authorization\UserContext.cs" />
-    <Compile Include="Controllers\ExternalAccountsController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
@@ -136,15 +134,11 @@
     <Compile Include="DtoServices\Venues\IVenueDtoService.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
-    <Compile Include="Dtos\ExternalAccounts\ExternalLoginViewModel.cs" />
-    <Compile Include="Dtos\ExternalAccounts\ParsedExternalAccessToken.cs" />
-    <Compile Include="Dtos\ExternalAccounts\RegisterExternalBindingModel.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
-    <Compile Include="HttpActionResults\AuthenticationChallengeResult.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyScope.cs" />
     <Compile Include="IocConfiguration\Installers\WebApiInstaller.cs" />
@@ -183,6 +177,10 @@
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
       <Name>zavit.Domain.Venues</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
       <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>

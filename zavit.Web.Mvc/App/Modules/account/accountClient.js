@@ -8,7 +8,7 @@ export function getAuthenticationTokens(email, password) {
         username: email,
         password,
         grant_type: "password",
-        client_id: 1
+        client_id: ApiSettings.clientId
     };
 
     return new Promise((resolve, reject) => 

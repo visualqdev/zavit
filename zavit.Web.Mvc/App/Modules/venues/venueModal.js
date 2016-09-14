@@ -2,11 +2,11 @@
 
 export function show(options = {}) {
     const width = 300,
-        height = 250,
+        height = 350,
         positionX = `${options.markerX - (width / 2)}px`,
-        positionY = `${options.markerY - (height - 5)}px`,
+        positionY = `${options.markerY - (height + 45)}px`,
         placeId = options.placeId || null,
-        modal = $(`<div id="joinVenueModal" style="width:${width}px; height:${height}px; left:${positionX}; top:${positionY};"></div>`);
+        modal = $(`<div id="joinVenueModal" data-name="placeModal" style="width:${width}px; height:${height}px; left:${positionX}; top:${positionY};"></div>`);
 
     $("#joinVenueModal").remove();
     modal.appendTo("#home");    
