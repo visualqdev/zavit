@@ -11,7 +11,6 @@ using Newtonsoft.Json.Linq;
 using zavit.Domain.Clients;
 using zavit.Domain.ExternalAccounts;
 using zavit.Web.Api.Dtos.ExternalAccounts;
-using zavit.Web.Authorization;
 using zavit.Web.Authorization.ExternalLogins;
 using zavit.Web.Authorization.ExternalLogins.LoginData;
 using zavit.Web.Authorization.HttpActionResults;
