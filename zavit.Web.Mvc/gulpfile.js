@@ -12,13 +12,6 @@ var gulp = require("gulp"),
     watchLess = require('gulp-watch-less'),
     uglify = require('gulp-uglify');
 
-//gulp.task("concat", function () {
-//    return gulp.src("./app/**/*.js")
-//        .pipe(concat("app-bundled.js"))
-//        //.pipe(uglify())
-//        .pipe(gulp.dest("./"));
-//});
-
 gulp.task("es6", function () {
     browserify({ debug: true })
 		.transform(babelify)
