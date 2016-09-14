@@ -27,7 +27,7 @@ namespace zavit.Web.Authorization.Controllers
         readonly ILocalAccessTokenProvider _localAccessTokenProvider;
         readonly IExternalLoginDataProvider _externalLoginDataProvider;
 
-        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider)
+        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider, IExternalLoginDataProvider externalLoginDataProvider)
         {
             _clientRepository = clientRepository;
             _externalAccountsRepository = externalAccountsRepository;
