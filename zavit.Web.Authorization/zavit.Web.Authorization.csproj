@@ -111,7 +111,6 @@
     <Compile Include="ExternalLogins\AuthenticationOptionsFactory.cs" />
     <Compile Include="ExternalLogins\AuthenticationProviders\FacebookAuthProvider.cs" />
     <Compile Include="ExternalLogins\AuthenticationProviders\GoogleAuthProvider.cs" />
-    <Compile Include="ExternalLogins\ExternalLoginData.cs" />
     <Compile Include="ExternalLogins\ExternalLoginRequestResult.cs" />
     <Compile Include="ExternalLogins\IAuthenticationOptionsFactory.cs" />
     <Compile Include="ExternalLogins\IExternalLoginsSettings.cs" />

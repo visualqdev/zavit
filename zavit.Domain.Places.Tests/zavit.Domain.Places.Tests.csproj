@@ -62,6 +62,7 @@
     <Compile Include="Suggestions\PlaceSuggestionsMergerTests.cs" />
     <Compile Include="Suggestions\PublicPlaceSuggestionFactoryTests.cs" />
     <Compile Include="Suggestions\PublicPlaceSuggestionTests.cs" />
+    <Compile Include="VenuePlaces\DefaultVenues\DefaultVenueProviderTests.cs" />
     <Compile Include="VenuePlaces\VenuePlaceCreatorTests.cs" />
     <Compile Include="VenuePlaces\VenuePlaceTests.cs" />
   </ItemGroup>
@@ -72,6 +73,10 @@
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
       <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Activities\zavit.Domain.Activities.csproj">
+      <Project>{2cd77dc8-cb42-4619-8887-ae3c2c64cc64}</Project>
+      <Name>zavit.Domain.Activities</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>

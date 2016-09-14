@@ -139,6 +139,9 @@
     <Content Include="app\modules\map\geocode.js" />
     <Content Include="app\modules\map\placeModal.js" />
     <Content Include="app\modules\map\places.js" />
+    <Content Include="app\modules\venues\venueClient.js" />
+    <Content Include="app\modules\venues\venueModal.js" />
+    <Content Include="app\modules\venues\venueService.js" />
     <Content Include="app\navigation\search.js" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />

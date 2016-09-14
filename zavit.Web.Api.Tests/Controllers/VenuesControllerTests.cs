@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
@@ -38,6 +39,23 @@ namespace zavit.Web.Api.Tests.Controllers
             static VenueDto _venueDto;
             static IHttpActionResult _result;
             const string PlaceId = "Place ID";
+        }
+
+        class When_getting_a_venue_for_a_place
+        {
+            Because of = () => _result = Subject.GetDefault(PlaceId).Result;
+
+            It should_return_a_default_venue_details_dto = () => _result.ShouldEqual(_defaultVenueDetailsDto);
+
+            Establish context = () =>
+            {
+                _defaultVenueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDtoService>().Stub(s => s.GetDefaultVenue(PlaceId)).Return(Task.FromResult(_defaultVenueDetailsDto));
+            };
+
+            static string PlaceId = "Place ID";
+            static VenueDetailsDto _result;
+            static VenueDetailsDto _defaultVenueDetailsDto;
         }
     }
 }

@@ -242,6 +242,75 @@ html, body {
     }
 }
 
+#placeModal {
+	position: absolute;
+	background: #fff;
+	border: 2px solid #ccc;
+    width: 300px;
+	height: 150px;
+    z-index: 2;
+    :after, :before {
+	    top: 100%;
+	    left: 50%;
+	    border: solid transparent;
+	    content: " ";
+	    height: 0;
+	    width: 0;
+	    position: absolute;
+	    pointer-events: none;
+    }
+    :after {
+	    border-color: rgba(255, 255, 255, 0);
+	    border-top-color: #fff;
+	    border-width: 15px;
+	    margin-left: -15px;
+    }
+    :before {
+	    border-color: rgba(204, 204, 204, 0);
+	    border-top-color: #ccc;
+	    border-width: 18px;
+	    margin-left: -18px;
+    }
+    h3 {
+        font-size:18px;
+        float:left;
+        margin:10px 10px 5px 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    address {
+        float:left;
+        margin:0 0 0 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    button {
+        background-color:@call-to-action;
+        border:@call-to-action;
+        margin:10px 0 0 10px;
+        color:@nav-bg;
+        float:left;
+        width:93%;
+
+    }
+    span {
+        float:right;
+        clear:left;
+        margin:15px;
+        font-size:16px;
+        a {
+            font-weight:bold;
+            color:@text-link;
+        }
+    }
+}
+
 #nprogress {
   pointer-events: none;
   .bar {
@@ -389,3 +458,69 @@ html, body {
     }
 }
 
+#joinVenueModal {
+	position: absolute;
+	background: #fff;
+	border: 2px solid #ccc;
+    z-index: 2;
+    :after, :before {
+	    top: 100%;
+	    left: 50%;
+	    border: solid transparent;
+	    content: " ";
+	    height: 0;
+	    width: 0;
+	    position: absolute;
+	    pointer-events: none;
+    }
+    :after {
+	    border-color: rgba(255, 255, 255, 0);
+	    border-top-color: #fff;
+	    border-width: 15px;
+	    margin-left: -15px;
+    }
+    :before {
+	    border-color: rgba(204, 204, 204, 0);
+	    border-top-color: #ccc;
+	    border-width: 18px;
+	    margin-left: -18px;
+    }
+    h3 {
+        font-size:18px;
+        float:left;
+        margin:10px 10px 5px 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    address {
+        float:left;
+        margin:0 0 0 10px;
+        clear:left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:80%;
+    }
+    button {
+        background-color:@call-to-action;
+        border:@call-to-action;
+        margin:10px 0 0 10px;
+        color:@nav-bg;
+        float:left;
+        width:93%;
+
+    }
+    span {
+        float:right;
+        clear:left;
+        margin:15px;
+        font-size:16px;
+        a {
+            font-weight:bold;
+            color:@text-link;
+        }
+    }
+}

@@ -4,6 +4,7 @@ using Castle.Windsor;
 using zavit.Domain.Places;
 using zavit.Domain.Places.Suggestions;
 using zavit.Domain.Places.VenuePlaces;
+using zavit.Domain.Places.VenuePlaces.DefaultVenues;
 
 namespace zavit.Infrastructure.Ioc.DomainInstallers
 {
@@ -15,7 +16,8 @@ namespace zavit.Infrastructure.Ioc.DomainInstallers
                 Component.For<IPlaceService>().ImplementedBy<PlaceService>().LifestyleTransient(),
                 Component.For<IVenuePlaceCreator>().ImplementedBy<VenuePlaceCreator>().LifestyleTransient(),
                 Component.For<IPlaceSuggestionsMerger>().ImplementedBy<PlaceSuggestionsMerger>().LifestyleTransient(),
-                Component.For<IPublicPlaceSuggestionFactory>().ImplementedBy<PublicPlaceSuggestionFactory>().LifestyleTransient()
+                Component.For<IPublicPlaceSuggestionFactory>().ImplementedBy<PublicPlaceSuggestionFactory>().LifestyleTransient(),
+                Component.For<IDefaultVenueProvider>().ImplementedBy<DefaultVenueProvider>().LifestyleTransient()
             );
         }
     }
