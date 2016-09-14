@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.AspNet.Identity;
+﻿using System.Web.Http;
 using zavit.Domain.Accounts;
 using zavit.Web.Api.Dtos.Accounts;
 

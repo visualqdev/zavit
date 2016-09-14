@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="AccountService.cs" />
+    <Compile Include="AccountType.cs" />
     <Compile Include="Registrations\AccountCreator.cs" />
     <Compile Include="Registrations\AccountRegistrationResult.cs" />
     <Compile Include="IAccountRepository.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Registrations\IAccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountSecurity.cs" />
     <Compile Include="Registrations\Validators\DisplayNameValidator.cs" />
+    <Compile Include="Registrations\Validators\PasswordValidator.cs" />
     <Compile Include="Registrations\Validators\UsernameValidator.cs" />
     <Compile Include="Registrations\Validators\IAccountRegistrationValidator.cs" />
   </ItemGroup>

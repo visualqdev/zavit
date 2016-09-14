@@ -55,9 +55,12 @@
     <Compile Include="Container.cs" />
     <Compile Include="DomainInstallers\AccountsInstaller.cs" />
     <Compile Include="DomainInstallers\ClientsInstaller.cs" />
+    <Compile Include="DomainInstallers\ExternalAccountsInstaller.cs" />
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureVenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureAccountsInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureActivitiesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureClientsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureCoreInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureExternalAccounts.cs" />
@@ -72,6 +75,10 @@
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
       <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Activities\zavit.Domain.Activities.csproj">
+      <Project>{2cd77dc8-cb42-4619-8887-ae3c2c64cc64}</Project>
+      <Name>zavit.Domain.Activities</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Clients\zavit.Domain.Clients.csproj">
       <Project>{ff10bc40-a0aa-42b1-9560-d9d5df1f2871}</Project>
@@ -97,6 +104,10 @@
       <Project>{06595c4b-874b-4060-924b-d30c57c0be45}</Project>
       <Name>zavit.Infrastructure.Accounts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Activities\zavit.Infrastructure.Activities.csproj">
+      <Project>{6e6bc9f9-dc62-44f5-a6f5-ef06c0189d09}</Project>
+      <Name>zavit.Infrastructure.Activities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Clients\zavit.Infrastructure.Clients.csproj">
       <Project>{17f0f9fe-0d3e-467e-9b7b-f492b31f315a}</Project>
       <Name>zavit.Infrastructure.Clients</Name>
@@ -116,6 +127,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Places\zavit.Infrastructure.Places.csproj">
       <Project>{644f8521-635e-4ccb-a256-96b17cb37894}</Project>
       <Name>zavit.Infrastructure.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Venues\zavit.Infrastructure.Venues.csproj">
+      <Project>{e79f46e1-217c-49f3-9d10-874e91c874ef}</Project>
+      <Name>zavit.Infrastructure.Venues</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

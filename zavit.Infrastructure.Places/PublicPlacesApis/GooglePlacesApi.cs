@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -25,12 +26,12 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             _httpClient = new HttpClient();
         }
 
-        public async Task<GooglePlaceSearchResult> NearbySearch(IPlaceSearchCriteria placeSearchCriteria)
+        public async Task<GooglePlaceSearchResult> NearbySearch(IPlaceSearchCriteria placeSearchCriteria, IEnumerable<string> keywords)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
-            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchCriteria.Latitude},{placeSearchCriteria.Longitude}&radius={placeSearchCriteria.Radius}");
+            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchCriteria.Latitude},{placeSearchCriteria.Longitude}&radius={placeSearchCriteria.Radius}&keyword={string.Join("|",keywords)}");
             var httpResponse = await _httpClient.SendAsync(message);
             var json = await httpResponse.Content.ReadAsStringAsync();
             var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);

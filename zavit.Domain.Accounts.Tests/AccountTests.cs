@@ -45,6 +45,26 @@ namespace zavit.Domain.Accounts.Tests
             static IAccountSecurity _accountSecurity;
             const string Password = "Test Password";
         }
+
+        class When_verifying_a_password_for_an_account_that_uses_external_authentication
+        {
+            Because of = () => _result = Subject.VerifyPassword(Password, _accountSecurity);
+
+            It should_not_use_account_security_to_try_to_verify_password =
+                () => _accountSecurity.AssertWasNotCalled(s => s.ValidatePassword(Arg<string>.Is.Anything, Arg<string>.Is.Anything));
+
+            It should_return_false_to_indicate_password_could_not_been_verified = () => _result.ShouldBeFalse();
+
+            Establish context = () =>
+            {
+                Subject.AccountType = AccountType.External;
+                _accountSecurity = NewInstanceOf<IAccountSecurity>();
+            };
+
+            static bool _result;
+            static IAccountSecurity _accountSecurity;
+            const string Password = "Test Password";
+        }
     }
 }
 

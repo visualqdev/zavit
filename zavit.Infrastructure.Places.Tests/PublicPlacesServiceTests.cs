@@ -26,7 +26,7 @@ namespace zavit.Infrastructure.Places.Tests
 
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
-                    .Stub(a => a.NearbySearch(_placeSearchCriteria))
+                    .Stub(a => a.NearbySearch(_placeSearchCriteria, PublicPlacesService.Keywords))
                     .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };

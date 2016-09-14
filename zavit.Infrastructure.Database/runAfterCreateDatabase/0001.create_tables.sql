@@ -1,4 +1,3 @@
-/****** Object:  Table [dbo].[Account]    Script Date: 06/08/2016 11:53:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -9,6 +8,7 @@ CREATE TABLE [dbo].[Account](
 	[DisplayName] [nvarchar](255) NULL,
 	[Password] [nvarchar](255) NULL,
 	[Email] [nvarchar](255) NULL,
+	[AccountType] [int] DEFAULT 0
 PRIMARY KEY CLUSTERED 
 (
 	[AccountId] ASC
@@ -28,7 +28,6 @@ PRIMARY KEY CLUSTERED
 )
 
 GO
-/****** Object:  Table [dbo].[Client]    Script Date: 06/08/2016 11:53:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -48,7 +47,6 @@ PRIMARY KEY CLUSTERED
 )
 
 GO
-/****** Object:  Table [dbo].[RefreshToken]    Script Date: 06/08/2016 11:53:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -68,7 +66,20 @@ PRIMARY KEY CLUSTERED
 )
 
 GO
-/****** Object:  Table [dbo].[Venue]    Script Date: 06/08/2016 11:53:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Activity](
+	[ActivityId] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](255) NULL
+PRIMARY KEY CLUSTERED 
+(
+	[ActivityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -85,7 +96,6 @@ PRIMARY KEY CLUSTERED
 )
 
 GO
-/****** Object:  Table [dbo].[VenuePlace]    Script Date: 06/08/2016 11:53:23 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

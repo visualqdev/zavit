@@ -2,11 +2,12 @@
 {
     public class AccountRegistrationResultFactory : IAccountRegistrationResultFactory
     {
-        public AccountRegistrationResult CreateSuccessful()
+        public AccountRegistrationResult CreateSuccessful(Account account)
         {
             return new AccountRegistrationResult
             {
-                Success = true
+                Success = true,
+                Account = account
             };
         }
 

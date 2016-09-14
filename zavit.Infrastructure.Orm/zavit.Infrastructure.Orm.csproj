@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\CascadeConvention.cs" />
+    <Compile Include="Conventions\EnumConvention.cs" />
     <Compile Include="Conventions\ForeignKeyConvention.cs" />
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="IDatabaseSettings.cs" />

@@ -40,6 +40,26 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             static Venue _venue;
             static VenueDto _newVenueDto;
         }
+
+        class When_getting_a_default_venue_details_by_place_id
+        {
+            Because of = () => _result = Subject.GetDefaultVenue(PlaceId).Result;
+
+            It should_return_a_venue_details_dto_for_a_default_venue = () => _result.ShouldEqual(_venueDetailsDto);
+
+            Establish context = () =>
+            {
+                var venue = NewInstanceOf<Venue>();
+                Injected<IPlaceService>().Stub(s => s.GetDefaultVenue(PlaceId)).Return(Task.FromResult(venue));
+
+                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(venue)).Return(_venueDetailsDto);
+            };
+
+            static VenueDetailsDto _result;
+            static VenueDetailsDto _venueDetailsDto;
+            const string PlaceId = "Place ID";
+        }
     }
 }
 

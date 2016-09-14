@@ -5,6 +5,7 @@ using zavit.Domain.Places.PublicPlaces;
 using zavit.Domain.Places.Search;
 using zavit.Domain.Places.Suggestions;
 using zavit.Domain.Places.VenuePlaces;
+using zavit.Domain.Places.VenuePlaces.DefaultVenues;
 using zavit.Domain.Venues;
 using zavit.Domain.Venues.NewVenueCreation;
 
@@ -17,14 +18,16 @@ namespace zavit.Domain.Places
         readonly IVenueService _venueService;
         readonly IVenuePlaceCreator _venuePlaceCreator;
         readonly IPlaceSuggestionsMerger _placeSuggestionsMerger;
+        readonly IDefaultVenueProvider _defaultVenueProvider;
 
-        public PlaceService(IPublicPlacesService publicPlacesService, IVenuePlaceRepository venuePlaceRepository, IVenueService venueService, IVenuePlaceCreator venuePlaceCreator, IPlaceSuggestionsMerger placeSuggestionsMerger)
+        public PlaceService(IPublicPlacesService publicPlacesService, IVenuePlaceRepository venuePlaceRepository, IVenueService venueService, IVenuePlaceCreator venuePlaceCreator, IPlaceSuggestionsMerger placeSuggestionsMerger, IDefaultVenueProvider defaultVenueProvider)
         {
             _publicPlacesService = publicPlacesService;
             _venuePlaceRepository = venuePlaceRepository;
             _venueService = venueService;
             _venuePlaceCreator = venuePlaceCreator;
             _placeSuggestionsMerger = placeSuggestionsMerger;
+            _defaultVenueProvider = defaultVenueProvider;
         }
 
         public async Task<IEnumerable<IPlace>> Suggest(IPlaceSearchCriteria placeSearchCriteria)
@@ -59,6 +62,20 @@ namespace zavit.Domain.Places
                 _venuePlaceRepository.Update(place);
 
             return venue;
+        }
+
+        public async Task<Venue> GetDefaultVenue(string placeId)
+        {
+            var venuePlace = _venuePlaceRepository.Get(placeId);
+            if (venuePlace != null)
+            {
+                return _defaultVenueProvider.ProvideDefaultVenue(venuePlace);
+            }
+            else
+            {
+                var publicPlace = await _publicPlacesService.GetPublicPlace(placeId);
+                return _defaultVenueProvider.ProvideDefaultVenue(publicPlace);
+            }
         }
     }
 }

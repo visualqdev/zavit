@@ -6,5 +6,6 @@ namespace zavit.Web.Api.DtoServices.Venues
     public interface IVenueDtoService
     {
         Task<VenueDto> AddVenue(VenueDto venueDto, string placeId);
+        Task<VenueDetailsDto> GetDefaultVenue(string placeId);
     }
 }

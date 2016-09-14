@@ -30,7 +30,7 @@ namespace zavit.Domain.Accounts
             var account = _accountCreator.Create(accountRegistration);
             _accountRepository.Save(account);
 
-            var result = _accountRegistrationResultFactory.CreateSuccessful();
+            var result = _accountRegistrationResultFactory.CreateSuccessful(account);
             return result;
         }
     }

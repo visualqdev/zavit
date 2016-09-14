@@ -11,8 +11,13 @@ namespace zavit.Domain.Accounts
         public virtual string Password { get; set; }
         public virtual string DisplayName { get; set; }
 
+        public virtual AccountType AccountType { get; set; }
+
         public virtual bool VerifyPassword(string password, IAccountSecurity accountSecurity)
         {
+            if (AccountType == AccountType.External)
+                return false;
+
             return accountSecurity.ValidatePassword(password, Password);
         }
     }

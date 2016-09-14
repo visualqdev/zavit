@@ -121,8 +121,10 @@
     <Compile Include="IAccountRepositoryFactory.cs" />
     <Compile Include="IClaimsIdentity.cs" />
     <Compile Include="IClientRepositoryFactory.cs" />
+    <Compile Include="ILocalAccessTokenProvider.cs" />
     <Compile Include="IRefreshTokenProviderFactory.cs" />
     <Compile Include="IRefreshTokenRepositoryFactory.cs" />
+    <Compile Include="LocalAccessTokenProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
