@@ -1,5 +1,6 @@
 ﻿import * as Progress from "../loading/progress";
 import * as PlaceModal from "../map/placeModal";
+import * as VenueModal from "../venues/venueModal";
 
 export class Places {
 
@@ -35,6 +36,18 @@ export class Places {
             e.preventDefault();
             const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
             this.map.triggerMarkerClick(marker);
+        });
+
+        $('#home').delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
+            e.preventDefault();
+            this.clearPlaceInfo();
+            const marker = this.map.markers[$(e.currentTarget).attr("data-marker-index")],
+                placeId = $(e.currentTarget).attr("data-place-id");
+            VenueModal.show({
+                markerX: marker.map.markerPoint.x,
+                markerY: marker.map.markerPoint.y,
+                placeId
+            });
         });
     }
 

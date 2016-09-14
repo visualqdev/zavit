@@ -21,7 +21,7 @@ export function modal(place, placeIndex, amountOfPlaces, map) {
 
                                 <address title="${place.Address}">${place.Address}</address>
 
-                                <button type="button" class="btn btn-primary">Be available to play here</button>
+                                <button type="button" class="btn btn-primary" id="placeModalBeAvailable" data-marker-index="${placeIndex}" data-place-id="${place.PlaceId}">Be available to play here</button>
 
                                 <span>
                                 

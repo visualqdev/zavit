@@ -34,7 +34,8 @@ namespace zavit.Infrastructure.Ioc
                 new ClientsInstaller(),
                 new InfrastructureClientsInstaller(),
                 new InfrastructureExternalAccounts(),
-                new ExternalAccountsInstaller());
+                new ExternalAccountsInstaller(),
+                new InfrastructureActivitiesInstaller());
         }
 
         public static Container Instance

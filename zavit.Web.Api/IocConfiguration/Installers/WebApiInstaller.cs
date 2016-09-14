@@ -34,7 +34,9 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IClaimsIdentityProviderFactory>().AsFactory(),
                 Component.For<AccessAuthorizationFilter>().LifestyleSingleton(),
                 Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
-                Component.For<ILocalAccessTokenProvider>().ImplementedBy<LocalAccessTokenProvider>().LifestyleTransient()
+                Component.For<ILocalAccessTokenProvider>().ImplementedBy<LocalAccessTokenProvider>().LifestyleTransient(),
+                Component.For<IVenueDetailsDtoFactory>().ImplementedBy<VenueDetailsDtoFactory>().LifestyleTransient(),
+                Component.For<IVenueActivityDtoFactory>().ImplementedBy<VenueActivityDtoFactory>().LifestyleTransient()
                 );
         }
     }

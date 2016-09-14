@@ -125,7 +125,11 @@
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
+    <Compile Include="DtoFactories\Venues\IVenueActivityDtoFactory.cs" />
+    <Compile Include="DtoFactories\Venues\IVenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDtoFactory.cs" />
+    <Compile Include="DtoFactories\Venues\VenueActivityDtoFactory.cs" />
+    <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactory.cs" />
     <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
@@ -137,6 +141,8 @@
     <Compile Include="Dtos\ExternalAccounts\RegisterExternalBindingModel.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
+    <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
+    <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
     <Compile Include="HttpActionResults\AuthenticationChallengeResult.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
@@ -153,6 +159,10 @@
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
       <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Activities\zavit.Domain.Activities.csproj">
+      <Project>{2cd77dc8-cb42-4619-8887-ae3c2c64cc64}</Project>
+      <Name>zavit.Domain.Activities</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Clients\zavit.Domain.Clients.csproj">
       <Project>{ff10bc40-a0aa-42b1-9560-d9d5df1f2871}</Project>
