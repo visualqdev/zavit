@@ -1,6 +1,7 @@
 ﻿import * as Progress from "../loading/progress";
 import * as PlaceModal from "../map/placeModal";
 import * as VenueModal from "../venues/venueModal";
+import * as Search from "../navigation/search";
 
 export class Places {
 
@@ -14,6 +15,7 @@ export class Places {
         this.getPlaces();
         this.registerWithMapEvents();
         this.registerPlaceEvents();
+        Search.initialise(this);
     }
 
     registerPlaceEvents() {
