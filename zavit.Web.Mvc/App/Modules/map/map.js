@@ -60,6 +60,12 @@
         });
     }
 
+    panBy(x, y) {
+        this.map.markerPoint.x += x;
+        this.map.markerPoint.y += y;
+        this.map.panBy(x, y);
+    }
+
     setZoom(level) {
         this.map.setZoom(level);
     }

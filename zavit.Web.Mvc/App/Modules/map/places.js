@@ -46,7 +46,8 @@ export class Places {
             VenueModal.show({
                 markerX: marker.map.markerPoint.x,
                 markerY: marker.map.markerPoint.y,
-                placeId
+                placeId,
+                map: this.map
             });
         });
     }
