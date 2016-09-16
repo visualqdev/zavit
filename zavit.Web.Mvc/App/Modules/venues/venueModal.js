@@ -31,7 +31,7 @@ function showVenue(venue) {
         <div id="joinVenueContainer">
             <header>
                 <h3 title="${venue.Name}">${venue.Name}</h3>
-                <address title=${venue.Address}>${venue.Address}</address>            
+                <address title="${venue.Address}">${venue.Address}</address>            
             </header>
             <h4>I am available for some</h4>
             <div class="control-group">                
@@ -41,7 +41,9 @@ function showVenue(venue) {
                 <div class="controls span2">
                     ${activityCheckboxes(rightColumnActivities)}                    
                 </div>
-                <a id="joinVenueOtherActivities">Some other activity</a>
+                <div class="span4 joinVenueOtherActivitiesContainer">
+                    <a href="" id="joinVenueOtherActivities">Some other activity</a>
+                </div>
             </div>
             <button type="button" class="btn btn-primary" id="joinVenueSubmit">Make me available here</button>
         </div>`);

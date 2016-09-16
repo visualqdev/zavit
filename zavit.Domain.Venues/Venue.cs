@@ -11,5 +11,6 @@ namespace zavit.Domain.Venues
         public virtual int Id { get; set; }
         public virtual Account OwnerAccount { get; set; }
         public virtual IEnumerable<Activity> Activities { get; set; }
+        public virtual string Address { get; set; }
     }
 }

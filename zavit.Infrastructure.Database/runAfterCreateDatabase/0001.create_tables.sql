@@ -87,6 +87,7 @@ GO
 CREATE TABLE [dbo].[Venue](
 	[VenueId] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](255) NULL,
+	[Address] [nvarchar](500) NULL,
 	[OwnerAccountId] [int] NULL,
 	[VenuePlaceId] [int] NULL,
 PRIMARY KEY CLUSTERED 
@@ -103,7 +104,7 @@ GO
 CREATE TABLE [dbo].[VenuePlace](
 	[VenuePlaceId] [int] IDENTITY(1,1) NOT NULL,
 	[PlaceId] [nvarchar](255) NULL,
-	[Address] [nvarchar](255) NULL,
+	[Address] [nvarchar](500) NULL,
 	[Latitude] [float] NULL,
 	[Longitude] [float] NULL,
 	[Name] [nvarchar](255) NULL,
@@ -112,3 +113,16 @@ PRIMARY KEY CLUSTERED
 	[VenuePlaceId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
 )
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ActivityToVenue](
+	[VenueId] [int] NOT NULL,
+	[ActivityId] [int] NOT NULL
+)
+
+GO
