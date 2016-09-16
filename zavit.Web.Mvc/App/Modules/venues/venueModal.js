@@ -42,7 +42,7 @@ function showVenue(venue) {
                     ${activityCheckboxes(rightColumnActivities)}                    
                 </div>
                 <div class="span4 joinVenueOtherActivitiesContainer">
-                    <a href="" id="joinVenueOtherActivities">Some other activity</a>
+                    <a href="" id="joinVenueOtherActivities">Other activity</a>
                 </div>
             </div>
             <button type="button" class="btn btn-primary" id="joinVenueSubmit">Make me available here</button>
