@@ -19,10 +19,10 @@ export function show(options = {}) {
     modal.appendTo("#home");
     
     VenueService.getVenueAtPlace(placeId)
-        .then(venue => showVenue(venue));
+        .then(venue => showVenue(venue, placeId));
 }
 
-function showVenue(venue) {
+    function showVenue(venue, placeId) {
     const activitiesInColumn = Math.ceil((venue.Activities.length) / 2);
     const leftColumnActivities = venue.Activities;
     const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
@@ -49,6 +49,10 @@ function showVenue(venue) {
         </div>`);
     $("#joinVenueModal").html("");
     venueContainer.appendTo("#joinVenueModal");
+    venueContainer.find("#joinVenueSubmit").click((e) => {
+        e.preventDefault();
+        joinVenue(placeId);
+    });
 }
 
 function activityCheckboxes(activities) {
@@ -61,4 +65,17 @@ function activityCheckboxes(activities) {
             `;
     });
     return activitiesMarkup;
+}
+
+function joinVenue(placeId) {
+    const activitiCheckboxes = $("#joinVenueContainer [name='venueActivities']:checked");
+    const activities = activitiCheckboxes
+        .map((index, checkbox) => $(checkbox).val())
+        .get();
+
+    VenueService.joinVenue({
+        activities,
+        placeId,
+        venueId: null
+    });
 }
