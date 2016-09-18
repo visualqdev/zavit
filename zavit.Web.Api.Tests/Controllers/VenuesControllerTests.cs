@@ -16,27 +16,27 @@ namespace zavit.Web.Api.Tests.Controllers
     {
         class When_posting_a_new_venue_dto
         {
-            Because of = () => _result = Subject.Post(_venueDto, PlaceId).Result;
+            Because of = () => _result = Subject.Post(_venueDetailsDto, PlaceId).Result;
 
             It should_return_http_result_specifying_the_default_route =
-                () => ((CreatedAtRouteNegotiatedContentResult<VenueDto>) _result).RouteName.ShouldEqual(CommonRoutes.Default);
+                () => ((CreatedAtRouteNegotiatedContentResult<VenueDetailsDto>) _result).RouteName.ShouldEqual(CommonRoutes.Default);
 
             It should_return_http_result_specifying_venues_controller_as_a_route_value =
-                () => ((CreatedAtRouteNegotiatedContentResult<VenueDto>)_result).RouteValues["controller"].ToString().ShouldEqual("venues");
+                () => ((CreatedAtRouteNegotiatedContentResult<VenueDetailsDto>)_result).RouteValues["controller"].ToString().ShouldEqual("venues");
 
             It should_return_http_result_specifying_the_created_venue_id_as_a_route_value =
-                () => int.Parse(((CreatedAtRouteNegotiatedContentResult<VenueDto>)_result).RouteValues["id"].ToString()).ShouldEqual(_createdVenue.Id);
+                () => int.Parse(((CreatedAtRouteNegotiatedContentResult<VenueDetailsDto>)_result).RouteValues["id"].ToString()).ShouldEqual(_createdVenueDetailsDto.Id);
 
             Establish context = () =>
             {
-                _venueDto = NewInstanceOf<VenueDto>();
-                _createdVenue = NewInstanceOf<VenueDto>();
-                _createdVenue.Id = 123;
-                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDto, PlaceId)).Return(Task.FromResult(_createdVenue));
+                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                _createdVenueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                _createdVenueDetailsDto.Id = 123;
+                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDetailsDto, PlaceId)).Return(Task.FromResult(_createdVenueDetailsDto));
             };
 
-            static VenueDto _createdVenue;
-            static VenueDto _venueDto;
+            static VenueDetailsDto _createdVenueDetailsDto;
+            static VenueDetailsDto _venueDetailsDto;
             static IHttpActionResult _result;
             const string PlaceId = "Place ID";
         }

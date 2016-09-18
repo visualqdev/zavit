@@ -2,6 +2,7 @@
 using zavit.Domain.Places;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.Venues;
+using zavit.Web.Api.DtoServices.Venues.NewVenues;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.DtoServices.Venues
@@ -9,23 +10,24 @@ namespace zavit.Web.Api.DtoServices.Venues
     public class VenueDtoService : IVenueDtoService
     {
         readonly IPlaceService _placeService;
-        readonly IVenueDtoFactory _venueDtoFactory;
         readonly IUserContext _userContext;
         readonly IVenueDetailsDtoFactory _venueDetailsDtoFactory;
+        readonly INewVenueProvider _newVenueProvider;
 
-        public VenueDtoService(IPlaceService placeService, IVenueDtoFactory venueDtoFactory, IUserContext userContext, IVenueDetailsDtoFactory venueDetailsDtoFactory)
+        public VenueDtoService(IPlaceService placeService, IUserContext userContext, IVenueDetailsDtoFactory venueDetailsDtoFactory, INewVenueProvider newVenueProvider)
         {
             _placeService = placeService;
-            _venueDtoFactory = venueDtoFactory;
             _userContext = userContext;
             _venueDetailsDtoFactory = venueDetailsDtoFactory;
+            _newVenueProvider = newVenueProvider;
         }
 
-        public async Task<VenueDto> AddVenue(VenueDto venueDto, string placeId)
+        public async Task<VenueDetailsDto> AddVenue(VenueDetailsDto venueDetailsDto, string placeId)
         {
-            var venue = await _placeService.AddVenue(venueDto, placeId, _userContext.Account);
-            var newVenueDto = _venueDtoFactory.Create(venue);
-            return newVenueDto;
+            var newVenueRequest = _newVenueProvider.ProvideNewVenueRequest(venueDetailsDto);
+            var venue = await _placeService.AddVenue(newVenueRequest, placeId, _userContext.Account);
+            var newVenueDetailsDto = _venueDetailsDtoFactory.Create(venue);
+            return newVenueDetailsDto;
         }
 
         public async Task<VenueDetailsDto> GetDefaultVenue(string placeId)

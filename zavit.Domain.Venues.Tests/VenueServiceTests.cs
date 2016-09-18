@@ -19,13 +19,13 @@ namespace zavit.Domain.Venues.Tests
             {
                 _venueOwnerAccount = NewInstanceOf<Account>();
 
-                _newVenue = NewInstanceOf<INewVenue>();
+                _newVenue = NewInstanceOf<NewVenue>();
 
                 _venue = NewInstanceOf<Venue>();
                 Injected<IVenueCreator>().Stub(v => v.Create(_newVenue, _venueOwnerAccount)).Return(_venue);
             };
 
-            static INewVenue _newVenue;
+            static NewVenue _newVenue;
             static Venue _result;
             static Venue _venue;
             static Account _venueOwnerAccount;

@@ -2,7 +2,7 @@
 import * as AuthorizedClient from "../clients/authorizedClient";
 
 export function getVenueAtPlace(placeId) {
-    const venuesUrl = `${ApiSettings.apiUrl}/api/places/${placeId}/venues/default`;
+    const venuesUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues/default`;
 
     return new Promise((resolve, reject) => 
         $.ajax({
@@ -16,10 +16,13 @@ export function getVenueAtPlace(placeId) {
 }
 
 export function addVenue(placeId, name, activities) {
-    const postVenueUrl = `${ApiSettings.apiUrl}/api/places/${placeId}/venues`;
+    const postVenueUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues`;
+    const activityDtos = activities.map((activityId) => {
+        return { id: activityId };
+    });
 
     const data = {
-        activities,
+        activities: activityDtos,
         name
     };
 

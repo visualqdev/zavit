@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="IVenueRepository.cs" />
     <Compile Include="IVenueService.cs" />
-    <Compile Include="NewVenueCreation\INewVenue.cs" />
+    <Compile Include="NewVenueCreation\NewVenue.cs" />
     <Compile Include="NewVenueCreation\IVenueCreator.cs" />
     <Compile Include="NewVenueCreation\VenueCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

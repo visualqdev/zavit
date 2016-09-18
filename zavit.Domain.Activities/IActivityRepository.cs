@@ -5,5 +5,6 @@ namespace zavit.Domain.Activities
     public interface IActivityRepository
     {
         IEnumerable<Activity> GetDefaultActivities();
+        IEnumerable<Activity> GetActivities(IEnumerable<int> activityIds);
     }
 }

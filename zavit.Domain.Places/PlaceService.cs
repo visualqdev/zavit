@@ -42,7 +42,7 @@ namespace zavit.Domain.Places
             return placeSuggestions;
         }
 
-        public async Task<Venue> AddVenue(INewVenue newVenue, string placeId, Account venueOwnerAccount)
+        public async Task<Venue> AddVenue(NewVenue newVenue, string placeId, Account venueOwnerAccount)
         {
             var place = _venuePlaceRepository.Get(placeId);
 

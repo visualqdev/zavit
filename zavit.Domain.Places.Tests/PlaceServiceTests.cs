@@ -57,7 +57,7 @@ namespace zavit.Domain.Places.Tests
             {
                 _venueOwnerAccount = NewInstanceOf<Account>();
 
-                _newVenue = NewInstanceOf<INewVenue>();
+                _newVenue = NewInstanceOf<NewVenue>();
                 _venue = NewInstanceOf<Venue>();
                 Injected<IVenueService>().Stub(s => s.CreateVenue(_newVenue, _venueOwnerAccount)).Return(_venue);
 
@@ -66,7 +66,7 @@ namespace zavit.Domain.Places.Tests
             };
 
             static Venue _result;
-            static INewVenue _newVenue;
+            static NewVenue _newVenue;
             static Venue _venue;
             static VenuePlace _place;
             static Account _venueOwnerAccount;
@@ -88,7 +88,7 @@ namespace zavit.Domain.Places.Tests
             {
                 _venueOwnerAccount = NewInstanceOf<Account>();
 
-                _newVenue = NewInstanceOf<INewVenue>();
+                _newVenue = NewInstanceOf<NewVenue>();
                 _venue = NewInstanceOf<Venue>();
                 Injected<IVenueService>().Stub(s => s.CreateVenue(_newVenue, _venueOwnerAccount)).Return(_venue);
 
@@ -97,7 +97,7 @@ namespace zavit.Domain.Places.Tests
             };
 
             static Venue _result;
-            static INewVenue _newVenue;
+            static NewVenue _newVenue;
             static Venue _venue;
             static VenuePlace _place;
             static Account _venueOwnerAccount;

@@ -82,6 +82,7 @@
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactoryTests.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoServiceTests.cs" />
+    <Compile Include="DtoServices\Venues\NewVenues\NewVenueProviderTests.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

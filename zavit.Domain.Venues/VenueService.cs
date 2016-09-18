@@ -12,7 +12,7 @@ namespace zavit.Domain.Venues
             _venueCreator = venueCreator;
         }
 
-        public Venue CreateVenue(INewVenue newVenue, Account venueOwnerAccount)
+        public Venue CreateVenue(NewVenue newVenue, Account venueOwnerAccount)
         {
             var venue = _venueCreator.Create(newVenue, venueOwnerAccount);
             return venue;

@@ -10,7 +10,7 @@ namespace zavit.Domain.Places
     public interface IPlaceService
     {
         Task<IEnumerable<IPlace>> Suggest(IPlaceSearchCriteria placeSearchCriteria);
-        Task<Venue> AddVenue(INewVenue newVenue, string placeId, Account venueOwnerAccount);
+        Task<Venue> AddVenue(NewVenue newVenue, string placeId, Account venueOwnerAccount);
         Task<Venue> GetDefaultVenue(string placeId);
     }
 }

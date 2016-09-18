@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 namespace zavit.Web.Api.Dtos.Venues
 {
     public class VenueDetailsDto

@@ -29,7 +29,7 @@ namespace zavit.Web.Api.Controllers
         [Authorize]
         [HttpPost]
         [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
-        public async Task<IHttpActionResult> Post(VenueDto venueDto, string placeId)
+        public async Task<IHttpActionResult> Post(VenueDetailsDto venueDto, string placeId)
         {
             var venue = await _venueDtoService.AddVenue(venueDto, placeId);
             return CreatedAtRoute(CommonRoutes.Default, new { controller = "venues", id = venue.Id }, venue);

@@ -4,6 +4,6 @@ namespace zavit.Domain.Venues.NewVenueCreation
 {
     public interface IVenueCreator
     {
-        Venue Create(INewVenue newVenue, Account venueOwnerAccount);
+        Venue Create(NewVenue newVenue, Account venueOwnerAccount);
     }
 }

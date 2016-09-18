@@ -9,6 +9,7 @@ using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.Venues;
+using zavit.Web.Api.DtoServices.Venues.NewVenues;
 using zavit.Web.Authorization;
 using zavit.Web.Authorization.Controllers;
 using zavit.Web.Authorization.ExternalLogins;
@@ -40,7 +41,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IVenueDetailsDtoFactory>().ImplementedBy<VenueDetailsDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueActivityDtoFactory>().ImplementedBy<VenueActivityDtoFactory>().LifestyleTransient(),
                 Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
-                Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton());
+                Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton(),
+                Component.For<INewVenueProvider>().ImplementedBy<NewVenueProvider>().LifestyleTransient());
         }
     }
 }

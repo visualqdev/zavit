@@ -132,6 +132,8 @@
     <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
     <Compile Include="DtoServices\Venues\IVenueDtoService.cs" />
+    <Compile Include="DtoServices\Venues\NewVenues\INewVenueProvider.cs" />
+    <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
