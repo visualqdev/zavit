@@ -18,6 +18,7 @@ namespace zavit.Web.Api.DtoFactories.Venues
             var venueActivity = new VenueDetailsDto
             {
                 Name = venue.Name,
+                Address = venue.Address,
                 Id = venue.Id,
                 Activities = venue.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a))
             };

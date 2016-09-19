@@ -17,6 +17,7 @@ namespace zavit.Domain.Places.VenuePlaces
 
         public virtual void AddVenue(Venue venue)
         {
+            venue.Address = Address;
             Venues.Add(venue);
         }
     }

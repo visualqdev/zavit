@@ -18,7 +18,7 @@ export class Places {
 
     registerPlaceEvents() {
 
-        $('#loadPlaces').on("click", (e) => {
+        $("#loadPlaces").on("click", (e) => {
             e.preventDefault();
             this.map.markers.forEach(marker => this.map.removeMarker(marker));
             this.map.markers = [];
@@ -26,19 +26,19 @@ export class Places {
             this.map.setZoom(this.map.zoom);
         });
 
-        $('#home').delegate("#placeModal a[data-nextMarker]", "click", (e) => {
+        $("#home").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
             e.preventDefault();
             const marker = this.map.markers[$(e.currentTarget).attr("data-nextMarker")];
             this.map.triggerMarkerClick(marker);
         });
 
-        $('#home').delegate("#placeModal a[data-prevMarker]", "click", (e) => {
+        $("#home").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
             e.preventDefault();
             const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
             this.map.triggerMarkerClick(marker);
         });
 
-        $('#home').delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
+        $("#home").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
             e.preventDefault();
             this.clearPlaceInfo();
             const marker = this.map.markers[$(e.currentTarget).attr("data-marker-index")],
@@ -46,9 +46,16 @@ export class Places {
             VenueModal.show({
                 markerX: marker.map.markerPoint.x,
                 markerY: marker.map.markerPoint.y,
-                placeId
+                placeId,
+                map: this.map
             });
         });
+        $(window)
+            .on("resize",() => {
+                this.map.pannedBy = { x: 0, y: 0 };
+            });
+
+        $("html").css("overflow", "hidden");
     }
 
     getPlaces() {
@@ -67,8 +74,8 @@ export class Places {
     }
 
     clearPlaceInfo() {
-        $('#placeModal').remove();
-        $('[data-name=placeModal]').remove();
+        $("#placeModal").remove();
+        $("[data-name=placeModal]").remove();
     }
 
     addPlaces(places) {
@@ -83,7 +90,7 @@ export class Places {
     }
 
     showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
-        $('[data-name=placeModal]').remove();
+        $("[data-name=placeModal]").remove();
         const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
         $(placeModal).appendTo("#home");
     }

@@ -23,10 +23,14 @@ namespace zavit.Domain.Places.Tests.VenuePlaces.DefaultVenues
             It should_set_the_venue_activities_to_be_default_activities = 
                 () => _result.Activities.ShouldEqual(_activities);
 
+            It should_set_the_venue_address_to_be_the_venue_place_address =
+                () => _result.Address.ShouldEqual(_venuePlace.Address);
+
             Establish context = () =>
             {
                 _venuePlace = NewInstanceOf<VenuePlace>();
                 _venuePlace.Name = "Place name";
+                _venuePlace.Address = "Test address";
 
                 _activities = new[] { NewInstanceOf<Activity>() };
                 Injected<IActivityRepository>().Stub(r => r.GetDefaultActivities()).Return(_activities);
@@ -47,10 +51,14 @@ namespace zavit.Domain.Places.Tests.VenuePlaces.DefaultVenues
             It should_set_the_venue_activities_to_be_default_activities =
                 () => _result.Activities.ShouldEqual(_activities);
 
+            It should_set_the_venue_address_to_be_the_public_place_address =
+                () => _result.Address.ShouldEqual(_publicPlace.Address);
+
             Establish context = () =>
             {
                 _publicPlace = NewInstanceOf<PublicPlace>();
                 _publicPlace.Name = "Place name";
+                _publicPlace.Address = "Test address";
 
                 _activities = new[] { NewInstanceOf<Activity>() };
                 Injected<IActivityRepository>().Stub(r => r.GetDefaultActivities()).Return(_activities);
