@@ -10,7 +10,7 @@ function showPreviousButton(placeIndex) {
     return "";
 }
 
-export function modal(place, placeIndex, amountOfPlaces, map) {
+export function modal(place, placeIndex, amountOfPlaces, mapClass) {
     const width = 300,
         height = 150;
 
@@ -19,9 +19,9 @@ export function modal(place, placeIndex, amountOfPlaces, map) {
     const position = MapPositionAdjuster.adjustMapToShow({
         width,
         height,
-        markerX: map.markerPoint.x,
-        markerY: map.markerPoint.y,
-        map: map
+        markerX: mapClass.map.markerPoint.x,
+        markerY: mapClass.map.markerPoint.y,
+        map: mapClass
     });
 
     const placeModal = `<div id="placeModal" class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
