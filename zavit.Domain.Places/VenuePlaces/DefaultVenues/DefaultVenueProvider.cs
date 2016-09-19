@@ -15,22 +15,23 @@ namespace zavit.Domain.Places.VenuePlaces.DefaultVenues
 
         public Venue ProvideDefaultVenue(VenuePlace venuePlace)
         {
-            return CreateVenue(venuePlace.Name);
+            return CreateVenue(venuePlace.Name, venuePlace.Address);
         }
 
         public Venue ProvideDefaultVenue(PublicPlace publicPlace)
         {
-            return CreateVenue(publicPlace.Name);
+            return CreateVenue(publicPlace.Name, publicPlace.Address);
         }
 
-        Venue CreateVenue(string venueName)
+        Venue CreateVenue(string venueName, string venueAddress)
         {
             var defaultActivities = _activityRepository.GetDefaultActivities();
 
             return new Venue
             {
                 Name = venueName,
-                Activities = defaultActivities
+                Activities = defaultActivities,
+                Address = venueAddress
             };
         }
     }

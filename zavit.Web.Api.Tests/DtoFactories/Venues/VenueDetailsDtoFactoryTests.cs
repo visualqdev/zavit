@@ -19,6 +19,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
 
             It should_set_the_name_to_be_the_venue_name = () => _result.Name.ShouldEqual(_venue.Name);
 
+            It should_set_the_address_to_be_the_venue_address = () => _result.Address.ShouldEqual(_venue.Address);
+
             It should_add_an_activity_dto_for_each_venue_activity =
                 () => _result.Activities.ShouldContainOnly(_venueActivityDto);
 
@@ -27,6 +29,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
                 _venue = NewInstanceOf<Venue>();
                 _venue.Name = "Test name";
                 _venue.Id = 123;
+                _venue.Address = "Test address";
 
                 var activity = NewInstanceOf<Activity>();
                 _venue.Activities = new[] { activity };

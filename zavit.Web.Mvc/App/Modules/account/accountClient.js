@@ -4,7 +4,7 @@ const tokenUrl = ApiSettings.apiUrl + "token";
 const accountsUrl = ApiSettings.apiUrl + "api/accounts";
 
 export function getAuthenticationTokens(email, password) {
-    var data = {
+    const data = {
         username: email,
         password,
         grant_type: "password",
@@ -24,7 +24,7 @@ export function getAuthenticationTokens(email, password) {
 }
 
 export function register(displayName, email, password) {
-    var data = {
+    const data = {
         username: email,
         password,
         displayName
@@ -56,6 +56,25 @@ export function register(displayName, email, password) {
                     reject(errMessage);
                 }
             }
+        })
+    );
+}
+
+export function refreshAccessToken(refreshToken) {
+    const data = {
+        refresh_token: refreshToken,
+        grant_type: "refresh_token",
+        client_id: ApiSettings.clientId
+    };
+
+    return new Promise((resolve, reject) => 
+        $.ajax({
+            url: tokenUrl,
+            type: "post",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: data,
+            success: resolve,
+            error: reject
         })
     );
 }

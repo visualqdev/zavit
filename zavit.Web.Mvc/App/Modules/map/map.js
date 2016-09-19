@@ -11,6 +11,7 @@
         this.dragged = [];
         this.zoomed = [];
         this.markers = [];
+        this.pannedBy = { x: 0, y: 0 };
     }
    
     initialise() {
@@ -60,6 +61,14 @@
         });
     }
 
+    panBy(x, y) {
+        this.map.panBy(x, y);
+    }
+    setPannedBy(x, y) {
+        this.pannedBy.x = x;
+        this.pannedBy.y = y;
+    }
+
     setZoom(level) {
         this.map.setZoom(level);
     }
@@ -96,12 +105,11 @@
 
                 map.setCenter(latLng);
                 map.markerPoint = map.overlay.getProjection().fromLatLngToContainerPixel(latLng);
-                callback(place, placeIndex, amountOfPlaces, mapClass.map);
+                callback(place, placeIndex, amountOfPlaces, mapClass);
         });
     }
 
     triggerMarkerClick(marker) {
         google.maps.event.trigger(marker,'click', marker.position);
     }
-
 }

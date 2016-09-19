@@ -135,8 +135,10 @@
     <Content Include="app\controllers\externalLoginController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\modules\clients\authorizedClient.js" />
     <Content Include="app\modules\loading\progress.js" />
     <Content Include="app\modules\map\geocode.js" />
+    <Content Include="app\modules\map\mapPositionAdjuster.js" />
     <Content Include="app\modules\map\placeModal.js" />
     <Content Include="app\modules\map\places.js" />
     <Content Include="app\modules\navigation\search.js" />

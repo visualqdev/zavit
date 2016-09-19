@@ -11,6 +11,8 @@ namespace zavit.Web.Authorization
 {
     public class OAuthConfig
     {
+        const int AccessTokenLifeTime = 2;
+
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static AccessRefreshTokenProvider AccessRefreshTokenProvider { get; private set; }
 
@@ -36,7 +38,7 @@ namespace zavit.Web.Authorization
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
+                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(AccessTokenLifeTime),
                 Provider = accessAuthorizationServerProvider,
                 RefreshTokenProvider = AccessRefreshTokenProvider
             };
