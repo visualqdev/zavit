@@ -34,5 +34,6 @@ export function addVenue(placeId, name, activities) {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data)
             })
-            .then(resolve));
+            .then(resolve)
+            .catch(reject));
 }

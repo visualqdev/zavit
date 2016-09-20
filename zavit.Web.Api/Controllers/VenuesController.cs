@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;

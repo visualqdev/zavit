@@ -1,5 +1,6 @@
 ﻿import * as LoginModal from "../account/loginModal";
 import * as AccountService from "../account/accountService";
+import * as Routes from "../../routing/routes";
 
 export function initialize() {
     refresh();
@@ -13,6 +14,7 @@ export function initialize() {
         e.preventDefault();
         AccountService.logOut();
         refresh();
+        Routes.goTo(Routes.home);
     });
 
     $("#topnavShowSideNav a").click((e) => {

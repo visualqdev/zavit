@@ -1,21 +1,24 @@
-﻿import * as HomeController from "../controllers/homeController";
-import * as LoginController from "../controllers/loginController"
-import * as ExternalLoginController from "../controllers/externalLoginController"
+﻿import * as Routes from "./routes";
+import * as HomeController from "../controllers/homeController";
+import * as LoginController from "../controllers/loginController";
+import * as ExternalLoginController from "../controllers/externalLoginController";
+import * as VenueController from "../controllers/venueController";
+import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 
 export function registerRoutes() {
-
-    crossroads.addRoute("/", () => HomeController.explore());
-
-    crossroads.addRoute("/login", function () {
-        LoginController.login();
+    crossroads.addRoute(`/${Routes.home}`, () => {
+        if (PostLoginRedirect.processRedirect()) return;
+        HomeController.explore();
     });
 
-    crossroads.addRoute("/logout", function () {
+    crossroads.addRoute(`/${Routes.login}`, () => LoginController.login());
+
+    crossroads.addRoute(`/${Routes.logout}`, () => {
         LoginController.logout();
-        window.location.href = "/";
+        Routes.goTo(Routes.home);
     });
 
-    crossroads.addRoute("/externallogin{?query}", function(query) {
+    crossroads.addRoute("/externallogin{?query}", (query) => {
         ExternalLoginController.processExternalLogin({
             externalAccessToken: query.externalaccesstoken,
             provider: query.provider,
@@ -24,6 +27,8 @@ export function registerRoutes() {
             hasLocalAccount: query.haslocalaccount
         });
     });
+
+    crossroads.addRoute(`/${Routes.joinVenue}`, () => VenueController.joinVenue());
    
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);

@@ -6,7 +6,7 @@ using zavit.Infrastructure.ExternalAccounts.Repositories;
 
 namespace zavit.Infrastructure.Ioc.Infrastructure
 {
-    public class InfrastructureExternalAccounts : IWindsorInstaller
+    public class InfrastructureExternalAccountsInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

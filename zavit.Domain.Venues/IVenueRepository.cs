@@ -2,6 +2,6 @@
 {
     public interface IVenueRepository
     {
-         
+        Venue GetVenue(int id);
     }
 }

@@ -1,5 +1,11 @@
 ﻿import * as VenueClient from "./venueClient";
+import * as VenueMembershipClient from "./venueMembershipClient";
 import * as AccountService from "../account/accountService";
+import * as Routes from "../../routing/routes";
+import * as PostLoginRedirect from "../account/postLoginRedirect";
+import * as VenueJoiningStorage from "./venueJoiningStorage";
+
+const joinVenueRedirectUrl = "/#/joinvenue";
 
 export function getVenueAtPlace(placeId) {
     return new Promise((resolve, reject) => {
@@ -9,14 +15,20 @@ export function getVenueAtPlace(placeId) {
 }
 
 export function joinVenue(options) {
-    VenueClient
-        .addVenue(options.placeId, "test venue name", options.activities)
-        .then((venue) => letUserJoinVenue(venue.Id, options.activities))
-        .catch();
+    if (AccountService.currentUserAccount()) {
+        VenueClient
+            .addVenue(options.placeId, "test venue name", options.activities)
+            .then((venue) => letUserJoinVenue(venue.Id, options.activities))
+            .catch();
+    } else {
+        PostLoginRedirect.storeRedirectUrl(joinVenueRedirectUrl);
+        Routes.goTo(Routes.login);
+        VenueJoiningStorage.storeOptions(options);
+    }
 }
 
 function letUserJoinVenue(venueId, activities) {
-    UserVenueClient
+    VenueMembershipClient
         .joinVenue(venueId, activities)
         .then(() => window.href = "/");
 }

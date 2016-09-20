@@ -76,12 +76,16 @@
     <Compile Include="Authorization\UserContextTests.cs" />
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
+    <Compile Include="Controllers\VenuesMembershipControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactoryTests.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoServiceTests.cs" />
+    <Compile Include="DtoServices\VenueMemberships\VenueMembershipDtoServiceTests.cs" />
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProviderTests.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +110,10 @@
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.VenueMemberships\zavit.Domain.VenueMemberships.csproj">
+      <Project>{bd4a859e-b7bd-4d6a-b579-87c3c1746114}</Project>
+      <Name>zavit.Domain.VenueMemberships</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>

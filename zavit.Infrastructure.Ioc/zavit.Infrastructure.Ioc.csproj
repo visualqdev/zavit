@@ -57,13 +57,15 @@
     <Compile Include="DomainInstallers\ClientsInstaller.cs" />
     <Compile Include="DomainInstallers\ExternalAccountsInstaller.cs" />
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
+    <Compile Include="DomainInstallers\VenueMembershipsInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureVenueMembershipsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureAccountsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureActivitiesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureClientsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureCoreInstaller.cs" />
-    <Compile Include="Infrastructure\InfrastructureExternalAccounts.cs" />
+    <Compile Include="Infrastructure\InfrastructureExternalAccountsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructurePlacesInstaller.cs" />
     <Compile Include="Infrastructure\NhibernateWebInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,6 +98,10 @@
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.VenueMemberships\zavit.Domain.VenueMemberships.csproj">
+      <Project>{bd4a859e-b7bd-4d6a-b579-87c3c1746114}</Project>
+      <Name>zavit.Domain.VenueMemberships</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
       <Name>zavit.Domain.Venues</Name>
@@ -127,6 +133,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Places\zavit.Infrastructure.Places.csproj">
       <Project>{644f8521-635e-4ccb-a256-96b17cb37894}</Project>
       <Name>zavit.Infrastructure.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.VenueMemberships\zavit.Infrastructure.VenueMemberships.csproj">
+      <Project>{26f89347-9092-4ec6-8858-4e08e8918592}</Project>
+      <Name>zavit.Infrastructure.VenueMemberships</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Venues\zavit.Infrastructure.Venues.csproj">
       <Project>{e79f46e1-217c-49f3-9d10-874e91c874ef}</Project>

@@ -23,6 +23,8 @@ function getFirstAttemptOptions(baseOptions, account, resolve, reject) {
                     .then(() => makeSecondAttempt(baseOptions))
                     .then(resolve)
                     .catch(reject);
+            } else {
+                reject();
             }
         }
     };

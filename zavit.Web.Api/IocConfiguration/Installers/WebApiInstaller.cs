@@ -3,11 +3,15 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using zavit.Domain.VenueMemberships;
 using zavit.Web.Api.Authorization;
 using zavit.Web.Api.Controllers;
 using zavit.Web.Api.DtoFactories.Places;
+using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.DtoServices.Places;
+using zavit.Web.Api.DtoServices.VenueMemberships;
+using zavit.Web.Api.DtoServices.VenueMemberships.NewVenueMemberships;
 using zavit.Web.Api.DtoServices.Venues;
 using zavit.Web.Api.DtoServices.Venues.NewVenues;
 using zavit.Web.Authorization;
@@ -42,7 +46,10 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IVenueActivityDtoFactory>().ImplementedBy<VenueActivityDtoFactory>().LifestyleTransient(),
                 Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
                 Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton(),
-                Component.For<INewVenueProvider>().ImplementedBy<NewVenueProvider>().LifestyleTransient());
+                Component.For<INewVenueProvider>().ImplementedBy<NewVenueProvider>().LifestyleTransient(),
+                Component.For<IVenueMembershipDtoService>().ImplementedBy<VenueMembershipDtoService>().LifestyleTransient(),
+                Component.For<IVenueMembershipDtoFactory>().ImplementedBy<VenueMembershipDtoFactory>().LifestyleTransient(),
+                Component.For<INewVenueMembershipProvider>().ImplementedBy<NewVenueMembershipProvider>().LifestyleTransient());
         }
     }
 }
