@@ -6,16 +6,23 @@ function explore(position) {
     HomeController.explore(position);
 }
 
-function searchArea($element) {
+function searchByArea(inputValue) {
     $("#placeModal").remove();
-    const inputValue = $element.closest("span").prev("input").val();
-
     if (inputValue !== "") Geocode.getGeoCodeByAddress(inputValue, explore);
 }
 
-function registerEvents(placesMap) {
+function searchByPlaceName(inputValue, placesClass) {
 
-    console.log(placesMap);
+    $("#placeModal").remove();
+
+    placesClass.removeMarkers();
+    placesClass.clearPlaceInfo();
+    
+    placesClass.name = inputValue;
+    placesClass.getPlaces();
+}
+
+function registerEvents(placesClass) {
 
     $("a[data-type]").on("click", function(e) {
         e.preventDefault();
@@ -24,16 +31,20 @@ function registerEvents(placesMap) {
 
         const searchType = $(this).attr("data-type"),
              searchTypePlaceholderText = $(this).attr("data-placeHolderText");
-        console.log(searchTypePlaceholderText);
         $("#search_concept").text(searchType);
         $("#search_input").attr('placeholder', searchTypePlaceholderText);
     });
 
-    $("#search .btn").on("click", function(e) {
+    $("#searchButton").on("click", function(e) {
         e.preventDefault();
-        const searchConcept = $(this).closest("div.input-group").find("#search_concept").text();
 
-        if (searchConcept === "Area") searchArea($(this));
+        const inputValue = $(this).closest("span").prev("input").val(),
+            searchConcept = $(this).closest("div.input-group").find("#search_concept").text();
+
+        if (searchConcept === "Area") searchByArea(inputValue);
+
+        if (searchConcept === "Place") searchByPlaceName(inputValue, placesClass);
+
     });
 }
 
