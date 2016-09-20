@@ -3,9 +3,9 @@
 
     const $infoPopUp = $("#infoPopUp"),
         adjustMarginLeft = ($infoPopUp.width() / 2),
-        adjustTop = ($infoPopUp.height() / 2);
+        adjustMarginTop = ($infoPopUp.height() / 2);
 
-    $("#infoPopUp").css({ 'margin-left': `-${adjustMarginLeft}px`, 'margin-top': `-${adjustTop}px`, visibility: "visible" });
+    $infoPopUp.css({ 'margin-left': `-${adjustMarginLeft}px`, 'margin-top': `-${adjustMarginTop}px`, visibility: "visible" });
 
-    setTimeout(() => $("#infoPopUp").fadeOut("200", function() { $("#infoPopUp").remove(); }), 2000);
+    setTimeout(() => $infoPopUp.fadeOut("200", function() { $infoPopUp.remove(); }), 2000);
 }

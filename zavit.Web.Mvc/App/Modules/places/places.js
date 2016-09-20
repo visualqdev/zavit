@@ -60,7 +60,6 @@ export class Places {
     }
 
     getPlaces() {
-        console.log(this.name);
         Progress.start();
         return new Promise((resolve, reject) => {
             Client.getPlaces(this.map.position.coords.latitude, this.map.position.coords.longitude, this.radius, this.name).then(places=> resolve(places));
