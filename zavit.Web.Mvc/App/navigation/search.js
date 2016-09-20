@@ -18,12 +18,16 @@ function searchArea($element) {
 function registerEvents() {
 
     $("a[data-type]").on("click", function(e) {
+
         e.preventDefault();
+
         $("#search_input").val("");
+
         const searchType = $(this).attr("data-type"),
              searchTypePlaceholderText = $(this).attr("data-placeHolderText");
 
         $("#search_concept").text(searchType);
+
         $("#search_input").attr('placeholder', searchTypePlaceholderText);
     });
 

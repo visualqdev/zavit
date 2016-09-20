@@ -39,7 +39,6 @@ namespace zavit.Web.Api.Tests.DtoServices.Places
             };
 
             static IEnumerable<PlaceDto> _result;
-
             static PlaceSearchCriteriaDto _placeSearchCriteriaDto;
             static PlaceDto _placeDto;
             static PlaceDto _otherPlaceDto;

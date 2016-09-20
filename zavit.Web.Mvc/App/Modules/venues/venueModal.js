@@ -11,7 +11,8 @@ export function show(options = {}) {
         height,
         markerX: options.markerX,
         markerY: options.markerY,
-        map: options.map
+        map: options.map,
+        venueModal:true
     });
 
     const modal = $(`<div id="joinVenueModal" class="map-popup" data-name="placeModal" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;"></div>`);

@@ -9,4 +9,4 @@ namespace zavit.Domain.Places.PublicPlaces
         Task<IEnumerable<PublicPlace>> GetPublicPlaces(IPlaceSearchCriteria placeSearchCriteria);
         Task<PublicPlace> GetPublicPlace(string placeId);
     }
-}
+}   

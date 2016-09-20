@@ -7,5 +7,6 @@ namespace zavit.Web.Api.Dtos.Places
         public double Longitude { get; set; }
         public double Latitude { get; set; }
         public int Radius { get; set; }
+        public string Name { get; }
     }
 }
