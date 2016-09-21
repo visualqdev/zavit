@@ -11,18 +11,17 @@ function searchByArea(inputValue) {
     if (inputValue !== "") Geocode.getGeoCodeByAddress(inputValue, explore);
 }
 
-function searchByPlaceName(inputValue, placesClass) {
+function searchByPlaceName(inputValue, places) {
 
     $("#placeModal").remove();
 
-    placesClass.removeMarkers();
-    placesClass.clearPlaceInfo();
-    
-    placesClass.name = inputValue;
-    placesClass.getPlaces();
+    places.removeMarkers();
+    places.clearPlaceInfo();
+    places.name = inputValue;
+    places.getPlaces();
 }
 
-function registerEvents(placesClass) {
+function registerEvents(places) {
 
     $("a[data-type]").on("click", function(e) {
         e.preventDefault();
@@ -43,12 +42,12 @@ function registerEvents(placesClass) {
 
         if (searchConcept === "Area") searchByArea(inputValue);
 
-        if (searchConcept === "Place") searchByPlaceName(inputValue, placesClass);
+        if (searchConcept === "Place") searchByPlaceName(inputValue, places);
 
     });
 }
 
-export function initialise(placesMap) {
-    registerEvents(placesMap);
+export function initialise(places) {
+    registerEvents(places);
 }
 
