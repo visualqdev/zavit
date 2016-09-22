@@ -12,16 +12,29 @@
         this.zoomed = [];
         this.markers = [];
         this.pannedBy = { x: 0, y: 0 };
+        this.mapCanScroll = options.mapCanScroll || true;
+        this.controlsAreDisabled = options.controlsAreDisabled || false;
+        this.mapIsDraggable = options.mapIsDraggable || true;
+        this.mapIsFixed = options.thisMapIsFixed || false;
     }
    
     initialise() {
         
         const area = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
 
+        if (this.mapIsFixed) {
+            this.mapCanScroll = false;
+            this.controlsAreDisabled = true;
+            this.mapIsDraggable = false;
+        }
+
         const map = new google.maps.Map(document.getElementById("map"), {
             center: area,
             zoom: this.zoom,
-            scrollwheel: true
+            scrollwheel: this.mapCanScroll,
+            draggable: this.mapIsDraggable,
+            disableDefaultUI:this.controlsAreDisabled,
+            disableDoubleClickZoom: true
         });
         
         const projectionChanged = new Promise(function(resolve) {
