@@ -10,6 +10,8 @@ html, body {
 	height: 100%;
 	background: @map-background;
 	z-index: 1;
+    margin: 0;
+    float:left;
 }
 
 #mainNav.navbar {
@@ -17,7 +19,7 @@ html, body {
 	border-radius: 0;
 	border: 1px solid @nav-bar-border;
 	background: @nav-bg;
-    position: absolute;
+    position: relative;
     top: 0;
     left:0;
     width:100%;
@@ -424,7 +426,7 @@ html, body {
 #yourVenues{
     background-color: @page-bg;
     border: 2px solid @page-border;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 10px;
     #yourVenuesHeading{
         border-bottom: 1px solid @page-border;

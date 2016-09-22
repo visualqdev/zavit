@@ -20,7 +20,7 @@ function getVenues(venues) {
             <div class="row-fluid yourVenue">
                 <h3>${venue.Name}</h3>
                 <address>${venue.Address}</address>
-                <a href="">${venue.NumberOfPlayers} players</a><span> available to play here</span>
+                <a href="#">${venue.NumberOfPlayers} players</a><span> available to play here</span>
                 <div>
                     <button type="button" class="btn btn-primary" id="yourVenuesView">Invite others to play here</button>
                 </div>

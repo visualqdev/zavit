@@ -1,5 +1,5 @@
 ﻿export function adjustMapToShow(options) {
-    const topOffset = 55,
+    const topOffset = 0,
         width = options.width,
         height = options.height;
     if (options.map.pannedBy && options.venueModal) {

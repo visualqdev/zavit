@@ -28,7 +28,7 @@
             this.mapIsDraggable = false;
         }
 
-        const map = new google.maps.Map(document.getElementById("map"), {
+        const map = new google.maps.Map(document.getElementById("mainContent"), {
             center: area,
             zoom: this.zoom,
             scrollwheel: this.mapCanScroll,
