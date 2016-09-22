@@ -2,7 +2,7 @@
 import * as AuthorizedClient from "../clients/authorizedClient";
 
 export function getVenueAtPlace(placeId) {
-    const venuesUrl = `${ApiSettings.apiUrl}/api/places/${placeId}/venues/default`;
+    const venuesUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues/default`;
 
     return new Promise((resolve, reject) => 
         $.ajax({

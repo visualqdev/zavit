@@ -281,7 +281,7 @@ html, body {
       background: @call-to-action;
 
       position: fixed;
-      z-index: 1031;
+      z-index: 2;
       top: 52px;
       left: 0;
 
@@ -298,7 +298,7 @@ html, body {
 .nprogress-custom-parent #nprogress .spinner,
 .nprogress-custom-parent #nprogress .bar {
   position: absolute;
-  z-index:100;
+  z-index:2;
 }
 
 @-webkit-keyframes nprogress-spinner {
@@ -420,4 +420,16 @@ html, body {
         background-color:@googleplus-button-disabled-bg;
         border-color:rgba(0,0,0,0.2)
     }
+}
+
+#infoPopUp {
+    width:300px;
+    background-color:@nav-bg;
+    top:50%;
+    left:50%;
+    position:absolute;
+    z-index:2;
+    padding:10px;
+    color:@info-text;
+    visibility:hidden;
 }
