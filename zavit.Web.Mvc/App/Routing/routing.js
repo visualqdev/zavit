@@ -4,6 +4,7 @@ import * as LoginController from "../controllers/loginController";
 import * as ExternalLoginController from "../controllers/externalLoginController";
 import * as VenueController from "../controllers/venueController";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
+import * as YourVenuesController from "../controllers/yourVenuesController";
 
 export function registerRoutes() {
     crossroads.addRoute(`/${Routes.home}`, () => {
@@ -30,6 +31,8 @@ export function registerRoutes() {
 
     crossroads.addRoute(`/${Routes.joinVenue}`, () => VenueController.joinVenue());
    
+    crossroads.addRoute(`/${Routes.yourVenues}`, () => YourVenuesController.index());
+
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);
     }

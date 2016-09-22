@@ -1,6 +1,7 @@
 ﻿export function getGeoCodeByAddress(address, callback) {
 
-    const geocoder = new google.maps.Geocoder();
+    const geocoder = new google.
+s.Geocoder();
 
     geocoder.geocode({'address': address}, function(results, status) 
     {   

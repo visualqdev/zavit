@@ -5,7 +5,7 @@ html, body {
 	width:100%;
 }
 
-#map {
+#mainContent {
 	width:100%;
 	height: 100%;
 	background: @map-background;
@@ -419,5 +419,37 @@ html, body {
     .btn-google-plus.disabled,.btn-google-plus[disabled],fieldset[disabled] .btn-google-plus,.btn-google-plus.disabled:hover,.btn-google-plus[disabled]:hover,fieldset[disabled] .btn-google-plus:hover,.btn-google-plus.disabled:focus,.btn-google-plus[disabled]:focus,fieldset[disabled] .btn-google-plus:focus,.btn-google-plus.disabled:active,.btn-google-plus[disabled]:active,fieldset[disabled] .btn-google-plus:active,.btn-google-plus.disabled.active,.btn-google-plus[disabled].active,fieldset[disabled] .btn-google-plus.active{
         background-color:@googleplus-button-disabled-bg;
         border-color:rgba(0,0,0,0.2)
+    }
+}
+
+#yourVenues{
+    background-color: @page-bg;
+    border: 2px solid @page-border;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    #yourVenuesHeading{
+        border-bottom: 1px solid @page-border;
+        h2{
+            text-align: center;
+        }
+    }
+    #yourVenuesAddMoreContainer{
+        text-align: center;
+    }
+    .yourVenue{
+        border-bottom: 1px solid @page-border;
+        padding-bottom: 10px;
+        button {
+            background-color:@call-to-action;
+            border:@call-to-action;
+            margin:10px 0 0 0;
+            color:@nav-bg;            
+            width:100%;
+            &:hover{
+                color: @call-to-action-hover-color;
+                background-color: @call-to-action-hover-bg;
+                border: @call-to-action-hover-bg;
+            }
+        }
     }
 }

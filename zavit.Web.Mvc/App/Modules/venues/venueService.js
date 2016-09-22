@@ -30,5 +30,5 @@ export function joinVenue(options) {
 function letUserJoinVenue(venueId, activities) {
     VenueMembershipClient
         .joinVenue(venueId, activities)
-        .then(() => window.href = "/");
+        .then(() => Routes.goTo(Routes.yourVenues));
 }

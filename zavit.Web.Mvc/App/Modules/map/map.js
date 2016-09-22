@@ -18,7 +18,7 @@
         
         const area = new google.maps.LatLng(this.position.coords.latitude, this.position.coords.longitude);
 
-        const map = new google.maps.Map(document.getElementById("map"), {
+        const map = new google.maps.Map(document.getElementById("mainContent"), {
             center: area,
             zoom: this.zoom,
             scrollwheel: true

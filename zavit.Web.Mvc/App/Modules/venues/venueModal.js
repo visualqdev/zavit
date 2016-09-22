@@ -23,7 +23,7 @@ export function show(options = {}) {
         .then(venue => showVenue(venue, placeId));
 }
 
-    function showVenue(venue, placeId) {
+function showVenue(venue, placeId) {
     const activitiesInColumn = Math.ceil((venue.Activities.length) / 2);
     const leftColumnActivities = venue.Activities;
     const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
