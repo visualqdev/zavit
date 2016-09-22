@@ -1,8 +1,5 @@
-﻿import { Map
-    
-
- } from "../modules/map/map";
-import { Places } from "../modules/map/places";
+﻿import { Map } from "../modules/map/map";
+import { Places } from "../modules/places/places";
 
 export function explore(position) {
 

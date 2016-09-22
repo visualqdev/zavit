@@ -1,12 +1,15 @@
 ﻿import * as Progress from "../loading/progress";
-import * as PlaceModal from "../map/placeModal";
+import * as PlaceModal from "../places/placeModal";
 import * as VenueModal from "../venues/venueModal";
-
+import * as Search from "../navigation/search";
+import * as Client from "../places/placesClient";
+import * as Info from "../loading/info";
 export class Places {
 
     constructor(options = {}) {
         this.map = options.map || null,
         this.radius = options.radius || 3000;
+        this.name = "";
     }
 
     initialise() {
@@ -14,14 +17,14 @@ export class Places {
         this.getPlaces();
         this.registerWithMapEvents();
         this.registerPlaceEvents();
+        Search.initialise(this);
     }
 
     registerPlaceEvents() {
 
         $("#loadPlaces").on("click", (e) => {
             e.preventDefault();
-            this.map.markers.forEach(marker => this.map.removeMarker(marker));
-            this.map.markers = [];
+            this.removeMarkers();
             this.getPlaces();
             this.map.setZoom(this.map.zoom);
         });
@@ -50,22 +53,18 @@ export class Places {
                 map: this.map
             });
         });
-        $(window)
-            .on("resize",() => {
-                this.map.pannedBy = { x: 0, y: 0 };
-            });
+
+        $(window).on("resize",() => { this.map.pannedBy = { x: 0, y: 0 };});
 
         $("html").css("overflow", "hidden");
     }
 
     getPlaces() {
-        const latitude = this.map.position.coords.latitude,
-            longitude = this.map.position.coords.longitude,
-            url = `/api/places?latitude=${latitude}&longitude=${longitude}&radius=${this.radius}`;
-
         Progress.start();
-
-        fetch(url).then(response => {  return response.json(); }).then(places => this.addPlaces(places));
+        return new Promise((resolve, reject) => {
+            Client.getPlaces(this.map.position.coords.latitude, this.map.position.coords.longitude, this.radius, this.name).then(places=> resolve(places));
+        })
+        .then(places => this.addPlaces(places));
     }
 
     registerWithMapEvents() {
@@ -79,9 +78,14 @@ export class Places {
     }
 
     addPlaces(places) {
-        places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
-        Progress.done();
-        this.map.triggerMarkerClick(this.map.markers[0]);
+        if (places.length) {
+            places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
+            Progress.done();
+            this.map.triggerMarkerClick(this.map.markers[0]);
+        } else {
+            Info.provide("Sorry, no results where found!");
+            Progress.done();
+        }
     }
 
     addPlaceMarker(place, placeIndex, amountOfPlaces) {
@@ -93,5 +97,10 @@ export class Places {
         $("[data-name=placeModal]").remove();
         const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
         $(placeModal).appendTo("#home");
+    }
+
+    removeMarkers() {
+        this.map.markers.forEach(marker => this.map.removeMarker(marker));
+        this.map.markers = [];
     }
 }
