@@ -6,7 +6,7 @@
         options.map.panBy(options.map.pannedBy.x, -options.map.pannedBy.y);
     }
     let positionX = options.markerX - (width / 2),
-        positionY = options.markerY - (height + 45);
+        positionY = options.markerY - (height);
     
     if (positionY < topOffset) {
         const yMovingBy = topOffset - positionY;
