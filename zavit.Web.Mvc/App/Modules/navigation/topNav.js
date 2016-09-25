@@ -16,11 +16,6 @@ export function initialize() {
         refresh();
         Routes.goTo(Routes.home);
     });
-
-    $("#topnavShowSideNav a").click((e) => {
-        e.preventDefault();
-        SideNav.show();
-    });
 }
 
 export function refresh() {

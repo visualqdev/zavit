@@ -76,7 +76,7 @@
     <Compile Include="Authorization\UserContextTests.cs" />
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
-    <Compile Include="Controllers\VenuesMembershipControllerTests.cs" />
+    <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />

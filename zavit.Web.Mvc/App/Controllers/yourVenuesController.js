@@ -1,15 +1,16 @@
 ﻿import * as IndexView from "../views/yourVenues/index";
+import * as YourVenueMap from "../modules/venues/yourVenueMap";
+import * as VenueMembershipClient from "../modules/venues/venueMembershipClient";
 
 export function index() {
     const container = $("#mainContent");
     container.empty();
 
-    const view = IndexView.getView({ venues: [
-    {
-        Name: "Tennis venue", 
-        Address: "Somewhere around you",
-        NumberOfPlayers: 4
-    }] });
-
-    container.append(view);
+    VenueMembershipClient
+        .getVenueMemberships()
+        .then(memberships => {
+            const view = IndexView.getView(memberships);
+            container.append(view);
+            YourVenueMap.addMapToElements(".yourVenueMap");
+        });
 }

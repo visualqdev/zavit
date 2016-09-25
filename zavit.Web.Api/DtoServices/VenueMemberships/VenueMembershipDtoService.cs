@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using zavit.Domain.VenueMemberships;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.Dtos.VenueMemberships;
@@ -29,6 +31,15 @@ namespace zavit.Web.Api.DtoServices.VenueMemberships
             var venueMembership = _venueMembershipService.AddUserToVenue(account, newVenueMembership);
 
             return _venueMembershipDtoFactory.CreateItem(venueMembership);
+        }
+
+        public IEnumerable<VenueMembershipDto> GetVenueMemberships()
+        {
+            var account = _userContext.Account;
+            var venueMemberships = _venueMembershipService.GetVenueMemberships(account);
+
+            var venueMembershipDtos = venueMemberships.Select(m => _venueMembershipDtoFactory.CreateItem(m));
+            return venueMembershipDtos;
         }
     }
 }

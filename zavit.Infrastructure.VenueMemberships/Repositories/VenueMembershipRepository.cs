@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using System.Collections.Generic;
+using NHibernate;
 using zavit.Domain.VenueMemberships;
 
 namespace zavit.Infrastructure.VenueMemberships.Repositories
@@ -16,6 +17,13 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
         {
             _session.Save(venueMembership);
             _session.Flush();
+        }
+
+        public IEnumerable<VenueMembership> GetMemberships(int accountId)
+        {
+            return _session.QueryOver<VenueMembership>()
+                .Where(m => m.Account.Id == accountId)
+                .List();
         }
     }
 }

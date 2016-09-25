@@ -15,7 +15,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships.NewVenueMemberships
             Because of = () => _result = Subject.Provide(_venueMembershipDto);
 
             It should_set_the_venue_id_to_be_the_same_as_venue_membership_dto_venue_id = 
-                () => _result.VenueId.ShouldEqual(_venueMembershipDto.VenueId);
+                () => _result.VenueId.ShouldEqual(_venueMembershipDto.Venue.Id);
 
             It should_set_the_activities_to_be_the_venue_membership_dto_activity_ids =
                 () => _result.Activities.ShouldContainOnly(_activity.Id, _otherActivity.Id);
@@ -23,7 +23,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships.NewVenueMemberships
             Establish context = () =>
             {
                 _venueMembershipDto = NewInstanceOf<VenueMembershipDto>();
-                _venueMembershipDto.VenueId = 123;
+                _venueMembershipDto.Venue = NewInstanceOf<VenueDetailsDto>();
+                _venueMembershipDto.Venue.Id = 123;
 
                 _activity = NewInstanceOf<VenueActivityDto>();
                 _activity.Id = 1;

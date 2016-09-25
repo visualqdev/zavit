@@ -8,19 +8,22 @@ namespace zavit.Web.Api.DtoFactories.VenueMemberships
     public class VenueMembershipDtoFactory : IVenueMembershipDtoFactory
     {
         readonly IVenueActivityDtoFactory _venueActivityDtoFactory;
+        readonly IVenueDetailsDtoFactory _venueDetailsDtoFactory;
 
-        public VenueMembershipDtoFactory(IVenueActivityDtoFactory venueActivityDtoFactory)
+        public VenueMembershipDtoFactory(IVenueActivityDtoFactory venueActivityDtoFactory, IVenueDetailsDtoFactory venueDetailsDtoFactory)
         {
             _venueActivityDtoFactory = venueActivityDtoFactory;
+            _venueDetailsDtoFactory = venueDetailsDtoFactory;
         }
 
         public VenueMembershipDto CreateItem(VenueMembership venueMembership)
         {
             var activityDtos = venueMembership.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a));
+            var venueDetailsDto = _venueDetailsDtoFactory.Create(venueMembership.Venue);
 
             return new VenueMembershipDto
             {
-                VenueId = venueMembership.Venue.Id,
+                Venue = venueDetailsDto,
                 Activities = activityDtos
             };
         }

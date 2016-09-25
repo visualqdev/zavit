@@ -18,8 +18,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
         {
             Because of = () => _result = Subject.CreateItem(_venueMembership);
 
-            It should_set_the_venue_id_to_be_the_same_as_the_venue_id_of_the_venue_membership = 
-                () => _result.VenueId.ShouldEqual(_venueMembership.Venue.Id);
+            It should_set_the_venue_to_be_the_venue_details_dto_for_the_membership_venue = 
+                () => _result.Venue.ShouldEqual(_venueDetailsDto);
 
             It should_create_a_venue_activity_dto_for_each_venue_membership_activity =
                 () => _result.Activities.ShouldContainOnly(_activityDto, _otherActivityDto);
@@ -28,7 +28,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
             {
                 _venueMembership = NewInstanceOf<VenueMembership>();
                 _venueMembership.Venue = NewInstanceOf<Venue>();
-                _venueMembership.Venue.Id = 123;
+
+                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(_venueMembership.Venue)).Return(_venueDetailsDto);
 
                 var activity = NewInstanceOf<Activity>();
                 var otherActivity = NewInstanceOf<Activity>();
@@ -45,6 +47,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
             static VenueMembershipDto _result;
             static VenueActivityDto _activityDto;
             static VenueActivityDto _otherActivityDto;
+            static VenueDetailsDto _venueDetailsDto;
         }
     }
 }

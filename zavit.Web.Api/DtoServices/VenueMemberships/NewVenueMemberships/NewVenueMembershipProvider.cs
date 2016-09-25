@@ -10,7 +10,7 @@ namespace zavit.Web.Api.DtoServices.VenueMemberships.NewVenueMemberships
         {
             return new NewVenueMembership
             {
-                VenueId = venueMembershipDto.VenueId,
+                VenueId = venueMembershipDto.Venue.Id,
                 Activities = venueMembershipDto.Activities.Select(a => a.Id)
             };
         }

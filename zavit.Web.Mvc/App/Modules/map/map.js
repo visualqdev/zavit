@@ -16,6 +16,7 @@
         this.controlsAreDisabled = options.controlsAreDisabled || false;
         this.mapIsDraggable = options.mapIsDraggable || true;
         this.mapIsFixed = options.thisMapIsFixed || false;
+        this.mapContainer = options.mapContainer || false;
     }
    
     initialise() {
@@ -28,7 +29,11 @@
             this.mapIsDraggable = false;
         }
 
-        const map = new google.maps.Map(document.getElementById("mainContent"), {
+        if (!this.mapContainer) {
+            this.mapContainer = document.getElementById("mainContent");
+        }
+
+        const map = new google.maps.Map(this.mapContainer, {
             center: area,
             zoom: this.zoom,
             scrollwheel: this.mapCanScroll,

@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Collections.Generic;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
@@ -42,6 +43,41 @@ namespace zavit.Web.Api.Tests.DtoServices.VenueMemberships
             static VenueMembershipDto _result;
             static VenueMembershipDto _venueMembershipDto;
             static VenueMembershipDto _newVenueMembershipDto;
+        }
+
+        class When_getting_venue_memberships
+        {
+            Because of = () => _result = Subject.GetVenueMemberships();
+
+            It should_return_a_collection_of_venue_memberships = () => _result.ShouldContainOnly(_venueMembershipDto, _otherVenueMembershipDto);
+
+            Establish context = () =>
+            {
+                var account = NewInstanceOf<Account>();
+                Injected<IUserContext>().Stub(c => c.Account).Return(account);
+
+                var venueMembership = NewInstanceOf<VenueMembership>();
+                var otherVenueMembership = NewInstanceOf<VenueMembership>();
+
+                Injected<IVenueMembershipService>()
+                    .Stub(s => s.GetVenueMemberships(account))
+                    .Return(new [] { venueMembership, otherVenueMembership });
+
+                _venueMembershipDto = NewInstanceOf<VenueMembershipDto>();
+                _otherVenueMembershipDto = NewInstanceOf<VenueMembershipDto>();
+
+                Injected<IVenueMembershipDtoFactory>()
+                    .Stub(f => f.CreateItem(venueMembership))
+                    .Return(_venueMembershipDto);
+
+                Injected<IVenueMembershipDtoFactory>()
+                    .Stub(f => f.CreateItem(otherVenueMembership))
+                    .Return(_otherVenueMembershipDto);
+            };
+
+            static IEnumerable<VenueMembershipDto> _result;
+            static VenueMembershipDto _venueMembershipDto;
+            static VenueMembershipDto _otherVenueMembershipDto;
         }
     }
 }

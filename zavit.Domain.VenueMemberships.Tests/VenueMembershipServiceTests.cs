@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Collections.Generic;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
@@ -32,6 +33,28 @@ namespace zavit.Domain.VenueMemberships.Tests
             static NewVenueMembership _newVenueMembership;
             static VenueMembership _result;
             static VenueMembership _venueMembership;
+        }
+
+        class When_getting_venue_memberships
+        {
+            Because of = () => _result = Subject.GetVenueMemberships(_account);
+
+            It should_return_the_venue_memberships_from_the_repository = () => _result.ShouldEqual(_venueMemberships);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 123;
+
+                _venueMemberships = new[] {NewInstanceOf<VenueMembership>(), NewInstanceOf<VenueMembership>()};
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMemberships(_account.Id))
+                    .Return(_venueMemberships);
+            };
+
+            static Account _account;
+            static IEnumerable<VenueMembership> _result;
+            static IEnumerable<VenueMembership> _venueMemberships;
         }
     }
 }

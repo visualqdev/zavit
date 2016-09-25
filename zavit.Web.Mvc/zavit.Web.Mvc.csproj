@@ -152,6 +152,7 @@
     <Content Include="app\modules\venues\venueJoiningStorage.js" />
     <Content Include="app\modules\venues\venueModal.js" />
     <Content Include="app\modules\venues\venueService.js" />
+    <Content Include="app\modules\venues\yourVenueMap.js" />
     <Content Include="app\routing\routes.js" />
     <Content Include="app\views\yourVenues\index.js" />
     <Content Include="libraries\fetch-ie8.js" />

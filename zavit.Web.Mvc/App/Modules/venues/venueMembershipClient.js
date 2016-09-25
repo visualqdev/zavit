@@ -8,8 +8,10 @@ export function joinVenue(venueId, activities) {
     });
 
     const data = {
-        activities: activityDtos,
-        venueId
+        venue: {
+            id: venueId
+        },
+        activities: activityDtos
     };
 
     return new Promise((resolve, reject) =>
@@ -19,6 +21,20 @@ export function joinVenue(venueId, activities) {
                 type: "post",
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data)
+            })
+            .then(resolve)
+            .catch(reject));
+}
+
+export function getVenueMemberships() {
+    const getVenueMembershipsUrl = `${ApiSettings.apiUrl}api/venuememberships`;
+
+    return new Promise((resolve, reject) => 
+        AuthorizedClient
+            .send({
+                url: getVenueMembershipsUrl,
+                type: "get",
+                contentType: "application/json; charset=utf-8"
             })
             .then(resolve)
             .catch(reject));

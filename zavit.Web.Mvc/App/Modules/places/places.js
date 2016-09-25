@@ -96,7 +96,7 @@ export class Places {
     showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
         $("[data-name=placeModal]").remove();
         const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
-        $(placeModal).appendTo("#home");
+        $(placeModal).appendTo("#mainContent");
     }
 
     removeMarkers() {

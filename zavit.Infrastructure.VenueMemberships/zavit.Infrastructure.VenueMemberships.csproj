@@ -60,6 +60,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Activities\zavit.Domain.Activities.csproj">
       <Project>{2cd77dc8-cb42-4619-8887-ae3c2c64cc64}</Project>
       <Name>zavit.Domain.Activities</Name>

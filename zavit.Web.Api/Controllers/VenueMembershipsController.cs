@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Http;
 using zavit.Web.Api.Dtos.VenueMemberships;
 using zavit.Web.Api.DtoServices.VenueMemberships;
 
@@ -18,7 +20,14 @@ namespace zavit.Web.Api.Controllers
         public IHttpActionResult Post(VenueMembershipDto venueMembershipDto)
         {
             var createdVenueMembershipDto = _venueMembershipDtoService.AddVenueMembership(venueMembershipDto);
-            return CreatedAtRoute(CommonRoutes.Default, new { controller = "venuememberships", id = createdVenueMembershipDto.VenueId }, createdVenueMembershipDto);
+            return CreatedAtRoute(CommonRoutes.Default, new { controller = "venuememberships", id = createdVenueMembershipDto.Venue.Id }, createdVenueMembershipDto);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IEnumerable<VenueMembershipDto> Get()
+        {
+            return _venueMembershipDtoService.GetVenueMemberships();
         }
     }
 }

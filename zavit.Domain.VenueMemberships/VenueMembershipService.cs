@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.Collections.Generic;
+using zavit.Domain.Accounts;
 using zavit.Domain.VenueMemberships.NewVenueMembershipCreation;
 
 namespace zavit.Domain.VenueMemberships
@@ -20,6 +21,12 @@ namespace zavit.Domain.VenueMemberships
 
             _venueMembershipRepository.Save(venueMembership);
             return venueMembership;
+        }
+
+        public IEnumerable<VenueMembership> GetVenueMemberships(Account account)
+        {
+            var venueMemberships = _venueMembershipRepository.GetMemberships(account.Id);
+            return venueMemberships;
         }
     }
 }
