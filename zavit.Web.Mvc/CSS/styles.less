@@ -3,6 +3,7 @@
 html, body {
 	height: 100%;
 	width:100%;
+    margin:0;
 }
 
 #mainContent {
@@ -10,9 +11,35 @@ html, body {
 	height: 100%;
 	background: @map-background;
 	z-index: 1;
+
+.contentContainer {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    z-index: 1;
+    .row {
+        margin:0;
+    }
+    .row.header {
+        flex: 0 1 auto;
+    }
+    .row.content {
+        flex: 1 1 auto;
+        z-index: 1;
+    }
+    .row.footer {
+        flex: 0 1 30px;
+        background-color:@nav-bg;
+        color:#fff;
+        text-align:center;
+        footer {
+            padding-top:5px;
+        }
+    }
     margin: 0;
     float:left;
 }
+
 
 #mainNav.navbar {
 	margin-bottom: 0px;
