@@ -21,6 +21,12 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
             It should_set_the_venue_name_to_be_the_same_as_the_name_of_the_venue_place =
                 () => _venue.Name.ShouldEqual(Subject.Name);
 
+            It should_set_the_venue_longitude_to_be_the_same_as_place_logitude =
+                () => _venue.Longitude.ShouldEqual(Subject.Longitude);
+
+            It should_set_the_venue_latitude_to_be_the_same_as_place_latitude =
+                () => _venue.Latitude.ShouldEqual(Subject.Latitude);
+
             Establish context = () =>
             {
                 _existingVenue = NewInstanceOf<Venue>();
@@ -29,6 +35,8 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
 
                 Subject.Name = "Test place name";
                 Subject.Address = "Test place address";
+                Subject.Longitude = 0.1;
+                Subject.Latitude = -0.2;
             };
 
             static Venue _existingVenue;
@@ -47,6 +55,12 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
             It should_not_try_to_change_the_venue_name =
                 () => _venue.Name.ShouldEqual(VenueName);
 
+            It should_set_the_venue_longitude_to_be_the_same_as_place_logitude =
+                () => _venue.Longitude.ShouldEqual(Subject.Longitude);
+
+            It should_set_the_venue_latitude_to_be_the_same_as_place_latitude =
+                () => _venue.Latitude.ShouldEqual(Subject.Latitude);
+
             Establish context = () =>
             {
                 _existingVenue = NewInstanceOf<Venue>();
@@ -56,6 +70,8 @@ namespace zavit.Domain.Places.Tests.VenuePlaces
 
                 Subject.Name = "Test place name";
                 Subject.Address = "Test place address";
+                Subject.Longitude = 0.1;
+                Subject.Latitude = -0.2;
             };
 
             static Venue _existingVenue;

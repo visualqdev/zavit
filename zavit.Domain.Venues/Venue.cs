@@ -12,5 +12,7 @@ namespace zavit.Domain.Venues
         public virtual Account OwnerAccount { get; set; }
         public virtual IEnumerable<Activity> Activities { get; set; }
         public virtual string Address { get; set; }
+        public virtual double Longitude { get; set; }
+        public virtual double Latitude { get; set; }
     }
 }

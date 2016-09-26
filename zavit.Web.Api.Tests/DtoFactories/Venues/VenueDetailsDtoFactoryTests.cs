@@ -24,12 +24,20 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
             It should_add_an_activity_dto_for_each_venue_activity =
                 () => _result.Activities.ShouldContainOnly(_venueActivityDto);
 
+            It should_set_the_longitude_to_be_the_venue_longitude =
+                () => _result.Longitude.ShouldEqual(_venue.Longitude);
+
+            It should_set_the_latitude_to_be_the_venue_latitude =
+                () => _result.Latitude.ShouldEqual(_venue.Latitude);
+
             Establish context = () =>
             {
                 _venue = NewInstanceOf<Venue>();
                 _venue.Name = "Test name";
                 _venue.Id = 123;
                 _venue.Address = "Test address";
+                _venue.Longitude = 0.1;
+                _venue.Latitude = -0.2;
 
                 var activity = NewInstanceOf<Activity>();
                 _venue.Activities = new[] { activity };

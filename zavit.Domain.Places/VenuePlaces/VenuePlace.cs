@@ -21,6 +21,9 @@ namespace zavit.Domain.Places.VenuePlaces
                 venue.Name = Name;
 
             venue.Address = Address;
+            venue.Longitude = Longitude;
+            venue.Latitude = Latitude;
+
             Venues.Add(venue);
         }
     }

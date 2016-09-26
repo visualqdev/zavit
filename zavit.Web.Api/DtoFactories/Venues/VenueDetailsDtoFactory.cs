@@ -20,7 +20,9 @@ namespace zavit.Web.Api.DtoFactories.Venues
                 Name = venue.Name,
                 Address = venue.Address,
                 Id = venue.Id,
-                Activities = venue.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a))
+                Activities = venue.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a)),
+                Longitude = venue.Longitude,
+                Latitude = venue.Latitude
             };
 
             return venueActivity;

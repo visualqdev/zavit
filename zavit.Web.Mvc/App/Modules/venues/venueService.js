@@ -17,7 +17,7 @@ export function getVenueAtPlace(placeId) {
 export function joinVenue(options) {
     if (AccountService.currentUserAccount()) {
         VenueClient
-            .addVenue(options.placeId, "test venue name", options.activities)
+            .addVenue(options.placeId, null, options.activities)
             .then((venue) => letUserJoinVenue(venue.Id, options.activities))
             .catch();
     } else {

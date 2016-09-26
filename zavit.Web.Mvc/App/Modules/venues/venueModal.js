@@ -17,7 +17,7 @@ export function show(options = {}) {
 
     const modal = $(`<div id="joinVenueModal" class="map-popup" data-name="placeModal" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;"></div>`);
     $("#joinVenueModal").remove();
-    modal.appendTo("#home");
+    modal.appendTo("#mainContent");
     
     VenueService.getVenueAtPlace(placeId)
         .then(venue => showVenue(venue, placeId));
