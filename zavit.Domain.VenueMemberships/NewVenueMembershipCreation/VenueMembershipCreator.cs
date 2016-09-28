@@ -1,5 +1,6 @@
 ﻿using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Shared;
 using zavit.Domain.Venues;
 
 namespace zavit.Domain.VenueMemberships.NewVenueMembershipCreation
@@ -8,11 +9,13 @@ namespace zavit.Domain.VenueMemberships.NewVenueMembershipCreation
     {
         readonly IVenueRepository _venueRepository;
         readonly IActivityRepository _activityRepository;
+        readonly IDateTime _dateTime;
 
-        public VenueMembershipCreator(IVenueRepository venueRepository, IActivityRepository activityRepository)
+        public VenueMembershipCreator(IVenueRepository venueRepository, IActivityRepository activityRepository, IDateTime dateTime)
         {
             _venueRepository = venueRepository;
             _activityRepository = activityRepository;
+            _dateTime = dateTime;
         }
 
         public VenueMembership Create(Account account, NewVenueMembership newVenueMembership)
@@ -24,7 +27,8 @@ namespace zavit.Domain.VenueMemberships.NewVenueMembershipCreation
             {
                 Account = account,
                 Venue = venue,
-                Activities = activities
+                Activities = activities,
+                CreatedOn = _dateTime.UtcNow
             };
 
             return venueMembership;

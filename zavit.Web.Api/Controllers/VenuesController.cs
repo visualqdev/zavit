@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
@@ -8,7 +9,8 @@ namespace zavit.Web.Api.Controllers
     public class VenuesController : ApiController
     {
         const string PostRoute = "VenuesPost";
-        const string GetRoute = "VenuesDefaultGet";
+        const string GetDefaultRoute = "VenuesDefaultGet";
+        const string GetSingleRoute = "VenuesGet";
 
         readonly IVenueDtoService _venueDtoService;
 
@@ -18,10 +20,17 @@ namespace zavit.Web.Api.Controllers
         }
         
         [HttpGet]
-        [Route("~/api/places/{placeid}/venues/default", Name = GetRoute)]
+        [Route("~/api/places/{placeid}/venues/default", Name = GetDefaultRoute)]
         public async Task<VenueDetailsDto> GetDefault(string placeId)
         {
             return await _venueDtoService.GetDefaultVenue(placeId);
+        }
+
+        [HttpGet]
+        [Route("~/api/venues/{venueId}", Name = GetSingleRoute)]
+        public VenueDetailsDto GetVenue(int venueId)
+        {
+            return _venueDtoService.GetVenue(venueId);
         }
 
         [Authorize]

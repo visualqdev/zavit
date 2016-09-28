@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
 using zavit.Domain.Shared;
@@ -12,5 +13,6 @@ namespace zavit.Domain.VenueMemberships
         public virtual Account Account { get; set; }
         public virtual Venue Venue { get; set; }
         public virtual IEnumerable<Activity> Activities { get; set; }
+        public virtual DateTime CreatedOn { get; set; }
     }
 }

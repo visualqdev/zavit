@@ -18,9 +18,9 @@ function getVenues(memberships) {
     memberships.forEach(membership => {
         venuesMarkup += `
             <div class="row-fluid yourVenue">
-                <div class="yourVenueMap" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}">
+                <div class="yourVenueMap col-md-4" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}">
                 </div>
-                <div class="yourVenueDetails">
+                <div class="yourVenueDetails col-md-4">
                     <h3>${membership.Venue.Name}</h3>
                     <address>${membership.Venue.Address}</address>
                     <a href="#">View players</a><span> available to play here</span>

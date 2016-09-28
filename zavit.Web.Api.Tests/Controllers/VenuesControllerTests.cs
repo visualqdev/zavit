@@ -6,6 +6,7 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Web.Api.Controllers;
+using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
 
@@ -56,6 +57,23 @@ namespace zavit.Web.Api.Tests.Controllers
             static string PlaceId = "Place ID";
             static VenueDetailsDto _result;
             static VenueDetailsDto _defaultVenueDetailsDto;
+        }
+
+        class When_getting_a_venue
+        {
+            Because of = () => _result = Subject.GetVenue(VenueId);
+
+            It should_return_a_venue_provided_by_venue_dto_service = () => _result.ShouldEqual(_venueDto);
+
+            Establish context = () =>
+            {
+                _venueDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDtoService>().Stub(s => s.GetVenue(VenueId)).Return(_venueDto);
+            };
+
+            static int VenueId = 123;
+            static VenueDetailsDto _result;
+            static VenueDetailsDto _venueDto;
         }
     }
 }

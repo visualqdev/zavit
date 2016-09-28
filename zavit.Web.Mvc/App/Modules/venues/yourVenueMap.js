@@ -8,6 +8,7 @@ export function addMapToElements(jquerySelector) {
 
         const map = new Map({
             thisMapIsFixed: true,
+            zoom:15,
             position: {
                 coords: {
                     latitude: lat, 

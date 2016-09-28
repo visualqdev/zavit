@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Shared;
 using zavit.Domain.VenueMemberships.NewVenueMembershipCreation;
 using zavit.Domain.Venues;
 
@@ -24,6 +26,8 @@ namespace zavit.Domain.VenueMemberships.Tests.VenueMembershipCreation
             It should_set_the_activities_to_match_the_requested_new_venue_membership_activities =
                 () => _result.Activities.ShouldEqual(_activities);
 
+            It should_set_the_create_to_the_current_utc_date_time_ = () => _result.CreatedOn.ShouldEqual(Injected<IDateTime>().UtcNow);
+
             Establish context = () =>
             {
                 _account = NewInstanceOf<Account>();
@@ -37,6 +41,8 @@ namespace zavit.Domain.VenueMemberships.Tests.VenueMembershipCreation
 
                 _activities = new[] { NewInstanceOf<Activity>(), NewInstanceOf<Activity>() };
                 Injected<IActivityRepository>().Stub(r => r.GetActivities(_newVenueMembership.Activities)).Return(_activities);
+
+                Injected<IDateTime>().Stub(d => d.UtcNow).Return(new DateTime(2016, 9, 28, 6, 56, 0));
             };
 
             static VenueMembership _result;

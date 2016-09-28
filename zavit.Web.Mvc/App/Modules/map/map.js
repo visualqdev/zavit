@@ -17,6 +17,7 @@
         this.mapIsDraggable = options.mapIsDraggable || true;
         this.mapIsFixed = options.thisMapIsFixed || false;
         this.mapContainer = options.mapContainer || false;
+        this.zoomControl = options.zoomControl || true;
     }
    
     initialise() {
@@ -39,7 +40,8 @@
             scrollwheel: this.mapCanScroll,
             draggable: this.mapIsDraggable,
             disableDefaultUI:this.controlsAreDisabled,
-            disableDoubleClickZoom: true
+            disableDoubleClickZoom: true,
+            zoomControl:this.zoomControl
         });
         
         const projectionChanged = new Promise(function(resolve) {
@@ -60,8 +62,8 @@
 
         Promise.all([projectionChanged, mapHasLoaded])
             .then(value => {
-                this.executeWhenMapFullyLoaded();
                 this.map = map;
+                this.executeWhenMapFullyLoaded();
             }, 
             reason => {
                 console.log(reason);

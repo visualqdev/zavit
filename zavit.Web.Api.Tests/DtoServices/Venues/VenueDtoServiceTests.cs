@@ -68,6 +68,26 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             static VenueDetailsDto _venueDetailsDto;
             const string PlaceId = "Place ID";
         }
+
+        class When_getting_a_venue_details
+        {
+            Because of = () => _result = Subject.GetVenue(VenueId);
+
+            It should_return_a_dto_created_from_the_venue = () => _result.ShouldEqual(_venueDetailsDto);
+
+            Establish context = () =>
+            {
+                var venue = NewInstanceOf<Venue>();
+                Injected<IVenueRepository>().Stub(r => r.GetVenue(VenueId)).Return(venue);
+
+                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(venue)).Return(_venueDetailsDto);
+            };
+
+            static VenueDetailsDto _result;
+            static VenueDetailsDto _venueDetailsDto;
+            const int VenueId = 123;
+        }
     }
 }
 

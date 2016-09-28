@@ -23,6 +23,7 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
         {
             return _session.QueryOver<VenueMembership>()
                 .Where(m => m.Account.Id == accountId)
+                .OrderBy(m => m.CreatedOn).Desc
                 .List();
         }
     }

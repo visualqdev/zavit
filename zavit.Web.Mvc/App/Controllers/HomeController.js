@@ -1,7 +1,10 @@
 ﻿import { Map } from "../modules/map/map";
 import { Places } from "../modules/places/places";
+import * as MainContent from "../layout/mainContent";
 
 export function explore(position) {
+
+    MainContent.load();
 
     const map = new Map({ executeWhenMapFullyLoaded: getPlaces});
 

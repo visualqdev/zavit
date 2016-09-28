@@ -296,7 +296,10 @@ html, body {
             margin-left: -30px;
             clear:left;
         }
-    }          
+    }
+    .warning-border{
+        border: 1px solid @warning-bg;   
+    }
 }
 
 #nprogress {
@@ -447,12 +450,12 @@ html, body {
 }
 
 #yourVenues{
-    background-color: @page-bg;
-    border: 2px solid @page-border;
+    /*background-color: @page-bg;*/
+    /*border: 2px solid @page-border;*/
     margin-top: 10px;
     margin-bottom: 10px;
     #yourVenuesHeading{
-        border-bottom: 1px solid @page-border;
+        /*border-bottom: 1px solid @page-border;*/
         h2{
             text-align: center;
         }
@@ -461,6 +464,9 @@ html, body {
         text-align: center;
     }
     .yourVenue{
+        background-color: @page-bg;
+        float:left;
+        width:50%;
         border-bottom: 1px solid @page-border;
         padding-bottom: 10px;
         button {
@@ -479,8 +485,15 @@ html, body {
         .yourVenueMap{
             width: 200px;
             height: 200px;
+            
         }
+        .col-md-4 {
+                padding:0 !important;
+                margin:0;
+            }
         .yourVenueDetails{
+            margin-left:10px;
+            float:left;
         }
     }
 }

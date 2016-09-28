@@ -44,19 +44,22 @@ export class Places {
         $("#home").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
             e.preventDefault();
             this.clearPlaceInfo();
-            const marker = this.map.markers[$(e.currentTarget).attr("data-marker-index")],
-                placeId = $(e.currentTarget).attr("data-place-id");
+            const button = $(e.currentTarget),
+                marker = this.map.markers[button.attr("data-marker-index")],
+                placeId = button.attr("data-place-id"),
+                venueId = button.attr("data-venue-id");
             VenueModal.show({
                 markerX: marker.map.markerPoint.x,
                 markerY: marker.map.markerPoint.y,
                 placeId,
+                venueId,
                 map: this.map
             });
         });
 
         $(window).on("resize",() => { this.map.pannedBy = { x: 0, y: 0 };});
 
-        $("html").css("overflow", "hidden");
+        //$("html").css("overflow", "hidden");
     }
 
     getPlaces() {
@@ -73,7 +76,6 @@ export class Places {
     }
 
     clearPlaceInfo() {
-        $("#placeModal").remove();
         $("[data-name=placeModal]").remove();
     }
 
@@ -94,9 +96,7 @@ export class Places {
     }
 
     showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
-        $("[data-name=placeModal]").remove();
-        const placeModal = PlaceModal.modal(place, placeIndex, amountOfPlaces, map);
-        $(placeModal).appendTo("#mainContent");
+        PlaceModal.show(place, placeIndex, amountOfPlaces, map);
     }
 
     removeMarkers() {

@@ -15,6 +15,20 @@ export function getVenueAtPlace(placeId) {
     );
 }
 
+export function getVenue(venueId) {
+    const venuesUrl = `${ApiSettings.apiUrl}api/venues/${venueId}`;
+
+    return new Promise((resolve, reject) => 
+        $.ajax({
+            url: venuesUrl,
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            success: resolve,
+            error: reject
+        })
+    );
+}
+
 export function addVenue(placeId, name, activities) {
     const postVenueUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues`;
     const activityDtos = activities.map((activityId) => {

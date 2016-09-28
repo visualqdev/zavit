@@ -14,16 +14,27 @@ export function getVenueAtPlace(placeId) {
     });
 }
 
+export function getVenue(venueId) {
+    return new Promise((resolve, reject) => {
+        VenueClient.getVenue(venueId)
+            .then(venue => resolve(venue));
+    });
+}
+
 export function joinVenue(options) {
     if (AccountService.currentUserAccount()) {
-        VenueClient
-            .addVenue(options.placeId, null, options.activities)
-            .then((venue) => letUserJoinVenue(venue.Id, options.activities))
-            .catch();
+        if (options.venueId) {
+            letUserJoinVenue(options.venueId, options.activities);
+        } else {
+            VenueClient
+                .addVenue(options.placeId, null, options.activities)
+                .then((venue) => letUserJoinVenue(venue.Id, options.activities))
+                .catch();
+        }
     } else {
         PostLoginRedirect.storeRedirectUrl(joinVenueRedirectUrl);
-        Routes.goTo(Routes.login);
         VenueJoiningStorage.storeOptions(options);
+        Routes.goTo(Routes.login);
     }
 }
 

@@ -136,6 +136,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
+    <Content Include="app\layout\mainContent.js" />
     <Content Include="app\modules\account\postLoginRedirect.js" />
     <Content Include="app\controllers\venueController.js" />
     <Content Include="app\modules\clients\authorizedClient.js" />
@@ -265,6 +266,7 @@
     <Compile Include="Settings\GoogleApiSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
