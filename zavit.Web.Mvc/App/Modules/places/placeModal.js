@@ -17,6 +17,8 @@ export function show(place, placeIndex, amountOfPlaces, mapClass) {
     
     if (place.Venues && place.Venues.length === 1) {
         placeModal = getSingleVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass);
+    } else if (place.Venues && place.Venues.length > 1) {
+        placeModal = getMultiVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass);
     } else {
         placeModal = getPlaceModal(place, placeIndex, amountOfPlaces, mapClass);
     }
@@ -50,10 +52,12 @@ function getPlaceModal(place, placeIndex, amountOfPlaces, mapClass){
     return placeModal;
 }
 
-function getSingleVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass){
-    const width = 300,
-        height = 150,
+function getSingleVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass) {
+    const
         venue = place.Venues[0],
+        venueName = singleVenueNameHeading(place.Name, venue.Name),
+        width = 300,
+        height = venueName === "" ? 150 : 180,
         position = MapPositionAdjuster.adjustMapToShow({
             width,
             height,
@@ -67,7 +71,7 @@ function getSingleVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass){
                                 <h3 title="${place.Name}">${place.Name}</h3>
                                 <address title="${place.Address}">${place.Address}</address>
                             </header>
-                            ${singleVenueNameHeading(place.Name, venue.Name)}
+                            ${venueName}
                             <button type="button" class="btn btn-primary" id="placeModalBeAvailable" data-marker-index="${placeIndex}" data-place-id="${place.PlaceId}" data-venue-id="${venue.Id}">Be available to play here</button>
                             <span>                                
                                 ${showPreviousButton(placeIndex)}
@@ -84,4 +88,47 @@ function singleVenueNameHeading(placeName, venueName) {
     }
 
     return `<h4>${venueName}</h4>`;
+}
+
+function getMultiVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass) {
+    const width = 300,
+        height = 260,
+        position = MapPositionAdjuster.adjustMapToShow({
+            width,
+            height,
+            markerX: mapClass.map.markerPoint.x,
+            markerY: mapClass.map.markerPoint.y,
+            map: mapClass
+        });
+
+    const placeModal = `<div id="placeModal" data-name="placeModal" class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
+                            <header>                   
+                                <h3 title="${place.Name}">${place.Name}</h3>
+                                <address title="${place.Address}">${place.Address}</address>
+                            </header>
+                            <div style="float:left;overflow:auto;height:145px;">
+                                ${venueList(place, placeIndex)}
+                            </div>
+                            <span>                                
+                                ${showPreviousButton(placeIndex)}
+                                ${placeIndex + 1} of ${amountOfPlaces} 
+                                ${showNextButton(placeIndex, amountOfPlaces)}                                    
+                            </span>
+                        </div>`;
+    return placeModal;
+}
+
+function venueList(place, placeIndex) {
+    let venueListMarkup = "";
+    
+    place.Venues.forEach((venue) => {
+        venueListMarkup += `
+            <div>
+                <h4>${venue.Name}</h4>
+                <button type="button" class="btn btn-primary" id="placeModalBeAvailable" data-marker-index="${placeIndex}" data-place-id="${place.PlaceId}" data-venue-id="${venue.Id}">Be available to play here</button>
+            </div>
+            `;
+    });
+
+    return venueListMarkup;
 }

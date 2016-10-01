@@ -57,9 +57,9 @@ export function refreshUserAccount() {
                         authenticationSuccess(data);
                         resolve();
                     })
-                .catch(reject);
+                .catch(() => { reject({ status: 401 }); });
         } else {
-            reject();
+            reject({ status: 401 });
         }
     });
 }

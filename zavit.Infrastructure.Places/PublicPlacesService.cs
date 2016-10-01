@@ -13,7 +13,7 @@ namespace zavit.Infrastructure.Places
         readonly IGooglePlacesApi _googlePlacesApi;
         readonly IPlaceSearchResultsTransformer _publicPlacesTransformer;
         readonly IPlaceDetailsResultTransformer _placeDetailsResultTransformer;
-        public static string[] Keywords = { "sport", "gym", "tennis", "football", "suqash", "rugby", "cricket", "golf", "basketball" };
+        public static string[] Keywords = { "gym", "tennis", "football", "squash", "rugby", "cricket", "golf", "basketball", "badminton", "swimming" };
 
         public PublicPlacesService(IGooglePlacesApi googlePlacesApi, IPlaceSearchResultsTransformer publicPlacesTransformer, IPlaceDetailsResultTransformer placeDetailsResultTransformer)
         {
