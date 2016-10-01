@@ -76,6 +76,10 @@
       <Project>{bd4a859e-b7bd-4d6a-b579-87c3c1746114}</Project>
       <Name>zavit.Domain.VenueMemberships</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
+      <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
+      <Name>zavit.Domain.Venues</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

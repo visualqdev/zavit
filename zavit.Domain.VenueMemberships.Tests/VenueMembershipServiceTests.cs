@@ -35,6 +35,32 @@ namespace zavit.Domain.VenueMemberships.Tests
             static VenueMembership _venueMembership;
         }
 
+        class When_trying_to_add_a_user_to_the_venue_but_the_user_is_already_a_member
+        {
+            Because of = () => _result = Subject.AddUserToVenue(_account, _newVenueMembership);
+
+            It should_return_the_exisitng_venue_membership = () => _result.ShouldEqual(_venueMembership);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 123;
+
+                _newVenueMembership = NewInstanceOf<NewVenueMembership>();
+                _newVenueMembership.VenueId = 456;
+
+                _venueMembership = NewInstanceOf<VenueMembership>();
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMembership(_account.Id, _newVenueMembership.VenueId))
+                    .Return(_venueMembership);
+            };
+
+            static Account _account;
+            static NewVenueMembership _newVenueMembership;
+            static VenueMembership _result;
+            static VenueMembership _venueMembership;
+        }
+
         class When_getting_venue_memberships
         {
             Because of = () => _result = Subject.GetVenueMemberships(_account);

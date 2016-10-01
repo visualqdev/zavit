@@ -39,7 +39,7 @@ namespace zavit.Web.Api.DtoServices.VenueMemberships
             var venueMemberships = _venueMembershipService.GetVenueMemberships(account);
 
             var venueMembershipDtos = venueMemberships.Select(m => _venueMembershipDtoFactory.CreateItem(m));
-            return venueMembershipDtos;
+            return venueMembershipDtos.ToList();
         }
     }
 }

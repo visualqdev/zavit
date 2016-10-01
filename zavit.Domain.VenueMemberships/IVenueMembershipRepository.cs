@@ -6,5 +6,6 @@ namespace zavit.Domain.VenueMemberships
     {
         void Save(VenueMembership venueMembership);
         IEnumerable<VenueMembership> GetMemberships(int accountId);
+        VenueMembership GetMembership(int accountId, int venueId);
     }
 }

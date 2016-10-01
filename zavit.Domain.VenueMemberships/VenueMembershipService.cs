@@ -17,7 +17,11 @@ namespace zavit.Domain.VenueMemberships
 
         public VenueMembership AddUserToVenue(Account account, NewVenueMembership newVenueMembership)
         {
-            var venueMembership = _venueMembershipCreator.Create(account, newVenueMembership);
+            var venueMembership = _venueMembershipRepository.GetMembership(account.Id, newVenueMembership.VenueId);
+
+            if (venueMembership != null) return venueMembership;
+
+            venueMembership = _venueMembershipCreator.Create(account, newVenueMembership);
 
             _venueMembershipRepository.Save(venueMembership);
             return venueMembership;
