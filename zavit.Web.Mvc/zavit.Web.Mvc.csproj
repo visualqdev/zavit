@@ -139,6 +139,7 @@
     <Content Include="app\layout\mainContent.js" />
     <Content Include="app\modules\account\postLoginRedirect.js" />
     <Content Include="app\controllers\venueController.js" />
+    <Content Include="app\modules\activities\activityClient.js" />
     <Content Include="app\modules\clients\authorizedClient.js" />
     <Content Include="app\modules\loading\info.js" />
     <Content Include="app\modules\loading\progress.js" />

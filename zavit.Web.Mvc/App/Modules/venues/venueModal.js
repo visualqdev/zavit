@@ -1,5 +1,6 @@
 ﻿import * as VenueService from "./venueService";
 import * as MapPositionAdjuster from "../map/mapPositionAdjuster";
+import * as ActivityClient from "../activities/activityClient";
 
 export function show(options = {}) {
     const width = 300,
@@ -32,10 +33,6 @@ export function show(options = {}) {
 }
 
 function showVenue(venue, placeId) {
-    const activitiesInColumn = Math.ceil((venue.Activities.length) / 2);
-    const leftColumnActivities = venue.Activities;
-    const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
-
     const venueContainer = $(`
         <div id="joinVenueContainer">
             <header>
@@ -44,24 +41,40 @@ function showVenue(venue, placeId) {
             </header>
             <h4>I am available for some</h4>
             <div class="control-group" id="joinVenueChooseActivities">                
-                <div class="controls span2">
-                    ${activityCheckboxes(leftColumnActivities)}
-                </div>
-                <div class="controls span2">
-                    ${activityCheckboxes(rightColumnActivities)}                    
-                </div>
+                ${getActivitiesMarkup(venue.Activities)}
                 <div class="span4 joinVenueOtherActivitiesContainer">
                     <a href="" id="joinVenueOtherActivities">Other activity</a>
                 </div>
             </div>
             <button type="button" class="btn btn-primary" id="joinVenueSubmit">Make me available here</button>
         </div>`);
+
     $("#joinVenueModal").html("");
     venueContainer.appendTo("#joinVenueModal");
+
     venueContainer.find("#joinVenueSubmit").click((e) => {
         e.preventDefault();
         joinVenue(placeId, venue.Id);
     });
+
+    venueContainer.find("#joinVenueOtherActivities").click((e) => {
+        e.preventDefault();
+        loadAllActivities();
+    });
+}
+
+function getActivitiesMarkup(activities) {
+    const activitiesInColumn = Math.ceil((activities.length) / 2);
+    const leftColumnActivities = activities;
+    const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
+
+    return `
+        <div class="controls span2">
+            ${activityCheckboxes(leftColumnActivities)}
+        </div>
+        <div class="controls span2">
+            ${activityCheckboxes(rightColumnActivities)}                    
+        </div>`;
 }
 
 function activityCheckboxes(activities) {
@@ -92,4 +105,12 @@ function joinVenue(placeId, venueId) {
         placeId,
         venueId
     });
+}
+
+function loadAllActivities() {
+    ActivityClient
+        .getAllActivities()
+        .then(activities => {
+            $("#joinVenueChooseActivities").html(getActivitiesMarkup(activities));
+        });
 }

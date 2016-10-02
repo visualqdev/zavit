@@ -119,6 +119,7 @@
     <Compile Include="Authorization\IClaimsIdentityProviderFactory.cs" />
     <Compile Include="Authorization\UserContext.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
@@ -161,7 +162,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dtos\Activities\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>

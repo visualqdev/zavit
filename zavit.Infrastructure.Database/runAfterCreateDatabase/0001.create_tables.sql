@@ -72,7 +72,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Activity](
 	[ActivityId] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](255) NULL
+	[Name] [nvarchar](255) NULL,
+	[IsDefault] [bit] DEFAULT 0,
 PRIMARY KEY CLUSTERED 
 (
 	[ActivityId] ASC
@@ -122,6 +123,34 @@ GO
 
 CREATE TABLE [dbo].[ActivityToVenue](
 	[VenueId] [int] NOT NULL,
+	[ActivityId] [int] NOT NULL
+)
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VenueMembership](
+	[VenueMembershipId] [int] IDENTITY(1,1) NOT NULL,
+	[AccountId] [int] NULL,
+	[VenueId] [int] NULL,
+	[CreatedOn] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[VenueMembershipId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+)
+
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ActivityToVenueMembership](
+	[VenueMembershipId] [int] NOT NULL,
 	[ActivityId] [int] NOT NULL
 )
 

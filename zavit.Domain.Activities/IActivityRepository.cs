@@ -6,5 +6,6 @@ namespace zavit.Domain.Activities
     {
         IEnumerable<Activity> GetDefaultActivities();
         IEnumerable<Activity> GetActivities(IEnumerable<int> activityIds);
+        IEnumerable<Activity> GetAllActivities();
     }
 }

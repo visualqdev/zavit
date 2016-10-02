@@ -17,6 +17,8 @@ namespace zavit.Infrastructure.Activities
         public IEnumerable<Activity> GetDefaultActivities()
         {
             return _session.QueryOver<Activity>()
+                .Where(a => a.IsDefault)
+                .OrderBy(a => a.Name).Asc
                 .List();
         }
 
@@ -24,6 +26,13 @@ namespace zavit.Infrastructure.Activities
         {
             return _session.QueryOver<Activity>()
                 .WhereRestrictionOn(a => a.Id).IsIn(activityIds.ToArray())
+                .List();
+        }
+
+        public IEnumerable<Activity> GetAllActivities()
+        {
+            return _session.QueryOver<Activity>()
+                .OrderBy(a => a.Name).Asc
                 .List();
         }
     }
