@@ -124,7 +124,9 @@
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDetailsDtoFactory.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
+    <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />

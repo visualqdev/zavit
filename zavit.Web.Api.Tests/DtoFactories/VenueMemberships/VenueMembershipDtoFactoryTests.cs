@@ -29,8 +29,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
                 _venueMembership = NewInstanceOf<VenueMembership>();
                 _venueMembership.Venue = NewInstanceOf<Venue>();
 
-                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
-                Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(_venueMembership.Venue)).Return(_venueDetailsDto);
+                _venueDetailsDto = NewInstanceOf<MembershipVenueDto>();
+                Injected<IMembershipVenueDtoFactory>().Stub(f => f.Create(_venueMembership.Venue)).Return(_venueDetailsDto);
 
                 var activity = NewInstanceOf<Activity>();
                 var otherActivity = NewInstanceOf<Activity>();
@@ -47,7 +47,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
             static VenueMembershipDto _result;
             static VenueActivityDto _activityDto;
             static VenueActivityDto _otherActivityDto;
-            static VenueDetailsDto _venueDetailsDto;
+            static MembershipVenueDto _venueDetailsDto;
         }
     }
 }

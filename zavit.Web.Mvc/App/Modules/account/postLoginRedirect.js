@@ -3,8 +3,8 @@
 const urlStorageKey = "post_login_redirect";
 
 export function processRedirect() {
-    const url = Storage.getString(urlStorageKey);
-    Storage.removeItem(urlStorageKey);
+    const url = Storage.getSessionString(urlStorageKey);
+    Storage.removeSessionItem(urlStorageKey);
     if (url) {
         window.location.replace(url);
         return true;
@@ -13,5 +13,5 @@ export function processRedirect() {
 }
 
 export function storeRedirectUrl(url) {
-    Storage.storeString(urlStorageKey, url);
+    Storage.storeSessionString(urlStorageKey, url);
 }

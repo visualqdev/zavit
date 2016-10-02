@@ -49,6 +49,7 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<INewVenueProvider>().ImplementedBy<NewVenueProvider>().LifestyleTransient(),
                 Component.For<IVenueMembershipDtoService>().ImplementedBy<VenueMembershipDtoService>().LifestyleTransient(),
                 Component.For<IVenueMembershipDtoFactory>().ImplementedBy<VenueMembershipDtoFactory>().LifestyleTransient(),
+                Component.For<IMembershipVenueDtoFactory>().ImplementedBy<MembershipVenueDtoFactory>().LifestyleTransient(),
                 Component.For<INewVenueMembershipProvider>().ImplementedBy<NewVenueMembershipProvider>().LifestyleTransient());
         }
     }

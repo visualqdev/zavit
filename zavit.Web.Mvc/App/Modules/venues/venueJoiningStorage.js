@@ -3,9 +3,9 @@
 const venueJoiningOptionsKey = "venue_joining_options_key";
 
 export function storeOptions(options) {
-    Storage.storeObject(venueJoiningOptionsKey, options);
+    Storage.storeSessionObject(venueJoiningOptionsKey, options);
 }
 
 export function getOptions() {
-    return Storage.getObject(venueJoiningOptionsKey);
+    return Storage.getSessionObject(venueJoiningOptionsKey);
 }

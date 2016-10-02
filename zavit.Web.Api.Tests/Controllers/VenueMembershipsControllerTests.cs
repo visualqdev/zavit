@@ -32,7 +32,7 @@ namespace zavit.Web.Api.Tests.Controllers
                 _venueMembershipDto = NewInstanceOf<VenueMembershipDto>();
                 
                 _createdVenueMembershipDto = NewInstanceOf<VenueMembershipDto>();
-                _createdVenueMembershipDto.Venue = NewInstanceOf<VenueDetailsDto>();
+                _createdVenueMembershipDto.Venue = NewInstanceOf<MembershipVenueDto>();
                 _createdVenueMembershipDto.Venue.Id = 123;
                 Injected<IVenueMembershipDtoService>().Stub(s => s.AddVenueMembership(_venueMembershipDto)).Return(_createdVenueMembershipDto);
             };

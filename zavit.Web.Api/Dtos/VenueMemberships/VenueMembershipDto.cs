@@ -5,7 +5,7 @@ namespace zavit.Web.Api.Dtos.VenueMemberships
 {
     public class VenueMembershipDto
     {
-        public VenueDetailsDto Venue { get; set; }
+        public MembershipVenueDto Venue { get; set; }
         public IEnumerable<VenueActivityDto> Activities { get; set; }
     }
 }

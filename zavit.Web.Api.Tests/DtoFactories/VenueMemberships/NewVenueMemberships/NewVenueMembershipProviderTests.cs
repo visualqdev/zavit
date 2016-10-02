@@ -23,7 +23,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships.NewVenueMemberships
             Establish context = () =>
             {
                 _venueMembershipDto = NewInstanceOf<VenueMembershipDto>();
-                _venueMembershipDto.Venue = NewInstanceOf<VenueDetailsDto>();
+                _venueMembershipDto.Venue = NewInstanceOf<MembershipVenueDto>();
                 _venueMembershipDto.Venue.Id = 123;
 
                 _activity = NewInstanceOf<VenueActivityDto>();

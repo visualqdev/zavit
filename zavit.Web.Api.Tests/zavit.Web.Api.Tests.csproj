@@ -79,6 +79,7 @@
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />
