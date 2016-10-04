@@ -241,6 +241,7 @@
     <Content Include="Fonts\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="Fonts\font-awesome\scss\_variables.scss" />
+    <Content Include="CSS\venues.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

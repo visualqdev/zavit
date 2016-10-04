@@ -2,35 +2,44 @@
     return `
         <div id="yourVenues" class="container">
             <div id="yourVenuesHeading">
-                <h2>Your venues</h2>
+                <h2 id="mainHeading"><i class="fa fa-map-marker" aria-hidden="true"></i>Your venues</h2>
             </div>
             ${getVenues(options)}
-            <div id="yourVenuesAddMoreContainer">
-                <a href="">Add more venues</a>
-            </div>
         </div>
         `;
 }
 
 function getVenues(memberships) {
+
     let venuesMarkup = "";
 
     memberships.forEach(membership => {
         venuesMarkup += `
-            <div class="row-fluid yourVenue">
-                <div class="yourVenueMap col-md-4" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}">
-                </div>
-                <div class="yourVenueDetails col-md-4">
-                    <h3>${membership.Venue.Name}</h3>
-                    <address>${membership.Venue.Address}</address>
-                    <a href="#">View players</a><span> available to play here</span>
-                    <div>
+            <div class="col-sm-6 yourVenue">
+                <div class="yourVenueMap" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}"></div>
+                <div class="yourVenueDetails">
+                    <div class="content">
+                        <h3>${membership.Venue.Name}</h3>
+                        <address>${membership.Venue.Address}</address>
+                        <span><a href="#">View players</a>  available to play here</span>
                         <button type="button" class="btn btn-primary" id="yourVenuesView">Invite others to play here</button>
                     </div>
                 </div>
             </div>
-            `;
+        `;
     });
+
+    venuesMarkup += `
+            <div class="col-sm-6 addVenue">
+                <a href="/"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                <div class="addDetails">
+                    <div class="content">
+                        <h3>Add more venues</h3>
+                        <span>Making yourself available at other venues is a great way to find new competion, remember they can provide you with a guest pass!</span>
+                    </div>
+                </div>
+            </div>
+        `;
 
     return venuesMarkup;
 }
