@@ -1,0 +1,151 @@
+﻿@import '.\libraries\colours';
+#yourVenues {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    #yourVenuesHeading {
+        float:left;
+        width:100%;
+        margin-bottom:20px;
+    }
+    #yourVenuesAddMoreContainer {
+        text-align: left;
+        padding:20px 0;
+        float:left;
+    }
+    .col-sm-6 {
+        padding:0 !important;
+        margin:0;
+    }
+
+    @media (max-width: 996px) {
+        .yourVenue, .addVenue {
+            float: left;
+            width: 100%;
+        }
+        .yourVenueDetails{ 
+            width:auto;
+        }
+    }
+
+    .yourVenue, .addVenue {
+
+        height:200px;
+        margin-bottom:10px;
+        position: relative;
+    
+        @media (min-width: 992px) {
+            .col-md-4 {
+                width:auto;
+            }
+        }
+
+        a {
+            color:@text-link;
+        }
+        h3 {
+            font-size:18px;
+        }
+
+        button {
+            background-color:@call-to-action;
+            border:@call-to-action;
+            margin:30px 0 0 0;
+            color:@nav-bg; 
+            max-width:200px;
+            position:relative;
+            float:right;
+
+            &:hover{
+                color: @call-to-action-hover-color;
+                background-color: @call-to-action-hover-bg;
+                border: @call-to-action-hover-bg;
+            }
+        }
+        .yourVenueMap, > a {
+
+            width: 35%;
+            height: 200px;
+            float:left;
+            padding:0;
+            margin:0;
+            clear:left;
+            
+        }
+        > a {
+            background-color:@plus-button-bg;
+            color:@page-bg;
+            text-align:center;
+            .fa {
+                height:100%;
+                font-size:200px;
+                font-weight:normal;
+            }
+        }
+        > a:hover {
+            background-color:@login-button-hover-bg;
+        }
+        .yourVenueDetails, .addDetails {
+            background-color: @page-bg;
+            height:100%;
+            width:63%;
+            height: 200px;
+            overflow:auto;
+            position:relative;
+
+           .content {
+               h3, address, span {
+                    padding:0;
+                   margin-bottom:10px;
+               }
+               address, span {
+                   font-size:16px;
+               }
+               address, span {
+                   color:@logo;
+               }
+               margin:20px 20px;
+           }
+        }
+
+        @media (max-width: 996px) {
+            .yourVenueDetails, .addDetails { 
+                width:auto;
+            }
+        }
+
+        @media (max-width: 457px) {
+            button {
+                    width:86px;
+                    overflow:hidden;
+                    margin:8px 0 0 0;
+                    clear:both;
+                }
+            .btn {
+                padding-left:5px;
+            }
+            > a {
+                vertical-align:central;
+                .fa {
+                    font-size:100px;
+                    margin-top:50px;
+                }
+            }
+            .yourVenueDetails, .addDetails{
+                .content {
+                    h3 {
+                        font-size:15px;
+                        font-weight:bold;
+                    }
+                    address, span {
+                        font-size:14px;
+                        width:100%;
+                        float:left;
+                        clear:left;
+                        margin-bottom:2px;
+                    }
+                }
+            }
+        }
+    }
+}

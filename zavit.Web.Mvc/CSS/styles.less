@@ -1,9 +1,26 @@
 ﻿@import '.\libraries\colours';
+@import 'venues';
 
 html, body {
 	height: 100%;
 	width:100%;
     margin:0;
+}
+h1,h2,h3,h4,h5,h6 {
+    color:@logo;
+}
+h2#mainHeading {
+    color:@nav-bg;
+    .fa {
+        margin-right:10px !important;
+        
+    }
+    font-size:36px !important;
+    padding:10px;
+    display:inline;
+    background-color:@page-bg;
+    float:left;
+    font-weight:normal;
 }
 
 .contentContainer {
@@ -61,7 +78,7 @@ html, body {
         font-size:18px;
     }
     .navbar-header {
-        width:70%;
+        width:65%;
         a {
 	        color: @logo;
 	        font-size: 30px;
@@ -113,13 +130,12 @@ html, body {
         }
     }
 
-   
-   
     @media screen and (min-width: 768px) {
         .navbar-form {
             width: 85%;
         }
     }
+
     @media screen and (min-width: 0px ) and (max-width:800px) {
         .navbar-header {
         width:100%;
@@ -134,8 +150,8 @@ html, body {
             width: 80%;
         }
     }
+
     @media screen and (max-width: 800px) {
-       
         li.active a {
 	        border: none;
         }
@@ -452,56 +468,6 @@ html, body {
         border-color:rgba(0,0,0,0.2)
     }
 }
-
-#yourVenues{
-    /*background-color: @page-bg;*/
-    /*border: 2px solid @page-border;*/
-    margin-top: 10px;
-    margin-bottom: 10px;
-    #yourVenuesHeading{
-        /*border-bottom: 1px solid @page-border;*/
-        h2{
-            text-align: center;
-        }
-    }
-    #yourVenuesAddMoreContainer{
-        text-align: center;
-    }
-    .yourVenue{
-        background-color: @page-bg;
-        float:left;
-        width:50%;
-        border-bottom: 1px solid @page-border;
-        padding-bottom: 10px;
-        button {
-            background-color:@call-to-action;
-            border:@call-to-action;
-            margin:10px 0 0 0;
-            color:@nav-bg;            
-            width:100%;
-            max-width:200px;
-            &:hover{
-                color: @call-to-action-hover-color;
-                background-color: @call-to-action-hover-bg;
-                border: @call-to-action-hover-bg;
-            }
-        }
-        .yourVenueMap{
-            width: 200px;
-            height: 200px;
-            
-        }
-        .col-md-4 {
-                padding:0 !important;
-                margin:0;
-            }
-        .yourVenueDetails{
-            margin-left:10px;
-            float:left;
-        }
-    }
-}
-
 #infoPopUp {
     width:300px;
     background-color:@nav-bg;
@@ -513,3 +479,5 @@ html, body {
     color:@info-text;
     visibility:hidden;
 }
+
+
