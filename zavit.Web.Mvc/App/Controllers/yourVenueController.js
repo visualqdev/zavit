@@ -76,7 +76,7 @@ export function index(venueId) {
     MainContent.append(view);
     YourVenueMap.addMapTo(".yourVenueMap");
 
-    const venueMembers = new [
+    const venueMembers = [
     {
         Id: 1,
         DisplayName: "John Paul",
@@ -127,4 +127,7 @@ export function index(venueId) {
             }
         ]
     }];
+
+    const venueMembersPartial = VenueMembersPartial.getView(venueMembers);
+    $("#yourVenueMembers").append(venueMembersPartial);
 }
