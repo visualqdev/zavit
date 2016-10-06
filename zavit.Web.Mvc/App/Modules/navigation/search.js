@@ -1,22 +1,29 @@
-﻿import * as HomeController from "../../controllers/homeController";
-import * as Geocode from "../map/geocode";
+﻿import * as Geocode from "../map/geocode";
 
 
-function explore(position) {
-    HomeController.explore(position);
+function searchByArea(inputValue, places) {
+
+    function load(position) {
+
+        places.map.map.markers = [];
+        places.removeMarkers();
+        places.clearPlaceInfo();
+
+        places.name = "";
+        places.map.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+        places.map.position = position;
+        places.getPlaces();
+    }
+
+    if (inputValue !== "") Geocode.getGeoCodeByAddress(inputValue, load);
 }
 
-function searchByArea(inputValue) {
-    $("#placeModal").remove();
-    if (inputValue !== "") Geocode.getGeoCodeByAddress(inputValue, explore);
-}
+function searchByVenueName(inputValue, places) {
 
-function searchByPlaceName(inputValue, places) {
-
-    $("#placeModal").remove();
-
+    places.map.map.markers = [];
     places.removeMarkers();
     places.clearPlaceInfo();
+
     places.name = inputValue;
     places.getPlaces();
 }
@@ -30,8 +37,10 @@ function registerEvents(places) {
 
         const searchType = $(this).attr("data-type"),
              searchTypePlaceholderText = $(this).attr("data-placeHolderText");
+
         $("#search_concept").text(searchType);
         $("#search_input").attr('placeholder', searchTypePlaceholderText);
+
     });
 
     $("#searchButton").on("click", function(e) {
@@ -40,9 +49,9 @@ function registerEvents(places) {
         const inputValue = $(this).closest("span").prev("input").val(),
             searchConcept = $(this).closest("div.input-group").find("#search_concept").text();
 
-        if (searchConcept === "Area") searchByArea(inputValue);
+        if (searchConcept === "Area") searchByArea(inputValue, places);
 
-        if (searchConcept === "Place") searchByPlaceName(inputValue, places);
+        if (searchConcept === "Venue") searchByVenueName(inputValue, places);
 
     });
 }
