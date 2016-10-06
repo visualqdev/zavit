@@ -1,13 +1,13 @@
 ﻿import { Map } from "../map/map";
 
-export function addMapTo(jquerySelector) {
+export function addMapToElements(jquerySelector) {
     $(jquerySelector).each((index, element) => {
         const container = $(element);
         const lat = container.attr("data-venue-lat");
         const lng = container.attr("data-venue-lng");
 
         const map = new Map({
-            thisMapIsFixed: false,
+            thisMapIsFixed: true,
             zoom:15,
             position: {
                 coords: {

@@ -3,6 +3,7 @@ export const logout = "logout";
 export const home = "";
 export const joinVenue = "joinvenue";
 export const yourVenues = "yourvenues";
+export const yourVenue = "yourvenue";
 
 export function goTo(routeName) {
     hasher.setHash(routeName);

@@ -135,6 +135,7 @@
     <Content Include="app\controllers\externalLoginController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\yourVenueController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
     <Content Include="app\layout\mainContent.js" />
     <Content Include="app\modules\account\postLoginRedirect.js" />
@@ -155,8 +156,11 @@
     <Content Include="app\modules\venues\venueModal.js" />
     <Content Include="app\modules\venues\venueService.js" />
     <Content Include="app\modules\venues\yourVenueMap.js" />
+    <Content Include="app\modules\venues\yourVenuesMap.js" />
     <Content Include="app\routing\routes.js" />
-    <Content Include="app\views\yourVenues\index.js" />
+    <Content Include="app\views\yourVenues\indexView.js" />
+    <Content Include="app\views\yourVenue\indexView.js" />
+    <Content Include="app\views\yourVenue\venueMembersPartial.js" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />
     <Content Include="app\modules\account\externalAccountClient.js" />

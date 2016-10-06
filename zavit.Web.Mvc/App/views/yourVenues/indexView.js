@@ -1,4 +1,6 @@
-﻿export function getView(options) {
+﻿import * as Routes from "../../routing/routes";
+
+export function getView(options) {
     return `
         <div id="yourVenues" class="container">
             <div id="yourVenuesHeading">
@@ -19,7 +21,7 @@ function getVenues(memberships) {
                 <div class="yourVenueMap" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}"></div>
                 <div class="yourVenueDetails">
                     <div class="content">
-                        <h3>${membership.Venue.Name}</h3>
+                        <h3><a href="#/${Routes.yourVenue}/${membership.Venue.Id}">${membership.Venue.Name}</a></h3>
                         <address>${membership.Venue.Address}</address>
                         <span><a href="#">View players</a>  available to play here</span>
                         <button type="button" class="btn btn-primary" id="yourVenuesView">Invite others to play here</button>
