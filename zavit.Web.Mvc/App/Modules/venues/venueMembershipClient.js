@@ -19,7 +19,6 @@ export function joinVenue(venueId, activities) {
             .send({
                 url: postVenueMembershipUrl,
                 type: "post",
-                contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data)
             })
             .then(resolve)
@@ -33,9 +32,18 @@ export function getVenueMemberships() {
         AuthorizedClient
             .send({
                 url: getVenueMembershipsUrl,
-                type: "get",
-                contentType: "application/json; charset=utf-8"
+                type: "get"
             })
             .then(resolve)
             .catch(reject));
+}
+
+export function getVenueMembership(venueId) {
+    const getVenueMembershipUrl = `${ApiSettings.apiUrl}api/venues/${venueId}/venuememberships`;
+
+    return AuthorizedClient
+        .send({
+            url: getVenueMembershipUrl,
+            type: "get"
+        });
 }

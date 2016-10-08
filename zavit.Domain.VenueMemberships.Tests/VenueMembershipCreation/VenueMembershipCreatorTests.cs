@@ -28,6 +28,8 @@ namespace zavit.Domain.VenueMemberships.Tests.VenueMembershipCreation
 
             It should_set_the_create_to_the_current_utc_date_time_ = () => _result.CreatedOn.ShouldEqual(Injected<IDateTime>().UtcNow);
 
+            It should_inform_venue_about_the_activities_required_for_the_membership = () => _venue.AssertWasCalled(v => v.AddActivities(_activities));
+
             Establish context = () =>
             {
                 _account = NewInstanceOf<Account>();
@@ -39,7 +41,7 @@ namespace zavit.Domain.VenueMemberships.Tests.VenueMembershipCreation
                 _venue = NewInstanceOf<Venue>();
                 Injected<IVenueRepository>().Stub(r => r.GetVenue(_newVenueMembership.VenueId)).Return(_venue);
 
-                _activities = new[] { NewInstanceOf<Activity>(), NewInstanceOf<Activity>() };
+                _activities = new List<Activity> { NewInstanceOf<Activity>(), NewInstanceOf<Activity>() };
                 Injected<IActivityRepository>().Stub(r => r.GetActivities(_newVenueMembership.Activities)).Return(_activities);
 
                 Injected<IDateTime>().Stub(d => d.UtcNow).Return(new DateTime(2016, 9, 28, 6, 56, 0));
@@ -49,7 +51,7 @@ namespace zavit.Domain.VenueMemberships.Tests.VenueMembershipCreation
             static Account _account;
             static NewVenueMembership _newVenueMembership;
             static Venue _venue;
-            static IEnumerable<Activity> _activities;
+            static IList<Activity> _activities;
         }
     }
 }

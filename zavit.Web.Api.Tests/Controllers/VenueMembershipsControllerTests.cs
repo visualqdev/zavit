@@ -57,6 +57,25 @@ namespace zavit.Web.Api.Tests.Controllers
             static IEnumerable<VenueMembershipDto> _result;
             static IEnumerable<VenueMembershipDto> _membershipDtos;
         }
+
+        class When_getting_a_venue_membership
+        {
+            Because of = () => _result = Subject.Get(_venueId);
+
+            It should_return_the_venue_membership_details_dto = () => _result.ShouldEqual(_venueMembershipDetailsDto);
+
+            Establish context = () =>
+            {
+                _venueMembershipDetailsDto = NewInstanceOf<VenueMembershipDetailsDto>();
+                Injected<IVenueMembershipDetailsDtoService>()
+                    .Stub(s => s.GetMembershipDetails(_venueId))
+                    .Return(_venueMembershipDetailsDto);
+            };
+
+            const int _venueId = 1;
+            static VenueMembershipDetailsDto _result;
+            static VenueMembershipDetailsDto _venueMembershipDetailsDto;
+        }
     }
 }
 

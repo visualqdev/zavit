@@ -22,6 +22,7 @@ namespace zavit.Domain.VenueMemberships.NewVenueMembershipCreation
         {
             var venue = _venueRepository.GetVenue(newVenueMembership.VenueId);
             var activities = _activityRepository.GetActivities(newVenueMembership.Activities);
+            venue.AddActivities(activities);
 
             var venueMembership = new VenueMembership
             {

@@ -3,6 +3,7 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Activities;
 using zavit.Domain.VenueMemberships.NewVenueMembershipCreation;
 
 namespace zavit.Domain.VenueMemberships.Tests 
@@ -35,9 +36,11 @@ namespace zavit.Domain.VenueMemberships.Tests
             static VenueMembership _venueMembership;
         }
 
-        class When_trying_to_add_a_user_to_the_venue_but_the_user_is_already_a_member
+        class When_trying_to_add_a_user_to_the_venue_but_the_user_is_already_a_member_with_different_activities
         {
             Because of = () => _result = Subject.AddUserToVenue(_account, _newVenueMembership);
+
+            It should_update_the_membership = () => Injected<IVenueMembershipRepository>().AssertWasCalled(r => r.Update(_venueMembership));
 
             It should_return_the_exisitng_venue_membership = () => _result.ShouldEqual(_venueMembership);
 
@@ -48,8 +51,16 @@ namespace zavit.Domain.VenueMemberships.Tests
 
                 _newVenueMembership = NewInstanceOf<NewVenueMembership>();
                 _newVenueMembership.VenueId = 456;
+                _newVenueMembership.Activities = new List<int> { 1, 2 };
+
+                _activities = new List<Activity> { NewInstanceOf<Activity>(), NewInstanceOf<Activity>() };
+                Injected<IActivityRepository>()
+                    .Stub(r => r.GetActivities(_newVenueMembership.Activities))
+                    .Return(_activities);
 
                 _venueMembership = NewInstanceOf<VenueMembership>();
+                _venueMembership.Stub(m => m.UpdateActivities(_activities)).Return(true);
+
                 Injected<IVenueMembershipRepository>()
                     .Stub(r => r.GetMembership(_account.Id, _newVenueMembership.VenueId))
                     .Return(_venueMembership);
@@ -59,6 +70,44 @@ namespace zavit.Domain.VenueMemberships.Tests
             static NewVenueMembership _newVenueMembership;
             static VenueMembership _result;
             static VenueMembership _venueMembership;
+            static List<Activity> _activities;
+        }
+
+        class When_trying_to_add_a_user_to_the_venue_but_the_user_is_already_a_member_with_same_activities
+        {
+            Because of = () => _result = Subject.AddUserToVenue(_account, _newVenueMembership);
+
+            It should_not_try_update_the_membership = () => Injected<IVenueMembershipRepository>().AssertWasNotCalled(r => r.Update(_venueMembership));
+
+            It should_return_the_exisitng_venue_membership = () => _result.ShouldEqual(_venueMembership);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 123;
+
+                _newVenueMembership = NewInstanceOf<NewVenueMembership>();
+                _newVenueMembership.VenueId = 456;
+                _newVenueMembership.Activities = new List<int> { 1, 2 };
+
+                _activities = new List<Activity> { NewInstanceOf<Activity>(), NewInstanceOf<Activity>() };
+                Injected<IActivityRepository>()
+                    .Stub(r => r.GetActivities(_newVenueMembership.Activities))
+                    .Return(_activities);
+
+                _venueMembership = NewInstanceOf<VenueMembership>();
+                _venueMembership.Stub(m => m.UpdateActivities(_activities)).Return(false);
+
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMembership(_account.Id, _newVenueMembership.VenueId))
+                    .Return(_venueMembership);
+            };
+
+            static Account _account;
+            static NewVenueMembership _newVenueMembership;
+            static VenueMembership _result;
+            static VenueMembership _venueMembership;
+            static List<Activity> _activities;
         }
 
         class When_getting_venue_memberships
@@ -81,6 +130,30 @@ namespace zavit.Domain.VenueMemberships.Tests
             static Account _account;
             static IEnumerable<VenueMembership> _result;
             static IEnumerable<VenueMembership> _venueMemberships;
+        }
+
+        class When_getting_a_venue_membership
+        {
+            Because of = () => _result = Subject.GetVenueMembership(_account, VenueId);
+
+            It should_return_the_venue_membership_for_the_specified_user_and_venue = 
+                () => _result.ShouldEqual(_venueMembership);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 456;
+
+                _venueMembership = NewInstanceOf<VenueMembership>();
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMembership(_account.Id, VenueId))
+                    .Return(_venueMembership);
+            };
+
+            static VenueMembership _result;
+            static Account _account;
+            static VenueMembership _venueMembership;
+            const int VenueId = 123;
         }
     }
 }

@@ -8,5 +8,6 @@ namespace zavit.Domain.VenueMemberships
     {
         VenueMembership AddUserToVenue(Account account, NewVenueMembership newVenueMembership);
         IEnumerable<VenueMembership> GetVenueMemberships(Account account);
+        VenueMembership GetVenueMembership(Account account, int venueId);
     }
 }

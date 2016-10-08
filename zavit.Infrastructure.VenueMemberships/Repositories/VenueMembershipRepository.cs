@@ -45,5 +45,11 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
                 .Where(m => m.Account.Id == accountId && m.Venue.Id == venueId)
                 .SingleOrDefault();
         }
+
+        public void Update(VenueMembership venueMembership)
+        {
+            _session.Update(venueMembership);
+            _session.Flush();
+        }
     }
 }

@@ -8,15 +8,21 @@ namespace zavit.Web.Api.Controllers
 {
     public class VenueMembershipsController : ApiController
     {
-        readonly IVenueMembershipDtoService _venueMembershipDtoService;
+        const string GetMembershipsRoute = "getMemberships";
+        const string GetMembershipRoute = "getMembership";
 
-        public VenueMembershipsController(IVenueMembershipDtoService venueMembershipDtoService)
+        readonly IVenueMembershipDtoService _venueMembershipDtoService;
+        readonly IVenueMembershipDetailsDtoService _venueMembershipDetailsDtoService;
+
+        public VenueMembershipsController(IVenueMembershipDtoService venueMembershipDtoService, IVenueMembershipDetailsDtoService venueMembershipDetailsDtoService)
         {
             _venueMembershipDtoService = venueMembershipDtoService;
+            _venueMembershipDetailsDtoService = venueMembershipDetailsDtoService;
         }
 
         [HttpPost]
         [Authorize]
+        [Route("~/api/venuememberships")]
         public IHttpActionResult Post(VenueMembershipDto venueMembershipDto)
         {
             var createdVenueMembershipDto = _venueMembershipDtoService.AddVenueMembership(venueMembershipDto);
@@ -25,9 +31,18 @@ namespace zavit.Web.Api.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("~/api/venuememberships")]
         public IEnumerable<VenueMembershipDto> Get()
         {
             return _venueMembershipDtoService.GetVenueMemberships();
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("~/api/venues/{venueId}/venuememberships", Name = GetMembershipRoute)]
+        public VenueMembershipDetailsDto Get(int venueId)
+        {
+            return _venueMembershipDetailsDtoService.GetMembershipDetails(venueId);
         }
     }
 }
