@@ -8,7 +8,6 @@ namespace zavit.Web.Api.Controllers
 {
     public class VenueMembershipsController : ApiController
     {
-        const string GetMembershipsRoute = "getMemberships";
         const string GetMembershipRoute = "getMembership";
 
         readonly IVenueMembershipDtoService _venueMembershipDtoService;

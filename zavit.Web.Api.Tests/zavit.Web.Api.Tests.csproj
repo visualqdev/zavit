@@ -77,6 +77,7 @@
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\ActivitiesControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
+    <Compile Include="Controllers\VenueMembersControllerTests.cs" />
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDetailsDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberCollectionDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberDtoFactoryTests.cs" />
+    <Compile Include="DtoServices\VenueMembers\VenueMemberDtoServiceTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactoryTests.cs" />

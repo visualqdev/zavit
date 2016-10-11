@@ -2,9 +2,12 @@
 using NHibernate;
 using NHibernate.SqlCommand;
 using NHibernate.Transform;
+using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Shared.ResultCollections;
 using zavit.Domain.VenueMemberships;
 using zavit.Domain.Venues;
+using zavit.Infrastructure.Core.ResultCollections;
 
 namespace zavit.Infrastructure.VenueMemberships.Repositories
 {
@@ -37,6 +40,33 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
                 .OrderBy(m => m.CreatedOn).Desc
                 .TransformUsing(Transformers.DistinctRootEntity)
                 .List();
+        }
+
+        public IResultCollection<VenueMembership> GetMemberships(int venueId, int skip, int take, int? excludeAccountId = null)
+        {
+            Account accountAlias = null;
+            Activity activityAlias = null;
+
+            var venueMembershipsQuery = _session.QueryOver<VenueMembership>()
+                .JoinAlias(m => m.Account, () => accountAlias, JoinType.InnerJoin)
+                .JoinAlias(m => m.Activities, () => activityAlias, JoinType.LeftOuterJoin)
+                .Fetch(m => m.Activities).Eager
+                .Fetch(m => m.Account).Eager
+                .Where(m => m.Venue.Id == venueId);
+
+            if (excludeAccountId.HasValue)
+            {
+                venueMembershipsQuery.Where(m => m.Account.Id != excludeAccountId.Value);
+            }
+
+            var venueMemberships = venueMembershipsQuery
+                .OrderBy(m => m.CreatedOn).Desc
+                .TransformUsing(Transformers.DistinctRootEntity)
+                .Skip(skip)
+                .Take(take + 1)
+                .List();
+
+            return new ResultCollection<VenueMembership>(venueMemberships, skip, take);
         }
 
         public VenueMembership GetMembership(int accountId, int venueId)

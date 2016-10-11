@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Shared.ResultCollections;
 using zavit.Domain.VenueMemberships.NewVenueMembershipCreation;
 
 namespace zavit.Domain.VenueMemberships
@@ -36,7 +37,7 @@ namespace zavit.Domain.VenueMemberships
             return venueMembership;
         }
 
-        public IEnumerable<VenueMembership> GetVenueMemberships(Account account)
+        public IEnumerable<VenueMembership> GetVenueMembershipsForUser(Account account)
         {
             var venueMemberships = _venueMembershipRepository.GetMemberships(account.Id);
             return venueMemberships;
@@ -46,6 +47,11 @@ namespace zavit.Domain.VenueMemberships
         {
             var venueMembership = _venueMembershipRepository.GetMembership(account.Id, venueId);
             return venueMembership;
+        }
+
+        public IResultCollection<VenueMembership> GetAllVenueMemberships(int venueId, int skip, int take, Account excludeAccount = null)
+        {
+            return _venueMembershipRepository.GetMemberships(venueId, skip, take, excludeAccount?.Id);
         }
     }
 }

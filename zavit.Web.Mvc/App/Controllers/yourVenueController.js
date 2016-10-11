@@ -5,9 +5,12 @@ import * as Routes from "../routing/routes";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as YourVenueMap from "../modules/venues/yourVenueMap";
 import * as VenueMembershipClient from "../modules/venues/venueMembershipClient";
+import * as Progress from "../modules/loading/progress";
 
 export function index(venueId) {
     MainContent.load();
+
+    Progress.start();
 
     VenueMembershipClient
         .getVenueMembership(venueId)
@@ -15,131 +18,48 @@ export function index(venueId) {
             const view = IndexView.getView(membership);
             MainContent.append(view);
             YourVenueMap.addMapTo(".yourVenueMap");
-            return VenueMembershipClient.getVenueMembers(venueId, 0, 20);
+            return VenueMembershipClient.getVenueMembers(venueId, 0, 6);
         })
         .then(venueMembersResult => {
-            const venueMembersPartial = VenueMembersPartial.getView(venueMembersResult.Members);
-            $("#yourVenueMembers").append(venueMembersPartial);
-            enableLoadMore(venueMembersResult, 20);
+            processVenueMembersResult(venueMembersResult, venueId);
         })
         .catch((error) => {
-            if (error && error.status && error.status === 401) {
-                PostLoginRedirect.storeRedirectUrl(window.location.href);
-                Routes.goTo(Routes.login);
-            }
-        });
-
-    //const view = IndexView.getView({
-    //    Venue: {
-    //        Name: "Test venue",
-    //        Address: "1 venue address, In This Town, PO54 3OD, United World",
-    //        Longitude: -0.281345,
-    //        Latitude: 51.493213,
-    //        Activities: [
-    //            {
-    //                Id: 1,
-    //                Name: "Aerobics"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Aikido"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "American Football"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Angling"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Aquathon"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Archery"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Arm Wrestling"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Athletics"
-    //            },
-    //            {
-    //                Id: 2,
-    //                Name: "Australian Rules Football"
-    //            }
-    //        ]
-    //    },
-    //    Activities: [
-    //        {
-    //            Id: 1,
-    //            Name: "Aerobics"
-    //        }
-    //    ]
-    //});
-    //MainContent.append(view);
-    //YourVenueMap.addMapTo(".yourVenueMap");
-
-    const venueMembers = [
-    {
-        Id: 1,
-        DisplayName: "John Paul",
-        Activities: [
-            {
-                Id: 2,
-                Name: "American Football"
-            },
-            {
-                Id: 2,
-                Name: "Angling"
-            },
-            {
-                Id: 2,
-                Name: "Aquathon"
-            }
-        ]
-    },
-    {
-        Id: 2,
-        DisplayName: "Freddy Falcon",
-        Activities: [
-            {
-                Id: 2,
-                Name: "Aquathon"
-            },
-            {
-                Id: 2,
-                Name: "Archery"
-            }
-        ]
-    },
-    {
-        Id: 3,
-        DisplayName: "Roger Smith",
-        Activities: [
-            {
-                Id: 2,
-                Name: "American Football"
-            },
-            {
-                Id: 2,
-                Name: "Angling"
-            },
-            {
-                Id: 2,
-                Name: "Aquathon"
-            }
-        ]
-    }];
-
-    const venueMembersPartial = VenueMembersPartial.getView(venueMembers);
-    $("#yourVenueMembers").append(venueMembersPartial);
+            checkUnauthorised(error);
+        })
+        .then(Progress.done);
 }
 
-function enableLoadMore(venueMembersResult, skip) {
-    alert("Load more users will be implemented");
+function enableLoadMore(venueMembersResult, venueId) {
+    if (!venueMembersResult.HasMoreResults) return;
+
+    $("#mainContent").on("scroll", () => {
+        if($("#mainContent").scrollTop() + $("#mainContent").height() > $(document).height()) {
+            $("#mainContent").off("scroll");
+
+            Progress.start();
+
+            VenueMembershipClient
+                .getVenueMembers(venueId, venueMembersResult.Take, venueMembersResult.Take)
+                .then(venueMembersMoreResult => {
+                    processVenueMembersResult(venueMembersMoreResult, venueId);
+                })
+                .catch((error) => {
+                    checkUnauthorised(error);
+                })
+                .then(Progress.done);
+        }
+    });
+}
+
+function processVenueMembersResult(venueMembersResult, venueId) {
+    const venueMembersPartial = VenueMembersPartial.getView(venueMembersResult.Members);
+    $("#yourVenueMembers").append(venueMembersPartial);
+    enableLoadMore(venueMembersResult, venueId);
+}
+
+function checkUnauthorised(errot) {
+    if (error && error.status && error.status === 401) {
+        PostLoginRedirect.storeRedirectUrl(window.location.href);
+        Routes.goTo(Routes.login);
+    }
 }

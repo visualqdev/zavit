@@ -60,7 +60,7 @@ namespace zavit.Web.Api.Tests.DtoServices.VenueMemberships
                 var otherVenueMembership = NewInstanceOf<VenueMembership>();
 
                 Injected<IVenueMembershipService>()
-                    .Stub(s => s.GetVenueMemberships(account))
+                    .Stub(s => s.GetVenueMembershipsForUser(account))
                     .Return(new [] { venueMembership, otherVenueMembership });
 
                 _venueMembershipDto = NewInstanceOf<VenueMembershipDto>();

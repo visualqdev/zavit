@@ -4,6 +4,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Shared.ResultCollections;
 using zavit.Domain.VenueMemberships.NewVenueMembershipCreation;
 
 namespace zavit.Domain.VenueMemberships.Tests 
@@ -112,7 +113,7 @@ namespace zavit.Domain.VenueMemberships.Tests
 
         class When_getting_venue_memberships
         {
-            Because of = () => _result = Subject.GetVenueMemberships(_account);
+            Because of = () => _result = Subject.GetVenueMembershipsForUser(_account);
 
             It should_return_the_venue_memberships_from_the_repository = () => _result.ShouldEqual(_venueMemberships);
 
@@ -154,6 +155,58 @@ namespace zavit.Domain.VenueMemberships.Tests
             static Account _account;
             static VenueMembership _venueMembership;
             const int VenueId = 123;
+        }
+
+        class When_getting_all_venue_memberships_for_a_venue_excluding_user_account
+        {
+            Because of = () => _result = Subject.GetAllVenueMemberships(VenueId, Skip, Take, _account);
+
+            It should_return_the_venue_membership_results_collection_from_the_repository = () => _result.ShouldEqual(_venueMembershipsResultCollection);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 123;
+
+                _venueMembershipsResultCollection = NewInstanceOf<IResultCollection<VenueMembership>>();
+
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMemberships(VenueId, Skip, Take, _account.Id))
+                    .Return(_venueMembershipsResultCollection);
+            };
+
+            static IResultCollection<VenueMembership> _result;
+            const int VenueId = 456;
+            const int Skip = 1;
+            const int Take = 2;
+            static Account _account;
+            static IResultCollection<VenueMembership> _venueMembershipsResultCollection;
+        }
+
+        class When_getting_all_venue_memberships_for_a_venue
+        {
+            Because of = () => _result = Subject.GetAllVenueMemberships(VenueId, Skip, Take);
+
+            It should_return_the_venue_membership_results_collection_from_the_repository = () => _result.ShouldEqual(_venueMembershipsResultCollection);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 123;
+
+                _venueMembershipsResultCollection = NewInstanceOf<IResultCollection<VenueMembership>>();
+
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMemberships(VenueId, Skip, Take, null))
+                    .Return(_venueMembershipsResultCollection);
+            };
+
+            static IResultCollection<VenueMembership> _result;
+            const int VenueId = 456;
+            const int Skip = 1;
+            const int Take = 2;
+            static Account _account;
+            static IResultCollection<VenueMembership> _venueMembershipsResultCollection;
         }
     }
 }

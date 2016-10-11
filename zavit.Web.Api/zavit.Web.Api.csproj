@@ -121,6 +121,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
@@ -131,6 +132,10 @@
     <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\IVenueMemberCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\IVenueMemberDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDtoFactory.cs" />
@@ -145,6 +150,8 @@
     <Compile Include="DtoServices\VenueMemberships\NewVenueMemberships\NewVenueMembershipProvider.cs" />
     <Compile Include="DtoServices\VenueMemberships\VenueMembershipDetailsDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\VenueMembershipDtoService.cs" />
+    <Compile Include="DtoServices\VenueMembers\IVenueMemberDtoService.cs" />
+    <Compile Include="DtoServices\VenueMembers\VenueMemberDtoService.cs" />
     <Compile Include="DtoServices\Venues\IVenueDtoService.cs" />
     <Compile Include="DtoServices\Venues\NewVenues\INewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
@@ -155,6 +162,8 @@
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDto.cs" />
+    <Compile Include="Dtos\VenueMembers\VenueMemberDto.cs" />
+    <Compile Include="Dtos\VenueMembers\VenueMembersCollectionDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />

@@ -36,7 +36,7 @@ namespace zavit.Web.Api.DtoServices.VenueMemberships
         public IEnumerable<VenueMembershipDto> GetVenueMemberships()
         {
             var account = _userContext.Account;
-            var venueMemberships = _venueMembershipService.GetVenueMemberships(account);
+            var venueMemberships = _venueMembershipService.GetVenueMembershipsForUser(account);
 
             var venueMembershipDtos = venueMemberships.Select(m => _venueMembershipDtoFactory.CreateItem(m));
             return venueMembershipDtos.ToList();

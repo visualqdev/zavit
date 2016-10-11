@@ -38,8 +38,19 @@ export function getVenueMemberships() {
             .catch(reject));
 }
 
+
 export function getVenueMembership(venueId) {
     const getVenueMembershipUrl = `${ApiSettings.apiUrl}api/venues/${venueId}/venuememberships`;
+
+    return AuthorizedClient
+        .send({
+            url: getVenueMembershipUrl,
+            type: "get"
+        });
+}
+
+export function getVenueMembers(venueId, skip, take) {
+    const getVenueMembershipUrl = `${ApiSettings.apiUrl}api/venues/${venueId}/venuemembers?skip=${skip}&take=${take}`;
 
     return AuthorizedClient
         .send({
