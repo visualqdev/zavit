@@ -246,6 +246,7 @@ h2#mainHeading {
         padding-bottom: 5px;          
     }
     address {
+        color: @default-text;
         float:left;        
         clear:left;
         white-space: nowrap;
@@ -319,6 +320,23 @@ h2#mainHeading {
     #joinVenueChooseActivities{
         height: 110px;
         overflow: auto;
+
+        .list-group{    
+            width: 100%;
+            margin-bottom: 0px;
+                    
+            .list-group-item{
+                border: 0px;
+                padding: 0px 15px;
+                background-color: @light-bg;
+                .checkbox{
+                    font-weight: 400;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    color: @default-text;
+                }
+            }
+        }
     }
 }
 

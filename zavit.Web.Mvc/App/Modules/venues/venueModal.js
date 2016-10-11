@@ -64,27 +64,25 @@ function showVenue(venue, placeId) {
 }
 
 function getActivitiesMarkup(activities) {
-    const activitiesInColumn = Math.ceil((activities.length) / 2);
-    const leftColumnActivities = activities;
-    const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
+    //const activitiesInColumn = Math.ceil((activities.length) / 2);
+    //const leftColumnActivities = activities;
+    //const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
 
     return `
-        <div class="controls span2">
-            ${activityCheckboxes(leftColumnActivities)}
-        </div>
-        <div class="controls span2">
-            ${activityCheckboxes(rightColumnActivities)}                    
-        </div>`;
+        <ul class="list-group row">
+            ${activityCheckboxes(activities)}
+        </ul>`;
 }
 
 function activityCheckboxes(activities) {
     let activitiesMarkup = "";
     activities.forEach(activity => {
         activitiesMarkup += ` 
-            <label class="checkbox">
-                <input type="checkbox" name="venueActivities" value="${activity.Id}">${activity.Name}
-            </label>
-            `;
+            <li class="list-group-item col-xs-12 col-sm-6">
+                <label class="checkbox">
+                    <input type="checkbox" name="venueActivities" value="${activity.Id}">${activity.Name}
+                </label>
+            </li>`;
     });
     return activitiesMarkup;
 }
