@@ -29,3 +29,8 @@ export function refresh() {
         $("#topnavLogin").show();
     }
 }
+
+export function navigatedToRoute(routeName) {
+    $("#topnavLinks li.active").removeClass("active");
+    $(`#topnavLinks li[data-page='${routeName}']`).addClass("active");
+}

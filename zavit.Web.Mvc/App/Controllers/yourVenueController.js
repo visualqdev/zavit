@@ -8,7 +8,7 @@ import * as VenueMembershipClient from "../modules/venues/venueMembershipClient"
 import * as Progress from "../modules/loading/progress";
 
 export function index(venueId) {
-    MainContent.load();
+    MainContent.load(Routes.yourVenue);
 
     Progress.start();
 

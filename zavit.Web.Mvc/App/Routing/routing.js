@@ -1,4 +1,5 @@
 ﻿import * as Routes from "./routes";
+import * as TopNav from "../modules/navigation/topNav";
 import * as HomeController from "../controllers/homeController";
 import * as LoginController from "../controllers/loginController";
 import * as ExternalLoginController from "../controllers/externalLoginController";
@@ -10,6 +11,8 @@ import * as YourVenueController from "../controllers/yourVenueController";
 export function registerRoutes() {
     crossroads.addRoute(`/${Routes.home}`, () => {
         if (PostLoginRedirect.processRedirect()) return;
+
+        TopNav.navigatedToRoute(Routes.home);
         HomeController.explore();
     });
 
@@ -32,9 +35,15 @@ export function registerRoutes() {
 
     crossroads.addRoute(`/${Routes.joinVenue}`, () => VenueController.joinVenue());
    
-    crossroads.addRoute(`/${Routes.yourVenues}`, () => YourVenuesController.index());
+    crossroads.addRoute(`/${Routes.yourVenues}`, () => {
+        TopNav.navigatedToRoute(Routes.yourVenues);
+        YourVenuesController.index();
+    });
 
-    crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => YourVenueController.index(venueId));
+    crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => {
+        TopNav.navigatedToRoute(Routes.yourVenue);
+        YourVenueController.index(venueId);
+    });
 
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);

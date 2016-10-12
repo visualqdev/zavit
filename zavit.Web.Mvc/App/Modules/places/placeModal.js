@@ -1,4 +1,6 @@
 ﻿import * as MapPositionAdjuster from "../map/mapPositionAdjuster";
+import * as MainContent from "../../layout/mainContent";
+import * as Routes from "../../routing/routes";
 
 function showNextButton(placeIndex, amountOfPlaces) {
     if (placeIndex < amountOfPlaces -1)  return `<a href="#" data-nextMarker="${placeIndex + 1}"> > </a>`;
@@ -12,6 +14,8 @@ function showPreviousButton(placeIndex) {
 
 export function show(place, placeIndex, amountOfPlaces, mapClass) {
     $("[data-name=placeModal]").remove();
+
+    if (!MainContent.isOnPage(Routes.home)) return;
 
     let placeModal;
     
@@ -66,7 +70,7 @@ function getSingleVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass) {
             map: mapClass
         });
 
-    const placeModal = `<div id="placeModal" data-name="placeModal" class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
+    const placeModal = `<div id="placeModal" data-name="placeModal" data-redirect-remove class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
                             <header>                   
                                 <h3 title="${place.Name}">${place.Name}</h3>
                                 <address title="${place.Address}">${place.Address}</address>
@@ -101,7 +105,7 @@ function getMultiVenuePlaceModal(place, placeIndex, amountOfPlaces, mapClass) {
             map: mapClass
         });
 
-    const placeModal = `<div id="placeModal" data-name="placeModal" class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
+    const placeModal = `<div id="placeModal" data-name="placeModal" data-redirect-remove class="map-popup" style="width:${width}px; height:${height}px; left:${position.X}px; top:${position.Y}px;">            
                             <header>                   
                                 <h3 title="${place.Name}">${place.Name}</h3>
                                 <address title="${place.Address}">${place.Address}</address>

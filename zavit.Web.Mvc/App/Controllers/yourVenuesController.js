@@ -6,7 +6,7 @@ import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as Routes from "../routing/routes";
 
 export function index() {
-    MainContent.load();
+    MainContent.load(Routes.yourVenues);
 
     VenueMembershipClient
         .getVenueMemberships()
