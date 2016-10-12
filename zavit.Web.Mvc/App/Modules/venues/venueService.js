@@ -41,5 +41,5 @@ export function joinVenue(options) {
 function letUserJoinVenue(venueId, activities) {
     VenueMembershipClient
         .joinVenue(venueId, activities)
-        .then(() => Routes.goTo(Routes.yourVenues));
+        .then(() => Routes.goTo(`${Routes.yourVenue}/${venueId}`));
 }

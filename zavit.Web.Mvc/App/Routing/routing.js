@@ -41,7 +41,7 @@ export function registerRoutes() {
     });
 
     crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => {
-        TopNav.navigatedToRoute(Routes.yourVenue);
+        TopNav.navigatedToRoute(Routes.yourVenues);
         YourVenueController.index(venueId);
     });
 
