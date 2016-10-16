@@ -56,9 +56,11 @@
     <Compile Include="DomainInstallers\AccountsInstaller.cs" />
     <Compile Include="DomainInstallers\ClientsInstaller.cs" />
     <Compile Include="DomainInstallers\ExternalAccountsInstaller.cs" />
+    <Compile Include="DomainInstallers\MessagingInstaller.cs" />
     <Compile Include="DomainInstallers\PlacesInstaller.cs" />
     <Compile Include="DomainInstallers\VenueMembershipsInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureMessagingInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenueMembershipsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureAccountsInstaller.cs" />
@@ -89,6 +91,10 @@
     <ProjectReference Include="..\zavit.Domain.ExternalAccounts\zavit.Domain.ExternalAccounts.csproj">
       <Project>{7edfe7c9-2268-43af-a262-30650b626e0a}</Project>
       <Name>zavit.Domain.ExternalAccounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
+      <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
+      <Name>zavit.Domain.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
@@ -125,6 +131,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.ExternalAccounts\zavit.Infrastructure.ExternalAccounts.csproj">
       <Project>{db40454f-f790-4f1d-8cb4-a4696f62f5fd}</Project>
       <Name>zavit.Infrastructure.ExternalAccounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Messaging\zavit.Infrastructure.Messaging.csproj">
+      <Project>{c934a74e-f5a1-45f1-8444-b943ca0dd521}</Project>
+      <Name>zavit.Infrastructure.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
       <Project>{67c23b94-0318-4507-ad94-08bd1e288fb9}</Project>

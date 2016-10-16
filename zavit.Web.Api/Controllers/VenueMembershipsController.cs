@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.VenueMemberships;
 using zavit.Web.Api.DtoServices.VenueMemberships;
 
@@ -20,7 +21,7 @@ namespace zavit.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [AccessAuthorize]
         [Route("~/api/venuememberships")]
         public IHttpActionResult Post(VenueMembershipDto venueMembershipDto)
         {
@@ -29,7 +30,7 @@ namespace zavit.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [AccessAuthorize]
         [Route("~/api/venuememberships")]
         public IEnumerable<VenueMembershipDto> Get()
         {
@@ -37,7 +38,7 @@ namespace zavit.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [AccessAuthorize]
         [Route("~/api/venues/{venueId}/venuememberships", Name = GetMembershipRoute)]
         public VenueMembershipDetailsDto Get(int venueId)
         {

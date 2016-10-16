@@ -1,4 +1,4 @@
-﻿namespace zavit.Web.Api.Authorization
+﻿namespace zavit.Web.Api.Authorization.ClaimsIdentities
 {
     public interface IClaimsIdentityProviderFactory
     {

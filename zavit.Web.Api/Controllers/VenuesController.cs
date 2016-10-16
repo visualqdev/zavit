@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Http;
+using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
 
@@ -33,7 +34,7 @@ namespace zavit.Web.Api.Controllers
             return _venueDtoService.GetVenue(venueId);
         }
 
-        [Authorize]
+        [AccessAuthorize]
         [HttpPost]
         [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
         public async Task<IHttpActionResult> Post(VenueDetailsDto venueDto, string placeId)

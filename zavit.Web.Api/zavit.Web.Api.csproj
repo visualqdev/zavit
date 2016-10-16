@@ -113,17 +113,37 @@
     <Compile Include="ApiStartup.cs" />
     <Compile Include="App_Start\CommonRoutes.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Authorization\AccessAuthorizationFilter.cs" />
-    <Compile Include="Authorization\ClaimsIdentityProvider.cs" />
-    <Compile Include="Authorization\IClaimsIdentityProvider.cs" />
-    <Compile Include="Authorization\IClaimsIdentityProviderFactory.cs" />
+    <Compile Include="Authorization\AccessAuthorization\AccessAuthorizeAttribute.cs" />
+    <Compile Include="Authorization\AccessAuthorization\AccessAuthorizationFilter.cs" />
+    <Compile Include="Authorization\ActionContextWrapper.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\ClaimsIdentityFilter.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\ClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\IClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\IClaimsIdentityProviderFactory.cs" />
+    <Compile Include="Authorization\IActionContext.cs" />
+    <Compile Include="Authorization\IUserContextFactory.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\IResourceAuthorization.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\IResourceAuthorizationsProvider.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\Messaging\MessageThreadAccessAuthorization.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\Messaging\MessageThreadAccessAuthorizeAttribute.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\ResourceAuthorizationFilter.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\ResourceAuthorizeAttribute.cs" />
     <Compile Include="Authorization\UserContext.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\MessageThreadsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\IMessageDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\IThreadParticipantDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\ThreadParticipantDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\IMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
@@ -142,6 +162,12 @@
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactory.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\IMessageThreadDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\INewMessageRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
     <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
@@ -157,6 +183,10 @@
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
     <Compile Include="Dtos\Places\PlaceDto.cs" />
     <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
@@ -195,6 +225,10 @@
     <ProjectReference Include="..\zavit.Domain.ExternalAccounts\zavit.Domain.ExternalAccounts.csproj">
       <Project>{7edfe7c9-2268-43af-a262-30650b626e0a}</Project>
       <Name>zavit.Domain.ExternalAccounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
+      <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
+      <Name>zavit.Domain.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>

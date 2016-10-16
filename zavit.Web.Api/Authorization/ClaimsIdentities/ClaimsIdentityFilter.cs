@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 
-namespace zavit.Web.Api.Authorization
+namespace zavit.Web.Api.Authorization.ClaimsIdentities
 {
-    public class AccessAuthorizationFilter : IActionFilter
+    public class ClaimsIdentityFilter : IActionFilter
     {
         readonly IClaimsIdentityProviderFactory _claimsIdentityProviderFactory;
 
-        public AccessAuthorizationFilter(IClaimsIdentityProviderFactory claimsIdentityProviderFactory)
+        public bool AllowMultiple => true;
+
+        public ClaimsIdentityFilter(IClaimsIdentityProviderFactory claimsIdentityProviderFactory)
         {
             _claimsIdentityProviderFactory = claimsIdentityProviderFactory;
         }
-
-        public bool AllowMultiple => true;
 
         public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
