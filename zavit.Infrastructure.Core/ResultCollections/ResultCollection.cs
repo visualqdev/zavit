@@ -9,14 +9,12 @@ namespace zavit.Infrastructure.Core.ResultCollections
     {
         readonly List<T> _results;
         
-        public ResultCollection(IEnumerable<T> results, int skip, int take)
+        public ResultCollection(IEnumerable<T> results, int take)
         {
             _results = results.ToList();
-            Skip = skip;
             Take = take;
         }
-
-        public int Skip { get; }
+       
         public int Take { get; }
 
         public bool HasMoreResults => _results.Count > Take;

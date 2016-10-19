@@ -131,12 +131,15 @@
     <Compile Include="Authorization\UserContext.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\IMessageCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\IMessageDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\MessageCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\IThreadParticipantDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\ThreadParticipantDtoFactory.cs" />
@@ -162,6 +165,8 @@
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactory.cs" />
+    <Compile Include="DtoServices\Messaging\Messages\IMessageDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\Messages\MessageDtoService.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\IMessageThreadDtoService.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoService.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\INewMessageRequestProvider.cs" />
@@ -184,6 +189,7 @@
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
@@ -199,6 +205,7 @@
     <Compile Include="Dtos\Venues\VenueDto.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyScope.cs" />
+    <Compile Include="IocConfiguration\Installers\AuthorizationInstaller.cs" />
     <Compile Include="IocConfiguration\Installers\WebApiInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

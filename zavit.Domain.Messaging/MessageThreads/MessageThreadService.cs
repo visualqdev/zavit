@@ -18,5 +18,10 @@
 
             return messageThread;
         }
+
+        public MessageThread GetMessageThread(int messageThreadId)
+        {
+            return _messageThreadRepository.GetMessageThread(messageThreadId);
+        }
     }
 }

@@ -66,7 +66,7 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
                 .Take(take + 1)
                 .List();
 
-            return new ResultCollection<VenueMembership>(venueMemberships, skip, take);
+            return new ResultCollection<VenueMembership>(venueMemberships, take);
         }
 
         public VenueMembership GetMembership(int accountId, int venueId)

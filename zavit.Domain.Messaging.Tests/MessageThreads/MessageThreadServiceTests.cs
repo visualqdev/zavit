@@ -30,6 +30,23 @@ namespace zavit.Domain.Messaging.Tests.MessageThreads
             static MessageThread _result;
             static MessageThread _messageThread;
         }
+
+        class When_getting_a_message_thread
+        {
+            Because of = () => _result = Subject.GetMessageThread(ThreadId);
+
+            It should_return_a_message_thread_from_the_repository = () => _result.ShouldEqual(_messageThread);
+
+            Establish context = () =>
+            {
+                _messageThread = NewInstanceOf<MessageThread>();
+                Injected<IMessageThreadRepository>().Stub(r => r.GetMessageThread(ThreadId)).Return(_messageThread);
+            };
+
+            static int ThreadId;
+            static MessageThread _result;
+            static MessageThread _messageThread;
+        }
     }
 }
 

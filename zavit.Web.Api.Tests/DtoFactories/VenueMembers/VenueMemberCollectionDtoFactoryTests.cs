@@ -18,9 +18,6 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
             It should_return_set_the_has_more_results_property_to_be_the_same_as_result_collection = 
                 () => _result.HasMoreResults.ShouldEqual(_venueMembersCollection.HasMoreResults);
 
-            It should_return_set_the_skip_property_to_be_the_same_as_result_collection =
-                () => _result.Skip.ShouldEqual(_venueMembersCollection.Skip);
-
             It should_return_set_the_take_property_to_be_the_same_as_result_collection =
                 () => _result.Take.ShouldEqual(_venueMembersCollection.Take);
 
@@ -34,7 +31,6 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
 
                 _venueMembersCollection = NewInstanceOf<IResultCollection<VenueMembership>>();
                 _venueMembersCollection.Stub(c => c.HasMoreResults).Return(true);
-                _venueMembersCollection.Stub(c => c.Skip).Return(1);
                 _venueMembersCollection.Stub(c => c.Take).Return(2);
                 _venueMembersCollection.Stub(c => c.Results).Return(new[] {venueMembership, otherVenueMembership});
 

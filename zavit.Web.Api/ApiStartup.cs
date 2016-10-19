@@ -13,7 +13,9 @@ namespace zavit.Web.Api
         public void Configuration(IAppBuilder app)
         {
             var container = Container.Instance;
-            container.Install(new WebApiInstaller());
+            container.Install(
+                new WebApiInstaller(),
+                new AuthorizationInstaller());
 
             OAuthConfig.Register(app, container);
             var config = new HttpConfiguration();

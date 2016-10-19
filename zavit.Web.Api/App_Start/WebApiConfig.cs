@@ -3,6 +3,7 @@ using System.Web.Http.Filters;
 using Castle.Windsor;
 using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Authorization.ClaimsIdentities;
+using zavit.Web.Api.Authorization.ResourcesAuthorization;
 using zavit.Web.Api.IocConfiguration.DependencyResolving;
 
 namespace zavit.Web.Api
@@ -14,7 +15,8 @@ namespace zavit.Web.Api
             config.DependencyResolver = new WindsorDependencyResolver(container);
             config.Filters.AddRange(new IActionFilter[] {
                 container.Resolve<ClaimsIdentityFilter>(),
-                container.Resolve<AccessAuthorizationFilter>()
+                container.Resolve<AccessAuthorizationFilter>(),
+                container.Resolve<ResourceAuthorizationFilter>()
                 });
 
             config.MapHttpAttributeRoutes();

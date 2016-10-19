@@ -18,7 +18,7 @@ namespace zavit.Infrastructure.Core.Tests.ResultCollections
             {
                 var results = new[] {new object(), new object() };
 
-                _subject = new ResultCollection<object>(results, 0, 1);
+                _subject = new ResultCollection<object>(results, 1);
             };
 
             static bool _result;
@@ -35,7 +35,7 @@ namespace zavit.Infrastructure.Core.Tests.ResultCollections
             {
                 var results = new[] { new object(), new object() };
 
-                _subject = new ResultCollection<object>(results, 0, 2);
+                _subject = new ResultCollection<object>(results, 2);
             };
 
             static bool _result;
@@ -54,7 +54,7 @@ namespace zavit.Infrastructure.Core.Tests.ResultCollections
                 _otherResultItem = new object();
                 var extraItem = new object();
 
-                _subject = new ResultCollection<object>(new[] { _resultItem, _otherResultItem, extraItem }, 0, 2);
+                _subject = new ResultCollection<object>(new[] { _resultItem, _otherResultItem, extraItem }, 2);
             };
 
             static ResultCollection<object> _subject;
@@ -74,7 +74,7 @@ namespace zavit.Infrastructure.Core.Tests.ResultCollections
                 _resultItem = new object();
                 _otherResultItem = new object();
 
-                _subject = new ResultCollection<object>(new[] { _resultItem, _otherResultItem }, 0, 2);
+                _subject = new ResultCollection<object>(new[] { _resultItem, _otherResultItem }, 2);
             };
 
             static ResultCollection<object> _subject;

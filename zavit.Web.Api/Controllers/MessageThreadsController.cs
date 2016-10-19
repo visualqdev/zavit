@@ -28,7 +28,7 @@ namespace zavit.Web.Api.Controllers
 
         [HttpGet]
         [MessageThreadAccessAuthorize("id")]
-        [Route("~/api/messagethreads/{id}")]
+        [Route("~/api/messagethreads/{id}", Name = GetMessageThreadRoute)]
         public MessageThreadDto Get(int id)
         {
             return _messageThreadDtoService.GetMessageThread(id);

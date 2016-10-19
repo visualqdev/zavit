@@ -11,7 +11,7 @@ namespace zavit.Web.Authorization
 {
     public class OAuthConfig
     {
-        public static TimeSpan AccessTokenLifeTime = TimeSpan.FromMinutes(2);
+        public static TimeSpan AccessTokenLifeTime = TimeSpan.FromMinutes(5);
 
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static AccessRefreshTokenProvider AccessRefreshTokenProvider { get; private set; }

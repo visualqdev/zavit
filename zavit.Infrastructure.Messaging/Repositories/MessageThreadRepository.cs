@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using NHibernate.SqlCommand;
+using NHibernate.Transform;
 using zavit.Domain.Accounts;
 using zavit.Domain.Messaging;
 using zavit.Domain.Messaging.MessageThreads;
@@ -32,6 +33,18 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 .RowCount();
 
             return count > 0;
+        }
+
+        public MessageThread GetMessageThread(int messageThreadId)
+        {
+            Account accountAlias = null;
+
+            return _session.QueryOver<MessageThread>()
+                .JoinAlias(g => g.Participants, () => accountAlias, JoinType.InnerJoin)
+                .Fetch(t => t.Participants).Eager
+                .Where(t => t.Id == messageThreadId)
+                .TransformUsing(Transformers.DistinctRootEntity)
+                .SingleOrDefault();
         }
     }
 }

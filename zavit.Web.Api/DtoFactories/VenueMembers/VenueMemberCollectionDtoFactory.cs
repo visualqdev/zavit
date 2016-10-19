@@ -21,7 +21,6 @@ namespace zavit.Web.Api.DtoFactories.VenueMembers
             return new VenueMembersCollectionDto
             {
                 HasMoreResults = venueMemberCollection.HasMoreResults,
-                Skip = venueMemberCollection.Skip,
                 Take = venueMemberCollection.Take,
                 Members = venueMembers
             };

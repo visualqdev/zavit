@@ -14,14 +14,16 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads
         readonly INewMessageRequestProvider _newMessageRequestProvider;
         readonly IMessageService _messageService;
         readonly INewMessageThreadDtoFactory _newMessageThreadDtoFactory;
+        readonly IMessageThreadDtoFactory _messageThreadDtoFactory;
 
-        public MessageThreadDtoService(INewMessageThreadRequestProvider newMessageThreadRequestProvider, IMessageThreadService messageThreadService, INewMessageRequestProvider newMessageRequestProvider, IMessageService messageService, INewMessageThreadDtoFactory newMessageThreadDtoFactory)
+        public MessageThreadDtoService(INewMessageThreadRequestProvider newMessageThreadRequestProvider, IMessageThreadService messageThreadService, INewMessageRequestProvider newMessageRequestProvider, IMessageService messageService, INewMessageThreadDtoFactory newMessageThreadDtoFactory, IMessageThreadDtoFactory messageThreadDtoFactory)
         {
             _newMessageThreadRequestProvider = newMessageThreadRequestProvider;
             _messageThreadService = messageThreadService;
             _newMessageRequestProvider = newMessageRequestProvider;
             _messageService = messageService;
             _newMessageThreadDtoFactory = newMessageThreadDtoFactory;
+            _messageThreadDtoFactory = messageThreadDtoFactory;
         }
 
         public NewMessageThreadDto SendMessageOnNewThread(NewMessageThreadDto newMessageThreadDto)
@@ -37,7 +39,8 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads
 
         public MessageThreadDto GetMessageThread(int threadId)
         {
-            throw new System.NotImplementedException();
+            var messageThread = _messageThreadService.GetMessageThread(threadId);
+            return _messageThreadDtoFactory.CreateItem(messageThread);
         }
     }
 }

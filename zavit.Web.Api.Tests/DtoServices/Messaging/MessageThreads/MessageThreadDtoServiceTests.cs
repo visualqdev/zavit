@@ -54,6 +54,26 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads
             static NewMessageThreadDto _result;
             static NewMessageThreadDto _createdNewMessageThreadDto;
         }
+
+        class When_getting_message_thread
+        {
+            Because of = () => _result = Subject.GetMessageThread(ThreadId);
+
+            It should_return_message_thread_dto_of_message_thread = () => _result.ShouldEqual(_messageThreadDto);
+
+            Establish context = () =>
+            {
+                var messageThread = NewInstanceOf<MessageThread>();
+                Injected<IMessageThreadService>().Stub(s => s.GetMessageThread(ThreadId)).Return(messageThread);
+
+                _messageThreadDto = NewInstanceOf<MessageThreadDto>();
+                Injected<IMessageThreadDtoFactory>().Stub(f => f.CreateItem(messageThread)).Return(_messageThreadDto);
+            };
+
+            static MessageThreadDto _result;
+            static MessageThreadDto _messageThreadDto;
+            const int ThreadId = 123;
+        }
     }
 }
 
