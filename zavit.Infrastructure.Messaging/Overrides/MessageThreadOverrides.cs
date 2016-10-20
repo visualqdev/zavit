@@ -8,7 +8,7 @@ namespace zavit.Infrastructure.Messaging.Overrides
     {
         public void Override(AutoMapping<MessageThread> mapping)
         {
-            mapping.HasManyToMany(t => t.Participants).Table("MessageThreadParticipants");
+            mapping.HasManyToMany(t => t.Participants).Table("MessageThreadParticipant");
         }
     }
 }
