@@ -1,5 +1,10 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.SqlCommand;
+using zavit.Domain.Accounts;
+using zavit.Domain.Messaging;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Shared.ResultCollections;
 using zavit.Infrastructure.Core.ResultCollections;
@@ -21,7 +26,7 @@ namespace zavit.Infrastructure.Messaging.Repositories
             _session.Flush();
         }
 
-        public IResultCollection<Message> GetMessages(int messageThreadId, int? olderThanMessageId, int take)
+        public IResultCollection<MessageInfo> GetMessages(int messageThreadId, int? olderThanMessageId, int take)
         {
             var messagesOnThread =_session.QueryOver<Message>()
                 .Where(m => m.MessageThread.Id == messageThreadId);
@@ -46,7 +51,31 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 .Take(take + 1)
                 .List<Message>();
 
-            return new ResultCollection<Message>(instantMessages, take);
+            Account accountAlias = null;
+
+            var userCount = _session.QueryOver<MessageThread>()
+                .JoinAlias(m => m.Participants, () => accountAlias, JoinType.InnerJoin)
+                .Where(m => m.Id == messageThreadId)
+                .RowCount();
+
+            var readMessages = _session.QueryOver<MessageRead>()
+                .SelectList(list => list
+                    .SelectGroup(r => r.Message.Id)
+                    .SelectCount(r => r.Account.Id)
+                )
+                .Select(Projections.GroupProperty(Projections.Property<MessageRead>(r => r.Message.Id)),
+                        Projections.Count<MessageRead>(r => r.Account.Id))
+                .Where(Restrictions.Ge(Projections.Count<MessageRead>(r => r.Account.Id), userCount - 1))
+                .AndRestrictionOn(r => r.Message.Id).IsIn(instantMessages.Select(m => m.Id).ToArray())
+                .List<object[]>();
+
+            return new ResultCollection<MessageInfo>(
+                instantMessages.Select(m => new MessageInfo
+                {
+                    Message = m,
+                    HasBeenRead = readMessages.Any(r => (int)r[0] == m.Id)
+                }), 
+                take);
         }
     }
 }

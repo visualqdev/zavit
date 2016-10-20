@@ -57,6 +57,9 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MessageReads\MessageReadCreatorTests.cs" />
+    <Compile Include="MessageReads\MessageReadProcessorTests.cs" />
+    <Compile Include="MessageReads\MessageReadServiceTests.cs" />
     <Compile Include="Messages\MessageServiceTests.cs" />
     <Compile Include="Messages\NewMessageProviderTests.cs" />
     <Compile Include="MessageThreads\MessageThreadServiceTests.cs" />

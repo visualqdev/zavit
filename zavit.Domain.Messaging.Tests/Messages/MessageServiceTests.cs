@@ -2,6 +2,7 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared.ResultCollections;
@@ -66,12 +67,15 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
             It should_return_messages_result_collection_from_message_repository = () => _result.ShouldEqual(_messageResultCollection);
 
+            It should_tell_the_message_read_service_that_user_has_accessed_messages_on_a_thread =
+                () => Injected<IMessageReadService>().AssertWasCalled(s => s.MessagesRead(MessageThreadId, _account));
+
             Establish context = () =>
             {
                 _account = NewInstanceOf<Account>();
                 _account.Id = 44;
 
-                _messageResultCollection = NewInstanceOf<IResultCollection<Message>>();
+                _messageResultCollection = NewInstanceOf<IResultCollection<MessageInfo>>();
                 Injected<IMessageRepository>()
                     .Stub(r => r.GetMessages(MessageThreadId, OlderThanMessageId, Take))
                     .Return(_messageResultCollection);
@@ -79,8 +83,8 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
             static Account _account;
             static readonly int? OlderThanMessageId = 123;
-            static IResultCollection<Message> _result;
-            static IResultCollection<Message> _messageResultCollection;
+            static IResultCollection<MessageInfo> _result;
+            static IResultCollection<MessageInfo> _messageResultCollection;
             const int MessageThreadId = 456;
             const int Take = 2;
         }

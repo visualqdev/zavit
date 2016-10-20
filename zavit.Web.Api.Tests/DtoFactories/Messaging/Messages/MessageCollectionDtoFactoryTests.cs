@@ -1,6 +1,7 @@
 ﻿using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Shared.ResultCollections;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
@@ -26,11 +27,11 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
 
             Establish context = () =>
             {
-                _messageCollection = NewInstanceOf<IResultCollection<Message>>();
+                _messageCollection = NewInstanceOf<IResultCollection<MessageInfo>>();
                 _messageCollection.Stub(c => c.HasMoreResults).Return(true);
 
-                var message = NewInstanceOf<Message>();
-                var otherMessage = NewInstanceOf<Message>();
+                var message = NewInstanceOf<MessageInfo>();
+                var otherMessage = NewInstanceOf<MessageInfo>();
                 _messageCollection.Stub(c => c.Results).Return(new[] {message, otherMessage});
 
                 _messageDto = NewInstanceOf<MessageDto>();
@@ -40,7 +41,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 Injected<IMessageDtoFactory>().Stub(f => f.CreateItem(otherMessage)).Return(_otherMessageDto);
             };
 
-            static IResultCollection<Message> _messageCollection;
+            static IResultCollection<MessageInfo> _messageCollection;
             static MessagesCollectionDto _result;
             static MessageDto _messageDto;
             static MessageDto _otherMessageDto;

@@ -1,4 +1,5 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Shared.ResultCollections;
 
 namespace zavit.Domain.Messaging.Messages
@@ -7,6 +8,6 @@ namespace zavit.Domain.Messaging.Messages
     {
         Message SendMessageOnThread(NewMessageRequest newMessageRequest, MessageThread messageThread);
         Message SendMessageOnThread(NewMessageRequest newMessageRequest, int messageThreadId);
-        IResultCollection<Message> GetMessages(int messageThreadId, int? olderThanMessageId, int take, Account account);
+        IResultCollection<MessageInfo> GetMessages(int messageThreadId, int? olderThanMessageId, int take, Account account);
     }
 }

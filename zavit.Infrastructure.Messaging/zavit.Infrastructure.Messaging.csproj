@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Overrides\MessageThreadOverrides.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MessageReadRepository.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\MessageThreadRepository.cs" />
   </ItemGroup>

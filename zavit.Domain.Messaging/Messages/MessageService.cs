@@ -1,4 +1,5 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared.ResultCollections;
 
@@ -9,12 +10,14 @@ namespace zavit.Domain.Messaging.Messages
         readonly INewMessageProvider _newMessageProvider;
         readonly IMessageRepository _messageRepository;
         readonly IMessageThreadRepository _messageThreadRepository;
+        readonly IMessageReadService _messageReadService;
 
-        public MessageService(INewMessageProvider newMessageProvider, IMessageRepository messageRepository, IMessageThreadRepository messageThreadRepository)
+        public MessageService(INewMessageProvider newMessageProvider, IMessageRepository messageRepository, IMessageThreadRepository messageThreadRepository, IMessageReadService messageReadService)
         {
             _newMessageProvider = newMessageProvider;
             _messageRepository = messageRepository;
             _messageThreadRepository = messageThreadRepository;
+            _messageReadService = messageReadService;
         }
 
         public Message SendMessageOnThread(NewMessageRequest newMessageRequest, MessageThread messageThread)
@@ -31,9 +34,12 @@ namespace zavit.Domain.Messaging.Messages
             return SendMessageOnThread(newMessageRequest, messageThread);
         }
 
-        public IResultCollection<Message> GetMessages(int messageThreadId, int? olderThanMessageId, int take, Account account)
+        public IResultCollection<MessageInfo> GetMessages(int messageThreadId, int? olderThanMessageId, int take, Account account)
         {
             var messageThreadCollection = _messageRepository.GetMessages(messageThreadId, olderThanMessageId, take);
+
+            _messageReadService.MessagesRead(messageThreadId, account);
+
             return messageThreadCollection;
         }
     }

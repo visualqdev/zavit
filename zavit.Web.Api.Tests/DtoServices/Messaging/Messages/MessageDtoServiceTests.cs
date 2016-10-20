@@ -2,6 +2,7 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Shared.ResultCollections;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
@@ -52,7 +53,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.Messages
                 var account = NewInstanceOf<Account>();
                 Injected<IUserContext>().Stub(c => c.Account).Return(account);
 
-                var messageCollection = NewInstanceOf<IResultCollection<Message>>();
+                var messageCollection = NewInstanceOf<IResultCollection<MessageInfo>>();
 
                 Injected<IMessageService>()
                     .Stub(s => s.GetMessages(MessageThreadId, OlderThanMessageThread, Take, account))

@@ -1,10 +1,11 @@
-﻿using zavit.Domain.Shared.ResultCollections;
+﻿using zavit.Domain.Messaging.MessageReads;
+using zavit.Domain.Shared.ResultCollections;
 
 namespace zavit.Domain.Messaging.Messages
 {
     public interface IMessageRepository
     {
         void Save(Message message);
-        IResultCollection<Message> GetMessages(int messageThreadId, int? olderThanMessageId, int take);
+        IResultCollection<MessageInfo> GetMessages(int messageThreadId, int? olderThanMessageId, int take);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using zavit.Domain.Messaging.Messages;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Shared.ResultCollections;
 using zavit.Web.Api.Dtos.Messaging.Messages;
 
@@ -14,7 +14,7 @@ namespace zavit.Web.Api.DtoFactories.Messaging.Messages
             _messageDtoFactory = messageDtoFactory;
         }
 
-        public MessagesCollectionDto CreateItem(IResultCollection<Message> messageCollection)
+        public MessagesCollectionDto CreateItem(IResultCollection<MessageInfo> messageCollection)
         {
             var messageDtos = messageCollection.Results.Select(r => _messageDtoFactory.CreateItem(r));
             return new MessagesCollectionDto

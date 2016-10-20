@@ -7,5 +7,6 @@ namespace zavit.Web.Api.Dtos.Messaging.Messages
         public string Body { get; set; }
         public DateTime SentOn { get; set; }
         public int Id { get; set; }
+        public bool HasBeenRead { get; set; }
     }
 }

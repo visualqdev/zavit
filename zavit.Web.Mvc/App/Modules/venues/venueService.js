@@ -24,22 +24,38 @@ export function getVenue(venueId) {
 export function joinVenue(options) {
     if (AccountService.currentUserAccount()) {
         if (options.venueId) {
-            letUserJoinVenue(options.venueId, options.activities);
+            letUserJoinVenue(options);
         } else {
             VenueClient
                 .addVenue(options.placeId, null, options.activities)
-                .then((venue) => letUserJoinVenue(venue.Id, options.activities))
-                .catch();
+                .then((venue) => {
+                    options.venueId = venue.Id;
+                    letUserJoinVenue(options);
+                })
+                .catch((error) => {
+                    if (error && error.status && error.status === 401) {
+                        redirectToLogin(options);
+                    }
+                });
         }
     } else {
-        PostLoginRedirect.storeRedirectUrl(joinVenueRedirectUrl);
-        VenueJoiningStorage.storeOptions(options);
-        Routes.goTo(Routes.login);
+        redirectToLogin(options);
     }
 }
 
-function letUserJoinVenue(venueId, activities) {
+function letUserJoinVenue(options) {
     VenueMembershipClient
-        .joinVenue(venueId, activities)
-        .then(() => Routes.goTo(`${Routes.yourVenue}/${venueId}`));
+        .joinVenue(options.venueId, options.activities)
+        .then(() => Routes.goTo(`${Routes.yourVenue}/${options.venueId}`))
+        .catch((error) => {
+            if (error && error.status && error.status === 401) {
+                redirectToLogin(options);
+            }
+        });
+}
+
+function redirectToLogin(options) {
+    PostLoginRedirect.storeRedirectUrl(joinVenueRedirectUrl);
+    VenueJoiningStorage.storeOptions(options);
+    Routes.goTo(Routes.login);
 }
