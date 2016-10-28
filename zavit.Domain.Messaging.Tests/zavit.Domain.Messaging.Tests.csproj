@@ -61,8 +61,11 @@
     <Compile Include="MessageReads\MessageReadProcessorTests.cs" />
     <Compile Include="MessageReads\MessageReadServiceTests.cs" />
     <Compile Include="Messages\MessageServiceTests.cs" />
+    <Compile Include="Messages\MessageTests.cs" />
     <Compile Include="Messages\NewMessageProviderTests.cs" />
+    <Compile Include="MessageThreads\MessageInboxTests.cs" />
     <Compile Include="MessageThreads\MessageThreadServiceTests.cs" />
+    <Compile Include="MessageThreads\MessageThreadTitleBuilderTests.cs" />
     <Compile Include="MessageThreads\NewMessageThreadProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

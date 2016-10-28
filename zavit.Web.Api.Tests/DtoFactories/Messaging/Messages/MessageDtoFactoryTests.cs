@@ -1,10 +1,14 @@
 ﻿using System;
 using Machine.Specifications;
+using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
+using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
 using zavit.Web.Api.Dtos.Messaging.Messages;
+using zavit.Web.Api.Dtos.Messaging.MessageThreads;
 
 namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages 
 {
@@ -24,6 +28,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
             It should_set_the_has_been_read_flag_to_be_the_same_as_the_message_info =
                 () => _result.HasBeenRead.ShouldEqual(_messageInfo.HasBeenRead);
 
+            It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
+                () => _result.Sender.ShouldEqual(_participantDto);
+
             Establish context = () =>
             {
                 _messageInfo = NewInstanceOf<MessageInfo>();
@@ -34,11 +41,17 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
 
                 _messageInfo.Message = _message;
                 _messageInfo.HasBeenRead = true;
+
+                _participantDto = NewInstanceOf<ThreadParticipantDto>();
+                Injected<IThreadParticipantDtoFactory>()
+                    .Stub(f => f.CreateItem(_message.Sender))
+                    .Return(_participantDto);
             };
 
             static Message _message;
             static MessageDto _result;
             static MessageInfo _messageInfo;
+            static ThreadParticipantDto _participantDto;
         }
 
         class When_creating_message_dto_from_message
@@ -54,16 +67,26 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
             It should_set_the_has_been_read_flag_to_false =
                 () => _result.HasBeenRead.ShouldBeFalse();
 
+            It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
+                () => _result.Sender.ShouldEqual(_participantDto);
+
             Establish context = () =>
             {
                 _message = NewInstanceOf<Message>();
                 _message.Id = 123;
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
+                _message.Sender = NewInstanceOf<Account>();
+
+                _participantDto = NewInstanceOf<ThreadParticipantDto>();
+                Injected<IThreadParticipantDtoFactory>()
+                    .Stub(f => f.CreateItem(_message.Sender))
+                    .Return(_participantDto);
             };
 
             static Message _message;
             static MessageDto _result;
+            static ThreadParticipantDto _participantDto;
         }
     }
 }

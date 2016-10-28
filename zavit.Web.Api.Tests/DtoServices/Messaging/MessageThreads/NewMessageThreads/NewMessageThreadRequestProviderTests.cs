@@ -17,7 +17,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads.NewMessageThr
             Because of = () => _result = Subject.Provide(_messageThreadDto);
 
             It should_set_the_participant_ids_to_be_the_list_of_ids_of_all_participants_including_the_current_user = 
-                () => _result.ParticipantIds.ShouldContainOnly(_threadParticipantDto.Id, _otherThreadParticipantDto.Id, _currentUserAccount.Id);
+                () => _result.ParticipantIds.ShouldContainOnly(_threadParticipantDto.AccountId, _otherThreadParticipantDto.AccountId, _currentUserAccount.Id);
 
             Establish context = () =>
             {
@@ -28,9 +28,9 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads.NewMessageThr
                 _messageThreadDto = NewInstanceOf<MessageThreadDto>();
 
                 _threadParticipantDto = NewInstanceOf<ThreadParticipantDto>();
-                _threadParticipantDto.Id = 12;
+                _threadParticipantDto.AccountId = 12;
                 _otherThreadParticipantDto = NewInstanceOf<ThreadParticipantDto>();
-                _otherThreadParticipantDto.Id = 14;
+                _otherThreadParticipantDto.AccountId = 14;
                 _messageThreadDto.Participants = new[] { _threadParticipantDto, _otherThreadParticipantDto };
             };
 
@@ -46,7 +46,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads.NewMessageThr
             Because of = () => _result = Subject.Provide(_messageThreadDto);
 
             It should_set_the_participant_ids_without_duplicating_the_current_user =
-                () => _result.ParticipantIds.ShouldContainOnly(_threadParticipantDto.Id, _currentUserAccount.Id);
+                () => _result.ParticipantIds.ShouldContainOnly(_threadParticipantDto.AccountId, _currentUserAccount.Id);
 
             Establish context = () =>
             {
@@ -57,9 +57,9 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads.NewMessageThr
                 _messageThreadDto = NewInstanceOf<MessageThreadDto>();
 
                 _threadParticipantDto = NewInstanceOf<ThreadParticipantDto>();
-                _threadParticipantDto.Id = 12;
+                _threadParticipantDto.AccountId = 12;
                 _otherThreadParticipantDto = NewInstanceOf<ThreadParticipantDto>();
-                _otherThreadParticipantDto.Id = _currentUserAccount.Id;
+                _otherThreadParticipantDto.AccountId = _currentUserAccount.Id;
                 _messageThreadDto.Participants = new[] { _threadParticipantDto, _otherThreadParticipantDto };
             };
 

@@ -17,7 +17,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.MessageThreads
         {
             Because of = () => _result = Subject.CreateItem(_messageThread);
 
-            It should_set_the_id_to_be_the_id_of_the_message_thread = () => _result.Id.ShouldEqual(_messageThread.Id);
+            It should_set_the_id_to_be_the_id_of_the_message_thread = () => _result.ThreadId.ShouldEqual(_messageThread.Id);
 
             It should_create_a_participant_dto_for_each_participant_on_the_message_thread = () => _result.Participants.ShouldContainOnly(_participantDto, _otherParticipantDto);
 

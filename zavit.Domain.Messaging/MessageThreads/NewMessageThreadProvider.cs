@@ -17,10 +17,12 @@ namespace zavit.Domain.Messaging.MessageThreads
         public MessageThread Provide(NewMessageThreadRequest newMessageThreadRequest)
         {
             var participants = _accountRepository.GetAccounts(newMessageThreadRequest.ParticipantIds);
+            var currentDateTime = _dateTime.UtcNow;
 
             return new MessageThread
             {
-                CreatedOn = _dateTime.UtcNow,
+                CreatedOn = currentDateTime,
+                LastUpdatedOn = currentDateTime,
                 Participants = participants
             };
         }

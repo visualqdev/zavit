@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using zavit.Web.Api.Dtos.VenueMembers;
 using zavit.Web.Api.DtoServices.VenueMembers;
 

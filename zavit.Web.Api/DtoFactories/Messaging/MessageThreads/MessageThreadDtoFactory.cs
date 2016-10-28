@@ -18,7 +18,7 @@ namespace zavit.Web.Api.DtoFactories.Messaging.MessageThreads
         {
             return new MessageThreadDto
             {
-                Id = messageThread.Id,
+                ThreadId = messageThread.Id,
                 Participants = messageThread.Participants.Select(p => _threadParticipantDtoFactory.CreateItem(p))
             };
         }

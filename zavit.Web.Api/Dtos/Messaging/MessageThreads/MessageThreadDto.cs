@@ -4,7 +4,7 @@ namespace zavit.Web.Api.Dtos.Messaging.MessageThreads
 {
     public class MessageThreadDto
     {
-        public int Id { get; set; }
+        public int ThreadId { get; set; }
         public IEnumerable<ThreadParticipantDto> Participants { get; set; }
     }
 }

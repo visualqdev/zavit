@@ -7,6 +7,6 @@ namespace zavit.Domain.Accounts
         Account Get(string userName);
         void Save(Account account);
         bool AccountExists(string username);
-        IList<Account> GetAccounts(IEnumerable<int> participantIds);
+        IList<Account> GetAccounts(IEnumerable<int> accountIds);
     }
 }

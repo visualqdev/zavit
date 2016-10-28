@@ -29,6 +29,7 @@ namespace zavit.Infrastructure.Messaging.Repositories
         public IResultCollection<MessageInfo> GetMessages(int messageThreadId, int? olderThanMessageId, int take)
         {
             var messagesOnThread =_session.QueryOver<Message>()
+                .Fetch(m => m.Sender).Eager
                 .Where(m => m.MessageThread.Id == messageThreadId);
 
             if (olderThanMessageId.HasValue)

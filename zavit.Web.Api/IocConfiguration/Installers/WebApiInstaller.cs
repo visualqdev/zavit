@@ -5,6 +5,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Web.Api.Authorization.ClaimsIdentities;
 using zavit.Web.Api.Controllers;
+using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreads;
@@ -12,6 +13,7 @@ using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.DtoFactories.Venues;
+using zavit.Web.Api.DtoServices.MessageRecipients;
 using zavit.Web.Api.DtoServices.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages;
@@ -58,7 +60,11 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IMessageDtoService>().ImplementedBy<MessageDtoService>().LifestyleTransient(),
                 Component.For<INewMessageRequestProvider>().ImplementedBy<NewMessageRequestProvider>().LifestyleTransient(),
                 Component.For<INewMessageThreadRequestProvider>().ImplementedBy<NewMessageThreadRequestProvider>().LifestyleTransient(),
-                Component.For<IMessageCollectionDtoFactory>().ImplementedBy<MessageCollectionDtoFactory>().LifestyleTransient()
+                Component.For<IMessageCollectionDtoFactory>().ImplementedBy<MessageCollectionDtoFactory>().LifestyleTransient(),
+                Component.For<IMessageRecipientDtoService>().ImplementedBy<MessageRecipientDtoService>().LifestyleTransient(),
+                Component.For<IMessageRecipientDtoFactory>().ImplementedBy<MessageRecipientDtoFactory>().LifestyleTransient(),
+                Component.For<IInboxThreadDtoFactory>().ImplementedBy<InboxThreadDtoFactory>().LifestyleTransient(),
+                Component.For<IInboxThreadDetailsDtoFactory>().ImplementedBy<InboxThreadDetailsDtoFactory>().LifestyleTransient()
                 );
         }
     }

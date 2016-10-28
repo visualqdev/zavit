@@ -1,4 +1,7 @@
-﻿namespace zavit.Domain.Messaging.MessageThreads
+﻿using System.Collections.Generic;
+using zavit.Domain.Accounts;
+
+namespace zavit.Domain.Messaging.MessageThreads
 {
     public class MessageThreadService : IMessageThreadService
     {
@@ -22,6 +25,11 @@
         public MessageThread GetMessageThread(int messageThreadId)
         {
             return _messageThreadRepository.GetMessageThread(messageThreadId);
+        }
+
+        public IMessageInbox GetMessageInbox(Account account)
+        {
+            return _messageThreadRepository.GetInbox(account.Id);
         }
     }
 }

@@ -22,7 +22,9 @@ namespace zavit.Domain.Messaging.Messages
 
         public Message SendMessageOnThread(NewMessageRequest newMessageRequest, MessageThread messageThread)
         {
-            var message = _newMessageProvider.Provide(newMessageRequest, messageThread);
+            var message = _newMessageProvider.Provide(newMessageRequest);
+            message.AddToThread(messageThread);
+
             _messageRepository.Save(message);
 
             return message;

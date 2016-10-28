@@ -135,6 +135,7 @@
     <Content Include="app\controllers\externalLoginController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\messageInboxController.js" />
     <Content Include="app\controllers\yourVenueController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
     <Content Include="app\layout\mainContent.js" />
@@ -146,6 +147,11 @@
     <Content Include="app\modules\loading\progress.js" />
     <Content Include="app\modules\map\geocode.js" />
     <Content Include="app\modules\map\mapPositionAdjuster.js" />
+    <Content Include="app\modules\messaging\messageClient.js" />
+    <Content Include="app\modules\messaging\messageInboxService.js" />
+    <Content Include="app\modules\messaging\messageRecipientsClient.js" />
+    <Content Include="app\modules\messaging\messageThreadClient.js" />
+    <Content Include="app\modules\messaging\messageThreadService.js" />
     <Content Include="app\modules\navigation\search.js" />
     <Content Include="app\modules\places\placeModal.js" />
     <Content Include="app\modules\places\places.js" />
@@ -158,6 +164,9 @@
     <Content Include="app\modules\venues\yourVenueMap.js" />
     <Content Include="app\modules\venues\yourVenuesMap.js" />
     <Content Include="app\routing\routes.js" />
+    <Content Include="app\views\messageInbox\indexView.js" />
+    <Content Include="app\views\messageInbox\messagePartial.js" />
+    <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />

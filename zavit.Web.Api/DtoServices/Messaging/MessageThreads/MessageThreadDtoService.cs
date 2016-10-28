@@ -1,9 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Messaging.MessageThreads;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreads;
 using zavit.Web.Api.Dtos.Messaging.MessageThreads;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessageThreads;
+using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads
 {
@@ -14,16 +17,20 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads
         readonly INewMessageRequestProvider _newMessageRequestProvider;
         readonly IMessageService _messageService;
         readonly INewMessageThreadDtoFactory _newMessageThreadDtoFactory;
-        readonly IMessageThreadDtoFactory _messageThreadDtoFactory;
+        readonly IInboxThreadDtoFactory _inboxThreadDtoFactory;
+        readonly IUserContext _userContext;
+        readonly IInboxThreadDetailsDtoFactory _inboxThreadDetailsDtoFactory;
 
-        public MessageThreadDtoService(INewMessageThreadRequestProvider newMessageThreadRequestProvider, IMessageThreadService messageThreadService, INewMessageRequestProvider newMessageRequestProvider, IMessageService messageService, INewMessageThreadDtoFactory newMessageThreadDtoFactory, IMessageThreadDtoFactory messageThreadDtoFactory)
+        public MessageThreadDtoService(INewMessageThreadRequestProvider newMessageThreadRequestProvider, IMessageThreadService messageThreadService, INewMessageRequestProvider newMessageRequestProvider, IMessageService messageService, INewMessageThreadDtoFactory newMessageThreadDtoFactory, IUserContext userContext, IInboxThreadDtoFactory inboxThreadDtoFactory, IInboxThreadDetailsDtoFactory inboxThreadDetailsDtoFactory)
         {
             _newMessageThreadRequestProvider = newMessageThreadRequestProvider;
             _messageThreadService = messageThreadService;
             _newMessageRequestProvider = newMessageRequestProvider;
             _messageService = messageService;
             _newMessageThreadDtoFactory = newMessageThreadDtoFactory;
-            _messageThreadDtoFactory = messageThreadDtoFactory;
+            _userContext = userContext;
+            _inboxThreadDtoFactory = inboxThreadDtoFactory;
+            _inboxThreadDetailsDtoFactory = inboxThreadDetailsDtoFactory;
         }
 
         public NewMessageThreadDto SendMessageOnNewThread(NewMessageThreadDto newMessageThreadDto)
@@ -37,10 +44,19 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads
             return _newMessageThreadDtoFactory.CreateItem(messageThread, message);
         }
 
-        public MessageThreadDto GetMessageThread(int threadId)
+        public InboxThreadDetailsDto GetMessageThread(int threadId, int messagesTake)
         {
             var messageThread = _messageThreadService.GetMessageThread(threadId);
-            return _messageThreadDtoFactory.CreateItem(messageThread);
+
+            var account = _userContext.Account;
+            var messageResultsCollection = _messageService.GetMessages(threadId, null, messagesTake, account);
+            return _inboxThreadDetailsDtoFactory.CreateItem(messageThread, messageResultsCollection);
+        }
+
+        public IEnumerable<InboxThreadDto> GetMessageThreads()
+        {
+            var messageInbox = _messageThreadService.GetMessageInbox(_userContext.Account);
+            return messageInbox.Threads.Select(t => _inboxThreadDtoFactory.CreateItem(t, messageInbox));
         }
     }
 }

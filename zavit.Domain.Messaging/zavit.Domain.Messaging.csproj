@@ -58,10 +58,14 @@
     <Compile Include="Messages\NewMessageProvider.cs" />
     <Compile Include="Messages\NewMessageRequest.cs" />
     <Compile Include="MessageThread.cs" />
+    <Compile Include="MessageThreads\IMessageInbox.cs" />
     <Compile Include="MessageThreads\IMessageThreadRepository.cs" />
     <Compile Include="MessageThreads\IMessageThreadService.cs" />
+    <Compile Include="MessageThreads\IMessageThreadTitleBuilder.cs" />
     <Compile Include="MessageThreads\INewMessageThreadProvider.cs" />
+    <Compile Include="MessageThreads\MessageInbox.cs" />
     <Compile Include="MessageThreads\MessageThreadService.cs" />
+    <Compile Include="MessageThreads\MessageThreadTitleBuilder.cs" />
     <Compile Include="MessageThreads\NewMessageThreadProvider.cs" />
     <Compile Include="MessageThreads\NewMessageThreadRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

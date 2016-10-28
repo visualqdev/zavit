@@ -13,12 +13,9 @@ namespace zavit.Domain.Messaging.Tests.Messages
     {
         class When_providing_message
         {
-            Because of = () => _result = Subject.Provide(_newMessageRequest, _messageThread);
+            Because of = () => _result = Subject.Provide(_newMessageRequest);
 
             It should_set_the_message_body_to_match_the_request = () => _result.Body.ShouldEqual(_newMessageRequest.Body);
-
-            It should_set_the_message_thread_to_the_provided_message_thread =
-                () => _result.MessageThread.ShouldEqual(_messageThread);
 
             It should_set_the_sender_to_be_the_sender_from_the_request = () => _result.Sender.ShouldEqual(_newMessageRequest.Sender);
 
@@ -30,13 +27,10 @@ namespace zavit.Domain.Messaging.Tests.Messages
                 _newMessageRequest.Body = "Test body";
                 _newMessageRequest.Sender = NewInstanceOf<Account>();
 
-                _messageThread = NewInstanceOf<MessageThread>();
-
                 Injected<IDateTime>().Stub(d => d.UtcNow).Return(new DateTime(2016, 1, 2));
             };
 
             static NewMessageRequest _newMessageRequest;
-            static MessageThread _messageThread;
             static Message _result;
         }
     }

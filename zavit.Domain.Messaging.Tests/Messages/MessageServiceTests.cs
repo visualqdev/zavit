@@ -18,6 +18,8 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
             It should_return_a_new_message = () => _result.ShouldEqual(_message);
 
+            It should_add_message_to_the_thread = () => _message.AssertWasCalled(m => m.AddToThread(_messageThread));
+
             It should_save_the_new_message = () => Injected<IMessageRepository>().AssertWasCalled(r => r.Save(_message));
 
             Establish context = () =>
@@ -26,7 +28,7 @@ namespace zavit.Domain.Messaging.Tests.Messages
                 _messageThread = NewInstanceOf<MessageThread>();
 
                 _message = NewInstanceOf<Message>();
-                Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest, _messageThread)).Return(_message);
+                Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest)).Return(_message);
             };
 
             static MessageThread _messageThread;
@@ -41,23 +43,26 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
             It should_return_a_new_message = () => _result.ShouldEqual(_message);
 
+            It should_add_message_to_the_thread = () => _message.AssertWasCalled(m => m.AddToThread(_messageThread));
+
             It should_save_the_new_message = () => Injected<IMessageRepository>().AssertWasCalled(r => r.Save(_message));
 
             Establish context = () =>
             {
                 _newMessageRequest = NewInstanceOf<NewMessageRequest>();
-                var messageThread = NewInstanceOf<MessageThread>();
+                _messageThread = NewInstanceOf<MessageThread>();
                 Injected<IMessageThreadRepository>()
                     .Stub(r => r.GetMessageThread(MessageThreadId))
-                    .Return(messageThread);
+                    .Return(_messageThread);
 
                 _message = NewInstanceOf<Message>();
-                Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest, messageThread)).Return(_message);
+                Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest)).Return(_message);
             };
             
             static Message _result;
             static NewMessageRequest _newMessageRequest;
             static Message _message;
+            static MessageThread _messageThread;
             const int MessageThreadId = 123;
         }
 

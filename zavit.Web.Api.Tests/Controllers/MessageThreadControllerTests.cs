@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
 using Rhino.Mocks;
@@ -23,7 +24,7 @@ namespace zavit.Web.Api.Tests.Controllers
                 () => ((CreatedAtRouteNegotiatedContentResult<NewMessageThreadDto>)_result).Content.ShouldEqual(_createdNewmessageThreadDto);
 
             It should_return_http_result_specifying_the_created_venue_id_as_a_route_value =
-                () => int.Parse(((CreatedAtRouteNegotiatedContentResult<NewMessageThreadDto>)_result).RouteValues["id"].ToString()).ShouldEqual(_createdNewmessageThreadDto.Thread.Id);
+                () => int.Parse(((CreatedAtRouteNegotiatedContentResult<NewMessageThreadDto>)_result).RouteValues["id"].ToString()).ShouldEqual(_createdNewmessageThreadDto.Thread.ThreadId);
 
             Establish context = () =>
             {
@@ -31,7 +32,7 @@ namespace zavit.Web.Api.Tests.Controllers
 
                 _createdNewmessageThreadDto = NewInstanceOf<NewMessageThreadDto>();
                 _createdNewmessageThreadDto.Thread = NewInstanceOf<MessageThreadDto>();
-                _createdNewmessageThreadDto.Thread.Id = 123;
+                _createdNewmessageThreadDto.Thread.ThreadId = 123;
 
                 Injected<IMessageThreadDtoService>()
                     .Stub(s => s.SendMessageOnNewThread(_newMessageThreadDto))
@@ -45,19 +46,38 @@ namespace zavit.Web.Api.Tests.Controllers
 
         class When_getting_the_message_thread
         {
-            Because of = () => _result = Subject.Get(ThreadId);
+            Because of = () => _result = Subject.Get(ThreadId, MessagesTake);
 
-            It should_return_the_message_thread_dto = () => _result.ShouldEqual(_messageThreadDto);
+            It should_return_the_inbox_thread_details_dto = () => _result.ShouldEqual(_inboxThreadDetailsDto);
 
             Establish context = () =>
             {
-                _messageThreadDto = NewInstanceOf<MessageThreadDto>();
-                Injected<IMessageThreadDtoService>().Stub(s => s.GetMessageThread(ThreadId)).Return(_messageThreadDto);
+                _inboxThreadDetailsDto = NewInstanceOf<InboxThreadDetailsDto>();
+                Injected<IMessageThreadDtoService>().Stub(s => s.GetMessageThread(ThreadId, MessagesTake)).Return(_inboxThreadDetailsDto);
             };
 
-            static MessageThreadDto _result;
-            static MessageThreadDto _messageThreadDto;
+            static InboxThreadDetailsDto _result;
+            static InboxThreadDetailsDto _inboxThreadDetailsDto;
             const int ThreadId = 1;
+            const int MessagesTake = 25;
+        }
+
+        class When_getting_message_threads_collection
+        {
+            Because of = () => _result = Subject.Get();
+
+            It should_return_collection_of_inbox_threads = () => _result.ShouldEqual(_inboxThreads);
+
+            Establish context = () =>
+            {
+                _inboxThreads = new[] { NewInstanceOf<InboxThreadDto>(), NewInstanceOf<InboxThreadDto>() };
+                Injected<IMessageThreadDtoService>()
+                    .Stub(s => s.GetMessageThreads())
+                    .Return(_inboxThreads);
+            };
+
+            static IEnumerable<InboxThreadDto> _result;
+            static IEnumerable<InboxThreadDto> _inboxThreads;
         }
     }
 }

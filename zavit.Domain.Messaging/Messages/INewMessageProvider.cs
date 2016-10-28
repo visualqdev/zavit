@@ -2,6 +2,6 @@
 {
     public interface INewMessageProvider
     {
-        Message Provide(NewMessageRequest newMessageRequest, MessageThread messageThread);
+        Message Provide(NewMessageRequest newMessageRequest);
     }
 }

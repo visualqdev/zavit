@@ -11,11 +11,10 @@ namespace zavit.Domain.Messaging.Messages
             _dateTime = dateTime;
         }
 
-        public Message Provide(NewMessageRequest newMessageRequest, MessageThread messageThread)
+        public Message Provide(NewMessageRequest newMessageRequest)
         {
             return new Message
             {
-                MessageThread = messageThread,
                 Body = newMessageRequest.Body,
                 Sender = newMessageRequest.Sender,
                 SentOn = _dateTime.UtcNow

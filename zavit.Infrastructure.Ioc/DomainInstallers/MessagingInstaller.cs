@@ -19,7 +19,8 @@ namespace zavit.Infrastructure.Ioc.DomainInstallers
                 Component.For<IMessageReadService>().ImplementedBy<MessageReadService>().LifestyleTransient(),
                 Component.For<IMessageReadCreator>().ImplementedBy<MessageReadCreator>().LifestyleTransient(),
                 Component.For<IMessageReadProcessor>().ImplementedBy<MessageReadProcessor>().LifestyleTransient(),
-                Component.For<IMessageReadObserver>().ImplementedBy<NoActionMessageReadObserver>().LifestyleSingleton()
+                Component.For<IMessageReadObserver>().ImplementedBy<NoActionMessageReadObserver>().LifestyleSingleton(),
+                Component.For<IMessageThreadTitleBuilder>().ImplementedBy<MessageThreadTitleBuilder>().LifestyleTransient()
                 );
         }
     }

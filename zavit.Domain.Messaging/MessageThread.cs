@@ -10,5 +10,6 @@ namespace zavit.Domain.Messaging
         public virtual int Id { get; set; }
         public virtual IList<Account> Participants { get; set; }
         public virtual DateTime CreatedOn { get; set; }
+        public virtual DateTime LastUpdatedOn { get; set; }
     }
 }

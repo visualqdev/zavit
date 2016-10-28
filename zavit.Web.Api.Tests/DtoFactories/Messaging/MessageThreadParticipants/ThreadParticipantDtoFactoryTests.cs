@@ -14,7 +14,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.MessageThreadParticipants
         {
             Because of = () => _result = Subject.CreateItem(_account);
 
-            It should_set_the_id_to_be_the_id_of_the_particpants_account = () => _result.Id.ShouldEqual(_account.Id);
+            It should_set_the_id_to_be_the_id_of_the_particpants_account = () => _result.AccountId.ShouldEqual(_account.Id);
 
             It should_set_the_display_name_to_be_the_account_disply_name = () => _result.DisplayName.ShouldEqual(_account.DisplayName);
 

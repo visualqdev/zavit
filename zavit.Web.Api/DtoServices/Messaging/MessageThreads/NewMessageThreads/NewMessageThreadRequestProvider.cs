@@ -18,7 +18,7 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessageThreads
         public NewMessageThreadRequest Provide(MessageThreadDto messageThreadDto)
         {
             var participants = new List<int> { _userContext.Account.Id };
-            participants.AddRange(messageThreadDto.Participants.Where(p => p.Id != _userContext.Account.Id).Select(p => p.Id));
+            participants.AddRange(messageThreadDto.Participants.Where(p => p.AccountId != _userContext.Account.Id).Select(p => p.AccountId));
             
             return new NewMessageThreadRequest
             {

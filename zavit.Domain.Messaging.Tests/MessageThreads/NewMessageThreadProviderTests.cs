@@ -22,6 +22,9 @@ namespace zavit.Domain.Messaging.Tests.MessageThreads
             It should_set_the_thread_creation_date_and_time_to_the_current_utc_date_time =
                 () => _result.CreatedOn.ShouldEqual(Injected<IDateTime>().UtcNow);
 
+            It should_set_the_last_updated_date_and_time_to_the_current_utc_date_time =
+                () => _result.LastUpdatedOn.ShouldEqual(Injected<IDateTime>().UtcNow);
+
             Establish context = () =>
             {
                 _newMessageThreadRequest = NewInstanceOf<NewMessageThreadRequest>();

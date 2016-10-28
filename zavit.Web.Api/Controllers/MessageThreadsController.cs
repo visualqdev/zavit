@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Authorization.ResourcesAuthorization.Messaging;
 using zavit.Web.Api.Dtos.Messaging.MessageThreads;
@@ -23,15 +24,23 @@ namespace zavit.Web.Api.Controllers
         public IHttpActionResult Post(NewMessageThreadDto newMessageThreadDto)
         {
             var newMessageThread = _messageThreadDtoService.SendMessageOnNewThread(newMessageThreadDto);
-            return CreatedAtRoute(GetMessageThreadRoute, new {id = newMessageThread.Thread.Id}, newMessageThread);
+            return CreatedAtRoute(GetMessageThreadRoute, new {id = newMessageThread.Thread.ThreadId}, newMessageThread);
         }
 
         [HttpGet]
         [MessageThreadAccessAuthorize("id")]
         [Route("~/api/messagethreads/{id}", Name = GetMessageThreadRoute)]
-        public MessageThreadDto Get(int id)
+        public InboxThreadDetailsDto Get(int id, int take = 20)
         {
-            return _messageThreadDtoService.GetMessageThread(id);
+            return _messageThreadDtoService.GetMessageThread(id, take);
+        }
+
+        [HttpGet]
+        [AccessAuthorize]
+        [Route("~/api/messagethreads")]
+        public IEnumerable<InboxThreadDto> Get()
+        {
+            return _messageThreadDtoService.GetMessageThreads();
         }
     }
 }

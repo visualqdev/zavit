@@ -1,4 +1,6 @@
-﻿export function getView(venueMembers) {
+﻿import * as Routes from "../../routing/routes";
+
+export function getView(venueMembers) {
     let venueMembersMarkup = "";
 
     $.each(venueMembers, (index, venueMember) => {
@@ -11,6 +13,9 @@
                     <div class="content">
                        <h3>${venueMember.DisplayName}</h3>
                        ${activitiesMarkup(venueMember.Activities)}
+                    </div>
+                    <div class="memberActions">
+                        <a class="btn btn-primary" href="/#/${Routes.messageInbox}?accounts=${venueMember.AccountId}">Arrange</a>
                     </div>
                 </div>
             </div>

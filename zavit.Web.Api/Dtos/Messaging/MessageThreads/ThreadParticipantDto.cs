@@ -2,7 +2,7 @@
 {
     public class ThreadParticipantDto
     {
-        public int Id { get; set; }
+        public int AccountId { get; set; }
         public string DisplayName { get; set; }
     }
 }

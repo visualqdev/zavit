@@ -76,15 +76,19 @@
     <Compile Include="Authorization\UserContextTests.cs" />
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\ActivitiesControllerTests.cs" />
+    <Compile Include="Controllers\MessageRecipientsControllerTests.cs" />
     <Compile Include="Controllers\MessagesControllerTests.cs" />
     <Compile Include="Controllers\MessageThreadControllerTests.cs" />
     <Compile Include="Controllers\PlacesControllerTests.cs" />
     <Compile Include="Controllers\VenueMembersControllerTests.cs" />
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\ThreadParticipantDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDetailsDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMembers\VenueMemberCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMembers\VenueMemberDtoFactoryTests.cs" />
+    <Compile Include="DtoServices\MessageRecipients\MessageRecipientDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\Messages\MessageDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProviderTests.cs" />

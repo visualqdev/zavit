@@ -7,6 +7,7 @@ import * as VenueController from "../controllers/venueController";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as YourVenuesController from "../controllers/yourVenuesController";
 import * as YourVenueController from "../controllers/yourVenueController";
+import * as MessageInboxController from "../controllers/messageInboxController";
 
 export function registerRoutes() {
     crossroads.addRoute(`/${Routes.home}`, () => {
@@ -43,6 +44,14 @@ export function registerRoutes() {
     crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => {
         TopNav.navigatedToRoute(Routes.yourVenues);
         YourVenueController.index(venueId);
+    });
+
+    crossroads.addRoute(`/${Routes.messageInbox}{?query}`, (query) => {
+        TopNav.navigatedToRoute(Routes.messageInbox);
+        MessageInboxController.index({
+            accountIds: query.accounts ? query.accounts.split(',') : [],
+            threadId: query.threadid
+        });
     });
 
     function parseHash(newHash, oldHash) {

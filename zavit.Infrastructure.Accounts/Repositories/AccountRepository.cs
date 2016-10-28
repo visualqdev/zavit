@@ -32,10 +32,10 @@ namespace zavit.Infrastructure.Accounts.Repositories
                 .RowCount() > 0;
         }
 
-        public IList<Account> GetAccounts(IEnumerable<int> participantIds)
+        public IList<Account> GetAccounts(IEnumerable<int> accountIds)
         {
             return _session.QueryOver<Account>()
-                .WhereRestrictionOn(a => a.Id).IsIn(participantIds.ToArray())
+                .WhereRestrictionOn(a => a.Id).IsIn(accountIds.ToArray())
                 .List();
         }
     }
