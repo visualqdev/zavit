@@ -27,6 +27,8 @@ namespace zavit.Domain.Messaging.Messages
 
             _messageRepository.Save(message);
 
+            _messageReadService.MessageSent(message);
+
             return message;
         }
 

@@ -42,13 +42,11 @@
   <ItemGroup>
     <Compile Include="MessageReads\IMessageReadCreator.cs" />
     <Compile Include="MessageReads\IMessageReadObserver.cs" />
-    <Compile Include="MessageReads\IMessageReadProcessor.cs" />
     <Compile Include="MessageReads\IMessageReadRepository.cs" />
     <Compile Include="MessageReads\IMessageReadService.cs" />
     <Compile Include="MessageReads\MessageInfo.cs" />
     <Compile Include="MessageReads\MessageRead.cs" />
     <Compile Include="MessageReads\MessageReadCreator.cs" />
-    <Compile Include="MessageReads\MessageReadProcessor.cs" />
     <Compile Include="MessageReads\MessageReadService.cs" />
     <Compile Include="Messages\IMessageRepository.cs" />
     <Compile Include="Messages\IMessageService.cs" />

@@ -9,7 +9,14 @@ namespace zavit.Domain.Messaging.MessageReads
     {
         public virtual Message Message { get; set; }
         public virtual Account Account { get; set; }
-        public virtual DateTime DateRead { get; set; }
+        public virtual bool HasRead { get; set; }
+        public virtual DateTime? DateRead { get; set; }
         public virtual int Id { get; set; }
+
+        public virtual void UserHasRead(DateTime dateRead)
+        {
+            DateRead = dateRead;
+            HasRead = true;
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Shared;
 
 namespace zavit.Domain.Messaging.MessageReads
@@ -9,28 +10,43 @@ namespace zavit.Domain.Messaging.MessageReads
     {
         readonly IDateTime _dateTime;
         readonly IMessageReadRepository _messageReadRepository;
-        readonly IMessageReadProcessor _messageReadProcessor;
         readonly IEnumerable<IMessageReadObserver> _messageReadObservers;
+        readonly IMessageReadCreator _messageReadCreator;
 
-        public MessageReadService(IDateTime dateTime, IMessageReadRepository messageReadRepository, IMessageReadProcessor messageReadProcessor, IEnumerable<IMessageReadObserver> messageReadObservers)
+        public MessageReadService(IDateTime dateTime, IMessageReadRepository messageReadRepository, IEnumerable<IMessageReadObserver> messageReadObservers, IMessageReadCreator messageReadCreator)
         {
             _dateTime = dateTime;
             _messageReadRepository = messageReadRepository;
-            _messageReadProcessor = messageReadProcessor;
             _messageReadObservers = messageReadObservers;
+            _messageReadCreator = messageReadCreator;
         }
 
         public void MessagesRead(int messageThreadId, Account account)
         {
-            var dateRead = _dateTime.UtcNow;
-            var unreadMessages = _messageReadRepository.UnreadMessagesByUser(messageThreadId, account.Id, dateRead);
-            _messageReadProcessor.Process(unreadMessages, account, dateRead);
+            var pendingReads = _messageReadRepository.GetPendingMessageReads(messageThreadId, account.Id);
+            var currentDate = _dateTime.UtcNow;
+            foreach (var pendingRead in pendingReads)
+            {
+                pendingRead.UserHasRead(currentDate);
+            }
 
-            var completelyReadMessages = _messageReadRepository.GetReadMessageIds(messageThreadId, unreadMessages.Select(m => m.Id));
+            _messageReadRepository.Update(pendingReads);
+
+            var completelyReadMessages = _messageReadRepository.GetReadMessageIds(pendingReads.Select(m => m.Message.Id));
             foreach (var messageReadObserver in _messageReadObservers)
             {
                 messageReadObserver.MessagesRead(completelyReadMessages, messageThreadId);
             }
+        }
+
+        public void MessageSent(Message message)
+        {
+            var messageReads = message
+                .GetRecipients()
+                .Select(recipient => _messageReadCreator.Create(recipient, message))
+                .ToList();
+
+            _messageReadRepository.Save(messageReads);
         }
     }
 }

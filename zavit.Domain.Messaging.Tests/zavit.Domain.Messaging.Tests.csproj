@@ -58,8 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MessageReads\MessageReadCreatorTests.cs" />
-    <Compile Include="MessageReads\MessageReadProcessorTests.cs" />
     <Compile Include="MessageReads\MessageReadServiceTests.cs" />
+    <Compile Include="MessageReads\MessageReadTests.cs" />
     <Compile Include="Messages\MessageServiceTests.cs" />
     <Compile Include="Messages\MessageTests.cs" />
     <Compile Include="Messages\NewMessageProviderTests.cs" />

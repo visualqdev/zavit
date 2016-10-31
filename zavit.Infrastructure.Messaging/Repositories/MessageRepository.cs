@@ -52,29 +52,23 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 .Take(take + 1)
                 .List<Message>();
 
-            Account accountAlias = null;
-
-            var userCount = _session.QueryOver<MessageThread>()
-                .JoinAlias(m => m.Participants, () => accountAlias, JoinType.InnerJoin)
-                .Where(m => m.Id == messageThreadId)
-                .RowCount();
-
+            var messageIdsArray = instantMessages.Select(m => m.Id).ToArray();
             var readMessages = _session.QueryOver<MessageRead>()
-                .SelectList(list => list
-                    .SelectGroup(r => r.Message.Id)
-                    .SelectCount(r => r.Account.Id)
+                .WhereRestrictionOn(r => r.Message.Id).IsIn(messageIdsArray)
+                .WithSubquery.WhereProperty(r => r.Message.Id).NotIn(
+                    QueryOver.Of<MessageRead>()
+                        .WhereRestrictionOn(r => r.Message.Id).IsIn(messageIdsArray)
+                        .And(r => !r.HasRead)
+                        .Select(r => r.Message.Id)
                 )
-                .Select(Projections.GroupProperty(Projections.Property<MessageRead>(r => r.Message.Id)),
-                        Projections.Count<MessageRead>(r => r.Account.Id))
-                .Where(Restrictions.Ge(Projections.Count<MessageRead>(r => r.Account.Id), userCount - 1))
-                .AndRestrictionOn(r => r.Message.Id).IsIn(instantMessages.Select(m => m.Id).ToArray())
-                .List<object[]>();
+                .Select(r => r.Message.Id)
+                .List<int>();
 
             return new ResultCollection<MessageInfo>(
                 instantMessages.Select(m => new MessageInfo
                 {
                     Message = m,
-                    HasBeenRead = readMessages.Any(r => (int)r[0] == m.Id)
+                    HasBeenRead = readMessages.Any(r => r == m.Id)
                 }), 
                 take);
         }

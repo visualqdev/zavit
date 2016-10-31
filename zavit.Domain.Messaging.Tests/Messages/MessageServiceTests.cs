@@ -22,6 +22,9 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
             It should_save_the_new_message = () => Injected<IMessageRepository>().AssertWasCalled(r => r.Save(_message));
 
+            It should_inform_the_message_read_service_that_a_new_message_has_been_sent_to_the_recipients =
+                () => Injected<IMessageReadService>().AssertWasCalled(s => s.MessageSent(_message));
+
             Establish context = () =>
             {
                 _newMessageRequest = NewInstanceOf<NewMessageRequest>();
@@ -46,6 +49,9 @@ namespace zavit.Domain.Messaging.Tests.Messages
             It should_add_message_to_the_thread = () => _message.AssertWasCalled(m => m.AddToThread(_messageThread));
 
             It should_save_the_new_message = () => Injected<IMessageRepository>().AssertWasCalled(r => r.Save(_message));
+
+            It should_inform_the_message_read_service_that_a_new_message_has_been_sent_to_the_recipients =
+                () => Injected<IMessageReadService>().AssertWasCalled(s => s.MessageSent(_message));
 
             Establish context = () =>
             {

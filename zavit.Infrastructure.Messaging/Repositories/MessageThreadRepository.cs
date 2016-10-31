@@ -70,16 +70,15 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 .OrderBy(t => t.CreatedOn).Desc
                 .Future();
 
-            MessageThread messageThreadAlias = null;
+            
             Message messageAlias = null;
             MessageRead messageReadAlias = null;
 
             var unreadMessageIds = _session.QueryOver(() => messageReadAlias)
-                .JoinAlias(r => r.Message, () => messageAlias, JoinType.RightOuterJoin, Restrictions.On(() => messageReadAlias.Account.Id).IsIn(new[] { accountId }))
-                .JoinAlias(() => messageAlias.MessageThread, () => messageThreadAlias, JoinType.InnerJoin)
-                .WithSubquery.WhereProperty(() => messageThreadAlias.Id).In(messageThreadIds)
-                .And(Restrictions.On(() => messageReadAlias.Message).IsNull)
-                .And(() => messageAlias.Sender.Id != accountId)
+                .JoinAlias(r => r.Message, () => messageAlias, JoinType.InnerJoin)
+                .WithSubquery.WhereProperty(() => messageAlias.MessageThread.Id).In(messageThreadIds)
+                .And(() => !messageReadAlias.HasRead)
+                .And(() => messageReadAlias.Account.Id == accountId)
                 .SelectList(list => list
                     .SelectGroup(() => messageAlias.MessageThread.Id)
                     .SelectCount(() => messageAlias.Id))
