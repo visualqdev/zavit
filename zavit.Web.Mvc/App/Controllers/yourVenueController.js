@@ -1,4 +1,5 @@
 ﻿import * as IndexView from "../views/yourVenue/indexView";
+import * as VenueActivitiesPartial from "../views/yourVenue/venueActivitiesPartial";
 import * as VenueMembersPartial from "../views/yourVenue/venueMembersPartial";
 import * as MainContent from "../layout/mainContent";
 import * as Routes from "../routing/routes";
@@ -6,6 +7,8 @@ import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as YourVenueMap from "../modules/venues/yourVenueMap";
 import * as VenueMembershipClient from "../modules/venues/venueMembershipClient";
 import * as Progress from "../modules/loading/progress";
+import * as ActivityClient from "../modules/activities/activityClient";
+import * as VenueService from "../modules/venues/venueService";
 
 export function index(venueId) {
     MainContent.load(Routes.yourVenue);
@@ -18,6 +21,7 @@ export function index(venueId) {
             const view = IndexView.getView(membership);
             MainContent.append(view);
             YourVenueMap.addMapTo(".yourVenueMap");
+            AttachActivityEvents(membership);
             return VenueMembershipClient.getVenueMembers(venueId, 0, 6);
         })
         .then(venueMembersResult => {
@@ -62,4 +66,28 @@ function checkUnauthorised(errot) {
         PostLoginRedirect.storeRedirectUrl(window.location.href);
         Routes.goTo(Routes.login);
     }
+}
+
+function AttachActivityEvents(membership) {
+    $("#yourVenueOtherActivities").click(e => {
+        e.preventDefault();
+        ActivityClient
+        .getAllActivities()
+        .then(activities => {
+            const allActivitiesMarkup = VenueActivitiesPartial.getView(activities, membership.Activities, true);
+            $(".yourVenueActivities").replaceWith(allActivitiesMarkup);
+        });
+    });
+
+    $("#yourVenue").on("change", "[name='venueActivities']", () => {
+        const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
+        const activities = activitiCheckboxes
+            .map((index, checkbox) => $(checkbox).val())
+            .get();
+        
+        VenueService.joinVenue({
+            activities,
+            venueId: membership.Venue.Id
+        });
+    });
 }

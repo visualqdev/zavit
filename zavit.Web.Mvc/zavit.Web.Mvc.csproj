@@ -169,6 +169,7 @@
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
+    <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />

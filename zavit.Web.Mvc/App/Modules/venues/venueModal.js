@@ -64,10 +64,6 @@ function showVenue(venue, placeId) {
 }
 
 function getActivitiesMarkup(activities) {
-    //const activitiesInColumn = Math.ceil((activities.length) / 2);
-    //const leftColumnActivities = activities;
-    //const rightColumnActivities = leftColumnActivities.splice(activitiesInColumn, leftColumnActivities.length);
-
     return `
         <ul class="list-group row">
             ${activityCheckboxes(activities)}
