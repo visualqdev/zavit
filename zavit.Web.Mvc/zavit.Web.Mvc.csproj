@@ -165,6 +165,7 @@
     <Content Include="app\modules\messaging\messageThreadClient.js" />
     <Content Include="app\modules\messaging\messageThreadService.js" />
     <Content Include="app\modules\messaging\newMessageFactory.js" />
+    <Content Include="app\modules\messaging\messageLayout.js" />
     <Content Include="app\modules\navigation\search.js" />
     <Content Include="app\modules\places\placeModal.js" />
     <Content Include="app\modules\places\places.js" />
@@ -273,6 +274,7 @@
     <Content Include="Fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="Fonts\font-awesome\scss\_variables.scss" />
     <Content Include="CSS\venues.less" />
+    <Content Include="CSS\messages.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
