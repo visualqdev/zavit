@@ -1,0 +1,123 @@
+﻿@import '.\libraries\colours';
+
+#messageThreads {
+
+    .col-md-3 {
+        padding:0;
+    }
+    .col-md-9 {
+        padding-top:0;
+    }
+    .noColPaddingLeft {
+        padding-left:0;
+    }
+
+    @media (max-width: 990px) {
+        .noColPaddingLeft {
+            padding-right:0;
+        }
+    }
+
+    #messagesContainer {
+        margin-top:15px;
+    }
+
+    #messagesHeading {
+        float:left;
+        width:100%;
+    }
+
+    > ul {
+        float:left;
+        clear:left;
+    }
+
+    a#arrangeNew {
+        float:left;
+        height:45px;
+        background-color:@page-bg;
+        clear:left;
+        width:95%;
+        font-size:28px;
+        text-indent:10px;
+        line-height:1.6;
+
+        .fa {
+            height:45px;
+            width:45px;
+            background-color:@plus-button-bg;
+            margin:0;
+            padding:0;
+            display:block;
+            float:left;
+            font-size:40px;
+            text-indent:4px;
+            line-height:1.1;
+        }
+    }
+
+    @media (max-width: 990px) {
+        a#arrangeNew {
+            width:100%;
+            margin-bottom:15px;
+        }
+    }
+
+    #threadTitle {
+        h4 {
+            font-size:16px;
+            font-weight:bold;
+            width:100%;
+            background-color:@page-bg;
+            height:45px;
+            text-indent:10px;
+            line-height:2.7;
+            float:left;
+            padding:0;
+            margin:0;
+        }
+    }
+
+    @media (max-width: 990px) {
+        #threadTitle {
+            padding:0;
+            h4 {
+                width:100%;
+            }
+            margin-bottom:10px;
+        }
+    }
+
+    #messages {
+        width:100%;
+        background-color:@page-bg;
+    }
+
+    ul#messageThreads {
+   
+        width:100%;
+        list-style:none;
+        margin:0;
+        padding:0;
+        max-height:120px;
+        overflow:auto;
+        
+        li{
+            a {
+                width:95%;
+                background-color:@page-bg;
+                padding:0;
+                margin:0 0 10px 0;
+                height:45px;
+                display:inline-block;
+                font-size:18px;
+                text-decoration:none;
+                line-height:2.6;
+                text-indent:10px;
+            }
+            a.selected {
+                width:100%;
+            }
+        } 
+    }
+}

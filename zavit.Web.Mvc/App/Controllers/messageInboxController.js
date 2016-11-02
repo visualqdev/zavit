@@ -5,6 +5,7 @@ import * as IndexView from "../views/messageInbox/indexView";
 import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartial";
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
+import * as MessageLayout from "../modules/messaging/messageLayout";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -21,22 +22,28 @@ export function index(options) {
         })
         .then(inboxThread => {
             const threadView = MessageThreadPartial.getView(inboxThread);
-            $("#messageThreadMessages").html(threadView);
+            setThreadTitle(inboxThread.ThreadTitle);
+            $("#messages").html(threadView);
             attachNewMessageEvents(inboxThread);
         })
-        .then(Progress.done);
+        .then(Progress.done)
+        .then(MessageLayout.setUp);
 }
+
+
 
 function attachInboxEvents() {
     $("#messageThreads").on("click", "[data-thread-id]", (e) => {
         e.preventDefault();
+        MessageLayout.styleSelected(e, $(this));
         const threadId = $(e.target).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
             })
             .then(inboxThread => {
                 const threadView = MessageThreadPartial.getView(inboxThread);
-                $("#messageThreadMessages").html(threadView);
+                setThreadTitle(inboxThread.ThreadTitle);
+                $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
             });
     });
@@ -66,4 +73,8 @@ function attachNewMessageEvents(inboxThread) {
                 alert(sendMessageRespone.message.Body);
             });
     });
+}
+
+function setThreadTitle(title) {
+    $("#threadTitle h4").text(title);
 }
