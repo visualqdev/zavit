@@ -2,6 +2,7 @@
 import * as Routes from "../routing/routes";
 import * as Progress from "../modules/loading/progress";
 import * as IndexView from "../views/messageInbox/indexView";
+import * as MessagePartial from "../views/messageInbox/messagePartial";
 import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartial";
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
@@ -53,27 +54,33 @@ function attachInboxEvents() {
 function attachNewMessageEvents(inboxThread) {
     let currentInboxThread = inboxThread;
 
-    $("#messageTextSend").on("click", () => {
-        const messageText = $("#messageTextInput").val();
-        const sendButton = $(this);
+    const sendButton = $("#messageTextSend");
+    sendButton.off("click");
+    sendButton.on("click", () => {
+        const messageInput = $("#messageTextInput");
+        const messageText = messageInput.val();
+        messageInput.val("");
 
         if (!currentInboxThread.ThreadId) {
             sendButton.prop("disabled", true);
         }
 
         const newMessage = NewMessageFactory.createMessage(messageText);
+        const newMessageView = MessagePartial.getView(newMessage);
+        $("#messages ul").prepend(newMessageView);
 
         MessageThreadService
             .sendMessage({
                 inboxThread: currentInboxThread,
                 message: newMessage
             })
-            .then(sendMessageRespone => {
+            .then(sendMessageResponse => {
                 if (!currentInboxThread.ThreadId) {
-                    Routes.goTo(`${Routes.messageInbox}?threadid=${sendMessageRespone.inboxThread.ThreadId}`);
+                    Routes.goTo(`${Routes.messageInbox}?threadid=${sendMessageResponse.inboxThread.ThreadId}`);
                 }
-                currentInboxThread = sendMessageRespone.inboxThread;
-                alert(sendMessageRespone.message.Body);
+                currentInboxThread = sendMessageResponse.inboxThread;
+                const sentMessageView = MessagePartial.getView(sendMessageResponse.message);
+                $(`[data-stamp='${sendMessageResponse.message.Stamp}']`).replaceWith(sentMessageView);
             });
     });
 }

@@ -31,6 +31,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
             It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
                 () => _result.Sender.ShouldEqual(_participantDto);
 
+            It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
+
             Establish context = () =>
             {
                 _messageInfo = NewInstanceOf<MessageInfo>();
@@ -38,6 +40,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.Id = 123;
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
+                _message.Stamp = Guid.NewGuid();
 
                 _messageInfo.Message = _message;
                 _messageInfo.Status = MessageStatus.Read;
@@ -70,6 +73,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
             It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
                 () => _result.Sender.ShouldEqual(_participantDto);
 
+            It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
+
             Establish context = () =>
             {
                 _message = NewInstanceOf<Message>();
@@ -77,6 +82,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
                 _message.Sender = NewInstanceOf<Account>();
+                _message.Stamp = Guid.NewGuid();
 
                 _participantDto = NewInstanceOf<ThreadParticipantDto>();
                 Injected<IThreadParticipantDtoFactory>()
