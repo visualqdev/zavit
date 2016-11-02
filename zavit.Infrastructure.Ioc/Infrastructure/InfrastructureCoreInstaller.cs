@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Shared;
 using zavit.Infrastructure.Core.DateAndTime;
+using zavit.Infrastructure.Core.Guids;
 using zavit.Infrastructure.Core.Serialization;
 
 namespace zavit.Infrastructure.Ioc.Infrastructure
@@ -13,7 +14,8 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         {
             container.Register(
                 Component.For<IJsonSerializer>().ImplementedBy<JsonSerializerWrapper>().LifestyleSingleton(),
-                Component.For<IDateTime>().ImplementedBy<DateTimeWrapper>().LifestyleSingleton()
+                Component.For<IDateTime>().ImplementedBy<DateTimeWrapper>().LifestyleSingleton(),
+                Component.For<IGuid>().ImplementedBy<GuidWrapper>().LifestyleSingleton()
             );
         }
     }

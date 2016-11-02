@@ -5,6 +5,7 @@ import * as IndexView from "../views/messageInbox/indexView";
 import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartial";
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
+import * as NewMessageFactory from "../modules/messaging/newMessageFactory";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -53,10 +54,12 @@ function attachNewMessageEvents(inboxThread) {
             sendButton.prop("disabled", true);
         }
 
+        const newMessage = NewMessageFactory.createMessage(messageText);
+
         MessageThreadService
             .sendMessage({
                 inboxThread: currentInboxThread,
-                messageBody: messageText
+                message: newMessage
             })
             .then(sendMessageRespone => {
                 if (!currentInboxThread.ThreadId) {

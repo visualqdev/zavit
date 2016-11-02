@@ -4,7 +4,7 @@
             <span>*${message.Sender.DisplayName}</span>
             <span>*${message.SentOn}</span>
             <span>*${message.Body}</span>
-            <span>*Has been read: ${message.HasBeenRead}</span>
+            <span>*Has been read: ${message.Status}</span>
         </li>
         `;
 }

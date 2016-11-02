@@ -26,7 +26,7 @@ export function sendMessage(sendMessageRequest) {
     if (sendMessageRequest.inboxThread.ThreadId) {
         return new Promise((resolve, reject) => {
             MessageClient
-                .sendMessage(sendMessageRequest.inboxThread.ThreadId, sendMessageRequest.messageBody)
+                .sendMessage(sendMessageRequest.inboxThread.ThreadId, sendMessageRequest.message)
                 .then(message => resolve({
                     message,
                     inboxThread: sendMessageRequest.inboxThread
@@ -38,7 +38,7 @@ export function sendMessage(sendMessageRequest) {
             MessageThreadClient
                 .startNewThread({
                     recipients: sendMessageRequest.inboxThread.Recipients,
-                    messageBody: sendMessageRequest.messageBody
+                    message: sendMessageRequest.message
                 })
                 .then(newMessageThreadResponse => resolve({
                     message: newMessageThreadResponse.Message,

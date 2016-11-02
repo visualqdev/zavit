@@ -18,7 +18,8 @@ namespace zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages
             return new NewMessageRequest
             {
                 Sender = _userContex.Account,
-                Body = messageDto.Body
+                Body = messageDto.Body,
+                Stamp = messageDto.Stamp
             };
         }
     }

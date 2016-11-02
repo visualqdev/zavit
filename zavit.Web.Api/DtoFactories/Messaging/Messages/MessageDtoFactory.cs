@@ -17,7 +17,7 @@ namespace zavit.Web.Api.DtoFactories.Messaging.Messages
         public MessageDto CreateItem(MessageInfo messageInfo)
         {
             var messageDto = CreateItem(messageInfo.Message);
-            messageDto.HasBeenRead = messageInfo.HasBeenRead;
+            messageDto.Status = messageInfo.Status.ToString();
             return messageDto;
         }
 
@@ -28,7 +28,8 @@ namespace zavit.Web.Api.DtoFactories.Messaging.Messages
                 Id = message.Id,
                 Body = message.Body,
                 SentOn = message.SentOn,
-                Sender = _threadParticipantDtoFactory.CreateItem(message.Sender)
+                Sender = _threadParticipantDtoFactory.CreateItem(message.Sender),
+                Status = MessageStatus.Sent.ToString()
             };
         }
     }
