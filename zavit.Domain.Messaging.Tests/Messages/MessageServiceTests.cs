@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Collections.Generic;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
@@ -25,6 +26,9 @@ namespace zavit.Domain.Messaging.Tests.Messages
             It should_inform_the_message_read_service_that_a_new_message_has_been_sent_to_the_recipients =
                 () => Injected<IMessageReadService>().AssertWasCalled(s => s.MessageSent(_message));
 
+            It should_inform_all_message_sent_observers_that_the_message_has_been_sent =
+                () => _observers.ForEach(o => o.AssertWasCalled(observer => observer.MessageSent(_message)));
+
             Establish context = () =>
             {
                 _newMessageRequest = NewInstanceOf<NewMessageRequest>();
@@ -32,13 +36,18 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
                 _message = NewInstanceOf<Message>();
                 Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest)).Return(_message);
+
+                _observers = (List<IMessageSentObserver>)Injected<IEnumerable<IMessageSentObserver>>();
+                _observers.Add(NewInstanceOf<IMessageSentObserver>());
+                _observers.Add(NewInstanceOf<IMessageSentObserver>());
             };
 
             static MessageThread _messageThread;
             static Message _result;
             static NewMessageRequest _newMessageRequest;
             static Message _message;
-        }
+            static List<IMessageSentObserver> _observers;
+    }
 
         class When_sending_a_message_on_a_thread_specified_by_thread_id
         {
@@ -53,6 +62,9 @@ namespace zavit.Domain.Messaging.Tests.Messages
             It should_inform_the_message_read_service_that_a_new_message_has_been_sent_to_the_recipients =
                 () => Injected<IMessageReadService>().AssertWasCalled(s => s.MessageSent(_message));
 
+            It should_inform_all_message_sent_observers_that_the_message_has_been_sent =
+               () => _observers.ForEach(o => o.AssertWasCalled(observer => observer.MessageSent(_message)));
+
             Establish context = () =>
             {
                 _newMessageRequest = NewInstanceOf<NewMessageRequest>();
@@ -63,6 +75,10 @@ namespace zavit.Domain.Messaging.Tests.Messages
 
                 _message = NewInstanceOf<Message>();
                 Injected<INewMessageProvider>().Stub(p => p.Provide(_newMessageRequest)).Return(_message);
+
+                _observers = (List<IMessageSentObserver>)Injected<IEnumerable<IMessageSentObserver>>();
+                _observers.Add(NewInstanceOf<IMessageSentObserver>());
+                _observers.Add(NewInstanceOf<IMessageSentObserver>());
             };
             
             static Message _result;
@@ -70,6 +86,7 @@ namespace zavit.Domain.Messaging.Tests.Messages
             static Message _message;
             static MessageThread _messageThread;
             const int MessageThreadId = 123;
+            static List<IMessageSentObserver> _observers;
         }
 
         class When_getting_messages

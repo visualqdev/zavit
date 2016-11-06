@@ -1,5 +1,4 @@
 ﻿using System;
-using zavit.Domain.Messaging.MessageReads;
 using zavit.Web.Api.Dtos.Messaging.MessageThreads;
 
 namespace zavit.Web.Api.Dtos.Messaging.Messages

@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.Collections.Generic;
+using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared.ResultCollections;
@@ -11,13 +12,15 @@ namespace zavit.Domain.Messaging.Messages
         readonly IMessageRepository _messageRepository;
         readonly IMessageThreadRepository _messageThreadRepository;
         readonly IMessageReadService _messageReadService;
+        readonly IEnumerable<IMessageSentObserver> _messageSentObservers;
 
-        public MessageService(INewMessageProvider newMessageProvider, IMessageRepository messageRepository, IMessageThreadRepository messageThreadRepository, IMessageReadService messageReadService)
+        public MessageService(INewMessageProvider newMessageProvider, IMessageRepository messageRepository, IMessageThreadRepository messageThreadRepository, IMessageReadService messageReadService, IEnumerable<IMessageSentObserver> messageSentObservers)
         {
             _newMessageProvider = newMessageProvider;
             _messageRepository = messageRepository;
             _messageThreadRepository = messageThreadRepository;
             _messageReadService = messageReadService;
+            _messageSentObservers = messageSentObservers;
         }
 
         public Message SendMessageOnThread(NewMessageRequest newMessageRequest, MessageThread messageThread)
@@ -28,6 +31,11 @@ namespace zavit.Domain.Messaging.Messages
             _messageRepository.Save(message);
 
             _messageReadService.MessageSent(message);
+
+            foreach (var messageSentObserver in _messageSentObservers)
+            {
+                messageSentObserver.MessageSent(message);
+            }
 
             return message;
         }

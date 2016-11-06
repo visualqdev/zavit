@@ -8,6 +8,7 @@ import * as MessageThreadService from "../modules/messaging/messageThreadService
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
 import * as NewMessageFactory from "../modules/messaging/newMessageFactory";
 import * as MessageLayout from "../modules/messaging/messageLayout";
+import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -27,6 +28,7 @@ export function index(options) {
             setThreadTitle(inboxThread.ThreadTitle);
             $("#messages").html(threadView);
             attachNewMessageEvents(inboxThread);
+            NotificationReceiver.observeThread(inboxThread.ThreadId, addMessageToThread);
         })
         .then(Progress.done)
         .then(MessageLayout.setUp);
@@ -66,8 +68,7 @@ function attachNewMessageEvents(inboxThread) {
         }
 
         const newMessage = NewMessageFactory.createMessage(messageText);
-        const newMessageView = MessagePartial.getView(newMessage);
-        $("#messages ul").prepend(newMessageView);
+        addMessageToThread(newMessage);
 
         MessageThreadService
             .sendMessage({
@@ -87,4 +88,9 @@ function attachNewMessageEvents(inboxThread) {
 
 function setThreadTitle(title) {
     $("#threadTitle h4").text(title);
+}
+
+function addMessageToThread(message) {
+    const messageView = MessagePartial.getView(message);
+    $("#messages ul").prepend(messageView);
 }
