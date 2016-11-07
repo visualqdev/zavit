@@ -300,14 +300,24 @@
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastRequestsProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesDtoFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IThreadMessageBroadcastRequestFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesBroadcastDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesBroadcastRequestsProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesDtoFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ThreadMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\Dtos\BroadcastRequest.cs" />
     <Compile Include="SignalR\ConnectionIds\ConnectionIdProvider.cs" />
     <Compile Include="SignalR\ConnectionIds\IConnectionIdProvider.cs" />
     <Compile Include="SignalR\Hubs\MessagingHub.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\Dtos\ReadMessagesDto.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IThreadGroupIdProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\ThreadGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\IMessagingBroadcaster.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\MessagingBroadcaster.cs" />
+    <Compile Include="SignalR\Messaging\Observers\MessageReadSignalRObserver.cs" />
     <Compile Include="SignalR\Messaging\Observers\MessageSentSignalRObserver.cs" />
   </ItemGroup>
   <ItemGroup>

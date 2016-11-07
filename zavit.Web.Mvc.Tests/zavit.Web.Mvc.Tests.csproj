@@ -79,7 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR\Messaging\Boradcasting\DtoFactorie\ReadMessagesBroadcastDtoFactoryTests.cs" />
+    <Compile Include="SignalR\Messaging\Boradcasting\DtoFactorie\ReadMessagesBroadcastRequestsProviderTests.cs" />
+    <Compile Include="SignalR\Messaging\Boradcasting\DtoFactorie\ReadMessagesDtoFactoryTests.cs" />
     <Compile Include="SignalR\Messaging\Boradcasting\DtoFactorie\ThreadMessageBroadcastRequestFactoryTests.cs" />
+    <Compile Include="SignalR\Messaging\GroupIds\ThreadGroupIdProviderTests.cs" />
+    <Compile Include="SignalR\Messaging\Observers\MessageReadSignalRObserverTests.cs" />
     <Compile Include="SignalR\Messaging\Observers\MessageSentSignalRObserverTests.cs" />
   </ItemGroup>
   <ItemGroup>

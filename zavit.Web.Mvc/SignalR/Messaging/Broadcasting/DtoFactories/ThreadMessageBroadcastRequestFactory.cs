@@ -5,6 +5,7 @@ using zavit.Web.Api.Dtos.Messaging.Messages;
 using zavit.Web.Mvc.SignalR.ConnectionIds;
 using zavit.Web.Mvc.SignalR.Hubs;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.Dtos;
+using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.GroupIds;
 
 namespace zavit.Web.Mvc.SignalR.Messaging.Broadcasting.DtoFactories
 {
@@ -12,17 +13,19 @@ namespace zavit.Web.Mvc.SignalR.Messaging.Broadcasting.DtoFactories
     {
         readonly IMessageDtoFactory _messageDtoFactory;
         readonly IConnectionIdProvider _connectionIdProvider;
+        readonly IThreadGroupIdProvider _threadGroupIdProvider;
 
-        public ThreadMessageBroadcastRequestFactory(IMessageDtoFactory messageDtoFactory, IConnectionIdProvider connectionIdProvider)
+        public ThreadMessageBroadcastRequestFactory(IMessageDtoFactory messageDtoFactory, IConnectionIdProvider connectionIdProvider, IThreadGroupIdProvider threadGroupIdProvider)
         {
             _messageDtoFactory = messageDtoFactory;
             _connectionIdProvider = connectionIdProvider;
+            _threadGroupIdProvider = threadGroupIdProvider;
         }
 
         public BroadcastRequest<MessageDto> CreateItem(Message message)
         {
             var messageDto = _messageDtoFactory.CreateItem(message);
-            var groupIds = message.GetRecipients().Select(r => $"{MessagingHub.ThreadNotificationPrefix}{r.Id}_{message.MessageThread.Id}").ToList();
+            var groupIds = message.GetRecipients().Select(r => _threadGroupIdProvider.Provide(message.MessageThread.Id, r.Id)).ToList();
 
             return new BroadcastRequest<MessageDto>
             {

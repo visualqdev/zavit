@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.GroupIds;
 
 namespace zavit.Web.Mvc.SignalR.Hubs
 {
@@ -20,12 +21,12 @@ namespace zavit.Web.Mvc.SignalR.Hubs
 
         public Task JoinThreadNotifications(string accountId, string messageThreadId)
         {
-            return Groups.Add(Context.ConnectionId, $"{ThreadNotificationPrefix}{accountId}_{messageThreadId}");
+            return Groups.Add(Context.ConnectionId, ThreadGroupIdProvider.Provide(messageThreadId, accountId));
         }
 
         public Task LeaveThreadNotifications(string accountId, string messageThreadId)
         {
-            return Groups.Remove(Context.ConnectionId, $"{ThreadNotificationPrefix}{accountId}_{messageThreadId}");
+            return Groups.Remove(Context.ConnectionId, ThreadGroupIdProvider.Provide(messageThreadId, accountId));
         }
     }
 }

@@ -9,6 +9,7 @@ import * as MessageInboxService from "../modules/messaging/messageInboxService";
 import * as NewMessageFactory from "../modules/messaging/newMessageFactory";
 import * as MessageLayout from "../modules/messaging/messageLayout";
 import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
+import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -19,7 +20,7 @@ export function index(options) {
         .then(messageThreads => {
             const view = IndexView.getView(messageThreads);
             MainContent.append(view);
-            
+
             attachInboxEvents();
             return MessageThreadService.getInboxThread(options);
         })
@@ -28,10 +29,17 @@ export function index(options) {
             setThreadTitle(inboxThread.ThreadTitle);
             $("#messages").html(threadView);
             attachNewMessageEvents(inboxThread);
-            NotificationReceiver.observeThread(inboxThread.ThreadId, addMessageToThread);
+            NotificationReceiver.observeThread({
+                threadId: inboxThread.ThreadId,
+                threadNewMessage: addMessageToThread,
+                threadMessagesRead: markMessagesAsRead
+            });
         })
-        .then(Progress.done)
-        .then(MessageLayout.setUp);
+        .then(MessageLayout.setUp)
+        .catch((error) => {
+            checkUnauthorised(error);
+        })
+        .then(Progress.done);
 }
 
 
@@ -80,8 +88,7 @@ function attachNewMessageEvents(inboxThread) {
                     Routes.goTo(`${Routes.messageInbox}?threadid=${sendMessageResponse.inboxThread.ThreadId}`);
                 }
                 currentInboxThread = sendMessageResponse.inboxThread;
-                const sentMessageView = MessagePartial.getView(sendMessageResponse.message);
-                $(`[data-stamp='${sendMessageResponse.message.Stamp}']`).replaceWith(sentMessageView);
+                replaceMessageOnThread(sendMessageResponse.message);
             });
     });
 }
@@ -90,7 +97,27 @@ function setThreadTitle(title) {
     $("#threadTitle h4").text(title);
 }
 
+function replaceMessageOnThread(message) {
+    const sentMessageView = MessagePartial.getView(message);
+    $(`[data-stamp='${message.Stamp}']`).replaceWith(sentMessageView);
+}
+
 function addMessageToThread(message) {
+    if ($(`[data-stamp='${message.Stamp}']`).length) return;
+
     const messageView = MessagePartial.getView(message);
     $("#messages ul").prepend(messageView);
+}
+
+function markMessagesAsRead(messagesRead) {
+    messagesRead.ReadMessageStamps.forEach(messageStamp => {
+        $(`[data-stamp='${messageStamp}'] [data-message-status]`).html("*Has been read: Read");
+    });
+}
+
+function checkUnauthorised(error) {
+    if (error && error.status && error.status === 401) {
+        PostLoginRedirect.storeRedirectUrl(window.location.href);
+        Routes.goTo(Routes.login);
+    }
 }

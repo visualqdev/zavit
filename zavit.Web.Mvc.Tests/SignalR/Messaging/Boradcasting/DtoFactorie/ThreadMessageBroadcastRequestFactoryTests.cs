@@ -10,6 +10,7 @@ using zavit.Web.Mvc.SignalR.ConnectionIds;
 using zavit.Web.Mvc.SignalR.Hubs;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.DtoFactories;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.Dtos;
+using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.GroupIds;
 
 namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Boradcasting.DtoFactorie 
 {
@@ -23,9 +24,7 @@ namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Boradcasting.DtoFactorie
             It should_set_the_dto_to_be_the_new_message_dto = () => _result.Dto.ShouldEqual(_messageDto);
 
             It should_set_group_to_ids_made_from_recipient_ids = 
-                () => _result.GroupIds.ShouldContainOnly(
-                    MessagingHub.ThreadNotificationPrefix + "123_777", 
-                    MessagingHub.ThreadNotificationPrefix + "234_777");
+                () => _result.GroupIds.ShouldContainOnly(GroupId, OtherGroupId);
 
             It should_set_the_excluded_ids_to_contain_current_connection_id =
                 () => _result.ConnectionIdsToExclude.ShouldContainOnly(ConnectionId);
@@ -47,6 +46,14 @@ namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Boradcasting.DtoFactorie
                 Injected<IMessageDtoFactory>().Stub(f => f.CreateItem(_message)).Return(_messageDto);
 
                 Injected<IConnectionIdProvider>().Stub(p => p.GetConnectionId()).Return(ConnectionId);
+
+                Injected<IThreadGroupIdProvider>()
+                    .Stub(p => p.Provide(_message.MessageThread.Id, _recipient.Id))
+                    .Return(GroupId);
+
+                Injected<IThreadGroupIdProvider>()
+                    .Stub(p => p.Provide(_message.MessageThread.Id, _otherRecipient.Id))
+                    .Return(OtherGroupId);
             };
 
             static BroadcastRequest<MessageDto> _result;
@@ -55,6 +62,8 @@ namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Boradcasting.DtoFactorie
             static Account _recipient;
             static Account _otherRecipient;
             const string ConnectionId = "currentConnectionId";
+            const string GroupId = "groupId";
+            const string OtherGroupId = "otherGroupId";
         }
     }
 }

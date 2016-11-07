@@ -17,17 +17,14 @@ export function observeInbox(observerId, callback) {
     }
 }
 
-export function observeThread(threadId, callback) {
+export function observeThread(options) {
     if (threadObserver)
         messagingHubProxy.server.leaveThreadNotifications(1, threadObserver.threadId);
     
     startSignalRConnection()
         .then(() => {
-            threadObserver = {
-                threadId,
-                callback
-            };
-            messagingHubProxy.server.joinThreadNotifications(1, threadId);
+            threadObserver = options;
+            messagingHubProxy.server.joinThreadNotifications(1, threadObserver.threadId);
         });
 }
 
@@ -40,7 +37,11 @@ function notifyInboxNewMessage(message) {
 }
 
 function notifyThreadNewMessage(message) {
-    threadObserver.callback(JSON.parse(message));
+    threadObserver.threadNewMessage(JSON.parse(message));
+}
+
+function notifyThreadMessagesRead(messagesRead) {
+    threadObserver.threadMessagesRead(JSON.parse(messagesRead));
 }
 
 function startSignalRConnection() {
@@ -52,6 +53,7 @@ function startSignalRConnection() {
 
         messagingHubProxy.client.inboxNewMessage = notifyInboxNewMessage;
         messagingHubProxy.client.threadNewMessage = notifyThreadNewMessage;
+        messagingHubProxy.client.threadMessagesRead = notifyThreadMessagesRead;
                     
         $.connection.hub.start()
             .done(resolve)

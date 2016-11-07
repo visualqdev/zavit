@@ -61,7 +61,7 @@ function processVenueMembersResult(venueMembersResult, venueId) {
     enableLoadMore(venueMembersResult, venueId);
 }
 
-function checkUnauthorised(errot) {
+function checkUnauthorised(error) {
     if (error && error.status && error.status === 401) {
         PostLoginRedirect.storeRedirectUrl(window.location.href);
         Routes.goTo(Routes.login);

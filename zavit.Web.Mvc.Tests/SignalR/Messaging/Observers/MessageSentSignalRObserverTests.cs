@@ -17,7 +17,8 @@ namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Observers
         {
             Because of = () => Subject.MessageSent(_message);
 
-            It should_broadcast_the_message_dto = () => Injected<IMessagingBroadcaster>().AssertWasCalled(b => b.ThreadMessageSent(_messageBroadcastRequest));
+            It should_broadcast_the_message_dto = 
+                () => Injected<IMessagingBroadcaster>().AssertWasCalled(b => b.ThreadMessageSent(_messageBroadcastRequest));
 
             Establish context = () =>
             {
