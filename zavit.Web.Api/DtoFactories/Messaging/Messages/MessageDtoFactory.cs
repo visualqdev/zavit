@@ -30,7 +30,8 @@ namespace zavit.Web.Api.DtoFactories.Messaging.Messages
                 SentOn = message.SentOn,
                 Sender = _threadParticipantDtoFactory.CreateItem(message.Sender),
                 Status = MessageStatus.Sent.ToString(),
-                Stamp = message.Stamp
+                Stamp = message.Stamp,
+                ThreadId = message.MessageThread.Id
             };
         }
     }

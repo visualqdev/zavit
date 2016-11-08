@@ -11,6 +11,8 @@ import * as MessageLayout from "../modules/messaging/messageLayout";
 import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 
+let currentInboxThread;
+
 export function index(options) {
     MainContent.load(Routes.messageInbox);
     Progress.start();
@@ -25,15 +27,7 @@ export function index(options) {
             return MessageThreadService.getInboxThread(options);
         })
         .then(inboxThread => {
-            const threadView = MessageThreadPartial.getView(inboxThread);
-            setThreadTitle(inboxThread.ThreadTitle);
-            $("#messages").html(threadView);
-            attachNewMessageEvents(inboxThread);
-            NotificationReceiver.observeThread({
-                threadId: inboxThread.ThreadId,
-                threadNewMessage: addMessageToThread,
-                threadMessagesRead: markMessagesAsRead
-            });
+            showInboxThread(inboxThread);
         })
         .then(MessageLayout.setUp)
         .catch((error) => {
@@ -53,16 +47,25 @@ function attachInboxEvents() {
                 threadId
             })
             .then(inboxThread => {
-                const threadView = MessageThreadPartial.getView(inboxThread);
-                setThreadTitle(inboxThread.ThreadTitle);
-                $("#messages").html(threadView);
-                attachNewMessageEvents(inboxThread);
+                showInboxThread(inboxThread);
             });
     });
 }
 
+function showInboxThread(inboxThread) {
+    const threadView = MessageThreadPartial.getView(inboxThread);
+    setThreadTitle(inboxThread.ThreadTitle);
+    $("#messages").html(threadView);
+    attachNewMessageEvents(inboxThread);
+    NotificationReceiver.observeThread({
+        threadId: inboxThread.ThreadId,
+        threadNewMessage: receivedNewMessageOnThread,
+        threadMessagesRead: markMessagesAsRead
+    });
+}
+
 function attachNewMessageEvents(inboxThread) {
-    let currentInboxThread = inboxThread;
+    currentInboxThread = inboxThread;
 
     const sendButton = $("#messageTextSend");
     sendButton.off("click");
@@ -107,6 +110,12 @@ function addMessageToThread(message) {
 
     const messageView = MessagePartial.getView(message);
     $("#messages ul").prepend(messageView);
+}
+
+function receivedNewMessageOnThread(message) {
+    if (currentInboxThread.ThreadId !== message.ThreadId) return;
+
+    addMessageToThread(message);
 }
 
 function markMessagesAsRead(messagesRead) {

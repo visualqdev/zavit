@@ -3,6 +3,7 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
@@ -33,6 +34,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
 
             It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
 
+            It should_set_the_thread_id_to_be_the_same_as_id_of_the_thread_the_message_belongs_to =
+                () => _result.ThreadId.ShouldEqual(_message.MessageThread.Id);
+
             Establish context = () =>
             {
                 _messageInfo = NewInstanceOf<MessageInfo>();
@@ -41,6 +45,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
                 _message.Stamp = Guid.NewGuid();
+
+                _message.MessageThread = NewInstanceOf<MessageThread>();
+                _message.MessageThread.Id = 456;
 
                 _messageInfo.Message = _message;
                 _messageInfo.Status = MessageStatus.Read;
@@ -75,6 +82,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
 
             It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
 
+            It should_set_the_thread_id_to_be_the_same_as_id_of_the_thread_the_message_belongs_to =
+                () => _result.ThreadId.ShouldEqual(_message.MessageThread.Id);
+
             Establish context = () =>
             {
                 _message = NewInstanceOf<Message>();
@@ -83,6 +93,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.SentOn = new DateTime(2016, 10, 15);
                 _message.Sender = NewInstanceOf<Account>();
                 _message.Stamp = Guid.NewGuid();
+
+                _message.MessageThread = NewInstanceOf<MessageThread>();
+                _message.MessageThread.Id = 456;
 
                 _participantDto = NewInstanceOf<ThreadParticipantDto>();
                 Injected<IThreadParticipantDtoFactory>()
