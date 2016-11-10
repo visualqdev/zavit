@@ -116,6 +116,7 @@ function receivedNewMessageOnThread(message) {
     if (currentInboxThread.ThreadId !== message.ThreadId) return;
 
     addMessageToThread(message);
+    MessageThreadService.confirmMessageRead(message.Stamp);
 }
 
 function markMessagesAsRead(messagesRead) {

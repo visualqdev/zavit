@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
@@ -50,6 +49,12 @@ namespace zavit.Infrastructure.Messaging.Repositories
             {
                 _session.Update(instantMessageRead);
             }
+            _session.Flush();
+        }
+
+        public void Update(MessageRead messageRead)
+        {
+            _session.Update(messageRead);
             _session.Flush();
         }
 

@@ -48,6 +48,10 @@ export function sendMessage(sendMessageRequest) {
     }
 }
 
+export function confirmMessageRead(messageStamp) {
+    MessageClient.confirmMessageRead(messageStamp);
+}
+
 function createEmptyThread(recipients) {
     const threadTitle = recipients
                          .map(recipient => recipient.DisplayName)

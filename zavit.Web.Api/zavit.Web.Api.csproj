@@ -200,6 +200,7 @@
     <Compile Include="Dtos\MessageRecipients\MessageRecipientDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessageStatusDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDetailsDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadDto.cs" />

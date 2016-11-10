@@ -12,19 +12,21 @@ export function observeInbox(observerId, callback) {
         startSignalRConnection()
             .then(() => {
                 const userAccount = AccountService.currentUserAccount();
-                messagingHubProxy.server.joinInboxNotifications(1);
+                messagingHubProxy.server.joinInboxNotifications(userAccount.accountId);
             });
     }
 }
 
 export function observeThread(options) {
+    const userAccount = AccountService.currentUserAccount();
+
     if (threadObserver)
-        messagingHubProxy.server.leaveThreadNotifications(1, threadObserver.threadId);
+        messagingHubProxy.server.leaveThreadNotifications(userAccount.accountId, threadObserver.threadId);
     
     startSignalRConnection()
         .then(() => {
             threadObserver = options;
-            messagingHubProxy.server.joinThreadNotifications(1, threadObserver.threadId);
+            messagingHubProxy.server.joinThreadNotifications(userAccount.accountId, threadObserver.threadId);
         });
 }
 
@@ -54,7 +56,7 @@ function startSignalRConnection() {
         messagingHubProxy.client.inboxNewMessage = notifyInboxNewMessage;
         messagingHubProxy.client.threadNewMessage = notifyThreadNewMessage;
         messagingHubProxy.client.threadMessagesRead = notifyThreadMessagesRead;
-                    
+
         $.connection.hub.start()
             .done(resolve)
             .fail(() => {

@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.GroupIds;
 
 namespace zavit.Web.Mvc.SignalR.Hubs
 {
+    [HubName("messagingHub")]
     public class MessagingHub : Hub
     {
         public const string InboxNotificationPrefix = "messageinbox_";

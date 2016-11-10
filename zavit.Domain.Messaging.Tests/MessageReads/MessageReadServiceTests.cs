@@ -6,6 +6,7 @@ using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
+using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared;
 
 namespace zavit.Domain.Messaging.Tests.MessageReads 

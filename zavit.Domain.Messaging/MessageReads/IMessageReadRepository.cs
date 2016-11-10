@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using zavit.Domain.Messaging.Messages;
 
 namespace zavit.Domain.Messaging.MessageReads
@@ -9,6 +8,7 @@ namespace zavit.Domain.Messaging.MessageReads
         IList<Message> GetReadMessages(IEnumerable<int> messageIds);
         void Save(IEnumerable<MessageRead> instantMessageReads);
         void Update(IEnumerable<MessageRead> messageReads);
+        void Update(MessageRead messageRead);
         IList<MessageRead> GetPendingMessageReads(int messageThreadId, int accountId);
     }
 }

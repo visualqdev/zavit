@@ -12,3 +12,19 @@ export function sendMessage(threadId, message) {
             data: JSON.stringify(message)
         });
 }
+
+export function confirmMessageRead(messageStamp) {
+    const confirmMessageReadUrl = `${ApiSettings.apiUrl}api/messages/${messageStamp}/statuses`;
+
+    const data = {
+        status: "Read"
+    };
+
+    return AuthorizedClient
+        .send({
+            url: confirmMessageReadUrl,
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data)
+        });
+}

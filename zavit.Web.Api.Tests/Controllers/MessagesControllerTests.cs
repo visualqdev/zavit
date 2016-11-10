@@ -1,8 +1,10 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using zavit.Domain.Messaging.MessageReads;
 using zavit.Web.Api.Controllers;
 using zavit.Web.Api.Dtos.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.Messages;
@@ -61,6 +63,22 @@ namespace zavit.Web.Api.Tests.Controllers
             static readonly int? OlderThanMessageId = 456;
             static MessagesCollectionDto _result;
             static MessagesCollectionDto _messagesCollectionDto;
+        }
+
+        class When_posting_message_status
+        {
+            Because of = () => Subject.Post(MessageStamp, _messageStatus);
+
+            It should_tell_the_message_read_service_that_the_message_has_been_read = 
+                () => Injected<IMessageDtoService>().AssertWasCalled(s => s.ConfirmMessageRead(MessageStamp));
+
+            Establish context = () =>
+            {
+                _messageStatus = NewInstanceOf<MessageStatusDto>();
+            };
+
+            static readonly Guid MessageStamp = Guid.NewGuid();
+            static MessageStatusDto _messageStatus;
         }
     }
 }

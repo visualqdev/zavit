@@ -40,6 +40,7 @@ namespace zavit.Web.Authorization
                                         new JProperty("userName", account.Username),
                                         new JProperty("displayName", account.DisplayName),
                                         new JProperty("access_token", accessToken),
+                                        new JProperty("accountId", account.Id.ToString()),
                                         new JProperty("token_type", "bearer"),
                                         new JProperty("expires_in", accessTokenLifeTime.TotalSeconds.ToString(CultureInfo.InvariantCulture)),
                                         new JProperty(".issued", context.Ticket.Properties.IssuedUtc.ToString()),
