@@ -24,7 +24,7 @@ export function index(options) {
             MainContent.append(view);
 
             attachInboxEvents();
-            return MessageThreadService.getInboxThread(options);
+            return MessageThreadService.getInboxThread(options, messageThreads);
         })
         .then(inboxThread => {
             showInboxThread(inboxThread);
@@ -35,8 +35,6 @@ export function index(options) {
         })
         .then(Progress.done);
 }
-
-
 
 function attachInboxEvents() {
     $("#messageThreads").on("click", "[data-thread-id]", (e) => {

@@ -6,7 +6,7 @@ export function startNewThread(options) {
     return MessageThreadClient.startNewThread(options);
 }
 
-export function getInboxThread(options) {
+export function getInboxThread(options, messageThreads) {
     if (options.threadId) {
         return MessageThreadClient.getMessageThread(options.threadId);
     }
@@ -19,6 +19,8 @@ export function getInboxThread(options) {
                     resolve(emptyNewThread);
                 });
         });
+    } else if (messageThreads && messageThreads.length > 0){
+        return MessageThreadClient.getMessageThread(messageThreads[0].ThreadId);
     }
 }
 

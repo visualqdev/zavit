@@ -46,11 +46,11 @@ export function registerRoutes() {
         YourVenueController.index(venueId);
     });
 
-    crossroads.addRoute(`/${Routes.messageInbox}{?query}`, (query) => {
+    crossroads.addRoute(`/${Routes.messageInbox}:?query:`, (query) => {
         TopNav.navigatedToRoute(Routes.messageInbox);
         MessageInboxController.index({
-            accountIds: query.accounts ? query.accounts.split(',') : [],
-            threadId: query.threadid
+            accountIds: query && query.accounts ? query.accounts.split(',') : [],
+            threadId: query && query.threadid
         });
     });
 
