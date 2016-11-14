@@ -17,6 +17,13 @@ export function registerRoutes() {
         HomeController.explore();
     });
 
+    crossroads.addRoute(`/${Routes.home}/test`, () => {
+        if (PostLoginRedirect.processRedirect()) return;
+
+        TopNav.navigatedToRoute(Routes.home);
+        HomeController.index();
+    });
+
     crossroads.addRoute(`/${Routes.login}`, () => LoginController.login());
 
     crossroads.addRoute(`/${Routes.logout}`, () => {

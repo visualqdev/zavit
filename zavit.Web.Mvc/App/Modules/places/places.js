@@ -1,8 +1,6 @@
-﻿import * as Progress from "../loading/progress";
-import * as PlaceModal from "../places/placeModal";
+﻿import * as PlaceModal from "../places/placeModal";
 import * as VenueModal from "../venues/venueModal";
 import * as Search from "../navigation/search";
-import * as Client from "../places/placesClient";
 import * as Info from "../loading/info";
 export class Places {
 
@@ -10,11 +8,10 @@ export class Places {
         this.map = options.map || null,
         this.radius = options.radius || 3000;
         this.name = "";
+        this.getPlaces = options.getPlaces;
     }
 
     initialise() {
-
-        this.getPlaces();
         this.registerWithMapEvents();
         this.registerPlaceEvents();
         Search.initialise(this);
@@ -29,19 +26,19 @@ export class Places {
             this.map.setZoom(this.map.zoom);
         });
 
-        $("#home").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
+        $("#exploreMap").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
             e.preventDefault();
             const marker = this.map.markers[$(e.currentTarget).attr("data-nextMarker")];
             this.map.triggerMarkerClick(marker);
         });
 
-        $("#home").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
+        $("#exploreMap").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
             e.preventDefault();
             const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
             this.map.triggerMarkerClick(marker);
         });
 
-        $("#home").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
+        $("#exploreMap").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
             e.preventDefault();
             this.clearPlaceInfo();
             const button = $(e.currentTarget),
@@ -58,16 +55,6 @@ export class Places {
         });
 
         $(window).on("resize",() => { this.map.pannedBy = { x: 0, y: 0 };});
-
-        //$("html").css("overflow", "hidden");
-    }
-
-    getPlaces() {
-        Progress.start();
-        return new Promise((resolve, reject) => {
-            Client.getPlaces(this.map.position.coords.latitude, this.map.position.coords.longitude, this.radius, this.name).then(places=> resolve(places));
-        })
-        .then(places => this.addPlaces(places));
     }
 
     registerWithMapEvents() {
@@ -82,11 +69,9 @@ export class Places {
     addPlaces(places) {
         if (places.length) {
             places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
-            Progress.done();
             this.map.triggerMarkerClick(this.map.markers[0]);
         } else {
             Info.provide("Sorry, no results where found!");
-            Progress.done();
         }
     }
 

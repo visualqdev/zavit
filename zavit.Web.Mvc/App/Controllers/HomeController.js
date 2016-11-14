@@ -2,33 +2,68 @@
 import { Places } from "../modules/places/places";
 import * as MainContent from "../layout/mainContent";
 import * as Routes from "../routing/routes";
+import * as IndexView from "../views/home/index";
+import * as PlacesService from "../modules/places/placesService";
+import * as Progress from "../modules/loading/progress";
+
+let map;
+let mapPlaces;
 
 export function explore(position) {
+    const view = IndexView.getView();
+    MainContent.load(Routes.home, view);
 
-    MainContent.load(Routes.home);
+    Progress.start();
 
-    const map = new Map({ executeWhenMapFullyLoaded: getPlaces});
+    loadMap()
+        .then(() => PlacesService.getPlaces({ map }))
+        .then(places => {
+            mapPlaces = new Places({
+                map,
+                getPlaces
+            });
+            mapPlaces.initialise();
+            mapPlaces.addPlaces(places);
 
-    if (typeof position === 'undefined') {
-        navigator.geolocation.getCurrentPosition(centerMapAtLocation, getDefaultMap);
-    } 
-    else {
-        map.position = position;
-        map.initialise();
-    }
+            Progress.done();
+        });
+}
 
-    function centerMapAtLocation(position) {
-        map.position = position;
-        map.initialise();
-    }
+function getPlaces() {
+    Progress.start();
 
-    function getDefaultMap() {
-        map.initialise();
-    }
+    PlacesService
+        .getPlaces({ map })
+        .then(places => {
+            mapPlaces.addPlaces(places);
 
-    function getPlaces() {
-        const places = new Places({ map:map });
-        places.initialise();
-    }
+            Progress.done();
+        });
+}
 
+function loadMap() {
+    return new Promise((resolve, reject) => {
+        const mapContainer = document.getElementById("exploreMap");
+        map = new Map({
+            executeWhenMapFullyLoaded: () => resolve(),
+            mapContainer
+        });
+
+        if (typeof position === 'undefined') {
+            navigator.geolocation.getCurrentPosition(centerMapAtLocation, getDefaultMap);
+        } 
+        else {
+            map.position = position;
+            map.initialise();
+        }
+    });
+}
+
+function centerMapAtLocation(position) {
+    map.position = position;
+    map.initialise();
+}
+
+function getDefaultMap() {
+    map.initialise();
 }

@@ -171,6 +171,7 @@
     <Content Include="app\modules\places\placeModal.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
+    <Content Include="app\modules\places\placesService.js" />
     <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
@@ -180,6 +181,7 @@
     <Content Include="app\modules\venues\yourVenueMap.js" />
     <Content Include="app\modules\venues\yourVenuesMap.js" />
     <Content Include="app\routing\routes.js" />
+    <Content Include="app\views\home\index.js" />
     <Content Include="app\views\messageInbox\indexView.js" />
     <Content Include="app\views\messageInbox\messagePartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
