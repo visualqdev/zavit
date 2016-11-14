@@ -42,6 +42,7 @@
   ],
   "dependencies": {
     "fetch-ie8": "^1.4.3",
-    "gulp-install": "^0.6.0"
+    "gulp-install": "^0.6.0",
+    "moment": "^2.16.0"
   }
 }

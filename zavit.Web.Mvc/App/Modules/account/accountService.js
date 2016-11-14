@@ -40,7 +40,8 @@ export function currentUserAccount() {
         return {
             email: tokenData.userName,
             displayName: tokenData.displayName,
-            accessToken: tokenData.access_token
+            accessToken: tokenData.access_token,
+            id:2
         };
     }
 }

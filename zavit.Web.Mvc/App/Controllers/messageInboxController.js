@@ -21,6 +21,7 @@ export function index(options) {
             return MessageThreadService.getInboxThread(options);
         })
         .then(inboxThread => {
+            
             const threadView = MessageThreadPartial.getView(inboxThread);
             setThreadTitle(inboxThread.ThreadTitle);
             $("#messages").html(threadView);
@@ -35,17 +36,27 @@ export function index(options) {
 function attachInboxEvents() {
     $("#messageThreads").on("click", "[data-thread-id]", (e) => {
         e.preventDefault();
-        MessageLayout.styleSelected(e, $(this));
         const threadId = $(e.target).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
             })
             .then(inboxThread => {
                 const threadView = MessageThreadPartial.getView(inboxThread);
+
                 setThreadTitle(inboxThread.ThreadTitle);
+                
+
                 $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
+                MessageLayout.threadSelected(e, $(this));
+                
+                MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });
+    });
+    $("#mainContent").delegate(".threadSelected #arrangeNew", "click", (e) => {
+        e.preventDefault();
+        $("#messageThreads").removeClass("threadSelected");
+        $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
     });
 }
 
