@@ -8,7 +8,9 @@ namespace zavit.Web.Api.Dtos.Messaging.Messages
         public string Body { get; set; }
         public DateTime SentOn { get; set; }
         public int Id { get; set; }
-        public bool HasBeenRead { get; set; }
+        public string Status { get; set; }
         public ThreadParticipantDto Sender { get; set; }
+        public Guid Stamp { get; set; }
+        public int ThreadId { get; set; }
     }
 }

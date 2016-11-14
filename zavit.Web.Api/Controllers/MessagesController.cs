@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Authorization.ResourcesAuthorization.Messaging;
 using zavit.Web.Api.Dtos.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.Messages;
@@ -31,6 +32,14 @@ namespace zavit.Web.Api.Controllers
         public MessagesCollectionDto Get(int messageThreadId, int? olderThanMessageId = null, int take = 20)
         {
             return _messageDtoService.GetMessages(messageThreadId, olderThanMessageId, take);
+        }
+
+        [HttpPost]
+        [AccessAuthorize]
+        [Route("~/api/messages/{messageStamp}/statuses")]
+        public void Post([FromUri] Guid messageStamp, [FromBody] MessageStatusDto messageStatus)
+        {
+            _messageDtoService.ConfirmMessageRead(messageStamp);
         }
     }
 }

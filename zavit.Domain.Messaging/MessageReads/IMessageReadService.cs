@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System;
+using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.Messages;
 
 namespace zavit.Domain.Messaging.MessageReads

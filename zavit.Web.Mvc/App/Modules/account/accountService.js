@@ -41,7 +41,7 @@ export function currentUserAccount() {
             email: tokenData.userName,
             displayName: tokenData.displayName,
             accessToken: tokenData.access_token,
-            id:2
+            accountId: tokenData.accountId
         };
     }
 }

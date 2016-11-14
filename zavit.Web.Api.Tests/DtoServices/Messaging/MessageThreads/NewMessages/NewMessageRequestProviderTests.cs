@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
@@ -20,9 +21,13 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.MessageThreads.NewMessages
 
             It should_set_the_body_to_be_the_message_dto_body = () => _result.Body.ShouldEqual(_messageDto.Body);
 
+            It should_set_the_stamp_to_be_the_message_dto_stamp = () => _result.Stamp.ShouldEqual(_messageDto.Stamp);
+
             Establish context = () =>
             {
                 _messageDto = NewInstanceOf<MessageDto>();
+                _messageDto.Body = "Test body";
+                _messageDto.Stamp = Guid.NewGuid();
 
                 Injected<IUserContext>().Stub(c => c.Account).Return(NewInstanceOf<Account>());
             };

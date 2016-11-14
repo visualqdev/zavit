@@ -7,9 +7,7 @@ export function startNewThread(options) {
         thread: {
             participants: options.recipients
         },
-        message: {
-            body: options.messageBody
-        }
+        message: options.message
     };
 
     return AuthorizedClient

@@ -3,6 +3,7 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
@@ -25,11 +26,16 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
 
             It should_set_the_id_to_be_the_same_as_message = () => _result.Id.ShouldEqual(_message.Id);
 
-            It should_set_the_has_been_read_flag_to_be_the_same_as_the_message_info =
-                () => _result.HasBeenRead.ShouldEqual(_messageInfo.HasBeenRead);
+            It should_set_the_status_to_be_the_same_status_as_the_message_info =
+                () => _result.Status.ShouldEqual(_messageInfo.Status.ToString());
 
             It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
                 () => _result.Sender.ShouldEqual(_participantDto);
+
+            It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
+
+            It should_set_the_thread_id_to_be_the_same_as_id_of_the_thread_the_message_belongs_to =
+                () => _result.ThreadId.ShouldEqual(_message.MessageThread.Id);
 
             Establish context = () =>
             {
@@ -38,9 +44,13 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.Id = 123;
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
+                _message.Stamp = Guid.NewGuid();
+
+                _message.MessageThread = NewInstanceOf<MessageThread>();
+                _message.MessageThread.Id = 456;
 
                 _messageInfo.Message = _message;
-                _messageInfo.HasBeenRead = true;
+                _messageInfo.Status = MessageStatus.Read;
 
                 _participantDto = NewInstanceOf<ThreadParticipantDto>();
                 Injected<IThreadParticipantDtoFactory>()
@@ -65,10 +75,15 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
             It should_set_the_id_to_be_the_same_as_message = () => _result.Id.ShouldEqual(_message.Id);
 
             It should_set_the_has_been_read_flag_to_false =
-                () => _result.HasBeenRead.ShouldBeFalse();
+                () => _result.Status.ShouldEqual(MessageStatus.Sent.ToString());
 
             It should_set_the_sender_to_be_the_participant_dto_of_the_participant_that_has_sent_the_message =
                 () => _result.Sender.ShouldEqual(_participantDto);
+
+            It should_set_the_stamp_to_be_the_message_stamp = () => _result.Stamp.ShouldEqual(_message.Stamp);
+
+            It should_set_the_thread_id_to_be_the_same_as_id_of_the_thread_the_message_belongs_to =
+                () => _result.ThreadId.ShouldEqual(_message.MessageThread.Id);
 
             Establish context = () =>
             {
@@ -77,6 +92,10 @@ namespace zavit.Web.Api.Tests.DtoFactories.Messaging.Messages
                 _message.Body = "Test body";
                 _message.SentOn = new DateTime(2016, 10, 15);
                 _message.Sender = NewInstanceOf<Account>();
+                _message.Stamp = Guid.NewGuid();
+
+                _message.MessageThread = NewInstanceOf<MessageThread>();
+                _message.MessageThread.Id = 456;
 
                 _participantDto = NewInstanceOf<ThreadParticipantDto>();
                 Injected<IThreadParticipantDtoFactory>()

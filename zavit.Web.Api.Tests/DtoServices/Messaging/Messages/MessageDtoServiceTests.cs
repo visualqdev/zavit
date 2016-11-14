@@ -1,9 +1,12 @@
-﻿using Machine.Specifications;
+﻿using System;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Messaging;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
+using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared.ResultCollections;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.Dtos.Messaging.Messages;
@@ -70,6 +73,28 @@ namespace zavit.Web.Api.Tests.DtoServices.Messaging.Messages
             static readonly int? OlderThanMessageThread = 456;
             static MessagesCollectionDto _messageCollectionDto;
             const int MessageThreadId = 123;
+        }
+
+        class When_confirming_message_has_been_read
+        {
+            Because of = () => Subject.ConfirmMessageRead(MessageStamp);
+
+            It should_tell_the_message_service_that_the_user_has_accessed_the_thread_and_read_messages = 
+                () => Injected<IMessageReadService>().Stub(s => s.MessagesRead(MessageThreadId, _account));
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                Injected<IUserContext>().Stub(c => c.Account).Return(_account);
+
+                Injected<IMessageThreadRepository>()
+                    .Stub(r => r.GetMessageThreadIdByMessage(MessageStamp))
+                    .Return(MessageThreadId);
+            };
+
+            static Account _account;
+            static readonly Guid MessageStamp = Guid.NewGuid();
+            const int MessageThreadId = 456;
         }
     }
 }

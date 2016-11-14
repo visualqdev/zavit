@@ -68,7 +68,7 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 instantMessages.Select(m => new MessageInfo
                 {
                     Message = m,
-                    HasBeenRead = readMessages.Any(r => r == m.Id)
+                    Status = readMessages.Any(r => r == m.Id) ? MessageStatus.Read : MessageStatus.Sent
                 }), 
                 take);
         }

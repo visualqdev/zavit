@@ -48,7 +48,9 @@
     <Compile Include="MessageReads\MessageRead.cs" />
     <Compile Include="MessageReads\MessageReadCreator.cs" />
     <Compile Include="MessageReads\MessageReadService.cs" />
+    <Compile Include="MessageReads\MessageStatus.cs" />
     <Compile Include="Messages\IMessageRepository.cs" />
+    <Compile Include="Messages\IMessageSentObserver.cs" />
     <Compile Include="Messages\IMessageService.cs" />
     <Compile Include="Messages\INewMessageProvider.cs" />
     <Compile Include="Messages\Message.cs" />

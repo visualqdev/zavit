@@ -58,8 +58,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -200,6 +200,7 @@
     <Compile Include="Dtos\MessageRecipients\MessageRecipientDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessageStatusDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDetailsDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadDto.cs" />

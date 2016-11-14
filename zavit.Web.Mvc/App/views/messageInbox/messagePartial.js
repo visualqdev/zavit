@@ -2,11 +2,11 @@
 
 export function getView(message) {
     return `
-        <li class="messageContainer ${userType(message)}">
+        <li data-stamp="${message.Stamp}" class="messageContainer ${userType(message)}">
             ${displayName(message)}
             <span class="body">${message.Body}</span>
-            ${messageHasBeenRead(message.HasBeenRead)}
-            <span class="date">${moment(message.SentOn).fromNow()}</span>
+            ${messageHasBeenRead(message.Status)}
+            <span class="date" data-message-status>${moment(message.SentOn).fromNow()}</span>
         </li>
         `;
 }
@@ -22,13 +22,12 @@ function userType(message) {
     return "";
 }
 
-function messageHasBeenRead(hasBeenRead) {
-    return `<span class="tick ${addClassForHasBeenRead(hasBeenRead)}">&#10004;</span>`;
+function messageHasBeenRead(status) {
+    return `<span class="tick ${addClassForHasBeenRead(status)}">&#10004;</span>`;
 }
 
-function addClassForHasBeenRead(hasBeenRead) {
-    if (hasBeenRead) return "read";
-    return "";
+function addClassForHasBeenRead(status) {
+    return status.toLowerCase();
 }
 function displayName(message) {
     const userIsNotCurrentUser = message.Sender.AccountId !== currentUserId();

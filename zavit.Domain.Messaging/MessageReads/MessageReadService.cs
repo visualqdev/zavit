@@ -32,7 +32,7 @@ namespace zavit.Domain.Messaging.MessageReads
 
             _messageReadRepository.Update(pendingReads);
 
-            var completelyReadMessages = _messageReadRepository.GetReadMessageIds(pendingReads.Select(m => m.Message.Id));
+            var completelyReadMessages = _messageReadRepository.GetReadMessages(pendingReads.Select(m => m.Message.Id));
             foreach (var messageReadObserver in _messageReadObservers)
             {
                 messageReadObserver.MessagesRead(completelyReadMessages, messageThreadId);

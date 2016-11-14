@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using NHibernate;
 using NHibernate.Criterion;
@@ -113,6 +113,16 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 UnreadMessageCountsPerThread = unreadMessageIds.ToDictionary(k => (int)k[0], v => (int)v[1]),
                 LatestMessagesPerThread = latestMessages.ToDictionary(k => k.MessageThread.Id, v => v)
             };
+        }
+
+        public int GetMessageThreadIdByMessage(Guid messageStamp)
+        {
+            return _session.QueryOver<Message>()
+                .Where(m => m.Stamp == messageStamp)
+                .Select(m => m.MessageThread.Id)
+                .Take(1)
+                .List<int>()
+                .SingleOrDefault();
         }
     }
 }

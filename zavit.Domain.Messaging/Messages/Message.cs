@@ -13,6 +13,7 @@ namespace zavit.Domain.Messaging.Messages
         public virtual MessageThread MessageThread { get; set; }
         public virtual Account Sender { get; set; }
         public virtual DateTime SentOn { get; set; }
+        public virtual Guid Stamp { get; set; }
 
         public virtual IEnumerable<Account> GetRecipients()
         {

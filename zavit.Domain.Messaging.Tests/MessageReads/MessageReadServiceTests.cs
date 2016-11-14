@@ -6,6 +6,7 @@ using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
+using zavit.Domain.Messaging.MessageThreads;
 using zavit.Domain.Shared;
 
 namespace zavit.Domain.Messaging.Tests.MessageReads 
@@ -49,9 +50,9 @@ namespace zavit.Domain.Messaging.Tests.MessageReads
                     .Stub(r => r.GetPendingMessageReads(MessageThreadId, _account.Id))
                     .Return(new List<MessageRead> { _messageRead, _otherMessageRead });
 
-                _completelyReadMessages = new List<int> { 1234 };
+                _completelyReadMessages = new List<Message> { NewInstanceOf<Message>() };
                 Injected<IMessageReadRepository>()
-                    .Stub(r => r.GetReadMessageIds(
+                    .Stub(r => r.GetReadMessages(
                         Arg<IEnumerable<int>>.List.Equal(new[] { _messageRead.Message.Id, _otherMessageRead.Message.Id })))
                     .Return(_completelyReadMessages);
 
@@ -65,7 +66,7 @@ namespace zavit.Domain.Messaging.Tests.MessageReads
             static MessageRead _messageRead;
             static MessageRead _otherMessageRead;
             static DateTime _dateRead;
-            static IList<int> _completelyReadMessages;
+            static IList<Message> _completelyReadMessages;
             static List<IMessageReadObserver> _observers;
         }
 

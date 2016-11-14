@@ -1,4 +1,5 @@
-﻿using zavit.Web.Api.Dtos.Messaging.Messages;
+﻿using System;
+using zavit.Web.Api.Dtos.Messaging.Messages;
 
 namespace zavit.Web.Api.DtoServices.Messaging.Messages
 {
@@ -6,5 +7,6 @@ namespace zavit.Web.Api.DtoServices.Messaging.Messages
     {
         MessageDto SendMessage(int messageThreadId, MessageDto messageDto);
         MessagesCollectionDto GetMessages(int messageThreadId, int? olderThanMessageId, int take);
+        void ConfirmMessageRead(Guid messageStamp);
     }
 }

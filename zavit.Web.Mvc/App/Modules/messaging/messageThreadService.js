@@ -6,7 +6,7 @@ export function startNewThread(options) {
     return MessageThreadClient.startNewThread(options);
 }
 
-export function getInboxThread(options) {
+export function getInboxThread(options, messageThreads) {
     if (options.threadId) {
         return MessageThreadClient.getMessageThread(options.threadId);
     }
@@ -19,6 +19,8 @@ export function getInboxThread(options) {
                     resolve(emptyNewThread);
                 });
         });
+    } else if (messageThreads && messageThreads.length > 0){
+        return MessageThreadClient.getMessageThread(messageThreads[0].ThreadId);
     }
 }
 
@@ -26,7 +28,7 @@ export function sendMessage(sendMessageRequest) {
     if (sendMessageRequest.inboxThread.ThreadId) {
         return new Promise((resolve, reject) => {
             MessageClient
-                .sendMessage(sendMessageRequest.inboxThread.ThreadId, sendMessageRequest.messageBody)
+                .sendMessage(sendMessageRequest.inboxThread.ThreadId, sendMessageRequest.message)
                 .then(message => resolve({
                     message,
                     inboxThread: sendMessageRequest.inboxThread
@@ -38,7 +40,7 @@ export function sendMessage(sendMessageRequest) {
             MessageThreadClient
                 .startNewThread({
                     recipients: sendMessageRequest.inboxThread.Recipients,
-                    messageBody: sendMessageRequest.messageBody
+                    message: sendMessageRequest.message
                 })
                 .then(newMessageThreadResponse => resolve({
                     message: newMessageThreadResponse.Message,
@@ -46,6 +48,10 @@ export function sendMessage(sendMessageRequest) {
                 })); 
         });
     }
+}
+
+export function confirmMessageRead(messageStamp) {
+    MessageClient.confirmMessageRead(messageStamp);
 }
 
 function createEmptyThread(recipients) {

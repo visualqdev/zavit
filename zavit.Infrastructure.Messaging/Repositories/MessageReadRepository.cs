@@ -17,25 +17,21 @@ namespace zavit.Infrastructure.Messaging.Repositories
             _session = session;
         }
 
-        public IList<int> GetReadMessageIds(IEnumerable<int> messageIds)
+        public IList<Message> GetReadMessages(IEnumerable<int> messageIds)
         {
             var messageIdsArray = messageIds.ToArray();
             if (messageIdsArray.Length == 0)
-                return new List<int>();
+                return new List<Message>();
 
-            Message messageAlias = null;
-
-            return _session.QueryOver<MessageRead>()
-                .JoinAlias(r => r.Message, () => messageAlias, JoinType.InnerJoin)
-                .WhereRestrictionOn(() => messageAlias.Id).IsIn(messageIdsArray)
-                .WithSubquery.WhereProperty(r => r.Message.Id).NotIn(
+            return _session.QueryOver<Message>()
+                .WhereRestrictionOn(m => m.Id).IsIn(messageIdsArray)
+                .WithSubquery.WhereProperty(m => m.Id).NotIn(
                     QueryOver.Of<MessageRead>()
                         .WhereRestrictionOn(r => r.Message.Id).IsIn(messageIdsArray)
                         .And(r => !r.HasRead)
                         .Select(r => r.Message.Id)
                 )
-                .Select(Projections.Distinct(Projections.Property(() => messageAlias.Id)))
-                .List<int>();
+                .List<Message>();
         }
 
         public void Save(IEnumerable<MessageRead> instantMessageReads)
@@ -53,6 +49,12 @@ namespace zavit.Infrastructure.Messaging.Repositories
             {
                 _session.Update(instantMessageRead);
             }
+            _session.Flush();
+        }
+
+        public void Update(MessageRead messageRead)
+        {
+            _session.Update(messageRead);
             _session.Flush();
         }
 

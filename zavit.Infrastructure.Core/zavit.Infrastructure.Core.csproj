@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateAndTime\DateTimeWrapper.cs" />
+    <Compile Include="Guids\GuidWrapper.cs" />
     <Compile Include="IContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultCollections\ResultCollection.cs" />

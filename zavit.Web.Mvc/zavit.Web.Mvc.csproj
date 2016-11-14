@@ -51,6 +51,14 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -62,6 +70,10 @@
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -152,11 +164,14 @@
     <Content Include="app\modules\messaging\messageRecipientsClient.js" />
     <Content Include="app\modules\messaging\messageThreadClient.js" />
     <Content Include="app\modules\messaging\messageThreadService.js" />
+    <Content Include="app\modules\messaging\newMessageFactory.js" />
     <Content Include="app\modules\messaging\messageLayout.js" />
     <Content Include="app\modules\navigation\search.js" />
+    <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placeModal.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
+    <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
     <Content Include="app\modules\venues\venueJoiningStorage.js" />
@@ -207,6 +222,8 @@
     <Content Include="Routing\hasher.min.js" />
     <Content Include="Routing\signals.min.js" />
     <Content Include="app\modules\map\map.js" />
+    <Content Include="libraries\jquery.signalR-2.2.1.js" />
+    <Content Include="libraries\jquery.signalR-2.2.1.min.js" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -274,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SignalRConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -284,14 +302,49 @@
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastRequestsProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IThreadMessageBroadcastRequestFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesBroadcastDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesBroadcastRequestsProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ReadMessagesDtoFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\ThreadMessageBroadcastRequestFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\Dtos\BroadcastRequest.cs" />
+    <Compile Include="SignalR\ConnectionIds\ConnectionIdProvider.cs" />
+    <Compile Include="SignalR\ConnectionIds\IConnectionIdProvider.cs" />
+    <Compile Include="SignalR\Hubs\MessagingHub.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\Dtos\ReadMessagesDto.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IThreadGroupIdProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\ThreadGroupIdProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\IMessagingBroadcaster.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\MessagingBroadcaster.cs" />
+    <Compile Include="SignalR\Messaging\Observers\MessageReadSignalRObserver.cs" />
+    <Compile Include="SignalR\Messaging\Observers\MessageSentSignalRObserver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
+      <Project>{5373CB15-71E6-44A9-88F6-6A84686E36C9}</Project>
+      <Name>zavit.Domain.Messaging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
       <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
       <Name>zavit.Domain.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
+      <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
+      <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
       <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>
