@@ -21,6 +21,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
 
             It should_set_the_address_to_be_the_venue_address = () => _result.Address.ShouldEqual(_venue.Address);
 
+            It should_set_the_public_place_id_to_be_the_venue_public_place_id = () => _result.PublicPlaceId.ShouldEqual(_venue.PublicPlaceId);
+
             It should_add_an_activity_dto_for_each_venue_activity =
                 () => _result.Activities.ShouldContainOnly(_venueActivityDto);
 
@@ -38,6 +40,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
                 _venue.Address = "Test address";
                 _venue.Longitude = 0.1;
                 _venue.Latitude = -0.2;
+                _venue.PublicPlaceId = "PubliPlaceId";
 
                 var activity = NewInstanceOf<Activity>();
                 _venue.Activities = new[] { activity };

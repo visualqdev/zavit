@@ -79,7 +79,6 @@
     <Compile Include="Controllers\MessageRecipientsControllerTests.cs" />
     <Compile Include="Controllers\MessagesControllerTests.cs" />
     <Compile Include="Controllers\MessageThreadControllerTests.cs" />
-    <Compile Include="Controllers\PlacesControllerTests.cs" />
     <Compile Include="Controllers\VenueMembersControllerTests.cs" />
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
@@ -91,7 +90,6 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactoryTests.cs" />
-    <Compile Include="DtoFactories\Places\PlaceDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDetailsDtoFactoryTests.cs" />
@@ -107,7 +105,6 @@
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactoryTests.cs" />
-    <Compile Include="DtoServices\Places\PlaceDtoServiceTests.cs" />
     <Compile Include="DtoServices\VenueMemberships\VenueMembershipDetailsDtoServiceTests.cs" />
     <Compile Include="DtoServices\VenueMemberships\VenueMembershipDtoServiceTests.cs" />
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProviderTests.cs" />
@@ -130,10 +127,6 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
       <Name>zavit.Domain.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
-      <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
-      <Name>zavit.Domain.Places</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>

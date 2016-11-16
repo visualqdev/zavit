@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using zavit.Domain.Places.PublicPlaces;
+using zavit.Domain.Venues.PublicPlaces;
 
 namespace zavit.Infrastructure.Places.PublicPlacesApis.Search
 {

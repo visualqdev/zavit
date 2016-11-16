@@ -1,8 +1,8 @@
-﻿using zavit.Domain.Places.Search;
+﻿using zavit.Domain.Venues.Search;
 
-namespace zavit.Web.Api.Dtos.Places
+namespace zavit.Web.Api.Dtos.Venues
 {
-    public class PlaceSearchCriteriaDto : IPlaceSearchCriteria
+    public class VenueSearchCriteriaDto : IVenueSearchCriteria
     {
         public double Longitude { get; set; }
         public double Latitude { get; set; }

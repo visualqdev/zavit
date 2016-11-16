@@ -1,6 +1,19 @@
 ﻿import * as ApiSettings from "../settings/apiSettings";
 import * as AuthorizedClient from "../clients/authorizedClient";
 
+export function getVenues(latitude, longitude, radius, name) {
+    const venuesUrl = `${ApiSettings.apiUrl}api/venues?latitude=${latitude}&longitude=${longitude}&radius=${radius}&name=${name}`;
+    return new Promise((resolve, reject) => 
+        $.ajax({
+            url: placesUrl,
+            type: "get",
+            contentType: "application/json; charset=utf-8",
+            success: resolve,
+            error: reject
+        })
+    );
+}
+
 export function getVenueAtPlace(placeId) {
     const venuesUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues/default`;
 

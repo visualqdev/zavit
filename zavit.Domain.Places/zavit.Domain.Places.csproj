@@ -55,9 +55,7 @@
     <Compile Include="VenuePlaces\DefaultVenues\DefaultVenueProvider.cs" />
     <Compile Include="VenuePlaces\DefaultVenues\IDefaultVenueProvider.cs" />
     <Compile Include="VenuePlaces\IVenuePlaceRepository.cs" />
-    <Compile Include="VenuePlaces\IVenuePlaceCreator.cs" />
     <Compile Include="VenuePlaces\VenuePlace.cs" />
-    <Compile Include="VenuePlaces\VenuePlaceCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">

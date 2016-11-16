@@ -3,7 +3,7 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using Rhino.Mspec.Contrib.Extensions;
-using zavit.Domain.Places.PublicPlaces;
+using zavit.Domain.Venues.PublicPlaces;
 using zavit.Infrastructure.Places.PublicPlacesApis.Search;
 
 namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis.Search 

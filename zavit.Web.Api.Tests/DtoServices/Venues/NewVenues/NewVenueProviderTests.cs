@@ -20,10 +20,14 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues.NewVenues
             It should_set_the_activity_ids_to_contain_ids_of_all_venue_activity_dtos =
                 () => _result.ActivityIds.ShouldContainOnly(_activity.Id, _otherActivity.Id);
 
+            It should_set_the_public_place_id_to_be_the_same_as_the_venue_details_dto =
+                () => _result.PublicPlaceId.ShouldEqual(_venueDetailsDto.PublicPlaceId);
+
             Establish context = () =>
             {
                 _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
                 _venueDetailsDto.Name = "Test name";
+                _venueDetailsDto.PublicPlaceId = "PublicPlaceID";
 
                 _activity = NewInstanceOf<VenueActivityDto>();
                 _activity.Id = 123;

@@ -22,12 +22,12 @@ namespace zavit.Web.Api.Tests.DtoFactories.Venues
 
             Establish context = () =>
             {
-                _venue = NewInstanceOf<Venue>();
-                _venue.Id = 1234;
-                _venue.Name = "Venue name";
+                _venue = NewInstanceOf<IVenue>();
+                _venue.Stub(v => v.Id).Return(1234);
+                _venue.Stub(v => v.Name).Return("Venue name");
             };
 
-            static Venue _venue;
+            static IVenue _venue;
             static VenueDto _result;
         }
     }

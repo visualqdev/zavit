@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Authorization.AccessAuthorization;
@@ -19,9 +20,16 @@ namespace zavit.Web.Api.Controllers
         {
             _venueDtoService = venueDtoService;
         }
-        
+
         [HttpGet]
-        [Route("~/api/places/{placeid}/venues/default", Name = GetDefaultRoute)]
+        [Route("~/api/venues")]
+        public async Task<IEnumerable<VenueDto>> Get([FromUri] VenueSearchCriteriaDto placeSearchCriteriaDto)
+        {
+            return await _venueDtoService.SuggestVenues(placeSearchCriteriaDto);
+        }
+
+        [HttpGet]
+        [Route("~/api/venues/default", Name = GetDefaultRoute)]
         public async Task<VenueDetailsDto> GetDefault(string placeId)
         {
             return await _venueDtoService.GetDefaultVenue(placeId);
@@ -36,10 +44,10 @@ namespace zavit.Web.Api.Controllers
 
         [AccessAuthorize]
         [HttpPost]
-        [Route("~/api/places/{placeid}/venues", Name = PostRoute)]
-        public async Task<IHttpActionResult> Post(VenueDetailsDto venueDto, string placeId)
+        [Route("~/api/venues", Name = PostRoute)]
+        public async Task<IHttpActionResult> Post(VenueDetailsDto venueDto)
         {
-            var venue = await _venueDtoService.AddVenue(venueDto, placeId);
+            var venue = await _venueDtoService.AddVenue(venueDto);
             return CreatedAtRoute(CommonRoutes.Default, new { controller = "venues", id = venue.Id }, venue);
         }
     }

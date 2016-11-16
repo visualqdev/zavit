@@ -7,6 +7,16 @@ import * as VenueJoiningStorage from "./venueJoiningStorage";
 
 const joinVenueRedirectUrl = "/#/joinvenue";
 
+export function getVenues(options) {
+    const radius = options.radius || 3000,
+        name = options.name || "";
+
+    return VenueClient.getVenues(
+        options.map.position.coords.latitude,
+        options.map.position.coords.longitude,
+        radius, name);
+}
+
 export function getVenueAtPlace(placeId) {
     return new Promise((resolve, reject) => {
         VenueClient.getVenueAtPlace(placeId)

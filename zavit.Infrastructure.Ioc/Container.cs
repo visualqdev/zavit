@@ -25,7 +25,6 @@ namespace zavit.Infrastructure.Ioc
             );
 
             Install(
-                new PlacesInstaller(),
                 new VenuesInstaller(),
                 new InfrastructurePlacesInstaller(),
                 new InfrastructureCoreInstaller(),

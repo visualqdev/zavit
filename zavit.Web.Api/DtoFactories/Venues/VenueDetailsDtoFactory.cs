@@ -22,7 +22,8 @@ namespace zavit.Web.Api.DtoFactories.Venues
                 Id = venue.Id,
                 Activities = venue.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a)),
                 Longitude = venue.Longitude,
-                Latitude = venue.Latitude
+                Latitude = venue.Latitude,
+                PublicPlaceId = venue.PublicPlaceId
             };
 
             return venueActivity;

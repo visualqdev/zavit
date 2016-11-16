@@ -79,14 +79,15 @@ h2#mainHeading {
         font-size:18px;
     }
     .navbar-header {
-        width:65%;
+        //width:65%;
         a {
 	        color: @logo;
 	        font-size: 30px;
         }
         #search {
+            max-width: 450px;
             .input-group {
-                width:100%;
+                //width:100%;
                 .input-group-btn {
                     width:1%;
                 }
@@ -112,7 +113,22 @@ h2#mainHeading {
         box-shadow: none;
     }
 
-    @media screen and (max-width: 1340px){
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .navbar-collapse.collapse {
+            display: none !important;
+        }
+        .navbar-collapse.collapse.in {
+            display: block !important;
+        }
+        .navbar-header .collapse, .navbar-toggle {
+            display:block !important;
+        }
+        .navbar-header {
+            float:none;
+        }
+    }
+
+    /*@media screen and (max-width: 1340px){
         .navbar-header {
         width:60%;
         }
@@ -133,7 +149,7 @@ h2#mainHeading {
 
     @media screen and (min-width: 768px) {
         .navbar-form {
-            width: 85%;
+           width: 85%;
         }
     }
 
@@ -150,13 +166,13 @@ h2#mainHeading {
         .navbar-form {
             width: 80%;
         }
-    }
+    */
 
-    @media screen and (max-width: 800px) {
+    /*@media screen and (max-width: 800px) {
         li.active a {
 	        border: none;
         }
-    }
+    }*/
 }
 
 #loginModal{
@@ -498,6 +514,11 @@ h2#mainHeading {
     padding:10px;
     color:@info-text;
     visibility:hidden;
+}
+
+#exploreList{
+    height: 100%;
+    overflow: auto;
 }
 
 

@@ -1,5 +1,4 @@
-﻿using zavit.Domain.Places.PublicPlaces;
-using zavit.Infrastructure.Places.PublicPlacesApis.Details;
+﻿using zavit.Domain.Venues.PublicPlaces;
 
 namespace zavit.Infrastructure.Places.PublicPlacesApis.Search
 {

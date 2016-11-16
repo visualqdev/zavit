@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using Rhino.Mspec.Contrib.Extensions;
 using zavit.Domain.Accounts;
-using zavit.Domain.Places;
 using zavit.Domain.Venues;
 using zavit.Domain.Venues.NewVenueCreation;
 using zavit.Web.Api.DtoFactories.Venues;
@@ -19,7 +20,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
     {
         class When_adding_a_venue
         {
-            Because of = () => _result = Subject.AddVenue(_venueDetailsDto, PlaceId).Result;
+            Because of = () => _result = Subject.AddVenue(_venueDetailsDto).Result;
 
             It should_return_a_venue_details_dto_for_a_newly_created_venue = () => _result.ShouldEqual(_newVenueDetailsDto);
 
@@ -36,13 +37,12 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
                     .Return(newVenueRequest);
 
                 _venue = NewInstanceOf<Venue>();
-                Injected<IPlaceService>().Stub(s => s.AddVenue(newVenueRequest, PlaceId, venueOwnerAccount)).Return(Task.FromResult(_venue));
+                Injected<IVenueService>().Stub(s => s.CreateVenue(newVenueRequest, venueOwnerAccount)).Return(Task.FromResult(_venue));
 
                 _newVenueDetailsDto = NewInstanceOf<VenueDetailsDto>();
                 Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(_venue)).Return(_newVenueDetailsDto);
             };
 
-            const string PlaceId = "Place ID";
             static VenueDetailsDto _result;
             static VenueDetailsDto _venueDetailsDto;
             static Venue _venue;
@@ -58,7 +58,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             Establish context = () =>
             {
                 var venue = NewInstanceOf<Venue>();
-                Injected<IPlaceService>().Stub(s => s.GetDefaultVenue(PlaceId)).Return(Task.FromResult(venue));
+                Injected<IVenueService>().Stub(s => s.GetDefaultVenue(PlaceId)).Return(Task.FromResult(venue));
 
                 _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
                 Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(venue)).Return(_venueDetailsDto);
@@ -87,6 +87,36 @@ namespace zavit.Web.Api.Tests.DtoServices.Venues
             static VenueDetailsDto _result;
             static VenueDetailsDto _venueDetailsDto;
             const int VenueId = 123;
+        }
+
+        class When_suggesting_venue_dtos
+        {
+            Because of = () => _result = Subject.SuggestVenues(_venueSearchCriteriaDto).Result;
+
+            It should_return_a_dto_for_each_of_the_venues_suggested_by_the_venue_service = () => _result.ShouldContainOnlyOrdered(_placeDto, _otherPlaceDto);
+
+            Establish context = () =>
+            {
+                _venueSearchCriteriaDto = NewInstanceOf<VenueSearchCriteriaDto>();
+
+                var venue = NewInstanceOf<IVenue>();
+                var otherVenue = NewInstanceOf<IVenue>();
+
+                Injected<IVenueService>()
+                    .Stub(s => s.SuggestVenues(_venueSearchCriteriaDto))
+                    .Return(Task.FromResult<IEnumerable<IVenue>>(new[] { venue, otherVenue }));
+
+                _placeDto = NewInstanceOf<VenueDto>();
+                Injected<IVenueDtoFactory>().Stub(f => f.Create(venue)).Return(_placeDto);
+
+                _otherPlaceDto = NewInstanceOf<VenueDto>();
+                Injected<IVenueDtoFactory>().Stub(f => f.Create(otherVenue)).Return(_otherPlaceDto);
+            };
+
+            static IEnumerable<VenueDto> _result;
+            static VenueSearchCriteriaDto _venueSearchCriteriaDto;
+            static VenueDto _placeDto;
+            static VenueDto _otherPlaceDto;
         }
     }
 }

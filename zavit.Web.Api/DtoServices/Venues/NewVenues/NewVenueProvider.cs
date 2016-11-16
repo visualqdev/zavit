@@ -11,7 +11,8 @@ namespace zavit.Web.Api.DtoServices.Venues.NewVenues
             return new NewVenue
             {
                 Name = venueDetailsDto.Name,
-                ActivityIds = venueDetailsDto.Activities.Select(a => a.Id)
+                ActivityIds = venueDetailsDto.Activities.Select(a => a.Id),
+                PublicPlaceId = venueDetailsDto.PublicPlaceId
             };
         }
     }

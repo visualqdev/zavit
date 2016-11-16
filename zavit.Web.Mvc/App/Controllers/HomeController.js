@@ -3,8 +3,9 @@ import { Places } from "../modules/places/places";
 import * as MainContent from "../layout/mainContent";
 import * as Routes from "../routing/routes";
 import * as IndexView from "../views/home/index";
-import * as PlacesService from "../modules/places/placesService";
+import * as ExploreListPartial from "../views/home/exploreListPartial";
 import * as Progress from "../modules/loading/progress";
+import * as VenueService from "../modules/venues/venueService";
 
 let map;
 let mapPlaces;
@@ -16,14 +17,16 @@ export function explore(position) {
     Progress.start();
 
     loadMap()
-        .then(() => PlacesService.getPlaces({ map }))
-        .then(places => {
+        .then(() => VenueService.getVenues({ map }))
+        .then(venues => {
             mapPlaces = new Places({
                 map,
                 getPlaces
             });
             mapPlaces.initialise();
-            mapPlaces.addPlaces(places);
+            mapPlaces.addPlaces(venues);
+
+            createExploreList(venues);
 
             Progress.done();
         });
@@ -32,11 +35,10 @@ export function explore(position) {
 function getPlaces() {
     Progress.start();
 
-    PlacesService
-        .getPlaces({ map })
-        .then(places => {
-            mapPlaces.addPlaces(places);
-
+    VenueService.getVenues({ map })
+        .then(venues => {
+            mapPlaces.addPlaces(venues);
+            createExploreList(venues);
             Progress.done();
         });
 }
@@ -66,4 +68,9 @@ function centerMapAtLocation(position) {
 
 function getDefaultMap() {
     map.initialise();
+}
+
+function createExploreList(venues) {
+    const exploreListView = ExploreListPartial.getView(venues);
+    $("#exploreList").html(exploreListView);
 }

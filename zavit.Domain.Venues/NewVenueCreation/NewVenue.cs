@@ -6,6 +6,7 @@ namespace zavit.Domain.Venues.NewVenueCreation
     {
         public string Name { get; set; }
 
-        public IEnumerable<int> ActivityIds { get; set; } 
+        public IEnumerable<int> ActivityIds { get; set; }
+        public string PublicPlaceId { get; set; }
     }
 }
