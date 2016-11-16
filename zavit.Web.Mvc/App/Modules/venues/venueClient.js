@@ -5,7 +5,7 @@ export function getVenues(latitude, longitude, radius, name) {
     const venuesUrl = `${ApiSettings.apiUrl}api/venues?latitude=${latitude}&longitude=${longitude}&radius=${radius}&name=${name}`;
     return new Promise((resolve, reject) => 
         $.ajax({
-            url: placesUrl,
+            url: venuesUrl,
             type: "get",
             contentType: "application/json; charset=utf-8",
             success: resolve,

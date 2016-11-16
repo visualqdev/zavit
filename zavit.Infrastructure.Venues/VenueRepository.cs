@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using NHibernate;
+using NHibernate.Transform;
 using NHibernate.Type;
 using zavit.Domain.Venues;
 using zavit.Domain.Venues.Search;
@@ -31,9 +32,11 @@ namespace zavit.Infrastructure.Venues
         public Task<IEnumerable<Venue>> SearchVenues(IVenueSearchCriteria venueSearchCriteria)
         {
             var queryOver = _session.QueryOver<Venue>()
+                .Fetch(v => v.Activities).Eager
                 .Where(NHibernate.Criterion.Expression.Sql("(6367 * acos(cos(radians(?)) * cos(radians({alias}.Latitude)) * cos(radians({alias}.Longitude) - radians(?)) + sin(radians(?)) * sin(radians({alias}.Latitude)))) < ?",
                     new object[] { venueSearchCriteria.Latitude.ToString(), venueSearchCriteria.Longitude.ToString(), venueSearchCriteria.Latitude.ToString(), venueSearchCriteria.Radius / 1000 },
                     new IType[] { NHibernateUtil.Decimal, NHibernateUtil.Decimal, NHibernateUtil.Decimal, NHibernateUtil.Int32 }))
+                .TransformUsing(Transformers.DistinctRootEntity)
                 .List();
 
             return Task.FromResult((IEnumerable<Venue>)queryOver);

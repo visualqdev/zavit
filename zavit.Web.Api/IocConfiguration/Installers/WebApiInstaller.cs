@@ -1,8 +1,10 @@
-﻿using System.Web.Http.Filters;
+﻿using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Web.Api.Authorization.ClaimsIdentities;
+using zavit.Web.Api.Controllers;
 using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
@@ -29,6 +31,7 @@ namespace zavit.Web.Api.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
+                Classes.FromAssemblyContaining<AccountsController>().BasedOn<IHttpController>().LifestyleTransient(),
                 Classes.FromAssemblyContaining<ClaimsIdentityFilter>().BasedOn<IActionFilter>().LifestyleSingleton(),
                 Component.For<ExternalAccountsController>().LifestyleTransient(),
                 Component.For<IVenueDtoService>().ImplementedBy<VenueDtoService>().LifestyleTransient(),

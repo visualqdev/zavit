@@ -1,4 +1,7 @@
-﻿namespace zavit.Domain.Venues
+﻿using System.Collections.Generic;
+using zavit.Domain.Activities;
+
+namespace zavit.Domain.Venues
 {
     public interface IVenue
     {
@@ -8,5 +11,6 @@
         double Latitude { get; }
         string PublicPlaceId { get; }
         string Address { get; }
+        IList<Activity> Activities { get; }
     }
 }

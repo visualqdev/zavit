@@ -1,6 +1,8 @@
-﻿using Machine.Specifications;
+﻿using System.Collections.Generic;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using zavit.Domain.Activities;
 using zavit.Domain.Venues.PublicPlaces;
 using zavit.Domain.Venues.Search;
 
@@ -77,6 +79,15 @@ namespace zavit.Domain.Venues.Tests.Search
             };
 
             static PublicPlace _publicPlace;
+        }
+
+        class When_getting_activities
+        {
+            Because of = () => _result = Subject.Activities;
+
+            It should_always_return_empty_collection = () => _result.ShouldBeEmpty();
+
+            static IEnumerable<Activity> _result;
         }
     }
 }
