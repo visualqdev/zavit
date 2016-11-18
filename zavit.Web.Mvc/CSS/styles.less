@@ -519,6 +519,40 @@ h2#mainHeading {
 #exploreList{
     height: 100%;
     overflow: auto;
+    padding: 0px;
+    ul.exploreListVenues{
+        list-style: none;
+        padding-left: 0px;
+        li{
+            cursor: pointer;
+            cursor: hand;
+        }
+        >li.exploreListVenue{
+            border-bottom: 1px solid @list-highlight-bg;
+            padding: 10px;            
+            &:hover{
+                background-color: @list-hover-bg;
+            }
+            h3{
+                margin-top: 0px;
+            }
+            ul.venueActivities{
+                >li{
+                    border: 0;
+                    background-color: inherit;                    
+                    label{
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+        >li.selected{
+            background-color: @list-highlight-bg;
+            color: @list-highlight-text;           
+            &:hover{
+                background-color: @list-highlight-bg;
+                color: @list-highlight-text;   
+            }
+        }
+    }
 }
-
-

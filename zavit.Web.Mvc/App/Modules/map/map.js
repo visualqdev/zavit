@@ -109,7 +109,7 @@
         marker.setMap(null);
     }
 
-    addPlaceMarkerClickEvent(mapClass, callback, place, placeIndex, amountOfPlaces) {
+    addPlaceMarkerClickEvent(mapClass, callback, callbackOptions) {
 
         let latLng;
         const map = mapClass.map;
@@ -125,7 +125,7 @@
 
                 map.setCenter(latLng);
                 map.markerPoint = map.overlay.getProjection().fromLatLngToContainerPixel(latLng);
-                callback(place, placeIndex, amountOfPlaces, mapClass);
+                callback(callbackOptions, mapClass);
         });
     }
 

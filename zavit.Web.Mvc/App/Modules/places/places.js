@@ -9,6 +9,7 @@ export class Places {
         this.radius = options.radius || 3000;
         this.name = "";
         this.getPlaces = options.getPlaces;
+        this.onPlaceSelected = options.onPlaceSelected;
     }
 
     initialise() {
@@ -18,7 +19,6 @@ export class Places {
     }
 
     registerPlaceEvents() {
-
         $("#loadPlaces").on("click", (e) => {
             e.preventDefault();
             this.removeMarkers();
@@ -28,14 +28,12 @@ export class Places {
 
         $("#exploreMap").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
             e.preventDefault();
-            const marker = this.map.markers[$(e.currentTarget).attr("data-nextMarker")];
-            this.map.triggerMarkerClick(marker);
+            showPlace($(e.currentTarget).attr("data-nextMarker"));
         });
 
         $("#exploreMap").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
             e.preventDefault();
-            const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
-            this.map.triggerMarkerClick(marker);
+            showPlace($(e.currentTarget).attr("data-prevMarker"));
         });
 
         $("#exploreMap").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
@@ -66,6 +64,11 @@ export class Places {
         $("[data-name=placeModal]").remove();
     }
 
+    selectPlace(dataMarkerIndex) {
+        const marker = this.map.markers[dataMarkerIndex];
+        this.map.triggerMarkerClick(marker);
+    }
+
     addPlaces(places) {
         if (places.length) {
             places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
@@ -77,11 +80,22 @@ export class Places {
 
     addPlaceMarker(place, placeIndex, amountOfPlaces) {
         this.map.addMarker({ lat: place.Latitude, lng: place.Longitude });
-        this.map.addPlaceMarkerClickEvent(this.map, this.showPlaceInfo, place, placeIndex, amountOfPlaces);
+        this.map.addPlaceMarkerClickEvent(
+            this.map, 
+            this.showPlaceInfo,
+            {
+                place, 
+                placeIndex, 
+                amountOfPlaces,
+                onPlaceSelected: this.onPlaceSelected
+            });
     }
 
-    showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
-        PlaceModal.show(place, placeIndex, amountOfPlaces, map);
+    showPlaceInfo(callbackOptions, map) {
+        PlaceModal.show(callbackOptions.place, callbackOptions.placeIndex, callbackOptions.amountOfPlaces, map);
+        if (callbackOptions.onPlaceSelected) {
+            callbackOptions.onPlaceSelected(callbackOptions.placeIndex);
+        }
     }
 
     removeMarkers() {

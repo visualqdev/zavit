@@ -21,12 +21,13 @@ export function explore(position) {
         .then(venues => {
             mapPlaces = new Places({
                 map,
-                getPlaces
+                getPlaces,
+                onPlaceSelected: venueSelected
             });
             mapPlaces.initialise();
-            mapPlaces.addPlaces(venues);
 
             createExploreList(venues);
+            mapPlaces.addPlaces(venues);
 
             Progress.done();
         });
@@ -73,4 +74,22 @@ function getDefaultMap() {
 function createExploreList(venues) {
     const exploreListView = ExploreListPartial.getView(venues);
     $("#exploreList").html(exploreListView);
+    $("#exploreList").on("click", "li.exploreListVenue", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#exploreList li.selected").removeClass("selected");
+        const venueItem = $(this);
+        venueItem.addClass("selected");
+        mapPlaces.selectPlace(venueItem.attr("data-marker-index"));
+    });
+}
+
+function venueSelected(index) {
+    $("#exploreList li.selected").removeClass("selected");
+    const venueItem = $(`#exploreList li[data-marker-index='${index}']`);
+    venueItem.addClass("selected");
+
+    const exploreList = $("#exploreList");
+    exploreList.scrollTop(exploreList.scrollTop() + venueItem.position().top
+        - exploreList.height()/2 + venueItem.height()/2);
 }
