@@ -3,18 +3,11 @@ import * as VenueService from "./venueService";
 
 export function getVenueMembership(options) {
     if (options.venueId) {
-        return VenueMembershipClient.getVenueMembership(options.venueId);
+        return VenueMembershipClient.getMembershipForVenue(options.venueId);
     }
 
     if (options.publicPlaceId) {
-        return new Promise((resolve, reject) => {
-            VenueService
-                .getVenueAtPlace(options.publicPlaceId)
-                .then(venue => resolve({
-                    Activities: [],
-                    Venue: venue
-                }));
-        });
+        return VenueMembershipClient.getMembershipForPlace(options.publicPlaceId);
     }
 }
 

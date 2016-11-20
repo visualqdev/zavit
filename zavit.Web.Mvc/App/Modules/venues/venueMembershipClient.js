@@ -39,8 +39,18 @@ export function getVenueMemberships() {
 }
 
 
-export function getVenueMembership(venueId) {
+export function getMembershipForVenue(venueId) {
     const getVenueMembershipUrl = `${ApiSettings.apiUrl}api/venues/${venueId}/venuememberships`;
+
+    return AuthorizedClient
+        .send({
+            url: getVenueMembershipUrl,
+            type: "get"
+        });
+}
+
+export function getMembershipForPlace(placeId) {
+    const getVenueMembershipUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venuememberships`;
 
     return AuthorizedClient
         .send({
