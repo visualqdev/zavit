@@ -1,4 +1,6 @@
-﻿using NHibernate;
+﻿using System.Collections.Generic;
+using System.Linq;
+using NHibernate;
 using zavit.Domain.Accounts;
 
 namespace zavit.Infrastructure.Accounts.Repositories
@@ -28,6 +30,13 @@ namespace zavit.Infrastructure.Accounts.Repositories
             return _session.QueryOver<Account>()
                 .Where(a => a.Username == username)
                 .RowCount() > 0;
+        }
+
+        public IList<Account> GetAccounts(IEnumerable<int> accountIds)
+        {
+            return _session.QueryOver<Account>()
+                .WhereRestrictionOn(a => a.Id).IsIn(accountIds.ToArray())
+                .List();
         }
     }
 }

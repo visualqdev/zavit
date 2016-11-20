@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5373CB15-71E6-44A9-88F6-6A84686E36C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>zavit.Domain.Messaging</RootNamespace>
+    <AssemblyName>zavit.Domain.Messaging</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MessageReads\IMessageReadCreator.cs" />
+    <Compile Include="MessageReads\IMessageReadObserver.cs" />
+    <Compile Include="MessageReads\IMessageReadRepository.cs" />
+    <Compile Include="MessageReads\IMessageReadService.cs" />
+    <Compile Include="MessageReads\MessageInfo.cs" />
+    <Compile Include="MessageReads\MessageRead.cs" />
+    <Compile Include="MessageReads\MessageReadCreator.cs" />
+    <Compile Include="MessageReads\MessageReadService.cs" />
+    <Compile Include="MessageReads\MessageStatus.cs" />
+    <Compile Include="Messages\IMessageRepository.cs" />
+    <Compile Include="Messages\IMessageSentObserver.cs" />
+    <Compile Include="Messages\IMessageService.cs" />
+    <Compile Include="Messages\INewMessageProvider.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\MessageService.cs" />
+    <Compile Include="Messages\NewMessageProvider.cs" />
+    <Compile Include="Messages\NewMessageRequest.cs" />
+    <Compile Include="MessageThread.cs" />
+    <Compile Include="MessageThreads\IMessageInbox.cs" />
+    <Compile Include="MessageThreads\IMessageThreadRepository.cs" />
+    <Compile Include="MessageThreads\IMessageThreadService.cs" />
+    <Compile Include="MessageThreads\IMessageThreadTitleBuilder.cs" />
+    <Compile Include="MessageThreads\INewMessageThreadProvider.cs" />
+    <Compile Include="MessageThreads\MessageInbox.cs" />
+    <Compile Include="MessageThreads\MessageThreadService.cs" />
+    <Compile Include="MessageThreads\MessageThreadTitleBuilder.cs" />
+    <Compile Include="MessageThreads\NewMessageThreadProvider.cs" />
+    <Compile Include="MessageThreads\NewMessageThreadRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
+      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
+      <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
+      <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
+      <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

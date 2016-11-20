@@ -57,14 +57,23 @@
     <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultVenues\DefaultVenueProviderTests.cs" />
     <Compile Include="NewVenueCreation\VenueCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search\PublicVenueSuggestionFactoryTests.cs" />
+    <Compile Include="Search\PublicVenueSuggestionTests.cs" />
+    <Compile Include="Search\VenueSuggestionsMergerTests.cs" />
     <Compile Include="VenueServiceTests.cs" />
+    <Compile Include="VenueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
       <Name>zavit.Domain.Accounts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Activities\zavit.Domain.Activities.csproj">
+      <Project>{2cd77dc8-cb42-4619-8887-ae3c2c64cc64}</Project>
+      <Name>zavit.Domain.Activities</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>

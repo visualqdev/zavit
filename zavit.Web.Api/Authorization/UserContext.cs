@@ -1,4 +1,6 @@
-﻿using zavit.Domain.Accounts;
+﻿using System;
+using zavit.Domain.Accounts;
+using zavit.Web.Api.Authorization.ClaimsIdentities;
 using zavit.Web.Authorization;
 using zavit.Web.Core.Context;
 
@@ -32,5 +34,7 @@ namespace zavit.Web.Api.Authorization
                 return account;
             }
         }
+
+        public bool IsAuthenticated => Account != null;
     }
 }

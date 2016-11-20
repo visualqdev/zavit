@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Places.PublicPlaces;
-using zavit.Domain.Places.Search;
+using zavit.Domain.Venues.PublicPlaces;
+using zavit.Domain.Venues.Search;
 using zavit.Infrastructure.Places.PublicPlacesApis;
 using zavit.Infrastructure.Places.PublicPlacesApis.Details;
 using zavit.Infrastructure.Places.PublicPlacesApis.Search;
@@ -16,74 +16,74 @@ namespace zavit.Infrastructure.Places.Tests
     {
         class When_requesting_public_places
         {
-            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria).Result;
+            Because of = () => _result = Subject.GetPublicPlaces(_venueSearchCriteria).Result;
 
             It should_return_a_list_of_public_places = () => _result.ShouldEqual(_publicPlaces);
 
             Establish context = () =>
             {
-                _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
+                _venueSearchCriteria = NewInstanceOf<IVenueSearchCriteria>();
 
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
-                    .Stub(a => a.NearbySearch(_placeSearchCriteria, PublicPlacesService.Keywords))
+                    .Stub(a => a.NearbySearch(_venueSearchCriteria, PublicPlacesService.Keywords))
                     .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
                 Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
             };
 
-            static IPlaceSearchCriteria _placeSearchCriteria;
+            static IVenueSearchCriteria _venueSearchCriteria;
             static IEnumerable<PublicPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
         }
 
         class When_requesting_public_places_by_name
         {
-            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria).Result;
+            Because of = () => _result = Subject.GetPublicPlaces(_venueSearchCriteria).Result;
 
             It should_return_a_list_of_public_places_by_name = () => _result.ShouldEqual(_publicPlaces);
 
             Establish context = () =>
             {
-                _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
-                _placeSearchCriteria.Stub(x => x.Name).Return("Name");
+                _venueSearchCriteria = NewInstanceOf<IVenueSearchCriteria>();
+                _venueSearchCriteria.Stub(x => x.Name).Return("Name");
 
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
-                    .Stub(a => a.NearbySearchByName(_placeSearchCriteria, PublicPlacesService.Keywords))
+                    .Stub(a => a.NearbySearchByName(_venueSearchCriteria, PublicPlacesService.Keywords))
                     .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
                 Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
             };
 
-            static IPlaceSearchCriteria _placeSearchCriteria;
+            static IVenueSearchCriteria _venueSearchCriteria;
             static IEnumerable<PublicPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
         }
 
         class When_requesting_public_places_by_name_and_name_is_empty
         {
-            Because of = () => _result = Subject.GetPublicPlaces(_placeSearchCriteria).Result;
+            Because of = () => _result = Subject.GetPublicPlaces(_venueSearchCriteria).Result;
 
             It should_return_a_list_of_public_places = () => _result.ShouldEqual(_publicPlaces);
 
             Establish context = () =>
             {
-                _placeSearchCriteria = NewInstanceOf<IPlaceSearchCriteria>();
-                _placeSearchCriteria.Stub(x => x.Name).Return("");
+                _venueSearchCriteria = NewInstanceOf<IVenueSearchCriteria>();
+                _venueSearchCriteria.Stub(x => x.Name).Return("");
 
                 var googlePlacesSearchResult = NewInstanceOf<GooglePlaceSearchResult>();
                 Injected<IGooglePlacesApi>()
-                    .Stub(a => a.NearbySearch(_placeSearchCriteria, PublicPlacesService.Keywords))
+                    .Stub(a => a.NearbySearch(_venueSearchCriteria, PublicPlacesService.Keywords))
                     .Return(Task.FromResult(googlePlacesSearchResult));
 
                 _publicPlaces = new[] { NewInstanceOf<PublicPlace>(), NewInstanceOf<PublicPlace>() };
                 Injected<IPlaceSearchResultsTransformer>().Stub(p => p.Transform(googlePlacesSearchResult)).Return(_publicPlaces);
             };
 
-            static IPlaceSearchCriteria _placeSearchCriteria;
+            static IVenueSearchCriteria _venueSearchCriteria;
             static IEnumerable<PublicPlace> _result;
             static IEnumerable<PublicPlace> _publicPlaces;
         }

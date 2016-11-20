@@ -36,7 +36,7 @@ namespace zavit.Web.Api.Tests.Controllers
         {
             Because of = () => _result = Subject.Post(_accountDto);
 
-            It should_return_an_ok_result = () => _result.ShouldBeAssignableTo<BadRequestErrorMessageResult>();
+            It should_return_an_bad_request_result = () => _result.ShouldBeAssignableTo<BadRequestErrorMessageResult>();
 
             It should_add_an_error_message_to_the_response =
                 () => ((BadRequestErrorMessageResult) _result).Message.ShouldEqual(_registrationResult.ErrorMessage);

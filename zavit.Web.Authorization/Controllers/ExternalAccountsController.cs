@@ -108,7 +108,8 @@ namespace zavit.Web.Authorization.Controllers
                 Request.GetOwinContext(),
                 OAuthConfig.AccessRefreshTokenProvider,
                 OAuthConfig.OAuthBearerOptions,
-                OAuthConfig.OAuthAuthorizationServerOptions);
+                OAuthConfig.OAuthAuthorizationServerOptions,
+                OAuthConfig.AccessTokenLifeTime);
 
             return Ok(accessTokenResponse);
         }
@@ -142,7 +143,8 @@ namespace zavit.Web.Authorization.Controllers
                 Request.GetOwinContext(), 
                 OAuthConfig.AccessRefreshTokenProvider, 
                 OAuthConfig.OAuthBearerOptions,
-                OAuthConfig.OAuthAuthorizationServerOptions);
+                OAuthConfig.OAuthAuthorizationServerOptions,
+                OAuthConfig.AccessTokenLifeTime);
 
             return Ok(accessTokenResponse);
 

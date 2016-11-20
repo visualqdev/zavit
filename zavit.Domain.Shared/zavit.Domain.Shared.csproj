@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="IDateTime.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IGuid.cs" />
+    <Compile Include="ResultCollections\IResultCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

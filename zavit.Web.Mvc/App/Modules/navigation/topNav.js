@@ -1,5 +1,6 @@
 ﻿import * as LoginModal from "../account/loginModal";
 import * as AccountService from "../account/accountService";
+import * as Routes from "../../routing/routes";
 
 export function initialize() {
     refresh();
@@ -13,11 +14,7 @@ export function initialize() {
         e.preventDefault();
         AccountService.logOut();
         refresh();
-    });
-
-    $("#topnavShowSideNav a").click((e) => {
-        e.preventDefault();
-        SideNav.show();
+        Routes.goTo(Routes.home);
     });
 }
 
@@ -31,4 +28,9 @@ export function refresh() {
         $("#topnavAccount").hide();
         $("#topnavLogin").show();
     }
+}
+
+export function navigatedToRoute(routeName) {
+    $("#topnavLinks li.active").removeClass("active");
+    $(`#topnavLinks li[data-page='${routeName}']`).addClass("active");
 }

@@ -16,16 +16,14 @@ namespace zavit.Domain.Places
         readonly IPublicPlacesService _publicPlacesService;
         readonly IVenuePlaceRepository _venuePlaceRepository;
         readonly IVenueService _venueService;
-        readonly IVenuePlaceCreator _venuePlaceCreator;
         readonly IPlaceSuggestionsMerger _placeSuggestionsMerger;
         readonly IDefaultVenueProvider _defaultVenueProvider;
 
-        public PlaceService(IPublicPlacesService publicPlacesService, IVenuePlaceRepository venuePlaceRepository, IVenueService venueService, IVenuePlaceCreator venuePlaceCreator, IPlaceSuggestionsMerger placeSuggestionsMerger, IDefaultVenueProvider defaultVenueProvider)
+        public PlaceService(IPublicPlacesService publicPlacesService, IVenuePlaceRepository venuePlaceRepository, IVenueService venueService, IPlaceSuggestionsMerger placeSuggestionsMerger, IDefaultVenueProvider defaultVenueProvider)
         {
             _publicPlacesService = publicPlacesService;
             _venuePlaceRepository = venuePlaceRepository;
             _venueService = venueService;
-            _venuePlaceCreator = venuePlaceCreator;
             _placeSuggestionsMerger = placeSuggestionsMerger;
             _defaultVenueProvider = defaultVenueProvider;
         }
@@ -40,28 +38,6 @@ namespace zavit.Domain.Places
             var placeSuggestions = _placeSuggestionsMerger.Merge(publicPlacesTask.Result, venuePlacesTask.Result);
 
             return placeSuggestions;
-        }
-
-        public async Task<Venue> AddVenue(INewVenue newVenue, string placeId, Account venueOwnerAccount)
-        {
-            var place = _venuePlaceRepository.Get(placeId);
-
-            var isNewPlace = false;
-            if (place == null)
-            {
-                isNewPlace = true;
-                place = await _venuePlaceCreator.Create(placeId);
-            }
-
-            var venue = _venueService.CreateVenue(newVenue, venueOwnerAccount);
-            place.AddVenue(venue);
-
-            if (isNewPlace)
-                _venuePlaceRepository.Save(place);
-            else
-                _venuePlaceRepository.Update(place);
-
-            return venue;
         }
 
         public async Task<Venue> GetDefaultVenue(string placeId)

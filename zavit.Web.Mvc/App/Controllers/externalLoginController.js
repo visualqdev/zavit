@@ -1,4 +1,5 @@
 ﻿import * as ExternalAccountService from "../modules/account/externalAccountService";
+import * as Progress from "../modules/loading/progress";
 
 export function processExternalLogin(options = {}) {
     const externalAccessToken = options.externalAccessToken || null,
@@ -6,6 +7,8 @@ export function processExternalLogin(options = {}) {
         externalUsername = options.externalUsername || null,
         externalEmail = options.externalEmail || null,
         hasLocalAccount = options.hasLocalAccount || false;
+
+    Progress.start();
 
     ExternalAccountService.processExternalLogin({
         externalAccessToken,
@@ -15,6 +18,7 @@ export function processExternalLogin(options = {}) {
         hasLocalAccount
     })
     .then(() => {
+            Progress.done();
             window.location.href = "/";
-        });
+    });
 }

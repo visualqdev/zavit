@@ -15,6 +15,9 @@ namespace zavit.Domain.Places.VenuePlaces.DefaultVenues
 
         public Venue ProvideDefaultVenue(VenuePlace venuePlace)
         {
+            if (venuePlace.Venues.Count > 0)
+                return venuePlace.Venues[0];
+
             return CreateVenue(venuePlace.Name, venuePlace.Address);
         }
 

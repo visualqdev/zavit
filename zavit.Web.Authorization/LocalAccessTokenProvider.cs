@@ -13,11 +13,8 @@ namespace zavit.Web.Authorization
     {
         const string ExternalClientId = "1";
 
-        public JObject GenerateLocalAccessTokenResponse(Account account, IOwinContext owinContext, AccessRefreshTokenProvider accessRefreshTokenProvider, OAuthBearerAuthenticationOptions oauthBearerOptions, OAuthAuthorizationServerOptions oauthAuthorizationServerOptions)
+        public JObject GenerateLocalAccessTokenResponse(Account account, IOwinContext owinContext, AccessRefreshTokenProvider accessRefreshTokenProvider, OAuthBearerAuthenticationOptions oauthBearerOptions, OAuthAuthorizationServerOptions oauthAuthorizationServerOptions, TimeSpan accessTokenLifeTime)
         {
-
-            var tokenExpiration = TimeSpan.FromDays(1);
-
             var identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 
             identity.AddClaim(new Claim(ClaimTypes.Name, account.Username));
@@ -26,7 +23,7 @@ namespace zavit.Web.Authorization
             var props = new AuthenticationProperties()
             {
                 IssuedUtc = DateTime.UtcNow,
-                ExpiresUtc = DateTime.UtcNow.Add(tokenExpiration),
+                ExpiresUtc = DateTime.UtcNow.Add(accessTokenLifeTime),
             };
 
             var ticket = new AuthenticationTicket(identity, props);
@@ -43,8 +40,9 @@ namespace zavit.Web.Authorization
                                         new JProperty("userName", account.Username),
                                         new JProperty("displayName", account.DisplayName),
                                         new JProperty("access_token", accessToken),
+                                        new JProperty("accountId", account.Id.ToString()),
                                         new JProperty("token_type", "bearer"),
-                                        new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString(CultureInfo.InvariantCulture)),
+                                        new JProperty("expires_in", accessTokenLifeTime.TotalSeconds.ToString(CultureInfo.InvariantCulture)),
                                         new JProperty(".issued", context.Ticket.Properties.IssuedUtc.ToString()),
                                         new JProperty(".expires", context.Ticket.Properties.ExpiresUtc.ToString()),
                                         new JProperty("refresh_token", context.Token));

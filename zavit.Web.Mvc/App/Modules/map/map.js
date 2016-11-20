@@ -16,6 +16,8 @@
         this.controlsAreDisabled = options.controlsAreDisabled || false;
         this.mapIsDraggable = options.mapIsDraggable || true;
         this.mapIsFixed = options.thisMapIsFixed || false;
+        this.mapContainer = options.mapContainer || false;
+        this.zoomControl = options.zoomControl || true;
     }
    
     initialise() {
@@ -28,13 +30,18 @@
             this.mapIsDraggable = false;
         }
 
-        const map = new google.maps.Map(document.getElementById("map"), {
+        if (!this.mapContainer) {
+            this.mapContainer = document.getElementById("mainContent");
+        }
+
+        const map = new google.maps.Map(this.mapContainer, {
             center: area,
             zoom: this.zoom,
             scrollwheel: this.mapCanScroll,
             draggable: this.mapIsDraggable,
             disableDefaultUI:this.controlsAreDisabled,
-            disableDoubleClickZoom: true
+            disableDoubleClickZoom: true,
+            zoomControl:this.zoomControl
         });
         
         const projectionChanged = new Promise(function(resolve) {
@@ -55,8 +62,8 @@
 
         Promise.all([projectionChanged, mapHasLoaded])
             .then(value => {
-                this.executeWhenMapFullyLoaded();
                 this.map = map;
+                this.executeWhenMapFullyLoaded();
             }, 
             reason => {
                 console.log(reason);
@@ -102,7 +109,7 @@
         marker.setMap(null);
     }
 
-    addPlaceMarkerClickEvent(mapClass, callback, place, placeIndex, amountOfPlaces) {
+    addPlaceMarkerClickEvent(mapClass, callback, callbackOptions) {
 
         let latLng;
         const map = mapClass.map;
@@ -118,7 +125,7 @@
 
                 map.setCenter(latLng);
                 map.markerPoint = map.overlay.getProjection().fromLatLngToContainerPixel(latLng);
-                callback(place, placeIndex, amountOfPlaces, mapClass);
+                callback(callbackOptions, mapClass);
         });
     }
 

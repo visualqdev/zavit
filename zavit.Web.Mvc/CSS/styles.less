@@ -1,9 +1,27 @@
 ﻿@import '.\libraries\colours';
+@import 'explore';
+@import 'venues';
+@import 'messages';
 
 html, body {
 	height: 100%;
 	width:100%;
     margin:0;
+}
+h1,h2,h3,h4,h5,h6 {
+    color:@logo;
+}
+h2#mainHeading {
+    color:@nav-bg;
+    .fa {
+        margin-right:10px !important;
+        
+    }
+    font-size:36px !important;
+    padding:10px;
+    display:inline;
+    float:left;
+    font-weight:normal;
 }
 
 .contentContainer {
@@ -29,9 +47,14 @@ html, body {
         footer {
             padding-top:5px;
         }
-    }
+    }    
 }
 
+#mainContent {	
+	background: @map-background;
+    overflow: auto;
+    height: 100%;
+}
 
 #mainNav.navbar {
 	margin-bottom: 0px;
@@ -57,14 +80,15 @@ html, body {
         font-size:18px;
     }
     .navbar-header {
-        width:70%;
+        //width:65%;
         a {
 	        color: @logo;
 	        font-size: 30px;
         }
         #search {
+            max-width: 450px;
             .input-group {
-                width:100%;
+                //width:100%;
                 .input-group-btn {
                     width:1%;
                 }
@@ -90,50 +114,18 @@ html, body {
         box-shadow: none;
     }
 
-    @media screen and (max-width: 1340px){
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .navbar-collapse.collapse {
+            display: none !important;
+        }
+        .navbar-collapse.collapse.in {
+            display: block !important;
+        }
+        .navbar-header .collapse, .navbar-toggle {
+            display:block !important;
+        }
         .navbar-header {
-        width:60%;
-        }
-        #mainNav.navbar .navbar-form {
-             width:60%;
-        }
-    }
-
-   
-    @media screen and (max-width: 1010px){
-        .navbar-header {
-        width:50%;
-        }
-        .navbar-form {
-             width:75%;
-        }
-    }
-
-   
-   
-    @media screen and (min-width: 768px) {
-        .navbar-form {
-            width: 85%;
-        }
-    }
-    @media screen and (min-width: 0px ) and (max-width:800px) {
-        .navbar-header {
-        width:100%;
-        margin:0;
-        padding:0;
-        }
-        .container-fluid {
-            margin:0;
-            padding:0;
-        }
-        .navbar-form {
-            width: 80%;
-        }
-    }
-    @media screen and (max-width: 800px) {
-       
-        li.active a {
-	        border: none;
+            float:none;
         }
     }
 }
@@ -191,89 +183,6 @@ html, body {
     }
 }
 
-.map-popup{
-    position: absolute;
-	background: @map-popup-bg;
-	border: 2px solid @map-popup-border;
-    z-index: 2;
-    padding: 10px;
-    &:after, &:before {
-	    top: 100%;
-	    left: 50%;
-	    border: solid transparent;
-	    content: " ";
-	    height: 0;
-	    width: 0;
-	    position: absolute;
-	    pointer-events: none;
-    }
-    &:after {
-	    border-color: rgba(255, 255, 255, 0);
-	    border-top-color: #fff;
-	    border-width: 15px;
-	    margin-left: -15px;
-    }
-    &:before {
-	    border-color: rgba(204, 204, 204, 0);
-	    border-top-color: #ccc;
-	    border-width: 18px;
-	    margin-left: -18px;
-    }
-    header{
-        border-bottom: 1px solid @map-popup-border;
-        float: left;
-        width: 100%;
-        padding-bottom: 5px;          
-    }
-    address {
-        float:left;        
-        clear:left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width:100%;
-        font-size: 12px;
-        margin-bottom: 0;
-    }
-    button {
-        background-color:@call-to-action;
-        border:@call-to-action;
-        margin:10px 0 0 0;
-        color:@nav-bg;
-        float:left;
-        width:100%;
-    }
-    span {
-        float:right;
-        clear:left;
-        margin:15px;
-        font-size:16px;
-        a {
-            font-weight:bold;
-            color:@text-link;
-        }
-    }
-    h3, h4, h5 {        
-        float: left;
-        margin: 0 0 5px 0;
-        clear: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 100%;
-    }
-    h3{
-        font-size: 18px;
-    }
-    h4{
-        font-size: 14px;
-        margin-top: 10px;
-    }
-    h5{
-        font-size: 12px;        
-    }
-}
-
 #joinVenueModal {   
     .control-group{
         float: left;
@@ -286,13 +195,38 @@ html, body {
             label{
                 font-weight: 400;
             }
-        }
+        }        
         .joinVenueOtherActivitiesContainer{
             text-align: center;
             margin-left: -30px;
             clear:left;
         }
-    }          
+    }
+    .warning-border{
+        border: 1px solid @warning-bg;   
+    }
+    #joinVenueChooseActivities{
+        height: 110px;
+        overflow: auto;
+
+        .list-group{    
+            width: 100%;
+            min-height: 90px;
+            margin-bottom: 0px;
+                    
+            .list-group-item{
+                border: 0px;
+                padding: 0px 15px;
+                background-color: @light-bg;
+                .checkbox{
+                    font-weight: 400;
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    color: @default-text;
+                }
+            }
+        }
+    }
 }
 
 #nprogress {
@@ -441,7 +375,6 @@ html, body {
         border-color:rgba(0,0,0,0.2)
     }
 }
-
 #infoPopUp {
     width:300px;
     background-color:@nav-bg;

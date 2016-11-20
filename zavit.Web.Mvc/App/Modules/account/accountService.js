@@ -40,7 +40,8 @@ export function currentUserAccount() {
         return {
             email: tokenData.userName,
             displayName: tokenData.displayName,
-            accessToken: tokenData.access_token
+            accessToken: tokenData.access_token,
+            accountId: tokenData.accountId
         };
     }
 }
@@ -57,9 +58,9 @@ export function refreshUserAccount() {
                         authenticationSuccess(data);
                         resolve();
                     })
-                .catch(reject);
+                .catch(() => { reject({ status: 401 }); });
         } else {
-            reject();
+            reject({ status: 401 });
         }
     });
 }

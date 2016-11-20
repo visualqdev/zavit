@@ -25,7 +25,6 @@ namespace zavit.Infrastructure.Ioc
             );
 
             Install(
-                new PlacesInstaller(),
                 new VenuesInstaller(),
                 new InfrastructurePlacesInstaller(),
                 new InfrastructureCoreInstaller(),
@@ -34,9 +33,14 @@ namespace zavit.Infrastructure.Ioc
                 new InfrastructureAccountsInstaller(),
                 new ClientsInstaller(),
                 new InfrastructureClientsInstaller(),
-                new InfrastructureExternalAccounts(),
+                new InfrastructureExternalAccountsInstaller(),
                 new ExternalAccountsInstaller(),
-                new InfrastructureActivitiesInstaller());
+                new InfrastructureActivitiesInstaller(),
+                new InfrastructureVenuesInstaller(),
+                new InfrastructureVenueMembershipsInstaller(),
+                new VenueMembershipsInstaller(),
+                new MessagingInstaller(),
+                new InfrastructureMessagingInstaller());
         }
 
         public static Container Instance

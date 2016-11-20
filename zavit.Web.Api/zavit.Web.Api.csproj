@@ -58,8 +58,8 @@
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -113,34 +113,107 @@
     <Compile Include="ApiStartup.cs" />
     <Compile Include="App_Start\CommonRoutes.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Authorization\AccessAuthorizationFilter.cs" />
-    <Compile Include="Authorization\ClaimsIdentityProvider.cs" />
-    <Compile Include="Authorization\IClaimsIdentityProvider.cs" />
-    <Compile Include="Authorization\IClaimsIdentityProviderFactory.cs" />
+    <Compile Include="Authorization\AccessAuthorization\AccessAuthorizeAttribute.cs" />
+    <Compile Include="Authorization\AccessAuthorization\AccessAuthorizationFilter.cs" />
+    <Compile Include="Authorization\ActionContextWrapper.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\ClaimsIdentityFilter.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\ClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\IClaimsIdentityProvider.cs" />
+    <Compile Include="Authorization\ClaimsIdentities\IClaimsIdentityProviderFactory.cs" />
+    <Compile Include="Authorization\IActionContext.cs" />
+    <Compile Include="Authorization\IUserContextFactory.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\IResourceAuthorization.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\IResourceAuthorizationsProvider.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\Messaging\MessageThreadAccessAuthorization.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\Messaging\MessageThreadAccessAuthorizeAttribute.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\ResourceAuthorizationFilter.cs" />
+    <Compile Include="Authorization\ResourcesAuthorization\ResourceAuthorizeAttribute.cs" />
     <Compile Include="Authorization\UserContext.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\MessageRecipientsController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\MessageThreadsController.cs" />
+    <Compile Include="Controllers\VenueMembersController.cs" />
+    <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
-    <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
-    <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\IMessageRecipientDtoFactory.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\IMessageCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\IMessageDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\MessageCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\IThreadParticipantDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreadParticipants\ThreadParticipantDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\IInboxThreadDetailsDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\IInboxThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\IMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDetailsDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDetailsDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDetailsDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\IVenueMemberCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\IVenueMemberDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberCollectionDtoFactory.cs" />
+    <Compile Include="DtoFactories\VenueMembers\VenueMemberDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\IVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactory.cs" />
-    <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
-    <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
+    <Compile Include="DtoServices\MessageRecipients\IMessageRecipientDtoService.cs" />
+    <Compile Include="DtoServices\MessageRecipients\MessageRecipientDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\Messages\IMessageDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\Messages\MessageDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\IMessageThreadDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoService.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\INewMessageRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
+    <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDtoService.cs" />
+    <Compile Include="DtoServices\VenueMemberships\NewVenueMemberships\INewVenueMembershipProvider.cs" />
+    <Compile Include="DtoServices\VenueMemberships\NewVenueMemberships\NewVenueMembershipProvider.cs" />
+    <Compile Include="DtoServices\VenueMemberships\VenueMembershipDetailsDtoService.cs" />
+    <Compile Include="DtoServices\VenueMemberships\VenueMembershipDtoService.cs" />
+    <Compile Include="DtoServices\VenueMembers\IVenueMemberDtoService.cs" />
+    <Compile Include="DtoServices\VenueMembers\VenueMemberDtoService.cs" />
     <Compile Include="DtoServices\Venues\IVenueDtoService.cs" />
+    <Compile Include="DtoServices\Venues\NewVenues\INewVenueProvider.cs" />
+    <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
-    <Compile Include="Dtos\Places\PlaceDto.cs" />
-    <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
+    <Compile Include="Dtos\MessageRecipients\MessageRecipientDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />
+    <Compile Include="Dtos\Messaging\Messages\MessageStatusDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDetailsDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\InboxThreadDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadsCollectionDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
+    <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
+    <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
+    <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />
+    <Compile Include="Dtos\VenueMemberships\VenueMembershipDto.cs" />
+    <Compile Include="Dtos\VenueMembers\VenueMemberDto.cs" />
+    <Compile Include="Dtos\VenueMembers\VenueMembersCollectionDto.cs" />
+    <Compile Include="Dtos\Venues\VenueSearchCriteriaDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyScope.cs" />
+    <Compile Include="IocConfiguration\Installers\AuthorizationInstaller.cs" />
     <Compile Include="IocConfiguration\Installers\WebApiInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -148,7 +221,9 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dtos\Activities\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
       <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
@@ -166,13 +241,17 @@
       <Project>{7edfe7c9-2268-43af-a262-30650b626e0a}</Project>
       <Name>zavit.Domain.ExternalAccounts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
-      <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
-      <Name>zavit.Domain.Places</Name>
+    <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
+      <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
+      <Name>zavit.Domain.Messaging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.VenueMemberships\zavit.Domain.VenueMemberships.csproj">
+      <Project>{bd4a859e-b7bd-4d6a-b579-87c3c1746114}</Project>
+      <Name>zavit.Domain.VenueMemberships</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>

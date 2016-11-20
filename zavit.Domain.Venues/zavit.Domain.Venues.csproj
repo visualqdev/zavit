@@ -40,12 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultVenues\DefaultVenueProvider.cs" />
+    <Compile Include="DefaultVenues\IDefaultVenueProvider.cs" />
+    <Compile Include="IVenue.cs" />
     <Compile Include="IVenueRepository.cs" />
     <Compile Include="IVenueService.cs" />
-    <Compile Include="NewVenueCreation\INewVenue.cs" />
+    <Compile Include="NewVenueCreation\NewVenue.cs" />
     <Compile Include="NewVenueCreation\IVenueCreator.cs" />
     <Compile Include="NewVenueCreation\VenueCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicPlaces\IPublicPlacesService.cs" />
+    <Compile Include="PublicPlaces\PublicPlace.cs" />
+    <Compile Include="Search\IPublicVenueSuggestionFactory.cs" />
+    <Compile Include="Search\IVenueSearchCriteria.cs" />
+    <Compile Include="Search\IVenueSuggestionsMerger.cs" />
+    <Compile Include="Search\PublicVenueSuggestion.cs" />
+    <Compile Include="Search\PublicVenueSuggestionFactory.cs" />
+    <Compile Include="Search\VenueSuggestionsMerger.cs" />
     <Compile Include="Venue.cs" />
     <Compile Include="VenueService.cs" />
   </ItemGroup>

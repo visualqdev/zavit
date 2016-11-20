@@ -17,7 +17,13 @@ namespace zavit.Domain.Places.VenuePlaces
 
         public virtual void AddVenue(Venue venue)
         {
+            if (string.IsNullOrWhiteSpace(venue.Name))
+                venue.Name = Name;
+
             venue.Address = Address;
+            venue.Longitude = Longitude;
+            venue.Latitude = Latitude;
+
             Venues.Add(venue);
         }
     }

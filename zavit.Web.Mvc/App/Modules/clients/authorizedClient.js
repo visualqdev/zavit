@@ -1,14 +1,16 @@
 ﻿import * as AccountService from "../account/accountService";
 
 export function send(options) {
-    const currentAccount = AccountService.currentUserAccount();
+    return new Promise((resolve, reject) => {
+        const currentAccount = AccountService.currentUserAccount();
 
-    if (currentAccount) {
-        return new Promise((resolve, reject) => {
+        if (currentAccount) {
             const ajaxOptions = getFirstAttemptOptions(options, currentAccount, resolve, reject);
             $.ajax(ajaxOptions);
-        });
-    }
+        } else {
+            reject({ status: 401 });
+        }
+    });
 }
 
 function getFirstAttemptOptions(baseOptions, account, resolve, reject) {
@@ -23,6 +25,8 @@ function getFirstAttemptOptions(baseOptions, account, resolve, reject) {
                     .then(() => makeSecondAttempt(baseOptions))
                     .then(resolve)
                     .catch(reject);
+            } else {
+                reject();
             }
         }
     };

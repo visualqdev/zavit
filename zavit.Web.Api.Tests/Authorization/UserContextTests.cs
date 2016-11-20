@@ -3,6 +3,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Web.Api.Authorization;
+using zavit.Web.Api.Authorization.ClaimsIdentities;
 using zavit.Web.Authorization;
 
 namespace zavit.Web.Api.Tests.Authorization
@@ -49,6 +50,45 @@ namespace zavit.Web.Api.Tests.Authorization
             };
 
             static Account _result;
+        }
+
+        class When_checking_if_user_is_authenticated_and_account_for_the_user_is_valid
+        {
+            Because of = () => _result = Subject.IsAuthenticated;
+
+            It should_return_true = () => _result.ShouldBeTrue();
+
+            Establish context = () =>
+            {
+                var account = NewInstanceOf<Account>();
+                const string username = "Username";
+                Injected<IClaimsIdentityProvider>().Stub(i => i.Username).Return(username);
+
+                var accountRepository = NewInstanceOf<IAccountRepository>();
+                accountRepository.Stub(r => r.Get(username)).Return(account);
+                Injected<IAccountRepositoryFactory>().Stub(f => f.Create()).Return(accountRepository);
+            };
+
+            static bool _result;
+        }
+
+        class When_checking_if_user_is_authenticated_and_account_for_the_user_is_not_valid
+        {
+            Because of = () => _result = Subject.IsAuthenticated;
+
+            It should_return_true = () => _result.ShouldBeFalse();
+
+            Establish context = () =>
+            {
+                const string username = "Username";
+                Injected<IClaimsIdentityProvider>().Stub(i => i.Username).Return(username);
+
+                var accountRepository = NewInstanceOf<IAccountRepository>();
+                accountRepository.Stub(r => r.Get(username)).Return(null);
+                Injected<IAccountRepositoryFactory>().Stub(f => f.Create()).Return(accountRepository);
+            };
+
+            static bool _result;
         }
     }
 }

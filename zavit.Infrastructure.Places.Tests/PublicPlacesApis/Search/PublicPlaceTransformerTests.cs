@@ -1,6 +1,6 @@
 ﻿using Machine.Specifications;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Places.PublicPlaces;
+using zavit.Domain.Venues.PublicPlaces;
 using zavit.Infrastructure.Places.PublicPlacesApis.Search;
 
 namespace zavit.Infrastructure.Places.Tests.PublicPlacesApis.Search 

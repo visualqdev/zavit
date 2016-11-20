@@ -29,6 +29,7 @@ namespace zavit.Domain.Places.Tests.VenuePlaces.DefaultVenues
             Establish context = () =>
             {
                 _venuePlace = NewInstanceOf<VenuePlace>();
+                _venuePlace.Venues = new List<Venue>();
                 _venuePlace.Name = "Place name";
                 _venuePlace.Address = "Test address";
 
@@ -39,6 +40,26 @@ namespace zavit.Domain.Places.Tests.VenuePlaces.DefaultVenues
             static IList<Activity> _activities;
             static VenuePlace _venuePlace;
             static Venue _result;
+        }
+
+        class When_providing_a_default_venue_for_a_venue_place_that_already_has_at_least_one_venue
+        {
+            Because of = () => _result = Subject.ProvideDefaultVenue(_venuePlace);
+
+            It should_return_the_first_available_venue_at_the_venue_palce =
+                () => _result.ShouldEqual(_venue);
+
+            Establish context = () =>
+            {
+                _venue = NewInstanceOf<Venue>();
+
+                _venuePlace = NewInstanceOf<VenuePlace>();
+                _venuePlace.Venues = new List<Venue> { _venue, NewInstanceOf<Venue>() };
+            };
+
+            static VenuePlace _venuePlace;
+            static Venue _result;
+            static Venue _venue;
         }
 
         class When_providing_a_default_venue_for_a_public_place

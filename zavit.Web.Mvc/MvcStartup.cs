@@ -22,6 +22,7 @@ namespace zavit.Web.Mvc
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            SignalRConfig.ConfigureSignalr(app);
         }
     }
 }
