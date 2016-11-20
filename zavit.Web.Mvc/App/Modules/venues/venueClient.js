@@ -43,13 +43,14 @@ export function getVenue(venueId) {
 }
 
 export function addVenue(placeId, name, activities) {
-    const postVenueUrl = `${ApiSettings.apiUrl}api/places/${placeId}/venues`;
+    const postVenueUrl = `${ApiSettings.apiUrl}api/venues`;
     const activityDtos = activities.map((activityId) => {
         return { id: activityId };
     });
 
     const data = {
         activities: activityDtos,
+        publicPlaceId: placeId,
         name
     };
 

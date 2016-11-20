@@ -33,7 +33,7 @@ export function getVenue(venueId) {
 
 export function joinVenue(options) {
     if (AccountService.currentUserAccount()) {
-        if (options.venueId) {
+        if (options.venueId && options.venueId > 0) {
             letUserJoinVenue(options);
         } else {
             VenueClient

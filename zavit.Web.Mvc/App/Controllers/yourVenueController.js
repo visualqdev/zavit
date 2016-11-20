@@ -89,7 +89,8 @@ function AttachActivityEvents(membership) {
         
         VenueService.joinVenue({
             activities,
-            venueId: membership.Venue.Id
+            venueId: membership.Venue.Id,
+            placeId: membership.Venue.PublicPlaceId
         });
     });
 }
