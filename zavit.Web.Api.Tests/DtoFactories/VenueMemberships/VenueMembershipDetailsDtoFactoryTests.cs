@@ -14,7 +14,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
     [Subject("VenueMembershipDetailsDtoFactory")]
     public class VenueMembershipDetailsDtoFactoryTests : TestOf<VenueMembershipDetailsDtoFactory>
     {
-        class When_creating_the_venue_membership_details_dto
+        class When_creating_the_venue_membership_details_dto_from_venue_membership
         {
             Because of = () => _result = Subject.CreateItem(_venueMembership);
 
@@ -47,6 +47,27 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMemberships
             static VenueDetailsDto _venueDetailsDto;
             static VenueActivityDto _otherMembershipActivity;
             static VenueActivityDto _membershipActivity;
+        }
+
+        class When_creating_the_venue_membership_details_dto_from_venue
+        {
+            Because of = () => _result = Subject.CreateItem(_venue);
+
+            It should_set_the_membership_venue_to_venue_details_dto = () => _result.Venue.ShouldEqual(_venueDetailsDto);
+
+            It should_set_the_activities_to_be_an_empty_collection = () => _result.Activities.ShouldBeEmpty();
+
+            Establish context = () =>
+            {
+                _venue = NewInstanceOf<Venue>();
+
+                _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
+                Injected<IVenueDetailsDtoFactory>().Stub(f => f.Create(_venue)).Return(_venueDetailsDto);
+            };
+
+            static Venue _venue;
+            static VenueMembershipDetailsDto _result;
+            static VenueDetailsDto _venueDetailsDto;
         }
     }
 }

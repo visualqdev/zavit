@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using zavit.Domain.VenueMemberships;
+using zavit.Domain.Venues;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.VenueMemberships;
+using zavit.Web.Api.Dtos.Venues;
 
 namespace zavit.Web.Api.DtoFactories.VenueMemberships
 {
@@ -22,6 +25,15 @@ namespace zavit.Web.Api.DtoFactories.VenueMemberships
             {
                 Venue = _venueDetailsDtoFactory.Create(venueMembership.Venue),
                 Activities = venueMembership.Activities.Select(a => _venueActivityDtoFactory.CreateItem(a))
+            };
+        }
+
+        public VenueMembershipDetailsDto CreateItem(Venue venue)
+        {
+            return new VenueMembershipDetailsDto
+            {
+                Venue = _venueDetailsDtoFactory.Create(venue),
+                Activities = new List<VenueActivityDto>()
             };
         }
     }

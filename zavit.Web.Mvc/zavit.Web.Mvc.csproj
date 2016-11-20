@@ -169,12 +169,14 @@
     <Content Include="app\modules\navigation\search.js" />
     <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placeModal.js" />
+    <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
     <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
     <Content Include="app\modules\venues\venueJoiningStorage.js" />
+    <Content Include="app\modules\venues\venueMembershipService.js" />
     <Content Include="app\modules\venues\venueModal.js" />
     <Content Include="app\modules\venues\venueService.js" />
     <Content Include="app\modules\venues\yourVenueMap.js" />
@@ -278,6 +280,7 @@
     <Content Include="Fonts\font-awesome\scss\_variables.scss" />
     <Content Include="CSS\venues.less" />
     <Content Include="CSS\messages.less" />
+    <Content Include="CSS\explore.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

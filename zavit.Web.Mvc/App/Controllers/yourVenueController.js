@@ -5,27 +5,29 @@ import * as MainContent from "../layout/mainContent";
 import * as Routes from "../routing/routes";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as YourVenueMap from "../modules/venues/yourVenueMap";
-import * as VenueMembershipClient from "../modules/venues/venueMembershipClient";
+import * as VenueMembershipService from "../modules/venues/venueMembershipService";
 import * as Progress from "../modules/loading/progress";
 import * as ActivityClient from "../modules/activities/activityClient";
 import * as VenueService from "../modules/venues/venueService";
 
-export function index(venueId) {
+const venueMembersTake = 20;
+
+export function index(options) {
     MainContent.load(Routes.yourVenue);
 
     Progress.start();
 
-    VenueMembershipClient
-        .getVenueMembership(venueId)
+    VenueMembershipService
+        .getVenueMembership(options)
         .then(membership => {
             const view = IndexView.getView(membership);
             MainContent.append(view);
             YourVenueMap.addMapTo(".yourVenueMap");
             AttachActivityEvents(membership);
-            return VenueMembershipClient.getVenueMembers(venueId, 0, 6);
+            return VenueMembershipService.getVenueMembers(options, 0, venueMembersTake);
         })
         .then(venueMembersResult => {
-            processVenueMembersResult(venueMembersResult, venueId);
+            processVenueMembersResult(venueMembersResult, options);
         })
         .catch((error) => {
             checkUnauthorised(error);
@@ -33,7 +35,7 @@ export function index(venueId) {
         .then(Progress.done);
 }
 
-function enableLoadMore(venueMembersResult, venueId) {
+function enableLoadMore(venueMembersResult, options) {
     if (!venueMembersResult.HasMoreResults) return;
 
     $("#mainContent").on("scroll", () => {
@@ -42,10 +44,10 @@ function enableLoadMore(venueMembersResult, venueId) {
 
             Progress.start();
 
-            VenueMembershipClient
-                .getVenueMembers(venueId, venueMembersResult.Take, venueMembersResult.Take)
+            VenueMembershipService
+                .getVenueMembers(options, venueMembersResult.Take, venueMembersTake)
                 .then(venueMembersMoreResult => {
-                    processVenueMembersResult(venueMembersMoreResult, venueId);
+                    processVenueMembersResult(venueMembersMoreResult, options);
                 })
                 .catch((error) => {
                     checkUnauthorised(error);
@@ -55,10 +57,10 @@ function enableLoadMore(venueMembersResult, venueId) {
     });
 }
 
-function processVenueMembersResult(venueMembersResult, venueId) {
+function processVenueMembersResult(venueMembersResult, options) {
     const venueMembersPartial = VenueMembersPartial.getView(venueMembersResult.Members);
     $("#yourVenueMembers").append(venueMembersPartial);
-    enableLoadMore(venueMembersResult, venueId);
+    enableLoadMore(venueMembersResult, options);
 }
 
 function checkUnauthorised(error) {

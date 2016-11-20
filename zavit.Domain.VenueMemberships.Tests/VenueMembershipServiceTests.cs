@@ -133,7 +133,7 @@ namespace zavit.Domain.VenueMemberships.Tests
             static IEnumerable<VenueMembership> _venueMemberships;
         }
 
-        class When_getting_a_venue_membership
+        class When_getting_a_venue_membership_by_venue_id
         {
             Because of = () => _result = Subject.GetVenueMembership(_account, VenueId);
 
@@ -155,6 +155,30 @@ namespace zavit.Domain.VenueMemberships.Tests
             static Account _account;
             static VenueMembership _venueMembership;
             const int VenueId = 123;
+        }
+
+        class When_getting_venue_membership_by_place_id
+        {
+            Because of = () => _result = Subject.GetVenueMembership(_account, PublicPlaceId);
+
+            It should_return_the_venue_membership_for_the_specified_user_and_place =
+                () => _result.ShouldEqual(_venueMembership);
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+                _account.Id = 456;
+
+                _venueMembership = NewInstanceOf<VenueMembership>();
+                Injected<IVenueMembershipRepository>()
+                    .Stub(r => r.GetMembership(_account.Id, PublicPlaceId))
+                    .Return(_venueMembership);
+            };
+
+            static VenueMembership _result;
+            static Account _account;
+            const string PublicPlaceId = "Public Place ID";
+            static VenueMembership _venueMembership;
         }
 
         class When_getting_all_venue_memberships_for_a_venue_excluding_user_account

@@ -1,4 +1,5 @@
 ﻿@import '.\libraries\colours';
+@import 'explore';
 @import 'venues';
 @import 'messages';
 
@@ -127,52 +128,6 @@ h2#mainHeading {
             float:none;
         }
     }
-
-    /*@media screen and (max-width: 1340px){
-        .navbar-header {
-        width:60%;
-        }
-        #mainNav.navbar .navbar-form {
-             width:60%;
-        }
-    }
-
-   
-    @media screen and (max-width: 1010px){
-        .navbar-header {
-        width:50%;
-        }
-        .navbar-form {
-             width:75%;
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        .navbar-form {
-           width: 85%;
-        }
-    }
-
-    @media screen and (min-width: 0px ) and (max-width:800px) {
-        .navbar-header {
-        width:100%;
-        margin:0;
-        padding:0;
-        }
-        .container-fluid {
-            margin:0;
-            padding:0;
-        }
-        .navbar-form {
-            width: 80%;
-        }
-    */
-
-    /*@media screen and (max-width: 800px) {
-        li.active a {
-	        border: none;
-        }
-    }*/
 }
 
 #loginModal{
@@ -225,90 +180,6 @@ h2#mainHeading {
     }
     .loginHelp{
         text-align: center;
-    }
-}
-
-.map-popup{
-    position: absolute;
-	background: @map-popup-bg;
-	border: 2px solid @map-popup-border;
-    z-index: 2;
-    padding: 10px;
-    &:after, &:before {
-	    top: 100%;
-	    left: 50%;
-	    border: solid transparent;
-	    content: " ";
-	    height: 0;
-	    width: 0;
-	    position: absolute;
-	    pointer-events: none;
-    }
-    &:after {
-	    border-color: rgba(255, 255, 255, 0);
-	    border-top-color: #fff;
-	    border-width: 15px;
-	    margin-left: -15px;
-    }
-    &:before {
-	    border-color: rgba(204, 204, 204, 0);
-	    border-top-color: #ccc;
-	    border-width: 18px;
-	    margin-left: -18px;
-    }
-    header{
-        border-bottom: 1px solid @map-popup-border;
-        float: left;
-        width: 100%;
-        padding-bottom: 5px;          
-    }
-    address {
-        color: @default-text;
-        float:left;        
-        clear:left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width:100%;
-        font-size: 12px;
-        margin-bottom: 0;
-    }
-    button {
-        background-color:@call-to-action;
-        border:@call-to-action;
-        margin:10px 0 0 0;
-        color:@nav-bg;
-        float:left;
-        width:100%;
-    }
-    span {
-        float:right;
-        clear:left;
-        margin:15px;
-        font-size:16px;
-        a {
-            font-weight:bold;
-            color:@text-link;
-        }
-    }
-    h3, h4, h5 {        
-        float: left;
-        margin: 0 0 5px 0;
-        clear: left;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        width: 100%;
-    }
-    h3{
-        font-size: 18px;
-    }
-    h4{
-        font-size: 14px;
-        margin-top: 10px;
-    }
-    h5{
-        font-size: 12px;        
     }
 }
 
@@ -514,45 +385,4 @@ h2#mainHeading {
     padding:10px;
     color:@info-text;
     visibility:hidden;
-}
-
-#exploreList{
-    height: 100%;
-    overflow: auto;
-    padding: 0px;
-    ul.exploreListVenues{
-        list-style: none;
-        padding-left: 0px;
-        li{
-            cursor: pointer;
-            cursor: hand;
-        }
-        >li.exploreListVenue{
-            border-bottom: 1px solid @list-highlight-bg;
-            padding: 10px;            
-            &:hover{
-                background-color: @list-hover-bg;
-            }
-            h3{
-                margin-top: 0px;
-            }
-            ul.venueActivities{
-                >li{
-                    border: 0;
-                    background-color: inherit;                    
-                    label{
-                        font-weight: 400;
-                    }
-                }
-            }
-        }
-        >li.selected{
-            background-color: @list-highlight-bg;
-            color: @list-highlight-text;           
-            &:hover{
-                background-color: @list-highlight-bg;
-                color: @list-highlight-text;   
-            }
-        }
-    }
 }

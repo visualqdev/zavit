@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
@@ -58,7 +59,7 @@ namespace zavit.Web.Api.Tests.Controllers
             static IEnumerable<VenueMembershipDto> _membershipDtos;
         }
 
-        class When_getting_a_venue_membership
+        class When_getting_a_venue_membership_for_a_specific_venue
         {
             Because of = () => _result = Subject.Get(_venueId);
 
@@ -73,6 +74,25 @@ namespace zavit.Web.Api.Tests.Controllers
             };
 
             const int _venueId = 1;
+            static VenueMembershipDetailsDto _result;
+            static VenueMembershipDetailsDto _venueMembershipDetailsDto;
+        }
+
+        class When_getting_a_venue_membership_at_specifiec_place
+        {
+            Because of = () => _result = Subject.GetAtPlace(PublicPlaceId).Result;
+
+            It should_return_the_venue_membership_details_dto = () => _result.ShouldEqual(_venueMembershipDetailsDto);
+
+            Establish context = () =>
+            {
+                _venueMembershipDetailsDto = NewInstanceOf<VenueMembershipDetailsDto>();
+                Injected<IVenueMembershipDetailsDtoService>()
+                    .Stub(s => s.GetMembershipDetails(PublicPlaceId))
+                    .Return(Task.FromResult(_venueMembershipDetailsDto));
+            };
+
+            static string PublicPlaceId = "Test place id";
             static VenueMembershipDetailsDto _result;
             static VenueMembershipDetailsDto _venueMembershipDetailsDto;
         }

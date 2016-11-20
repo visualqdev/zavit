@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.VenueMemberships;
@@ -43,6 +43,13 @@ namespace zavit.Web.Api.Controllers
         public VenueMembershipDetailsDto Get(int venueId)
         {
             return _venueMembershipDetailsDtoService.GetMembershipDetails(venueId);
+        }
+
+        [HttpGet]
+        [Route("~/api/places/{publicPlaceId}/venuememberships")]
+        public async Task<VenueMembershipDetailsDto> GetAtPlace(string publicPlaceId)
+        {
+            return await _venueMembershipDetailsDtoService.GetMembershipDetails(publicPlaceId);
         }
     }
 }

@@ -48,9 +48,12 @@ export function registerRoutes() {
         YourVenuesController.index();
     });
 
-    crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => {
+    crossroads.addRoute(`/${Routes.yourVenue}/:venueId::?query:`, (venueId, query) => {
         TopNav.navigatedToRoute(Routes.yourVenues);
-        YourVenueController.index(venueId);
+        YourVenueController.index({
+            venueId,
+            publicPlaceId: query && query.placeid
+        });
     });
 
     crossroads.addRoute(`/${Routes.messageInbox}:?query:`, (query) => {

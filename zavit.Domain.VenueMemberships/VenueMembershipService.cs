@@ -49,6 +49,12 @@ namespace zavit.Domain.VenueMemberships
             return venueMembership;
         }
 
+        public VenueMembership GetVenueMembership(Account account, string publicPlaceId)
+        {
+            var venueMembership = _venueMembershipRepository.GetMembership(account.Id, publicPlaceId);
+            return venueMembership;
+        }
+
         public IResultCollection<VenueMembership> GetAllVenueMemberships(int venueId, int skip, int take, Account excludeAccount = null)
         {
             return _venueMembershipRepository.GetMemberships(venueId, skip, take, excludeAccount?.Id);

@@ -1,7 +1,8 @@
-﻿import * as PlaceModal from "../places/placeModal";
-import * as VenueModal from "../venues/venueModal";
+﻿import * as PlacePopup from "../places/placePopup";
 import * as Search from "../navigation/search";
 import * as Info from "../loading/info";
+import * as Routes from "../../routing/routes";
+
 export class Places {
 
     constructor(options = {}) {
@@ -26,30 +27,18 @@ export class Places {
             this.map.setZoom(this.map.zoom);
         });
 
-        $("#exploreMap").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
-            e.preventDefault();
-            showPlace($(e.currentTarget).attr("data-nextMarker"));
-        });
-
-        $("#exploreMap").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
-            e.preventDefault();
-            showPlace($(e.currentTarget).attr("data-prevMarker"));
-        });
-
         $("#exploreMap").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
             e.preventDefault();
             this.clearPlaceInfo();
             const button = $(e.currentTarget),
-                marker = this.map.markers[button.attr("data-marker-index")],
                 placeId = button.attr("data-place-id"),
                 venueId = button.attr("data-venue-id");
-            VenueModal.show({
-                markerX: marker.map.markerPoint.x,
-                markerY: marker.map.markerPoint.y,
-                placeId,
-                venueId,
-                map: this.map
-            });
+
+            if (venueId && venueId > 0)
+                Routes.goTo(`${Routes.yourVenue}/${venueId}`);
+            else if (placeId) {
+                Routes.goTo(`${Routes.yourVenue}?placeid=${placeId}`);
+            }
         });
 
         $(window).on("resize",() => { this.map.pannedBy = { x: 0, y: 0 };});
@@ -92,7 +81,12 @@ export class Places {
     }
 
     showPlaceInfo(callbackOptions, map) {
-        PlaceModal.show(callbackOptions.place, callbackOptions.placeIndex, callbackOptions.amountOfPlaces, map);
+        PlacePopup.show({
+            place: callbackOptions.place,
+            placeIndex: callbackOptions.placeIndex,
+            placesMap: map
+        });
+            
         if (callbackOptions.onPlaceSelected) {
             callbackOptions.onPlaceSelected(callbackOptions.placeIndex);
         }
