@@ -12,7 +12,7 @@ function getMessages(messages) {
     let messagesMarkup = "";
 
     messages.forEach(message => {
-        messagesMarkup += MessagePartial.getView(message);
+        messagesMarkup = MessagePartial.getView(message) + messagesMarkup;
     });
 
     return messagesMarkup;

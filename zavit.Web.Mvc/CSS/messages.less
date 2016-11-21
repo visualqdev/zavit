@@ -5,9 +5,11 @@
     .col-md-3 {
         padding:0;
     }
+
     .col-md-9 {
         padding-top:0;
     }
+
     .noColPaddingLeft {
         padding-left:0;
     }
@@ -22,16 +24,42 @@
         margin-top:15px;
     }
 
+    @media (max-width: 990px) {
+        #messagesContainer {
+            margin-top:0;
+        }
+    }
+
     #messagesHeading {
         float:left;
         width:100%;
+    }
+
+    @media (max-width: 990px) {
+        #messagesHeading {
+            display:none;
+        }
+    }
+    
+    #controls {
+        height:50px;
+        float:left;
+        width:100%;
+        margin-top:10px;
+        input#messageTextInput {
+            width:84%;
+        }
+        input#messageTextSend {
+            width:15%;
+            float:right;
+        }
     }
 
     > ul {
         float:left;
         clear:left;
     }
-
+    
     a#arrangeNew {
         float:left;
         height:45px;
@@ -50,9 +78,15 @@
             padding:0;
             display:block;
             float:left;
-            font-size:40px;
-            text-indent:4px;
-            line-height:1.1;
+            font-size:30px;
+            text-indent:10px;
+            line-height:1.5;
+        }
+    }
+
+    @media (max-width: 990px) {
+        a#arrangeNew {
+            margin-top:15px;
         }
     }
 
@@ -60,6 +94,9 @@
         a#arrangeNew {
             width:100%;
             margin-bottom:15px;
+            .fa {
+            
+        }
         }
     }
 
@@ -85,24 +122,108 @@
                 width:100%;
             }
             margin-bottom:10px;
+           
+            float:left;
+            width:100%;
         }
     }
 
     #messages {
         width:100%;
         background-color:@page-bg;
+        position:relative;
+        overflow: auto;
+        
+        ul {
+
+            position:absolute;
+            bottom:0;
+            width:100%;
+            margin:10px 0 0 0px;
+            padding:0px;
+
+            li {
+
+                list-style:none;
+                width:80%;
+                margin-left:20px;
+                float:left;
+
+                span {
+                    display:block;
+                    float:left;
+                    clear:left;
+                    width:100%;
+                    margin:0px;
+                    padding:0px;
+                }
+                .body {
+                    width:100%;
+                    background-color:@map-background;
+                    float:left;
+                    padding:10px;
+                    margin:0;
+                    border-radius:10px;
+                }
+                .currentUser {
+                    float:right;
+                }
+                .date {
+                    float:right;
+                    width:auto;
+                    margin-bottom:10px;
+                    color:@light-text;
+                }
+                .tick {
+                    width:auto;
+                    float:right;
+                    margin:0 10px;
+                    -webkit-transform: rotate(10deg);
+                    color:@logo;
+                }
+                .read {
+                    color:@call-to-action;
+                }
+                .displayName {
+                    text-indent:10px;
+                    color:@light-text;
+                }
+            }
+
+            li.currentUser {
+
+                float:right;
+                margin-right:20px;
+
+                .body{
+                    background-color:@text-link;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 990px) {
+        #messages {
+            display:none;
+        }
+        #controls {
+            display:none;
+        }
+    }
+
+    div#messageThreadsContainer {
+        overflow:auto;
     }
 
     ul#messageThreads {
    
-        width:100%;
+        overflow: auto;
         list-style:none;
+        width:100%;
         margin:0;
         padding:0;
-        max-height:120px;
-        overflow:auto;
-        
-        li{
+
+        li {
             a {
                 width:95%;
                 background-color:@page-bg;
@@ -115,9 +236,30 @@
                 line-height:2.6;
                 text-indent:10px;
             }
+
             a.selected {
                 width:100%;
             }
+
+            @media (max-width: 990px) {
+                a {
+                    width:100%;
+                }
+            }
         } 
+    }
+}
+
+#messageThreads.threadSelected {
+    @media (max-width: 990px) {
+        #messages {
+            display:block;
+        }
+        #controls {
+            display:block;
+        }
+        ul#messageThreads {
+            display:none;
+        }
     }
 }

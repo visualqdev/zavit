@@ -11,18 +11,20 @@ export function getView(messageThreads) {
                 <div class="col-md-9 noColPaddingLeft" id="threadTitle"> <h4></h4></div>
             </div>
             <div class="row" id="messagesContainer">
-               <div class="col-md-3">
-                    <ul id="messageThreads">
-                        ${getMessageThreads(messageThreads)}
-                    </ul>
-                </div>
-                <div class="col-md-9 noColPaddingLeft">
-                    <div id="messages"></div>
-                    <div id="controls">
-                        <input id="messageTextInput" type="text"/>
-                        <input id="messageTextSend" type="button" value="Send" />
+                <div id="enableScroll">
+                    <div class="col-md-3" id="messageThreadsContainer">
+                        <ul id="messageThreads">
+                            ${getMessageThreads(messageThreads)}
+                        </ul>
                     </div>
-                </div>        
+                    <div class="col-md-9 noColPaddingLeft">
+                        <div id="messages"></div>
+                        <div id="controls">
+                            <input id="messageTextInput" type="text"/>
+                            <input id="messageTextSend" type="button" value="Send" />
+                        </div>
+                    </div>  
+                </div>
             </div>
         </div>
         `;

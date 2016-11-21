@@ -191,6 +191,7 @@
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />
+    <Content Include="Images\tennis-pic.jpg" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />
     <Content Include="app\modules\account\externalAccountClient.js" />
@@ -218,6 +219,8 @@
     <Content Include="CSS\bootstrap\js\npm.js" />
     <Content Include="CSS\production\styles.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="libraries\jQueryEmoji.min.js" />
+    <Content Include="libraries\moment.js" />
     <Content Include="libraries\nprogress.js" />
     <Content Include="packages.config" />
     <Content Include="Routing\crossroads.min.js" />
@@ -326,7 +329,6 @@
     <Compile Include="SignalR\Messaging\Observers\MessageSentSignalRObserver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

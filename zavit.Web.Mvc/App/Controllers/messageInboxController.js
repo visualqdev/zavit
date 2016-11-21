@@ -27,6 +27,11 @@ export function index(options) {
             return MessageThreadService.getInboxThread(options, messageThreads);
         })
         .then(inboxThread => {
+            
+            const threadView = MessageThreadPartial.getView(inboxThread);
+            setThreadTitle(inboxThread.ThreadTitle);
+            $("#messages").html(threadView);
+            attachNewMessageEvents(inboxThread);
             showInboxThread(inboxThread);
         })
         .then(MessageLayout.setUp)
@@ -39,14 +44,27 @@ export function index(options) {
 function attachInboxEvents() {
     $("#messageThreads").on("click", "[data-thread-id]", (e) => {
         e.preventDefault();
-        MessageLayout.styleSelected(e, $(this));
         const threadId = $(e.target).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
             })
             .then(inboxThread => {
+                const threadView = MessageThreadPartial.getView(inboxThread);
+
+                setThreadTitle(inboxThread.ThreadTitle);
+                
+                $("#messages").html(threadView);
+                attachNewMessageEvents(inboxThread);
                 showInboxThread(inboxThread);
+                MessageLayout.threadSelected(e, $(this));
+                
+                MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });
+    });
+    $("#mainContent").delegate(".threadSelected #arrangeNew", "click", (e) => {
+        e.preventDefault();
+        $("#messageThreads").removeClass("threadSelected");
+        $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
     });
 }
 
@@ -101,13 +119,14 @@ function setThreadTitle(title) {
 function replaceMessageOnThread(message) {
     const sentMessageView = MessagePartial.getView(message);
     $(`[data-stamp='${message.Stamp}']`).replaceWith(sentMessageView);
+    MessageLayout.setScrollPositionToBottom();
 }
 
 function addMessageToThread(message) {
     if ($(`[data-stamp='${message.Stamp}']`).length) return;
 
     const messageView = MessagePartial.getView(message);
-    $("#messages ul").prepend(messageView);
+    $("#messages ul").append(messageView);
 }
 
 function receivedNewMessageOnThread(message) {
