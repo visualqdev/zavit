@@ -215,6 +215,7 @@
     <Content Include="CSS\bootstrap\js\npm.js" />
     <Content Include="CSS\production\styles.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="libraries\jQueryEmoji.min.js" />
     <Content Include="libraries\moment.js" />
     <Content Include="libraries\nprogress.js" />
     <Content Include="packages.config" />

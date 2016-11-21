@@ -34,8 +34,13 @@
         float:left;
         width:100%;
     }
-    
 
+    @media (max-width: 990px) {
+        #messagesHeading {
+            display:none;
+        }
+    }
+    
     #controls {
         height:50px;
         float:left;
@@ -73,9 +78,15 @@
             padding:0;
             display:block;
             float:left;
-            font-size:40px;
-            text-indent:4px;
-            line-height:1.1;
+            font-size:30px;
+            text-indent:10px;
+            line-height:1.5;
+        }
+    }
+
+    @media (max-width: 990px) {
+        a#arrangeNew {
+            margin-top:15px;
         }
     }
 
@@ -83,6 +94,9 @@
         a#arrangeNew {
             width:100%;
             margin-bottom:15px;
+            .fa {
+            
+        }
         }
     }
 
@@ -108,7 +122,9 @@
                 width:100%;
             }
             margin-bottom:10px;
-            display:none;
+           
+            float:left;
+            width:100%;
         }
     }
 
@@ -196,7 +212,6 @@
     }
 
     div#messageThreadsContainer {
-        
         overflow:auto;
     }
 

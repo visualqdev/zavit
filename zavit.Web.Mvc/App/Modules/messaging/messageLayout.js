@@ -6,7 +6,9 @@ export function threadSelected(e) {
     $(e.target).addClass("selected");
     $(e.target).closest("li").siblings().children().removeClass("selected");
     $("#messageThreads").addClass('threadSelected');
-    if(window.matchMedia("(max-width: 990px)").matches) $('#arrangeNew').html('<i class="fa fa-commenting-o" aria-hidden="true"></i>Back to inbox');
+    if (window.matchMedia("(max-width: 990px)").matches) {
+        $('#arrangeNew').html('<i class="fa fa-chevron-left aria-hidden="true"></i>Back to inbox');
+    }
     adjustCssPositioningForMessagesContainer($('#messages'));
 }
 
@@ -46,6 +48,10 @@ function heightOfMessages() {
     return combinedMessagesHeight;
 }
 
+export function setScrollPositionToBottom(){
+    setToScrollPosition($('#messages'), heightOfMessages());
+}
+
 export function adjustCssPositioningForMessagesContainer($messagesContainer) {
     const $messagesList = $('#messages ul');
     if (heightOfMessages() > $messagesContainer.height()) {
@@ -76,7 +82,7 @@ function setMediaQueryWatch() {
 
     const handleMediaChange = function (mediaQueryList) {
         if (mediaQueryList.matches) {
-            $('.threadSelected #arrangeNew').html('<i class="fa fa-commenting-o" aria-hidden="true"></i>Back to inbox');
+            $('.threadSelected #arrangeNew').html('<i class="fa fa-chevron-left" aria-hidden="true"></i>Back to inbox');
             
         } else {
             $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
@@ -95,4 +101,5 @@ export function setUp() {
     adjustCssPositioningForMessagesContainer($messagesContainer);
     adjustHeightOfMessageThreadColumn();
     setMediaQueryWatch();
+    $('.body').Emoji();
 }

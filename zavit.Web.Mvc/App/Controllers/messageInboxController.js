@@ -53,7 +53,6 @@ function attachInboxEvents() {
 
                 setThreadTitle(inboxThread.ThreadTitle);
                 
-
                 $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
                 showInboxThread(inboxThread);
@@ -120,13 +119,14 @@ function setThreadTitle(title) {
 function replaceMessageOnThread(message) {
     const sentMessageView = MessagePartial.getView(message);
     $(`[data-stamp='${message.Stamp}']`).replaceWith(sentMessageView);
+    MessageLayout.setScrollPositionToBottom();
 }
 
 function addMessageToThread(message) {
     if ($(`[data-stamp='${message.Stamp}']`).length) return;
 
     const messageView = MessagePartial.getView(message);
-    $("#messages ul").prepend(messageView);
+    $("#messages ul").append(messageView);
 }
 
 function receivedNewMessageOnThread(message) {
