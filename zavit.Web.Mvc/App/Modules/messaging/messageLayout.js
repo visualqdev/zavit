@@ -13,11 +13,12 @@ export function threadSelected(e) {
 }
 
 export function adjustHeightOfMainContainer($messagesContainer) {
-  
+
     const topOfMessages = $messagesContainer.offset().top,
         heightOfControls = $("#controls").height(),
+        heightOfMargin = parseInt($('#controls').css("margin-top")),
         heightOfFooter = $(".footer").height(),
-        heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter;
+        heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin;
 
     $messagesContainer.height(heightOfMessagesContainer);
 }
@@ -101,5 +102,4 @@ export function setUp() {
     adjustCssPositioningForMessagesContainer($messagesContainer);
     adjustHeightOfMessageThreadColumn();
     setMediaQueryWatch();
-    $('.body').Emoji();
 }
