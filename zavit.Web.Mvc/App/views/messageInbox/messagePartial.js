@@ -6,7 +6,7 @@ export function getView(message) {
             ${displayName(message)}
             <span class="body">${message.Body}</span>
             ${messageHasBeenRead(message)}
-            <span class="date" data-message-status>${moment(message.SentOn).fromNow()}</span>
+            <span class="date" data-message-status>${moment(message.SentOn).calendar()}</span>
         </li>
         `;
 }
