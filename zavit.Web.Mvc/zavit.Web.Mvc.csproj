@@ -169,17 +169,21 @@
     <Content Include="app\modules\navigation\search.js" />
     <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placeModal.js" />
+    <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
     <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
     <Content Include="app\modules\venues\venueJoiningStorage.js" />
+    <Content Include="app\modules\venues\venueMembershipService.js" />
     <Content Include="app\modules\venues\venueModal.js" />
     <Content Include="app\modules\venues\venueService.js" />
     <Content Include="app\modules\venues\yourVenueMap.js" />
     <Content Include="app\modules\venues\yourVenuesMap.js" />
     <Content Include="app\routing\routes.js" />
+    <Content Include="app\views\home\exploreListPartial.js" />
+    <Content Include="app\views\home\index.js" />
     <Content Include="app\views\messageInbox\indexView.js" />
     <Content Include="app\views\messageInbox\messagePartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
@@ -279,6 +283,7 @@
     <Content Include="Fonts\font-awesome\scss\_variables.scss" />
     <Content Include="CSS\venues.less" />
     <Content Include="CSS\messages.less" />
+    <Content Include="CSS\explore.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -334,10 +339,6 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373CB15-71E6-44A9-88F6-6A84686E36C9}</Project>
       <Name>zavit.Domain.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
-      <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
-      <Name>zavit.Domain.Places</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>

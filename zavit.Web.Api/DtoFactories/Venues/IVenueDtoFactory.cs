@@ -5,6 +5,6 @@ namespace zavit.Web.Api.DtoFactories.Venues
 {
     public interface IVenueDtoFactory
     {
-        VenueDto Create(Venue venue);
+        VenueDto Create(IVenue venue);
     }
 }

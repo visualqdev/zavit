@@ -76,6 +76,18 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
                 .SingleOrDefault();
         }
 
+        public VenueMembership GetMembership(int accountId, string publicPlaceId)
+        {
+            Venue venueAias = null;
+
+            return _session.QueryOver<VenueMembership>()
+                .Fetch(l => l.Venue).Eager
+                .JoinAlias(m => m.Venue, () => venueAias, JoinType.InnerJoin)
+                .Where(m => m.Account.Id == accountId)
+                .And(() => venueAias.PublicPlaceId == publicPlaceId)
+                .SingleOrDefault();
+        }
+
         public void Update(VenueMembership venueMembership)
         {
             _session.Update(venueMembership);

@@ -9,6 +9,7 @@ namespace zavit.Domain.VenueMemberships
         IEnumerable<VenueMembership> GetMemberships(int accountId);
         IResultCollection<VenueMembership> GetMemberships(int venueId, int skip, int take, int? excludeAccountId = null);
         VenueMembership GetMembership(int accountId, int venueId);
+        VenueMembership GetMembership(int accountId, string publicPlaceId);
         void Update(VenueMembership venueMembership);
     }
 }

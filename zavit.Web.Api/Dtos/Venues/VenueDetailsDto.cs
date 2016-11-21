@@ -9,5 +9,6 @@ namespace zavit.Web.Api.Dtos.Venues
         public string Address { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public string PublicPlaceId { get; set; }
     }
 }

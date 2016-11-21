@@ -21,7 +21,7 @@ export function show(options = {}) {
     
     $("[data-name=placeModal]").remove();
     
-    modal.appendTo("body");
+    modal.appendTo("#exploreMap");
 
     if (venueId) {
         VenueService.getVenue(venueId)

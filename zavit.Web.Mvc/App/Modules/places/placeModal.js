@@ -27,7 +27,7 @@ export function show(place, placeIndex, amountOfPlaces, mapClass) {
         placeModal = getPlaceModal(place, placeIndex, amountOfPlaces, mapClass);
     }
 
-    $(placeModal).appendTo("body");
+    $(placeModal).appendTo("#exploreMap");
 }
 
 function getPlaceModal(place, placeIndex, amountOfPlaces, mapClass){

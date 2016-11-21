@@ -9,7 +9,6 @@ using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreads;
-using zavit.Web.Api.DtoFactories.Places;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.DtoFactories.Venues;
@@ -18,7 +17,6 @@ using zavit.Web.Api.DtoServices.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessageThreads;
-using zavit.Web.Api.DtoServices.Places;
 using zavit.Web.Api.DtoServices.VenueMembers;
 using zavit.Web.Api.DtoServices.VenueMemberships;
 using zavit.Web.Api.DtoServices.VenueMemberships.NewVenueMemberships;
@@ -33,11 +31,9 @@ namespace zavit.Web.Api.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Classes.FromAssemblyContaining<PlacesController>().BasedOn<IHttpController>().LifestyleTransient(),
+                Classes.FromAssemblyContaining<AccountsController>().BasedOn<IHttpController>().LifestyleTransient(),
                 Classes.FromAssemblyContaining<ClaimsIdentityFilter>().BasedOn<IActionFilter>().LifestyleSingleton(),
                 Component.For<ExternalAccountsController>().LifestyleTransient(),
-                Component.For<IPlaceDtoService>().ImplementedBy<PlaceDtoService>().LifestyleTransient(),
-                Component.For<IPlaceDtoFactory>().ImplementedBy<PlaceDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueDtoService>().ImplementedBy<VenueDtoService>().LifestyleTransient(),
                 Component.For<IVenueDtoFactory>().ImplementedBy<VenueDtoFactory>().LifestyleTransient(),
                 Component.For<IVenueDetailsDtoFactory>().ImplementedBy<VenueDetailsDtoFactory>().LifestyleTransient(),

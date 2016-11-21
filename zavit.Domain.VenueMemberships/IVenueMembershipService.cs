@@ -10,6 +10,7 @@ namespace zavit.Domain.VenueMemberships
         VenueMembership AddUserToVenue(Account account, NewVenueMembership newVenueMembership);
         IEnumerable<VenueMembership> GetVenueMembershipsForUser(Account account);
         VenueMembership GetVenueMembership(Account account, int venueId);
+        VenueMembership GetVenueMembership(Account account, string publicPlaceId);
         IResultCollection<VenueMembership> GetAllVenueMemberships(int venueId, int skip, int take, Account excludeAccount = null);
     }
 }

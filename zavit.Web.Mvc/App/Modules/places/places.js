@@ -1,27 +1,25 @@
-﻿import * as Progress from "../loading/progress";
-import * as PlaceModal from "../places/placeModal";
-import * as VenueModal from "../venues/venueModal";
+﻿import * as PlacePopup from "../places/placePopup";
 import * as Search from "../navigation/search";
-import * as Client from "../places/placesClient";
 import * as Info from "../loading/info";
+import * as Routes from "../../routing/routes";
+
 export class Places {
 
     constructor(options = {}) {
         this.map = options.map || null,
         this.radius = options.radius || 3000;
         this.name = "";
+        this.getPlaces = options.getPlaces;
+        this.onPlaceSelected = options.onPlaceSelected;
     }
 
     initialise() {
-
-        this.getPlaces();
         this.registerWithMapEvents();
         this.registerPlaceEvents();
         Search.initialise(this);
     }
 
     registerPlaceEvents() {
-
         $("#loadPlaces").on("click", (e) => {
             e.preventDefault();
             this.removeMarkers();
@@ -29,45 +27,21 @@ export class Places {
             this.map.setZoom(this.map.zoom);
         });
 
-        $("#home").delegate("#placeModal a[data-nextMarker]", "click", (e) => {
-            e.preventDefault();
-            const marker = this.map.markers[$(e.currentTarget).attr("data-nextMarker")];
-            this.map.triggerMarkerClick(marker);
-        });
-
-        $("#home").delegate("#placeModal a[data-prevMarker]", "click", (e) => {
-            e.preventDefault();
-            const marker = this.map.markers[$(e.currentTarget).attr("data-prevMarker")];
-            this.map.triggerMarkerClick(marker);
-        });
-
-        $("#home").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
+        $("#exploreMap").delegate("#placeModal #placeModalBeAvailable", "click", (e) => {
             e.preventDefault();
             this.clearPlaceInfo();
             const button = $(e.currentTarget),
-                marker = this.map.markers[button.attr("data-marker-index")],
                 placeId = button.attr("data-place-id"),
                 venueId = button.attr("data-venue-id");
-            VenueModal.show({
-                markerX: marker.map.markerPoint.x,
-                markerY: marker.map.markerPoint.y,
-                placeId,
-                venueId,
-                map: this.map
-            });
+
+            if (venueId && venueId > 0)
+                Routes.goTo(`${Routes.yourVenue}/${venueId}`);
+            else if (placeId) {
+                Routes.goTo(`${Routes.yourVenue}?placeid=${placeId}`);
+            }
         });
 
         $(window).on("resize",() => { this.map.pannedBy = { x: 0, y: 0 };});
-
-        //$("html").css("overflow", "hidden");
-    }
-
-    getPlaces() {
-        Progress.start();
-        return new Promise((resolve, reject) => {
-            Client.getPlaces(this.map.position.coords.latitude, this.map.position.coords.longitude, this.radius, this.name).then(places=> resolve(places));
-        })
-        .then(places => this.addPlaces(places));
     }
 
     registerWithMapEvents() {
@@ -79,24 +53,43 @@ export class Places {
         $("[data-name=placeModal]").remove();
     }
 
+    selectPlace(dataMarkerIndex) {
+        const marker = this.map.markers[dataMarkerIndex];
+        this.map.triggerMarkerClick(marker);
+    }
+
     addPlaces(places) {
         if (places.length) {
             places.forEach((place, placeIndex) => this.addPlaceMarker(place, placeIndex, places.length));
-            Progress.done();
             this.map.triggerMarkerClick(this.map.markers[0]);
         } else {
             Info.provide("Sorry, no results where found!");
-            Progress.done();
         }
     }
 
     addPlaceMarker(place, placeIndex, amountOfPlaces) {
         this.map.addMarker({ lat: place.Latitude, lng: place.Longitude });
-        this.map.addPlaceMarkerClickEvent(this.map, this.showPlaceInfo, place, placeIndex, amountOfPlaces);
+        this.map.addPlaceMarkerClickEvent(
+            this.map, 
+            this.showPlaceInfo,
+            {
+                place, 
+                placeIndex, 
+                amountOfPlaces,
+                onPlaceSelected: this.onPlaceSelected
+            });
     }
 
-    showPlaceInfo(place, placeIndex, amountOfPlaces, map) {
-        PlaceModal.show(place, placeIndex, amountOfPlaces, map);
+    showPlaceInfo(callbackOptions, map) {
+        PlacePopup.show({
+            place: callbackOptions.place,
+            placeIndex: callbackOptions.placeIndex,
+            placesMap: map
+        });
+            
+        if (callbackOptions.onPlaceSelected) {
+            callbackOptions.onPlaceSelected(callbackOptions.placeIndex);
+        }
     }
 
     removeMarkers() {

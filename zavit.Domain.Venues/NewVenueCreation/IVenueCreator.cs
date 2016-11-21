@@ -1,9 +1,10 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.Threading.Tasks;
+using zavit.Domain.Accounts;
 
 namespace zavit.Domain.Venues.NewVenueCreation
 {
     public interface IVenueCreator
     {
-        Venue Create(NewVenue newVenue, Account venueOwnerAccount);
+        Task<Venue> Create(NewVenue newVenue, Account venueOwnerAccount);
     }
 }

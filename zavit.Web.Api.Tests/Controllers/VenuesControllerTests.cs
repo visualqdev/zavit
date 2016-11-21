@@ -6,7 +6,6 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Web.Api.Controllers;
-using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
 
@@ -15,9 +14,30 @@ namespace zavit.Web.Api.Tests.Controllers
     [Subject("VenuesControllerTests")]
     public class VenuesControllerTests : TestOf<VenuesController>
     {
+        class When_getting_list_of_venues
+        {
+            Because of = () => _result = Subject.Get(_venueSearchCriteriaDto).Result;
+
+            It should_return_a_list_of_places = () => _result.ShouldNotBeNull();
+
+            Establish context = () =>
+            {
+                _venueSearchCriteriaDto = NewInstanceOf<VenueSearchCriteriaDto>();
+
+                _venues = new[] { NewInstanceOf<VenueDto>() };
+                Injected<IVenueDtoService>()
+                    .Stub(s => s.SuggestVenues(_venueSearchCriteriaDto))
+                    .Return(Task.FromResult(_venues));
+            };
+
+            static IEnumerable<VenueDto> _result;
+            static IEnumerable<VenueDto> _venues;
+            static VenueSearchCriteriaDto _venueSearchCriteriaDto;
+        }
+
         class When_posting_a_new_venue_dto
         {
-            Because of = () => _result = Subject.Post(_venueDetailsDto, PlaceId).Result;
+            Because of = () => _result = Subject.Post(_venueDetailsDto).Result;
 
             It should_return_http_result_specifying_the_default_route =
                 () => ((CreatedAtRouteNegotiatedContentResult<VenueDetailsDto>) _result).RouteName.ShouldEqual(CommonRoutes.Default);
@@ -33,13 +53,12 @@ namespace zavit.Web.Api.Tests.Controllers
                 _venueDetailsDto = NewInstanceOf<VenueDetailsDto>();
                 _createdVenueDetailsDto = NewInstanceOf<VenueDetailsDto>();
                 _createdVenueDetailsDto.Id = 123;
-                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDetailsDto, PlaceId)).Return(Task.FromResult(_createdVenueDetailsDto));
+                Injected<IVenueDtoService>().Stub(s => s.AddVenue(_venueDetailsDto)).Return(Task.FromResult(_createdVenueDetailsDto));
             };
 
             static VenueDetailsDto _createdVenueDetailsDto;
             static VenueDetailsDto _venueDetailsDto;
             static IHttpActionResult _result;
-            const string PlaceId = "Place ID";
         }
 
         class When_getting_a_venue_for_a_place

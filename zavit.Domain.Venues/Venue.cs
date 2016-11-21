@@ -6,7 +6,7 @@ using zavit.Domain.Shared;
 
 namespace zavit.Domain.Venues
 {
-    public class Venue : IEntity<int>
+    public class Venue : IEntity<int>, IVenue
     {
         public virtual string Name { get; set; }
         public virtual int Id { get; set; }
@@ -15,6 +15,7 @@ namespace zavit.Domain.Venues
         public virtual string Address { get; set; }
         public virtual double Longitude { get; set; }
         public virtual double Latitude { get; set; }
+        public virtual string PublicPlaceId { get; set; }
 
         public virtual void AddActivities(IEnumerable<Activity> activities)
         {

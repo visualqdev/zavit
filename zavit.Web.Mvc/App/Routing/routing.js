@@ -17,6 +17,13 @@ export function registerRoutes() {
         HomeController.explore();
     });
 
+    crossroads.addRoute(`/${Routes.home}/test`, () => {
+        if (PostLoginRedirect.processRedirect()) return;
+
+        TopNav.navigatedToRoute(Routes.home);
+        HomeController.index();
+    });
+
     crossroads.addRoute(`/${Routes.login}`, () => LoginController.login());
 
     crossroads.addRoute(`/${Routes.logout}`, () => {
@@ -41,9 +48,12 @@ export function registerRoutes() {
         YourVenuesController.index();
     });
 
-    crossroads.addRoute(`/${Routes.yourVenue}/{venueId}`, (venueId) => {
+    crossroads.addRoute(`/${Routes.yourVenue}/:venueId::?query:`, (venueId, query) => {
         TopNav.navigatedToRoute(Routes.yourVenues);
-        YourVenueController.index(venueId);
+        YourVenueController.index({
+            venueId,
+            publicPlaceId: query && query.placeid
+        });
     });
 
     crossroads.addRoute(`/${Routes.messageInbox}:?query:`, (query) => {

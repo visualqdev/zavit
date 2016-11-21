@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using zavit.Domain.Places.Search;
+using zavit.Domain.Venues.Search;
 using zavit.Infrastructure.Core.Serialization;
 using zavit.Infrastructure.Places.PublicPlacesApis.Details;
 using zavit.Infrastructure.Places.PublicPlacesApis.Search;
@@ -26,12 +26,12 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             _httpClient = new HttpClient();
         }
 
-        public async Task<GooglePlaceSearchResult> NearbySearch(IPlaceSearchCriteria placeSearchCriteria, IEnumerable<string> keywords)
+        public async Task<GooglePlaceSearchResult> NearbySearch(IVenueSearchCriteria venueSearchCriteria, IEnumerable<string> keywords)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
-            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchCriteria.Latitude},{placeSearchCriteria.Longitude}&radius={placeSearchCriteria.Radius}&keyword={string.Join("|",keywords)}");
+            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={venueSearchCriteria.Latitude},{venueSearchCriteria.Longitude}&radius={venueSearchCriteria.Radius}&keyword={string.Join("|",keywords)}");
             var httpResponse = await _httpClient.SendAsync(message);
             var json = await httpResponse.Content.ReadAsStringAsync();
             var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);
@@ -50,12 +50,12 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             return result;
         }
 
-        public async Task<GooglePlaceSearchResult> NearbySearchByName(IPlaceSearchCriteria placeSearchByNameCriteria, IEnumerable<string> keywords)
+        public async Task<GooglePlaceSearchResult> NearbySearchByName(IVenueSearchCriteria venueSearchCriteria, IEnumerable<string> keywords)
         {
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
-            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={placeSearchByNameCriteria.Latitude},{placeSearchByNameCriteria.Longitude}&radius={placeSearchByNameCriteria.Radius}&name={placeSearchByNameCriteria.Name}");
+            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={venueSearchCriteria.Latitude},{venueSearchCriteria.Longitude}&radius={venueSearchCriteria.Radius}&name={venueSearchCriteria.Name}");
             var httpResponse = await _httpClient.SendAsync(message);
             var json = await httpResponse.Content.ReadAsStringAsync();
             var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);

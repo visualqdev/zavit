@@ -134,7 +134,6 @@
     <Compile Include="Controllers\MessageRecipientsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
-    <Compile Include="Controllers\PlacesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
@@ -154,8 +153,6 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
-    <Compile Include="DtoFactories\Places\IPlaceDtoFactory.cs" />
-    <Compile Include="DtoFactories\Places\PlaceDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDtoFactory.cs" />
@@ -182,8 +179,6 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
-    <Compile Include="DtoServices\Places\IPlaceDtoService.cs" />
-    <Compile Include="DtoServices\Places\PlaceDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\NewVenueMemberships\INewVenueMembershipProvider.cs" />
@@ -207,13 +202,12 @@
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadsCollectionDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
-    <Compile Include="Dtos\Places\PlaceDto.cs" />
-    <Compile Include="Dtos\Places\PlaceSearchCriteriaDto.cs" />
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDto.cs" />
     <Compile Include="Dtos\VenueMembers\VenueMemberDto.cs" />
     <Compile Include="Dtos\VenueMembers\VenueMembersCollectionDto.cs" />
+    <Compile Include="Dtos\Venues\VenueSearchCriteriaDto.cs" />
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
@@ -250,10 +244,6 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
       <Name>zavit.Domain.Messaging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\zavit.Domain.Places\zavit.Domain.Places.csproj">
-      <Project>{0a2e19ae-c5b9-47fb-8add-315d6a35d269}</Project>
-      <Name>zavit.Domain.Places</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
