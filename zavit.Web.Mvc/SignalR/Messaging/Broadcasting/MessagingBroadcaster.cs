@@ -23,5 +23,13 @@ namespace zavit.Web.Mvc.SignalR.Messaging.Broadcasting
             var groups = context.Clients.Groups(readMessagesBroadcastRequest.GroupIds, readMessagesBroadcastRequest.ConnectionIdsToExclude);
             groups.threadMessagesRead(message);
         }
+
+        public void InboxMessageSent(BroadcastRequest<MessageDto> messageBroadcastRequest)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<MessagingHub>();
+            var message = JsonConvert.SerializeObject(messageBroadcastRequest.Dto);
+            var groups = context.Clients.Groups(messageBroadcastRequest.GroupIds, "");
+            groups.inboxNewMessage(message);
+        }
     }
 }

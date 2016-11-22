@@ -12,6 +12,7 @@ import * as NotificationReceiver from "../modules/notifications/notificationRece
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 
 let currentInboxThread;
+const messageInboxObserverId = "messageInboxObserver";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -66,6 +67,7 @@ function attachInboxEvents() {
         $("#messageThreads").removeClass("threadSelected");
         $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
     });
+    NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
 }
 
 function showInboxThread(inboxThread) {
@@ -147,4 +149,8 @@ function checkUnauthorised(error) {
         PostLoginRedirect.storeRedirectUrl(window.location.href);
         Routes.goTo(Routes.login);
     }
+}
+
+function messageInboxHasChanged() {
+    console.log("inbox has changed");
 }

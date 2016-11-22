@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using zavit.Domain.Accounts;
-using zavit.Domain.Shared.ResultCollections;
+﻿using zavit.Domain.Accounts;
 
 namespace zavit.Domain.Messaging.MessageThreads
 {

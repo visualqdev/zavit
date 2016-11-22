@@ -308,6 +308,8 @@
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IInboxMessageBroadcastRequestFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\InboxMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastDtoFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastRequestsProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesDtoFactory.cs" />
@@ -321,6 +323,8 @@
     <Compile Include="SignalR\ConnectionIds\IConnectionIdProvider.cs" />
     <Compile Include="SignalR\Hubs\MessagingHub.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\Dtos\ReadMessagesDto.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IInboxGroupIdProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\InboxGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IThreadGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\ThreadGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\IMessagingBroadcaster.cs" />

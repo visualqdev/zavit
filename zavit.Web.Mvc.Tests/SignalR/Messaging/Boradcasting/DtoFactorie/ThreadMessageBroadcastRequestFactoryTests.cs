@@ -7,7 +7,6 @@ using zavit.Domain.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.Dtos.Messaging.Messages;
 using zavit.Web.Mvc.SignalR.ConnectionIds;
-using zavit.Web.Mvc.SignalR.Hubs;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.DtoFactories;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.Dtos;
 using zavit.Web.Mvc.SignalR.Messaging.Broadcasting.GroupIds;

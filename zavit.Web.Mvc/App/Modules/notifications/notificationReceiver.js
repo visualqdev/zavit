@@ -3,6 +3,8 @@
 const inboxObservers = {};
 let threadObserver;
 let connectionStarted = false;
+let connectionStarting = false;
+let connectionStartedObservers = [];
 let messagingHubProxy;
 
 export function observeInbox(observerId, callback) {
@@ -13,6 +15,7 @@ export function observeInbox(observerId, callback) {
             .then(() => {
                 const userAccount = AccountService.currentUserAccount();
                 messagingHubProxy.server.joinInboxNotifications(userAccount.accountId);
+                inboxObservers[observerId] = callback;
             });
     }
 }
@@ -48,20 +51,30 @@ function notifyThreadMessagesRead(messagesRead) {
 
 function startSignalRConnection() {
     return new Promise((resolve, reject) => {
-        if (connectionStarted) resolve();
+        if (connectionStarted) {
+            resolve();
+        }
+        else if (connectionStarting) {
+            connectionStartedObservers.push(resolve);
+        } else {
+            messagingHubProxy = $.connection.messagingHub;
 
-        connectionStarted = true;
-        messagingHubProxy = $.connection.messagingHub;
+            messagingHubProxy.client.inboxNewMessage = notifyInboxNewMessage;
+            messagingHubProxy.client.threadNewMessage = notifyThreadNewMessage;
+            messagingHubProxy.client.threadMessagesRead = notifyThreadMessagesRead;
 
-        messagingHubProxy.client.inboxNewMessage = notifyInboxNewMessage;
-        messagingHubProxy.client.threadNewMessage = notifyThreadNewMessage;
-        messagingHubProxy.client.threadMessagesRead = notifyThreadMessagesRead;
-
-        $.connection.hub.start()
-            .done(resolve)
-            .fail(() => {
-                connectionStarted = false;
-                reject();
-            });
+            $.connection.hub.start()
+                .done(() => {
+                    connectionStarted = true;
+                    connectionStarting = false;
+                    connectionStartedObservers.forEach(observer => observer());
+                    resolve();
+                })
+                .fail(() => {
+                    connectionStarted = false;
+                    connectionStarting = false;
+                    reject();
+                });
+        }
     });
 }
