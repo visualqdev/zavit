@@ -1,13 +1,29 @@
-﻿export function selectFirstNavItem() {
-    $("#messageThreads li:first a").addClass("selected");
+﻿export function setUp(threadId) {
+    const $messagesContainer = $("#messages");
+    selectThreadId(threadId);
+    setWindowResizeWatch($messagesContainer);
+    adjustHeightOfMainContainer($messagesContainer);
+    adjustCssPositioningForMessagesContainer($messagesContainer);
+    adjustHeightOfMessageThreadColumn();
+    setMediaQueryWatch();
 }
 
-export function threadSelected(e) {
-    $(e.target).addClass("selected");
-    $(e.target).closest("li").siblings().children().removeClass("selected");
-    $("#messageThreads").addClass('threadSelected');
+export function currentlySelectedThreadId() {
+    const link = $("#messageThreads li a.selected");
+    if (link.length)
+        return link.attr("data-thread-id");
+}
+
+export function selectThreadId(threadId) {
+    threadSelected(`#messageThreads a[data-thread-id=${threadId}]`);
+}
+
+export function threadSelected(selectedThread) {
+    $("#messageThreads li a.selected").removeClass("selected");
+    $(selectedThread).addClass("selected");
+    $("#messageThreads").addClass("threadSelected");
     if (window.matchMedia("(max-width: 990px)").matches) {
-        $('#arrangeNew').html('<i class="fa fa-chevron-left aria-hidden="true"></i>Back to inbox');
+        $("#arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox");
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
 }
@@ -16,7 +32,7 @@ export function adjustHeightOfMainContainer($messagesContainer) {
 
     const topOfMessages = $messagesContainer.offset().top,
         heightOfControls = $("#controls").height(),
-        heightOfMargin = parseInt($('#controls').css("margin-top")),
+        heightOfMargin = parseInt($("#controls").css("margin-top")),
         heightOfFooter = $(".footer").height(),
         heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin;
 
@@ -38,7 +54,7 @@ function setToScrollPosition($element, height) {
 function heightOfMessages() {
 
     let combinedMessagesHeight = 0;
-    const $messages = $('#messages ul li');
+    const $messages = $("#messages ul li");
 
     function calculateMessageHeight(message) {
         combinedMessagesHeight += message.offsetHeight;
@@ -50,11 +66,11 @@ function heightOfMessages() {
 }
 
 export function setScrollPositionToBottom(){
-    setToScrollPosition($('#messages'), heightOfMessages());
+    setToScrollPosition($("#messages"), heightOfMessages());
 }
 
 export function adjustCssPositioningForMessagesContainer($messagesContainer) {
-    const $messagesList = $('#messages ul');
+    const $messagesList = $("#messages ul");
     if (heightOfMessages() > $messagesContainer.height()) {
         changeToRelativePositioning($messagesList);
         setToScrollPosition($messagesContainer, heightOfMessages());
@@ -65,7 +81,7 @@ export function adjustCssPositioningForMessagesContainer($messagesContainer) {
 }
 
 function adjustHeightOfMessageThreadColumn() {
-    if(!window.matchMedia("(max-width: 990px)").matches)  $("#messageThreadsContainer").css('max-height', $("#controls").position().top + $("#controls").height() - parseInt($("#controls").css('margin-top')));
+    if(!window.matchMedia("(max-width: 990px)").matches)  $("#messageThreadsContainer").css("max-height", $("#controls").position().top + $("#controls").height() - parseInt($("#controls").css("margin-top")));
 
 }
 
@@ -83,23 +99,13 @@ function setMediaQueryWatch() {
 
     const handleMediaChange = function (mediaQueryList) {
         if (mediaQueryList.matches) {
-            $('.threadSelected #arrangeNew').html('<i class="fa fa-chevron-left" aria-hidden="true"></i>Back to inbox');
+            $(".threadSelected #arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox");
             
         } else {
-            $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
+            $("#arrangeNew").html("<i class='fa fa-plus-circle' aria-hidden='true'></i>Arrange new");
         }
     }
 
     mql.addListener(handleMediaChange);
     handleMediaChange(mql);
-}
-
-export function setUp() {
-    const $messagesContainer = $("#messages");
-    selectFirstNavItem();
-    setWindowResizeWatch($messagesContainer);
-    adjustHeightOfMainContainer($messagesContainer);
-    adjustCssPositioningForMessagesContainer($messagesContainer);
-    adjustHeightOfMessageThreadColumn();
-    setMediaQueryWatch();
 }

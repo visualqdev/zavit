@@ -1,4 +1,4 @@
-﻿import * as Routes from "../../routing/routes";
+﻿import * as MessageThreadListPartial from "./messageThreadListPartial";
 
 export function getView(messageThreads) {
     return `
@@ -13,9 +13,7 @@ export function getView(messageThreads) {
             <div class="row" id="messagesContainer">
                 <div id="enableScroll">
                     <div class="col-md-3" id="messageThreadsContainer">
-                        <ul id="messageThreads">
-                            ${getMessageThreads(messageThreads)}
-                        </ul>
+                        ${MessageThreadListPartial.getView(messageThreads)}
                     </div>
                     <div class="col-md-9 noColPaddingLeft">
                         <div id="messages"></div>
@@ -28,20 +26,4 @@ export function getView(messageThreads) {
             </div>
         </div>
         `;
-}
-
-function getMessageThreads(messageThreads) {
-    let messageThreadsMarkup = "";
-
-    messageThreads.forEach(messageThread => {
-        messageThreadsMarkup += `
-            <li>
-                <a href="/#/${Routes.messageInbox}?threadid=${messageThread.ThreadId}" data-thread-id="${messageThread.ThreadId}">
-                    ${messageThread.ThreadTitle}
-                </a>
-            </li>
-            `;
-    });
-
-    return messageThreadsMarkup;
 }

@@ -186,6 +186,7 @@
     <Content Include="app\views\home\index.js" />
     <Content Include="app\views\messageInbox\indexView.js" />
     <Content Include="app\views\messageInbox\messagePartial.js" />
+    <Content Include="app\views\messageInbox\messageThreadListPartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />

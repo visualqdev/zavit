@@ -3,6 +3,7 @@ import * as Routes from "../routing/routes";
 import * as Progress from "../modules/loading/progress";
 import * as IndexView from "../views/messageInbox/indexView";
 import * as MessagePartial from "../views/messageInbox/messagePartial";
+import * as MessageThreadListPartial from "../views/messageInbox/messageThreadListPartial";
 import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartial";
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
@@ -34,8 +35,8 @@ export function index(options) {
             $("#messages").html(threadView);
             attachNewMessageEvents(inboxThread);
             showInboxThread(inboxThread);
+            MessageLayout.setUp(inboxThread.ThreadId);
         })
-        .then(MessageLayout.setUp)
         .catch((error) => {
             checkUnauthorised(error);
         })
@@ -43,8 +44,9 @@ export function index(options) {
 }
 
 function attachInboxEvents() {
-    $("#messageThreads").on("click", "[data-thread-id]", (e) => {
+    $("#messageThreadsContainer").on("click", "[data-thread-id]", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         const threadId = $(e.target).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
@@ -57,7 +59,7 @@ function attachInboxEvents() {
                 $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
                 showInboxThread(inboxThread);
-                MessageLayout.threadSelected(e, $(this));
+                MessageLayout.threadSelected(e.target);
                 
                 MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });
@@ -140,7 +142,9 @@ function receivedNewMessageOnThread(message) {
 
 function markMessagesAsRead(messagesRead) {
     messagesRead.ReadMessageStamps.forEach(messageStamp => {
-        $(`[data-stamp='${messageStamp}'] [data-message-status]`).html("*Has been read: Read");
+        var indicator = $(`[data-stamp='${messageStamp}'] span.sent`);
+        indicator.removeClass("sent");
+        indicator.addClass("read");
     });
 }
 
@@ -152,5 +156,13 @@ function checkUnauthorised(error) {
 }
 
 function messageInboxHasChanged() {
-    console.log("inbox has changed");
+    MessageInboxService
+        .getInboxThreads()
+        .then(messageThreads => {
+            var currentlySelectedThread = MessageLayout.currentlySelectedThreadId();
+
+            const threadView = MessageThreadListPartial.getView(messageThreads);
+            $("#messageThreadsContainer").html(threadView);
+            MessageLayout.selectThreadId(currentlySelectedThread);
+        });
 }
