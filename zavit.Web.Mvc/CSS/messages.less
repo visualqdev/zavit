@@ -2,11 +2,11 @@
 
 #messageThreads {
 
-    .col-md-3 {
+    .col-md-4 {
         padding:0;
     }
 
-    .col-md-9 {
+    .col-md-8 {
         padding-top:0;
     }
 
@@ -215,7 +215,7 @@
         overflow:auto;
     }
 
-    ul#messageThreads {
+    ul#messageThreadList {
    
         overflow: auto;
         list-style:none;
@@ -224,26 +224,61 @@
         padding:0;
 
         li {
-            a {
+            .inboxThread {
                 width:95%;
                 background-color:@page-bg;
-                padding:0;
+                padding:0 5px 0 5px;
                 margin:0 0 10px 0;
-                height:45px;
+                height:70px;
                 display:inline-block;
                 font-size:18px;
                 text-decoration:none;
-                line-height:2.6;
                 text-indent:10px;
+                &:hover{
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .inboxThreadInfo{
+                    .inboxThreadInfoRow{
+                        line-height:2;
+                        overflow: hidden;
+                        position: relative;
+                        .inboxThreadDate{
+                            font-size: 12px;
+                            line-height: 2.8;                                                   
+                        }
+                        .inboxThreadLatestMessage{
+                            font-size: 12px;
+                            width: 100%;
+                            float: left;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;  
+                        }
+                        .inboxThreadTitle{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }                    
+                }                                
             }
 
-            a.selected {
+            .inboxThread.selected {
                 width:100%;
+                .inboxThreadInfo{
+                    width: 95%;                 
+                }
             }
 
             @media (max-width: 990px) {
-                a {
+                .inboxThread {
                     width:100%;
+                }
+                .inboxThread.selected {
+                    .inboxThreadInfo{
+                        width: 100%;                 
+                    }
                 }
             }
         } 
@@ -258,7 +293,7 @@
         #controls {
             display:block;
         }
-        ul#messageThreads {
+        ul#messageThreadList {
             display:none;
         }
     }

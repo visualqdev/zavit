@@ -44,10 +44,10 @@ export function index(options) {
 }
 
 function attachInboxEvents() {
-    $("#messageThreadsContainer").on("click", "[data-thread-id]", (e) => {
+    $("#messageThreadsContainer").on("click", "[data-thread-id]", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        const threadId = $(e.target).attr("data-thread-id");
+        const threadId = $(this).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
             })
@@ -59,7 +59,7 @@ function attachInboxEvents() {
                 $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
                 showInboxThread(inboxThread);
-                MessageLayout.threadSelected(e.target);
+                MessageLayout.threadSelected(this);
                 
                 MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });

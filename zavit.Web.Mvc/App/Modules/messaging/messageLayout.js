@@ -9,17 +9,17 @@
 }
 
 export function currentlySelectedThreadId() {
-    const link = $("#messageThreads li a.selected");
+    const link = $("#messageThreadList li .inboxThread.selected");
     if (link.length)
         return link.attr("data-thread-id");
 }
 
 export function selectThreadId(threadId) {
-    threadSelected(`#messageThreads a[data-thread-id=${threadId}]`);
+    threadSelected(`#messageThreadList [data-thread-id=${threadId}]`);
 }
 
 export function threadSelected(selectedThread) {
-    $("#messageThreads li a.selected").removeClass("selected");
+    $("#messageThreadList li .selected[data-thread-id]").removeClass("selected");
     $(selectedThread).addClass("selected");
     $("#messageThreads").addClass("threadSelected");
     if (window.matchMedia("(max-width: 990px)").matches) {
