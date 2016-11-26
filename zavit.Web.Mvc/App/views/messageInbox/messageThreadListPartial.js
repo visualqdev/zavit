@@ -8,7 +8,7 @@ export function getView(messageThreads) {
             <li>                
                 <div class="inboxThread" data-thread-id="${messageThread.ThreadId}">
                     <div class="inboxThreadInfo">
-                        <div class="inboxThreadInfoRow">
+                        <div class="inboxThreadInfoRow inboxThreadInfoHeading">
                             <span class="inboxThreadTitle pull-left">${messageThread.ThreadTitle}</span>
                             <span class="inboxThreadDate pull-right">${moment(messageThread.LatestMessageSentOn).calendar()}</span>
                         </div>

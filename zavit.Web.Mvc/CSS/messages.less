@@ -215,23 +215,22 @@
         overflow:auto;
     }
 
-    ul#messageThreadList {
-   
+    ul#messageThreadList {   
         overflow: auto;
         list-style:none;
         width:100%;
         margin:0;
         padding:0;
-
         li {
             .inboxThread {
                 width:95%;
                 background-color:@page-bg;
+                color: @light-text;
                 padding:0 5px 0 5px;
                 margin:0 0 10px 0;
                 height:70px;
-                display:inline-block;
-                font-size:18px;
+                display:inline-block;                
+                font-size: 12px;
                 text-decoration:none;
                 text-indent:10px;
                 &:hover{
@@ -240,15 +239,13 @@
                 }
                 .inboxThreadInfo{
                     .inboxThreadInfoRow{
-                        line-height:2;
+                        line-height: 2;
                         overflow: hidden;
                         position: relative;
-                        .inboxThreadDate{
-                            font-size: 12px;
+                        .inboxThreadDate{                            
                             line-height: 2.8;                                                   
                         }
                         .inboxThreadLatestMessage{
-                            font-size: 12px;
                             width: 100%;
                             float: left;
                             white-space: nowrap;
@@ -259,6 +256,9 @@
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
+                            color: @standard-text;
+                            font-size: 16px;
+                            font-weight: bold;
                         }
                     }                    
                 }                                

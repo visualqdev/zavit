@@ -6,6 +6,7 @@
     adjustCssPositioningForMessagesContainer($messagesContainer);
     adjustHeightOfMessageThreadColumn();
     setMediaQueryWatch();
+    adjustInboxThreadListLayout();
 }
 
 export function currentlySelectedThreadId() {
@@ -26,6 +27,7 @@ export function threadSelected(selectedThread) {
         $("#arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox");
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
+    adjustInboxThreadListLayout();
 }
 
 export function adjustHeightOfMainContainer($messagesContainer) {
@@ -85,11 +87,21 @@ function adjustHeightOfMessageThreadColumn() {
 
 }
 
+function adjustInboxThreadListLayout() {
+    $(".inboxThreadInfoHeading").each(function(index, container) {
+        const jContainer = $(container);
+        const containerWidth = jContainer.width();
+        const dateWidth = jContainer.find(".inboxThreadDate").width();
+        jContainer.find(".inboxThreadTitle").css("max-width", containerWidth - dateWidth);
+    });
+}
+
 function setWindowResizeWatch($messagesContainer) {
     $(window).resize(() => {
         adjustHeightOfMainContainer($messagesContainer);
         adjustCssPositioningForMessagesContainer($messagesContainer);
         adjustHeightOfMessageThreadColumn();
+        adjustInboxThreadListLayout();
     });
 }
 
