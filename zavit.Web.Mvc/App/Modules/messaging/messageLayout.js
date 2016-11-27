@@ -28,6 +28,7 @@ export function threadSelected(selectedThread) {
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
     adjustInboxThreadListLayout();
+    fadeOutUnreadCount(selectedThread);
 }
 
 export function adjustHeightOfMainContainer($messagesContainer) {
@@ -39,6 +40,10 @@ export function adjustHeightOfMainContainer($messagesContainer) {
         heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin;
 
     $messagesContainer.height(heightOfMessagesContainer);
+}
+
+function fadeOutUnreadCount(selectedThread) {
+    $(selectedThread).find(".inboxThreadUnreadCount").fadeOut("slow");
 }
 
 function changeToRelativePositioning($element) {
@@ -88,11 +93,16 @@ function adjustHeightOfMessageThreadColumn() {
 }
 
 function adjustInboxThreadListLayout() {
-    $(".inboxThreadInfoHeading").each(function(index, container) {
+    $(".inboxThreadInfo").each(function(index, container) {
         const jContainer = $(container);
         const containerWidth = jContainer.width();
         const dateWidth = jContainer.find(".inboxThreadDate").width();
         jContainer.find(".inboxThreadTitle").css("max-width", containerWidth - dateWidth);
+
+        const unreadCount = jContainer.find(".inboxThreadUnreadCount");
+        if (unreadCount.length) {
+            jContainer.find(".inboxThreadLatestMessage").css("max-width", containerWidth - unreadCount.width());
+        }
     });
 }
 

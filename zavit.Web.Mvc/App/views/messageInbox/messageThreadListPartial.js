@@ -8,12 +8,13 @@ export function getView(messageThreads) {
             <li>                
                 <div class="inboxThread" data-thread-id="${messageThread.ThreadId}">
                     <div class="inboxThreadInfo">
-                        <div class="inboxThreadInfoRow inboxThreadInfoHeading">
+                        <div class="inboxThreadInfoRow">
                             <span class="inboxThreadTitle pull-left">${messageThread.ThreadTitle}</span>
                             <span class="inboxThreadDate pull-right">${moment(messageThread.LatestMessageSentOn).calendar()}</span>
                         </div>
                         <div class="inboxThreadInfoRow">
-                            <span class="inboxThreadLatestMessage">${messageThread.LatestMessageBody}</span>
+                            <span class="inboxThreadLatestMessage pull-left">${messageThread.LatestMessageBody}</span>
+                            ${getUnreadCount(messageThread)}                            
                         </div>
                     </div>                    
                 </div>
@@ -24,4 +25,12 @@ export function getView(messageThreads) {
     messageThreadsMarkup += `</ul>`;
 
     return messageThreadsMarkup;
+}
+
+function getUnreadCount(messageThread) {
+    if (messageThread.UnreadMessageCount < 1) return "";
+
+    return `
+        <span class="inboxThreadUnreadCount pull-right">${messageThread.UnreadMessageCount}</span>
+        `;
 }
