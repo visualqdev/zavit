@@ -60,7 +60,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IMessageRecipientDtoService>().ImplementedBy<MessageRecipientDtoService>().LifestyleTransient(),
                 Component.For<IMessageRecipientDtoFactory>().ImplementedBy<MessageRecipientDtoFactory>().LifestyleTransient(),
                 Component.For<IInboxThreadDtoFactory>().ImplementedBy<InboxThreadDtoFactory>().LifestyleTransient(),
-                Component.For<IInboxThreadDetailsDtoFactory>().ImplementedBy<InboxThreadDetailsDtoFactory>().LifestyleTransient()
+                Component.For<IInboxThreadDetailsDtoFactory>().ImplementedBy<InboxThreadDetailsDtoFactory>().LifestyleTransient(),
+                Component.For<IMessageRecipientCollectionDtoFactory>().ImplementedBy<MessageRecipientCollectionDtoFactory>().LifestyleTransient()
                 );
         }
     }

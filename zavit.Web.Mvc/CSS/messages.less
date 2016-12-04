@@ -66,9 +66,10 @@
         background-color:@page-bg;
         clear:left;
         width:95%;
-        font-size:28px;
+        font-size:20px;
+        font-weight: bold;
         text-indent:10px;
-        line-height:1.6;
+        line-height:2.2;
 
         .fa {
             height:45px;
@@ -300,5 +301,85 @@
         ul#messageThreadList {
             display:none;
         }
+    }
+}
+
+#searchRecipientsModal{
+    .searhRecipientsContainer{
+        max-width: 350px;
+        width: 100%;
+        background-color: @login-bg;
+        margin: 0 auto;
+        border-radius: 2px;
+        overflow: hidden;
+        padding: 30px 0;   
+        padding: 10px;         
+        .recipientSuggestion{
+            margin-bottom: 10px;
+            input{
+                width: 100%;
+            }
+        }
+        .recipientResults{
+            width: 100%;
+            overflow: auto; 
+            max-height: 400px;
+            margin-bottom: 10px;         
+            .recipientResult{
+                height:100px;
+                margin-bottom:10px;
+                position: relative;
+                padding: 0;
+                &:hover{
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .memberImage{
+                    width: 100px;
+                    height: 100px;
+                    float:left;
+                    padding:0;
+                    margin:0;
+                    clear:left;
+                    background-color:@plus-button-bg;
+                    color:@page-bg;
+                    text-align:center;
+                    .fa {
+                        height:100%;
+                        font-size:65px;
+                        font-weight:normal;
+                        line-height: 1.5;
+                    }
+                }
+                .memberDetails{
+                    margin-right: 100px;
+                    background-color: @page-bg;
+                    height: 100px;
+                    overflow:auto;
+                    position:relative;
+                    margin: 0;
+                    .content {
+                        padding:10px;
+                        h3 {
+                            padding:0;
+                            margin: 0px 0px 10px 0px;
+                            font-size: 16px;
+                        }                   
+                    }                                   
+                }
+            }
+            .recipientResult.selected{
+                .memberDetails{
+                     background-color: @call-to-action;
+                }
+            }
+        }
+        .doneButton{
+            float: right;
+        }     
+    }        
+    h2{
+        text-align: center;
+        font-size: 1.8em;
     }
 }

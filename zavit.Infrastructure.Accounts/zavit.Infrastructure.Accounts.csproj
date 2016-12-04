@@ -61,6 +61,10 @@
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

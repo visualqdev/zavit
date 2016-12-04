@@ -132,12 +132,15 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\MessageRecipientsController.cs" />
+    <Compile Include="Controllers\MessageRecipientSuggestionsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\IMessageRecipientCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\MessageRecipients\IMessageRecipientDtoFactory.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\IMessageCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\IMessageDtoFactory.cs" />
@@ -192,6 +195,7 @@
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
+    <Compile Include="Dtos\MessageRecipients\MessageRecipientCollectionDto.cs" />
     <Compile Include="Dtos\MessageRecipients\MessageRecipientDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />

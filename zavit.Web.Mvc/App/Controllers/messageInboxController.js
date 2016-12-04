@@ -8,6 +8,7 @@ import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartia
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
 import * as NewMessageFactory from "../modules/messaging/newMessageFactory";
+import * as MessageRecipientSearchModal from "../modules/messaging/messageRecipientSearchModal";
 import * as MessageLayout from "../modules/messaging/messageLayout";
 import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
@@ -68,6 +69,10 @@ function attachInboxEvents() {
         e.preventDefault();
         $("#messageThreads").removeClass("threadSelected");
         $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
+    });
+    $("#arrangeNew").click(function(e) {
+        e.preventDefault();
+        MessageRecipientSearchModal.show();
     });
     NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
 }

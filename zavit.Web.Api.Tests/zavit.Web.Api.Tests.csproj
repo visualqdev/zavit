@@ -77,11 +77,13 @@
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\ActivitiesControllerTests.cs" />
     <Compile Include="Controllers\MessageRecipientsControllerTests.cs" />
+    <Compile Include="Controllers\MessageRecipientSuggestionsControllerTests.cs" />
     <Compile Include="Controllers\MessagesControllerTests.cs" />
     <Compile Include="Controllers\MessageThreadControllerTests.cs" />
     <Compile Include="Controllers\VenueMembersControllerTests.cs" />
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactoryTests.cs" />
