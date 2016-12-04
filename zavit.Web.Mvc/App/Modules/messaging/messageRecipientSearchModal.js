@@ -2,14 +2,16 @@
 import * as MessageRecipientsListPartial from "../../views/messageRecipientSearch/messageRecipientsListPartial";
 import * as MessageRecipientsClient from "./messageRecipientsClient";
 import * as MessageRecipientSearchLayout from "./messageRecipientSearchLayout";
+import * as Routes from "../../routing/routes";
 
 const recipientSuggestionTake = 20;
 let selectedRecipients = [];
 let suggestedRecipients = [];
+let modalView;
 
 export function show(options) {
     const view = MessageRecipientSearchModalView.getView();
-    const modalView = $(view);
+    modalView = $(view);
 
     modalView.on("hidden.bs.modal", () => {
         modalView.remove();
@@ -74,5 +76,14 @@ function attachSearchEvents() {
             }
             searchRecipients();
         }
+    });
+
+    MessageRecipientSearchLayout.onDone(() => {
+        if (selectedRecipients.length > 0) {
+            const path = `${Routes.messageInbox}?accounts=${selectedRecipients.map(recipient => recipient.AccountId).join(",")}`;
+            selectedRecipients = [];
+            Routes.goTo(path);
+        }
+        modalView.modal("hide");
     });
 }

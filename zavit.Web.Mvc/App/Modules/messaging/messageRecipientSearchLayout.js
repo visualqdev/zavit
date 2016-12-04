@@ -40,6 +40,10 @@ export function onRecipientSelected(callbacks) {
     });
 }
 
+export function onDone(callback) {
+    $("#searchRecipientsModal .doneButton").click(callback);
+}
+
 export function selectRecipients(recipientIds) {
     recipientIds.forEach(recipientId => {
         const recipientContainer = $(`#searchRecipientsModal .recipientResult[data-id=${recipientId}]`);
