@@ -1,0 +1,94 @@
+﻿@import '.\libraries\colours';
+
+#profile{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    address, span, .checkbox, li, label {
+        color: @default-text;
+        font-size:16px;
+    }
+
+    #profileHeading {
+        float:left;
+        width:100%;
+        margin-bottom:20px;
+    }
+
+    .profileDetailsContainer{
+        background-color: @page-bg;
+        width: 100%;
+        float: left;  
+        position: relative;
+
+        .profileImageContainer{
+            width: 230px;
+            position: absolute;
+
+            .profileImage{
+                margin: 15px 15px;
+                width: 200px;
+                height: 200px;
+                float:left;
+                padding:0;                
+                clear:left;
+                background-color:@plus-button-bg;
+                color:@page-bg;
+                text-align:center;
+                
+                .fa {
+                    height:100%;
+                    font-size:150px;
+                    font-weight:normal;
+                    line-height: 1.3;
+                }
+            }
+        }                              
+        
+        .profileDetails{ 
+            clear: both;
+            padding-left: 230px;
+            width: 100%;
+
+            .row{
+                padding: 15px 0;
+            }
+                       
+            .profileRowLabel{
+                label{
+                    width: 100%;
+                    font-weight: normal;
+                    text-align: right;
+                }
+            }
+            .profileRowValue{
+                label{
+                    .glyphicon{
+                        display: none;
+                    }
+                    &:hover{
+                        cursor: pointer;
+                        cursor: hand;
+                                        
+                        .glyphicon{
+                            display: inline;
+                        }
+                    }
+                }
+            }          
+        }
+        
+        @media (max-width: 767px){
+            .profileDetails{
+                padding-left: 0px;
+                padding-top: 230px;
+
+                .profileRowLabel{
+                    label{
+                        text-align: left;
+                    }
+                }
+            }            
+        }        
+    }    
+}

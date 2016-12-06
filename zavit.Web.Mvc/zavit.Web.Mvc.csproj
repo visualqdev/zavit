@@ -148,6 +148,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\messageInboxController.js" />
+    <Content Include="app\controllers\profileController.js" />
     <Content Include="app\controllers\yourVenueController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
     <Content Include="app\layout\mainContent.js" />
@@ -173,6 +174,8 @@
     <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
+    <Content Include="app\modules\profile\profileClient.js" />
+    <Content Include="app\modules\profile\profileDetailsLayout.js" />
     <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
@@ -192,6 +195,7 @@
     <Content Include="app\views\messageInbox\messageThreadListPartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\messageRecipientSearch\messageRecipientsListPartial.js" />
+    <Content Include="app\views\profile\indexView.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
@@ -289,6 +293,7 @@
     <Content Include="CSS\venues.less" />
     <Content Include="CSS\messages.less" />
     <Content Include="CSS\explore.less" />
+    <Content Include="CSS\profile.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

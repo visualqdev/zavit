@@ -8,6 +8,7 @@ import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 import * as YourVenuesController from "../controllers/yourVenuesController";
 import * as YourVenueController from "../controllers/yourVenueController";
 import * as MessageInboxController from "../controllers/messageInboxController";
+import * as ProfileController from "../controllers/profileController";
 
 export function registerRoutes() {
     crossroads.addRoute(`/${Routes.home}`, () => {
@@ -63,6 +64,8 @@ export function registerRoutes() {
             threadId: query && query.threadid
         });
     });
+
+    crossroads.addRoute(`/${Routes.profile}`, () => ProfileController.index());
 
     function parseHash(newHash, oldHash) {
         crossroads.parse(newHash);
