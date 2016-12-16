@@ -5,12 +5,15 @@ import * as ProfileClient from "../modules/profile/profileClient";
 import * as ProfileDetailsLayout from "../modules/profile/profileDetailsLayout";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
 
+let profile;
+
 export function index() {
     MainContent.load(Routes.profile);
 
     ProfileClient
         .getProfile()
-        .then(profile => {
+        .then(profileResult => {
+            profile = profileResult;
             const view = IndexView.getView(profile);
             MainContent.append(view);
             attachEditEvents();
@@ -24,9 +27,14 @@ export function index() {
 }
 
 function attachEditEvents() {
-    ProfileDetailsLayout.attachEvents();
+    ProfileDetailsLayout.attachEvents({
+        onValueChanged: (name, value) => {
+            profile[name] = value;
 
-    ProfileDetailsLayout.onValueChanged((propertyName, value) => {
-        
+            ProfileClient.saveProfile(profile)
+                .then(() => {
+                    ProfileDetailsLayout.finishEditing(name, value);
+                });
+        }
     });
 }

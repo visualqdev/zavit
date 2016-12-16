@@ -1,11 +1,25 @@
-﻿export function getProfile() {
-    return new Promise((resolve, reject) => {
-        resolve({
-            DisplayName: "Toby Roosvelt",
-            Email: "someone@someemail.com",
-            Gender: "Male",
-            Country: "England",
-            About: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+﻿import * as AuthorizedClient from "../clients/authorizedClient";
+import * as ApiSettings from "../settings/apiSettings";
+
+export function getProfile() {
+    const myProfileUrl = `${ApiSettings.apiUrl}api/profiles/myprofile`;
+
+    return AuthorizedClient
+        .send({
+            url: myProfileUrl,
+            type: "get",
+            contentType: "application/json; charset=utf-8"
         });
-    });
+}
+
+export function saveProfile(profile) {
+    const postProfileUrl = `${ApiSettings.apiUrl}api/profiles`;
+
+    return AuthorizedClient
+        .send({
+            url: postProfileUrl,
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(profile)
+        });
 }

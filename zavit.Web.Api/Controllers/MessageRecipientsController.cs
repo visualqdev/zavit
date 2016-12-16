@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.MessageRecipients;

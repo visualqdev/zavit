@@ -4,7 +4,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     
-    address, span, .checkbox, li, label {
+    address, span, .checkbox, li, label, input[type=text], select, textarea {
         color: @default-text;
         font-size:16px;
     }
@@ -52,6 +52,7 @@
 
             .row{
                 padding: 15px 0;
+                min-height: 63px;                
             }
                        
             .profileRowLabel{
@@ -59,10 +60,14 @@
                     width: 100%;
                     font-weight: normal;
                     text-align: right;
+                    margin: 0;
+                    line-height: 32px;
                 }
             }
             .profileRowValue{
                 label{
+                    line-height: 32px;
+                    margin: 0;
                     .glyphicon{
                         display: none;
                     }
@@ -73,6 +78,38 @@
                         .glyphicon{
                             display: inline;
                         }
+                    }
+                }
+
+                .editProfileValue{
+                    min-height: 32px;
+                }
+
+                .editProfileText{
+                    min-width: 250px;
+                }
+
+                .editProfileLongText{
+                    margin-bottom: 15px;
+                    width: 100%;                    
+                }
+
+                .editProfileSave{
+                    background-color:@call-to-action;
+                    border:@call-to-action;
+                    color:@nav-bg; 
+
+                    &:hover{
+                        color: @call-to-action-hover-color;
+                        background-color: @call-to-action-hover-bg;
+                        border: @call-to-action-hover-bg;       
+                    }
+                }
+                .editProfileCancel{
+                    margin-left: 5px;
+                    &:hover{
+                        cursor: pointer;
+                        cursor: hand;
                     }
                 }
             }          

@@ -10,13 +10,15 @@ namespace zavit.Domain.Accounts
         readonly IAccountCreator _accountCreator;
         readonly IAccountRepository _accountRepository;
         readonly IEnumerable<IAccountRegistrationValidator> _accountRegistrationValidators;
+        readonly IEnumerable<IAccountRegistrationObserver> _accountRegistrationObservers;
 
-        public AccountService(IAccountRegistrationResultFactory accountRegistrationResultFactory, IAccountCreator accountCreator, IAccountRepository accountRepository, IEnumerable<IAccountRegistrationValidator> accountRegistrationValidators)
+        public AccountService(IAccountRegistrationResultFactory accountRegistrationResultFactory, IAccountCreator accountCreator, IAccountRepository accountRepository, IEnumerable<IAccountRegistrationValidator> accountRegistrationValidators, IEnumerable<IAccountRegistrationObserver> accountRegistrationObservers)
         {
             _accountRegistrationResultFactory = accountRegistrationResultFactory;
             _accountCreator = accountCreator;
             _accountRepository = accountRepository;
             _accountRegistrationValidators = accountRegistrationValidators;
+            _accountRegistrationObservers = accountRegistrationObservers;
         }
 
         public AccountRegistrationResult Register(IAccountRegistration accountRegistration)
@@ -29,6 +31,11 @@ namespace zavit.Domain.Accounts
 
             var account = _accountCreator.Create(accountRegistration);
             _accountRepository.Save(account);
+
+            foreach (var accountRegistrationObserver in _accountRegistrationObservers)
+            {
+                accountRegistrationObserver.AccountRegsitered(account);
+            }
 
             var result = _accountRegistrationResultFactory.CreateSuccessful(account);
             return result;

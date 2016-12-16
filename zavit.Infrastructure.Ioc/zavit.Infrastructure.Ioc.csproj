@@ -58,9 +58,11 @@
     <Compile Include="DomainInstallers\ExternalAccountsInstaller.cs" />
     <Compile Include="DomainInstallers\MessagingInstaller.cs" />
     <Compile Include="DomainInstallers\VenueMembershipsInstaller.cs" />
+    <Compile Include="DomainInstallers\ProfilesInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureMessagingInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenueMembershipsInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureProfilesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureAccountsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureActivitiesInstaller.cs" />
@@ -94,6 +96,10 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
       <Name>zavit.Domain.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Profiles\zavit.Domain.Profiles.csproj">
+      <Project>{6144e0cf-88dd-4dba-89cd-3098a9e99202}</Project>
+      <Name>zavit.Domain.Profiles</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
@@ -138,6 +144,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Places\zavit.Infrastructure.Places.csproj">
       <Project>{644f8521-635e-4ccb-a256-96b17cb37894}</Project>
       <Name>zavit.Infrastructure.Places</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Profiles\zavit.Infrastructure.Profiles.csproj">
+      <Project>{f8b2f575-e38e-430d-ae42-7742530a55b3}</Project>
+      <Name>zavit.Infrastructure.Profiles</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.VenueMemberships\zavit.Infrastructure.VenueMemberships.csproj">
       <Project>{26f89347-9092-4ec6-8858-4e08e8918592}</Project>

@@ -1,5 +1,8 @@
-﻿export function getView(profile) {
-    return `
+﻿import * as ProfileGender from "../../modules/profile/profileGender";
+import { html } from "../../modules/htmlUtils/htmlUtil";
+
+export function getView(profile) {
+    const view = `
         <div id="profile" class="container">
             <div id="profileHeading">
                 <h2 id="mainHeading">My profile</h2>
@@ -11,23 +14,25 @@
                 <div class="profileDetails">
                     ${profileDetailsRow("Display name", profile.DisplayName, "DisplayName")}
                     ${profileDetailsRow("Email", profile.Email, "Email")}
-                    ${profileDetailsRow("Gender", profile.Gender, "Gender")}
+                    ${profileDetailsRow("Gender", ProfileGender.displayName(profile.Gender), "Gender")}
                     ${profileDetailsRow("Location", profile.Country, "Coutnry")}
                     ${profileDetailsRow("About", profile.About, "About")}
                 </div>
             </div>            
         </div>
         `;
+
+    return view;
 }
 
 function profileDetailsRow(label, value, name) {
-    return `
+    return html`
         <div class="row">
             <div class="col-sm-3 col-xs-12 profileRowLabel">
                 <label>${label}</label>
             </div>
             <div class="col-sm-9 col-xs-12 profileRowValue">                            
-                <label name="${name}"><span class="value">${value}</span>  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></label>                
+                <label name="${name}" class="profileRowValueLabel"><span class="value">${value}</span>  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></label>                
             </div>
         </div>
         `;
