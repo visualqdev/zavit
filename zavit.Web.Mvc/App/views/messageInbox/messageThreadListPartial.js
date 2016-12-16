@@ -1,4 +1,5 @@
 ﻿import * as Routes from "../../routing/routes";
+import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 
 export function getView(messageThreads) {
     let messageThreadsMarkup = `<ul id="messageThreadList">`;
@@ -9,11 +10,11 @@ export function getView(messageThreads) {
                 <div class="inboxThread" data-thread-id="${messageThread.ThreadId}">
                     <div class="inboxThreadInfo">
                         <div class="inboxThreadInfoRow">
-                            <span class="inboxThreadTitle pull-left">${messageThread.ThreadTitle}</span>
+                            <span class="inboxThreadTitle pull-left">${htmlEncode(messageThread.ThreadTitle)}</span>
                             <span class="inboxThreadDate pull-right">${moment(messageThread.LatestMessageSentOn).calendar()}</span>
                         </div>
                         <div class="inboxThreadInfoRow">
-                            <span class="inboxThreadLatestMessage pull-left">${messageThread.LatestMessageBody}</span>
+                            <span class="inboxThreadLatestMessage pull-left">${htmlEncode(messageThread.LatestMessageBody)}</span>
                             ${getUnreadCount(messageThread)}                            
                         </div>
                     </div>                    

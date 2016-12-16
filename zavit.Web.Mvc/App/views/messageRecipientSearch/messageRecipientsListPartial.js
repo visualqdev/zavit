@@ -1,8 +1,10 @@
-﻿export function getView(options) {
+﻿import { html } from "../../modules/htmlUtils/htmlUtil";
+
+export function getView(options) {
     let recipientsMarkup = "";
 
     options.SuggestedRecipients.forEach(recipient =>
-        recipientsMarkup += `
+        recipientsMarkup += html`
             <div class="col-sm-12 recipientResult" data-id="${recipient.AccountId}">
                 <div class="memberImage"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>                
                 <div class="memberDetails">

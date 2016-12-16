@@ -7,6 +7,13 @@ export function attachEvents(options) {
         showEditBox($(this));
     });
 
+    $("#profile .profileDetails").on("click", ".profileRowLabel label", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const editField = $(this).closest(".row").find(".profileRowValueLabel");
+        showEditBox(editField);
+    });
+
     $("#profile .profileDetails").on("click", ".editProfileCancel", function(e) {
         e.stopPropagation();
         const container = $(this).closest(".editProfileControls");

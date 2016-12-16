@@ -1,4 +1,6 @@
-﻿export function getView(availableActivities, memberActivities, isFullActivityList) {
+﻿import { html } from "../../modules/htmlUtils/htmlUtil";
+
+export function getView(availableActivities, memberActivities, isFullActivityList) {
     const memberActivityIds = memberActivities.map((activity) => activity.Id);
     
     return `
@@ -18,7 +20,7 @@ function activityCheckboxes(activities, memberActivityIds) {
     activities.forEach(activity => {
         const isChecked = memberActivityIds.includes(activity.Id) ? "checked" : "";
 
-        activitiesMarkup += `
+        activitiesMarkup += html`
             <li class="list-group-item col-xs-6 col-sm-4 col-md-3">
                 <label class="checkbox">
                     <input type="checkbox" name="venueActivities" value="${activity.Id}" ${isChecked}>${activity.Name}
