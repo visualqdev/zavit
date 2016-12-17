@@ -172,6 +172,7 @@
     <Content Include="app\modules\messaging\newMessageFactory.js" />
     <Content Include="app\modules\messaging\messageLayout.js" />
     <Content Include="app\modules\navigation\search.js" />
+    <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
@@ -209,7 +210,6 @@
     <Content Include="app\modules\account\externalAccountClient.js" />
     <Content Include="app\modules\account\externalAccountService.js" />
     <Content Include="app\modules\account\registerModal.js" />
-    <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\settings\apiSettings.js" />
     <Content Include="app\modules\storage\storage.js" />
     <Content Include="bundle.js" />

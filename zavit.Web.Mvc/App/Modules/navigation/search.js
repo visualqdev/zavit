@@ -1,6 +1,5 @@
 ﻿import * as Geocode from "../map/geocode";
 
-
 function searchByArea(inputValue, places) {
 
     function load(position) {

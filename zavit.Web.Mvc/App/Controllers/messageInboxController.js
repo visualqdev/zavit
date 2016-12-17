@@ -12,6 +12,7 @@ import * as MessageRecipientSearchModal from "../modules/messaging/messageRecipi
 import * as MessageLayout from "../modules/messaging/messageLayout";
 import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
+import { htmlEncode } from "../modules/htmlUtils/htmlEncoder";
 
 let currentInboxThread;
 const messageInboxObserverId = "messageInboxObserver";
@@ -122,7 +123,7 @@ function attachNewMessageEvents(inboxThread) {
 }
 
 function setThreadTitle(title) {
-    $("#threadTitle h4").text(title);
+    $("#threadTitle h4").text(htmlEncode(title));
 }
 
 function replaceMessageOnThread(message) {
