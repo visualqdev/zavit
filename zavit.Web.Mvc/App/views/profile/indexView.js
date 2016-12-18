@@ -15,7 +15,6 @@ export function getView(profile) {
                     ${profileDetailsRow("Display name", profile.DisplayName, "DisplayName")}
                     ${profileDetailsRow("Email", profile.Email, "Email")}
                     ${profileDetailsRow("Gender", ProfileGender.displayName(profile.Gender), "Gender")}
-                    ${profileDetailsRow("Location", profile.Country, "Coutnry")}
                     ${profileDetailsRow("About", profile.About, "About")}
                 </div>
             </div>            
