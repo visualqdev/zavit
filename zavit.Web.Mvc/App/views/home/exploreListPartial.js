@@ -1,4 +1,6 @@
-﻿export function getView(venues) {
+﻿import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
+
+export function getView(venues) {
     return `
         <ul class="exploreListVenues">
             ${getPlaceListItems(venues)}
@@ -13,8 +15,8 @@ function getPlaceListItems(venues) {
         venuesMarkup += `
             <li class="exploreListVenue" data-marker-index="${index}">
                 <header>
-                    <h3 title="${venue.Name}">${venue.Name}</h3>
-                    <address title="${venue.Address}">${venue.Address}</address>
+                    <h3 title="${htmlEncode(venue.Name)}">${htmlEncode(venue.Name)}</h3>
+                    <address title="${htmlEncode(venue.Address)}">${htmlEncode(venue.Address)}</address>
                     <ul class="list-group row venueActivities">
                         ${activityListItems(venue.Activities)}
                     </ul>
@@ -30,7 +32,7 @@ function activityListItems(activities) {
     activities.forEach(activity => {
         activitiesMarkup += ` 
             <li class="list-group-item col-xs-12 col-sm-6">
-                <label>${activity.Name}</label>
+                <label>${htmlEncode(activity.Name)}</label>
             </li>`;
     });
     return activitiesMarkup;

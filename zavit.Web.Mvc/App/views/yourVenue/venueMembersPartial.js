@@ -1,4 +1,5 @@
 ﻿import * as Routes from "../../routing/routes";
+import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 
 export function getView(venueMembers) {
     let venueMembersMarkup = "";
@@ -11,7 +12,7 @@ export function getView(venueMembers) {
                 <div class="memberImage"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>
                 <div class="memberDetails">
                     <div class="content">
-                       <h3>${venueMember.DisplayName}</h3>
+                       <h3>${htmlEncode(venueMember.DisplayName)}</h3>
                        ${activitiesMarkup(venueMember.Activities)}
                     </div>
                     <div class="memberActions">
@@ -30,7 +31,7 @@ function activitiesMarkup(activities) {
 
     activities.forEach(activity => {
         activitiesListItems += `
-            <li>${activity.Name}</li>
+            <li>${htmlEncode(activity.Name)}</li>
             `;
     });
 

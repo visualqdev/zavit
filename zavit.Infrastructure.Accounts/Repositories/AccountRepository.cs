@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
+using NHibernate.Criterion;
 using zavit.Domain.Accounts;
+using zavit.Domain.Shared.ResultCollections;
+using zavit.Infrastructure.Core.ResultCollections;
 
 namespace zavit.Infrastructure.Accounts.Repositories
 {
@@ -37,6 +40,19 @@ namespace zavit.Infrastructure.Accounts.Repositories
             return _session.QueryOver<Account>()
                 .WhereRestrictionOn(a => a.Id).IsIn(accountIds.ToArray())
                 .List();
+        }
+
+        public IResultCollection<Account> Search(string searchTerm, int skip, int take, int requestedByAccountId)
+        {
+            var results = _session.QueryOver<Account>()
+                .Where(a => a.Id != requestedByAccountId)
+                .WhereRestrictionOn(a => a.DisplayName).IsLike(searchTerm, MatchMode.Anywhere)
+                .OrderBy(a => a.DisplayName).Asc
+                .Skip(skip)
+                .Take(take + 1)
+                .List();
+
+            return new ResultCollection<Account>(results, take);
         }
     }
 }

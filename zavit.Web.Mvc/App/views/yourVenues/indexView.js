@@ -1,4 +1,5 @@
 ﻿import * as Routes from "../../routing/routes";
+import { html } from "../../modules/htmlUtils/htmlUtil";
 
 export function getView(options) {
     return `
@@ -16,7 +17,7 @@ function getVenues(memberships) {
     let venuesMarkup = "";
 
     memberships.forEach(membership => {
-        venuesMarkup += `
+        venuesMarkup += html`
             <div class="col-sm-6 yourVenue">
                 <div class="yourVenueMap" data-venue-lat="${membership.Venue.Latitude}" data-venue-lng="${membership.Venue.Longitude}"></div>
                 <div class="yourVenueDetails">

@@ -2,11 +2,11 @@
 
 #messageThreads {
 
-    .col-md-3 {
+    .col-md-4 {
         padding:0;
     }
 
-    .col-md-9 {
+    .col-md-8 {
         padding-top:0;
     }
 
@@ -66,9 +66,10 @@
         background-color:@page-bg;
         clear:left;
         width:95%;
-        font-size:28px;
+        font-size:20px;
+        font-weight: bold;
         text-indent:10px;
-        line-height:1.6;
+        line-height:2.2;
 
         .fa {
             height:45px;
@@ -112,17 +113,16 @@
             float:left;
             padding:0;
             margin:0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
 
     @media (max-width: 990px) {
         #threadTitle {
-            padding:0;
-            h4 {
-                width:100%;
-            }
-            margin-bottom:10px;
-           
+            padding:0;            
+            margin-bottom:10px;           
             float:left;
             width:100%;
         }
@@ -215,35 +215,74 @@
         overflow:auto;
     }
 
-    ul#messageThreads {
-   
+    ul#messageThreadList {   
         overflow: auto;
         list-style:none;
         width:100%;
         margin:0;
         padding:0;
-
         li {
-            a {
+            .inboxThread {
                 width:95%;
                 background-color:@page-bg;
-                padding:0;
+                color: @light-text;
+                padding:5px 15px 0 5px;
                 margin:0 0 10px 0;
-                height:45px;
-                display:inline-block;
-                font-size:18px;
+                height:70px;
+                display:inline-block;                
+                font-size: 12px;
                 text-decoration:none;
-                line-height:2.6;
                 text-indent:10px;
+                &:hover{
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .inboxThreadInfo{
+                    .inboxThreadInfoRow{
+                        line-height: 2;
+                        overflow: hidden;
+                        position: relative;
+                        .inboxThreadDate{                            
+                            line-height: 2.8;                                                   
+                        }
+                        .inboxThreadLatestMessage{
+                            float: left;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis; 
+                            max-width: 100%;
+                        }
+                        .inboxThreadTitle{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            color: @standard-text;
+                            font-size: 16px;
+                            font-weight: bold;
+                        }
+                        .inboxThreadUnreadCount{
+                            font-weight: bold;
+                            color: @notification-text-color;
+                        }
+                    }                    
+                }                                
             }
 
-            a.selected {
+            .inboxThread.selected {
                 width:100%;
+                .inboxThreadInfo{
+                    width: 95%;                 
+                }
             }
 
             @media (max-width: 990px) {
-                a {
+                .inboxThread {
                     width:100%;
+                }
+                .inboxThread.selected {
+                    .inboxThreadInfo{
+                        width: 100%;                 
+                    }
                 }
             }
         } 
@@ -258,8 +297,88 @@
         #controls {
             display:block;
         }
-        ul#messageThreads {
+        ul#messageThreadList {
             display:none;
         }
+    }
+}
+
+#searchRecipientsModal{
+    .searhRecipientsContainer{
+        max-width: 350px;
+        width: 100%;
+        background-color: @login-bg;
+        margin: 0 auto;
+        border-radius: 2px;
+        overflow: hidden;
+        padding: 30px 0;   
+        padding: 10px;         
+        .recipientSuggestion{
+            margin-bottom: 10px;
+            input{
+                width: 100%;
+            }
+        }
+        .recipientResults{
+            width: 100%;
+            overflow: auto; 
+            max-height: 400px;
+            margin-bottom: 10px;         
+            .recipientResult{
+                height:100px;
+                margin-bottom:10px;
+                position: relative;
+                padding: 0;
+                &:hover{
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .memberImage{
+                    width: 100px;
+                    height: 100px;
+                    float:left;
+                    padding:0;
+                    margin:0;
+                    clear:left;
+                    background-color:@plus-button-bg;
+                    color:@page-bg;
+                    text-align:center;
+                    .fa {
+                        height:100%;
+                        font-size:65px;
+                        font-weight:normal;
+                        line-height: 1.5;
+                    }
+                }
+                .memberDetails{
+                    margin-right: 100px;
+                    background-color: @page-bg;
+                    height: 100px;
+                    overflow:auto;
+                    position:relative;
+                    margin: 0;
+                    .content {
+                        padding:10px;
+                        h3 {
+                            padding:0;
+                            margin: 0px 0px 10px 0px;
+                            font-size: 16px;
+                        }                   
+                    }                                   
+                }
+            }
+            .recipientResult.selected{
+                .memberDetails{
+                     background-color: @call-to-action;
+                }
+            }
+        }
+        .doneButton{
+            float: right;
+        }     
+    }        
+    h2{
+        text-align: center;
+        font-size: 1.8em;
     }
 }

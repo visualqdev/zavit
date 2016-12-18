@@ -4,6 +4,7 @@ using Castle.Windsor;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
 using zavit.Domain.Messaging.MessageThreads;
+using zavit.Domain.Messaging.Recipients;
 
 namespace zavit.Infrastructure.Ioc.DomainInstallers
 {
@@ -18,7 +19,8 @@ namespace zavit.Infrastructure.Ioc.DomainInstallers
                 Component.For<INewMessageProvider>().ImplementedBy<NewMessageProvider>().LifestyleTransient(),
                 Component.For<IMessageReadService>().ImplementedBy<MessageReadService>().LifestyleTransient(),
                 Component.For<IMessageReadCreator>().ImplementedBy<MessageReadCreator>().LifestyleTransient(),
-                Component.For<IMessageThreadTitleBuilder>().ImplementedBy<MessageThreadTitleBuilder>().LifestyleTransient()
+                Component.For<IMessageThreadTitleBuilder>().ImplementedBy<MessageThreadTitleBuilder>().LifestyleTransient(),
+                Component.For<IMessageRecipientService>().ImplementedBy<MessageRecipientService>().LifestyleTransient()
                 );
         }
     }

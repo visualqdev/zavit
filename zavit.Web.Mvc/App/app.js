@@ -4,4 +4,4 @@ import * as TopNav from "./modules/navigation/topNav";
 (function() {
     TopNav.initialize();
     Routing.registerRoutes();
-}())
+}());

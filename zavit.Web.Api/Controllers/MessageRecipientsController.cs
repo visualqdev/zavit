@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.MessageRecipients;
 using zavit.Web.Api.DtoServices.MessageRecipients;
 
@@ -17,6 +17,7 @@ namespace zavit.Web.Api.Controllers
 
         [HttpGet]
         [Route("~/api/messagerecipients")]
+        [AccessAuthorize]
         public IEnumerable<MessageRecipientDto> GetRecipients([FromUri] IEnumerable<int> accountIds)
         {
             return _messageRecipientDtoService.GetRecipients(accountIds);

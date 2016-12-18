@@ -22,13 +22,15 @@ namespace zavit.Web.Mvc.IocConfiguration.Installers
                 Component.For<IMessageSentObserver>().ImplementedBy<MessageSentSignalRObserver>().LifestyleTransient(),
                 Component.For<ApiStartup>().LifestyleTransient(),
                 Component.For<IThreadMessageBroadcastRequestFactory>().ImplementedBy<ThreadMessageBroadcastRequestFactory>().LifestyleTransient(),
+                Component.For<IInboxMessageBroadcastRequestFactory>().ImplementedBy<InboxMessageBroadcastRequestFactory>().LifestyleTransient(),
                 Component.For<IConnectionIdProvider>().ImplementedBy<ConnectionIdProvider>().LifestyleSingleton(),
                 Component.For<IMessagingBroadcaster>().ImplementedBy<MessagingBroadcaster>().LifestyleSingleton(),
                 Component.For<IMessageReadObserver>().ImplementedBy<MessageReadSignalRObserver>().LifestyleTransient(),
                 Component.For<IReadMessagesBroadcastRequestsProvider>().ImplementedBy<ReadMessagesBroadcastRequestsProvider>().LifestyleTransient(),
                 Component.For<IReadMessagesBroadcastDtoFactory>().ImplementedBy<ReadMessagesBroadcastDtoFactory>().LifestyleTransient(),
                 Component.For<IReadMessagesDtoFactory>().ImplementedBy<ReadMessagesDtoFactory>().LifestyleTransient(),
-                Component.For<IThreadGroupIdProvider>().ImplementedBy<ThreadGroupIdProvider>().LifestyleSingleton()
+                Component.For<IThreadGroupIdProvider>().ImplementedBy<ThreadGroupIdProvider>().LifestyleSingleton(),
+                Component.For<IInboxGroupIdProvider>().ImplementedBy<InboxGroupIdProvider>().LifestyleSingleton()
             );
         }
     }

@@ -3,15 +3,19 @@ import * as Routes from "../routing/routes";
 import * as Progress from "../modules/loading/progress";
 import * as IndexView from "../views/messageInbox/indexView";
 import * as MessagePartial from "../views/messageInbox/messagePartial";
+import * as MessageThreadListPartial from "../views/messageInbox/messageThreadListPartial";
 import * as MessageThreadPartial from "../views/messageInbox/messageThreadPartial";
 import * as MessageThreadService from "../modules/messaging/messageThreadService";
 import * as MessageInboxService from "../modules/messaging/messageInboxService";
 import * as NewMessageFactory from "../modules/messaging/newMessageFactory";
+import * as MessageRecipientSearchModal from "../modules/messaging/messageRecipientSearchModal";
 import * as MessageLayout from "../modules/messaging/messageLayout";
 import * as NotificationReceiver from "../modules/notifications/notificationReceiver";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
+import { htmlEncode } from "../modules/htmlUtils/htmlEncoder";
 
 let currentInboxThread;
+const messageInboxObserverId = "messageInboxObserver";
 
 export function index(options) {
     MainContent.load(Routes.messageInbox);
@@ -33,8 +37,8 @@ export function index(options) {
             $("#messages").html(threadView);
             attachNewMessageEvents(inboxThread);
             showInboxThread(inboxThread);
+            MessageLayout.setUp(inboxThread.ThreadId);
         })
-        .then(MessageLayout.setUp)
         .catch((error) => {
             checkUnauthorised(error);
         })
@@ -42,9 +46,10 @@ export function index(options) {
 }
 
 function attachInboxEvents() {
-    $("#messageThreads").on("click", "[data-thread-id]", (e) => {
+    $("#messageThreadsContainer").on("click", "[data-thread-id]", function(e) {
         e.preventDefault();
-        const threadId = $(e.target).attr("data-thread-id");
+        e.stopPropagation();
+        const threadId = $(this).attr("data-thread-id");
         MessageThreadService.getInboxThread({
                 threadId
             })
@@ -56,7 +61,7 @@ function attachInboxEvents() {
                 $("#messages").html(threadView);
                 attachNewMessageEvents(inboxThread);
                 showInboxThread(inboxThread);
-                MessageLayout.threadSelected(e, $(this));
+                MessageLayout.threadSelected(this);
                 
                 MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });
@@ -66,6 +71,11 @@ function attachInboxEvents() {
         $("#messageThreads").removeClass("threadSelected");
         $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
     });
+    $("#arrangeNew").click(function(e) {
+        e.preventDefault();
+        MessageRecipientSearchModal.show();
+    });
+    NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
 }
 
 function showInboxThread(inboxThread) {
@@ -113,7 +123,7 @@ function attachNewMessageEvents(inboxThread) {
 }
 
 function setThreadTitle(title) {
-    $("#threadTitle h4").text(title);
+    $("#threadTitle h4").text(htmlEncode(title));
 }
 
 function replaceMessageOnThread(message) {
@@ -138,7 +148,9 @@ function receivedNewMessageOnThread(message) {
 
 function markMessagesAsRead(messagesRead) {
     messagesRead.ReadMessageStamps.forEach(messageStamp => {
-        $(`[data-stamp='${messageStamp}'] [data-message-status]`).html("*Has been read: Read");
+        var indicator = $(`[data-stamp='${messageStamp}'] span.sent`);
+        indicator.removeClass("sent");
+        indicator.addClass("read");
     });
 }
 
@@ -147,4 +159,16 @@ function checkUnauthorised(error) {
         PostLoginRedirect.storeRedirectUrl(window.location.href);
         Routes.goTo(Routes.login);
     }
+}
+
+function messageInboxHasChanged() {
+    MessageInboxService
+        .getInboxThreads()
+        .then(messageThreads => {
+            var currentlySelectedThread = MessageLayout.currentlySelectedThreadId();
+
+            const threadView = MessageThreadListPartial.getView(messageThreads);
+            $("#messageThreadsContainer").html(threadView);
+            MessageLayout.selectThreadId(currentlySelectedThread);
+        });
 }

@@ -1,6 +1,8 @@
 ﻿import * as VenueService from "./venueService";
 import * as MapPositionAdjuster from "../map/mapPositionAdjuster";
 import * as ActivityClient from "../activities/activityClient";
+import { htmlEncode } from "../htmlUtils/htmlEncoder";
+import { html } from "../htmlUtils/htmlUtil";
 
 export function show(options = {}) {
     const width = 300,
@@ -36,8 +38,8 @@ function showVenue(venue, placeId) {
     const venueContainer = $(`
         <div id="joinVenueContainer">
             <header>
-                <h3 title="${venue.Name}">${venue.Name}</h3>
-                <address title="${venue.Address}">${venue.Address}</address>            
+                <h3 title="${htmlEncode(venue.Name)}">${htmlEncode(venue.Name)}</h3>
+                <address title="${htmlEncode(venue.Address)}">${htmlEncode(venue.Address)}</address>            
             </header>
             <h4>I am available for some</h4>
             <div class="control-group" id="joinVenueChooseActivities">                
@@ -73,7 +75,7 @@ function getActivitiesMarkup(activities) {
 function activityCheckboxes(activities) {
     let activitiesMarkup = "";
     activities.forEach(activity => {
-        activitiesMarkup += ` 
+        activitiesMarkup += html` 
             <li class="list-group-item col-xs-12 col-sm-6">
                 <label class="checkbox">
                     <input type="checkbox" name="venueActivities" value="${activity.Id}">${activity.Name}

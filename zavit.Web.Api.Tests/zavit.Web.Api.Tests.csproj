@@ -77,11 +77,14 @@
     <Compile Include="Controllers\AccountsControllerTests.cs" />
     <Compile Include="Controllers\ActivitiesControllerTests.cs" />
     <Compile Include="Controllers\MessageRecipientsControllerTests.cs" />
+    <Compile Include="Controllers\MessageRecipientSuggestionsControllerTests.cs" />
     <Compile Include="Controllers\MessagesControllerTests.cs" />
     <Compile Include="Controllers\MessageThreadControllerTests.cs" />
+    <Compile Include="Controllers\ProfilesControllerTests.cs" />
     <Compile Include="Controllers\VenueMembersControllerTests.cs" />
     <Compile Include="Controllers\VenueMembershipsControllerTests.cs" />
     <Compile Include="Controllers\VenuesControllerTests.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\MessageDtoFactoryTests.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\Profiles\ProfileDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDetailsDtoFactoryTests.cs" />
@@ -101,6 +105,8 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProviderTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProviderTests.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileDtoServiceTests.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileUpdateFactoryTests.cs" />
     <Compile Include="DtoServices\VenueMembers\VenueMemberDtoServiceTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactoryTests.cs" />
@@ -127,6 +133,10 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
       <Name>zavit.Domain.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Profiles\zavit.Domain.Profiles.csproj">
+      <Project>{6144e0cf-88dd-4dba-89cd-3098a9e99202}</Project>
+      <Name>zavit.Domain.Profiles</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>

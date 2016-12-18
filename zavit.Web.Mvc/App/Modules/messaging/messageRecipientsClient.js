@@ -11,3 +11,14 @@ export function getRecipientsById(accountIds) {
             contentType: "application/json; charset=utf-8"
         });
 }
+
+export function suggestRecipients(searchTerm, skip, take) {
+    const getRecipientsUrl = `${ApiSettings.apiUrl}api/messagerecipientsuggestions?searchterm=${searchTerm}&skip=${skip}&take=${take}`;
+    
+    return AuthorizedClient
+        .send({
+            url: getRecipientsUrl,
+            type: "get",
+            contentType: "application/json; charset=utf-8"
+        });
+}

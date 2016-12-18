@@ -132,12 +132,16 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\MessageRecipientsController.cs" />
+    <Compile Include="Controllers\MessageRecipientSuggestionsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\IMessageRecipientCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\MessageRecipients\IMessageRecipientDtoFactory.cs" />
+    <Compile Include="DtoFactories\MessageRecipients\MessageRecipientCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\MessageRecipients\MessageRecipientDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\IMessageCollectionDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\Messages\IMessageDtoFactory.cs" />
@@ -153,6 +157,8 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\Profiles\IProfileDtoFactory.cs" />
+    <Compile Include="DtoFactories\Profiles\ProfileDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IVenueMembershipDtoFactory.cs" />
@@ -179,6 +185,10 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\Profiles\IProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\IProfileUpdateFactory.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileUpdateFactory.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\NewVenueMemberships\INewVenueMembershipProvider.cs" />
@@ -192,6 +202,7 @@
     <Compile Include="DtoServices\Venues\NewVenues\NewVenueProvider.cs" />
     <Compile Include="DtoServices\Venues\VenueDtoService.cs" />
     <Compile Include="Dtos\Accounts\AccountRegistrationDto.cs" />
+    <Compile Include="Dtos\MessageRecipients\MessageRecipientCollectionDto.cs" />
     <Compile Include="Dtos\MessageRecipients\MessageRecipientDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessageDto.cs" />
     <Compile Include="Dtos\Messaging\Messages\MessagesCollectionDto.cs" />
@@ -202,6 +213,7 @@
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadsCollectionDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
+    <Compile Include="Dtos\Profiles\ProfileDto.cs" />
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDto.cs" />
@@ -244,6 +256,10 @@
     <ProjectReference Include="..\zavit.Domain.Messaging\zavit.Domain.Messaging.csproj">
       <Project>{5373cb15-71e6-44a9-88f6-6a84686e36c9}</Project>
       <Name>zavit.Domain.Messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Profiles\zavit.Domain.Profiles.csproj">
+      <Project>{6144e0cf-88dd-4dba-89cd-3098a9e99202}</Project>
+      <Name>zavit.Domain.Profiles</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
