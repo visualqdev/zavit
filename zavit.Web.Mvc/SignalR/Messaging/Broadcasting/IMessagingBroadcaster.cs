@@ -7,5 +7,6 @@ namespace zavit.Web.Mvc.SignalR.Messaging.Broadcasting
     {
         void ThreadMessageSent(BroadcastRequest<MessageDto> messageBroadcastRequest);
         void ThreadMessageRead(BroadcastRequest<ReadMessagesDto> readMessagesBroadcastRequest);
+        void InboxMessageSent(BroadcastRequest<MessageDto> messageBroadcastRequest);
     }
 }

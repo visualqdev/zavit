@@ -1,8 +1,13 @@
 ﻿import * as VenueActivitiesPartial from "./venueActivitiesPartial";
+import { html } from "../../modules/htmlUtils/htmlUtil";
+import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 
 export function getView(membership) {
     return `
         <div id="yourVenue" class="container">
+            <div id="yourVenueHeading">
+                <h2 id="mainHeading">${htmlEncode(membership.Venue.Name)}</h2>
+            </div>
             ${venueDetails(membership.Venue)}
             ${VenueActivitiesPartial.getView(membership.Venue.Activities, membership.Activities)}
             ${venueMembers()}
@@ -11,7 +16,7 @@ export function getView(membership) {
 }
 
 function venueDetails(venue) {
-    return `
+    return html`
             <div class="yourVenueDetails">
                 <div class="yourVenueMap" data-venue-lat="${venue.Latitude}" data-venue-lng="${venue.Longitude}"></div>
                 <div class="pull-left">

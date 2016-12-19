@@ -9,6 +9,7 @@ using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreads;
+using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.DtoFactories.Venues;
@@ -17,6 +18,7 @@ using zavit.Web.Api.DtoServices.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessageThreads;
+using zavit.Web.Api.DtoServices.Profiles;
 using zavit.Web.Api.DtoServices.VenueMembers;
 using zavit.Web.Api.DtoServices.VenueMemberships;
 using zavit.Web.Api.DtoServices.VenueMemberships.NewVenueMemberships;
@@ -60,7 +62,11 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IMessageRecipientDtoService>().ImplementedBy<MessageRecipientDtoService>().LifestyleTransient(),
                 Component.For<IMessageRecipientDtoFactory>().ImplementedBy<MessageRecipientDtoFactory>().LifestyleTransient(),
                 Component.For<IInboxThreadDtoFactory>().ImplementedBy<InboxThreadDtoFactory>().LifestyleTransient(),
-                Component.For<IInboxThreadDetailsDtoFactory>().ImplementedBy<InboxThreadDetailsDtoFactory>().LifestyleTransient()
+                Component.For<IInboxThreadDetailsDtoFactory>().ImplementedBy<InboxThreadDetailsDtoFactory>().LifestyleTransient(),
+                Component.For<IMessageRecipientCollectionDtoFactory>().ImplementedBy<MessageRecipientCollectionDtoFactory>().LifestyleTransient(),
+                Component.For<IProfileDtoService>().ImplementedBy<ProfileDtoService>().LifestyleTransient(),
+                Component.For<IProfileDtoFactory>().ImplementedBy<ProfileDtoFactory>().LifestyleTransient(),
+                Component.For<IProfileUpdateFactory>().ImplementedBy<ProfileUpdateFactory>().LifestyleTransient()
                 );
         }
     }

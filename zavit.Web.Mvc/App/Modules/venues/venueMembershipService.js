@@ -13,6 +13,6 @@ export function getVenueMembership(options) {
 
 export function getVenueMembers(options, skip, take) {
     if (options.venueId) {
-        VenueMembershipClient.getVenueMembers(options.venueId, skip, take);
+        return VenueMembershipClient.getVenueMembers(options.venueId, skip, take);
     }
 }

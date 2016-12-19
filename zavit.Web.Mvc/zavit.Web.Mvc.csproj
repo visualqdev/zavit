@@ -148,6 +148,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\messageInboxController.js" />
+    <Content Include="app\controllers\profileController.js" />
     <Content Include="app\controllers\yourVenueController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
     <Content Include="app\layout\mainContent.js" />
@@ -155,6 +156,8 @@
     <Content Include="app\controllers\venueController.js" />
     <Content Include="app\modules\activities\activityClient.js" />
     <Content Include="app\modules\clients\authorizedClient.js" />
+    <Content Include="app\modules\htmlUtils\htmlEncoder.js" />
+    <Content Include="app\modules\htmlUtils\htmlUtil.js" />
     <Content Include="app\modules\loading\info.js" />
     <Content Include="app\modules\loading\progress.js" />
     <Content Include="app\modules\map\geocode.js" />
@@ -162,16 +165,21 @@
     <Content Include="app\modules\messaging\messageClient.js" />
     <Content Include="app\modules\messaging\messageInboxService.js" />
     <Content Include="app\modules\messaging\messageRecipientsClient.js" />
+    <Content Include="app\modules\messaging\messageRecipientSearchModal.js" />
+    <Content Include="app\modules\messaging\messageRecipientSearchLayout.js" />
     <Content Include="app\modules\messaging\messageThreadClient.js" />
     <Content Include="app\modules\messaging\messageThreadService.js" />
     <Content Include="app\modules\messaging\newMessageFactory.js" />
     <Content Include="app\modules\messaging\messageLayout.js" />
     <Content Include="app\modules\navigation\search.js" />
+    <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\notifications\notificationReceiver.js" />
-    <Content Include="app\modules\places\placeModal.js" />
     <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
     <Content Include="app\modules\places\placesClient.js" />
+    <Content Include="app\modules\profile\profileClient.js" />
+    <Content Include="app\modules\profile\profileDetailsLayout.js" />
+    <Content Include="app\modules\profile\profileGender.js" />
     <Content Include="app\modules\uniqueIdentifier\guid.js" />
     <Content Include="app\modules\venues\venueMembershipClient.js" />
     <Content Include="app\modules\venues\venueClient.js" />
@@ -182,11 +190,16 @@
     <Content Include="app\modules\venues\yourVenueMap.js" />
     <Content Include="app\modules\venues\yourVenuesMap.js" />
     <Content Include="app\routing\routes.js" />
+    <Content Include="app\views\account\loginModalView.js" />
     <Content Include="app\views\home\exploreListPartial.js" />
     <Content Include="app\views\home\index.js" />
     <Content Include="app\views\messageInbox\indexView.js" />
     <Content Include="app\views\messageInbox\messagePartial.js" />
+    <Content Include="app\views\messageRecipientSearch\messageRecipientSearchModalView.js" />
+    <Content Include="app\views\messageInbox\messageThreadListPartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
+    <Content Include="app\views\messageRecipientSearch\messageRecipientsListPartial.js" />
+    <Content Include="app\views\profile\indexView.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
@@ -197,7 +210,6 @@
     <Content Include="app\modules\account\externalAccountClient.js" />
     <Content Include="app\modules\account\externalAccountService.js" />
     <Content Include="app\modules\account\registerModal.js" />
-    <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\settings\apiSettings.js" />
     <Content Include="app\modules\storage\storage.js" />
     <Content Include="bundle.js" />
@@ -284,6 +296,7 @@
     <Content Include="CSS\venues.less" />
     <Content Include="CSS\messages.less" />
     <Content Include="CSS\explore.less" />
+    <Content Include="CSS\profile.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -308,6 +321,8 @@
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IInboxMessageBroadcastRequestFactory.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\InboxMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastDtoFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastRequestsProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesDtoFactory.cs" />
@@ -321,6 +336,8 @@
     <Compile Include="SignalR\ConnectionIds\IConnectionIdProvider.cs" />
     <Compile Include="SignalR\Hubs\MessagingHub.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\Dtos\ReadMessagesDto.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IInboxGroupIdProvider.cs" />
+    <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\InboxGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\IThreadGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\GroupIds\ThreadGroupIdProvider.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\IMessagingBroadcaster.cs" />

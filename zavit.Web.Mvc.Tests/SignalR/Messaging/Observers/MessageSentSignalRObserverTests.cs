@@ -17,19 +17,26 @@ namespace zavit.Web.Mvc.Tests.SignalR.Messaging.Observers
         {
             Because of = () => Subject.MessageSent(_message);
 
-            It should_broadcast_the_message_dto = 
-                () => Injected<IMessagingBroadcaster>().AssertWasCalled(b => b.ThreadMessageSent(_messageBroadcastRequest));
+            It should_broadcast_the_new_message_dto = 
+                () => Injected<IMessagingBroadcaster>().AssertWasCalled(b => b.ThreadMessageSent(_threadMessageBroadcastRequest));
+
+            It should_broadcast_the_inbox_change_with_new_message_dto =
+                () => Injected<IMessagingBroadcaster>().AssertWasCalled(b => b.InboxMessageSent(_inboxMessageBroadcastRequest));
 
             Establish context = () =>
             {
                 _message = NewInstanceOf<Message>();
 
-                _messageBroadcastRequest = NewInstanceOf<BroadcastRequest<MessageDto>>();
-                Injected<IThreadMessageBroadcastRequestFactory>().Stub(p => p.CreateItem(_message)).Return(_messageBroadcastRequest);
+                _threadMessageBroadcastRequest = NewInstanceOf<BroadcastRequest<MessageDto>>();
+                Injected<IThreadMessageBroadcastRequestFactory>().Stub(p => p.CreateItem(_message)).Return(_threadMessageBroadcastRequest);
+
+                _inboxMessageBroadcastRequest = NewInstanceOf<BroadcastRequest<MessageDto>>();
+                Injected<IInboxMessageBroadcastRequestFactory>().Stub(p => p.CreateItem(_message)).Return(_inboxMessageBroadcastRequest);
             };
 
             static Message _message;
-            static BroadcastRequest<MessageDto> _messageBroadcastRequest;
+            static BroadcastRequest<MessageDto> _threadMessageBroadcastRequest;
+            static BroadcastRequest<MessageDto> _inboxMessageBroadcastRequest;
         }
     }
 }

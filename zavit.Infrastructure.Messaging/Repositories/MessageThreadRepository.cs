@@ -67,7 +67,7 @@ namespace zavit.Infrastructure.Messaging.Repositories
                 .Fetch(t => t.Participants).Eager
                 .WithSubquery.WhereProperty(t => t.Id).In(messageThreadIds)
                 .TransformUsing(Transformers.DistinctRootEntity)
-                .OrderBy(t => t.CreatedOn).Desc
+                .OrderBy(t => t.LastUpdatedOn).Desc
                 .Future();
 
             

@@ -68,6 +68,7 @@
     <Compile Include="MessageThreads\MessageThreadTitleBuilderTests.cs" />
     <Compile Include="MessageThreads\NewMessageThreadProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recipients\MessageRecipientServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">

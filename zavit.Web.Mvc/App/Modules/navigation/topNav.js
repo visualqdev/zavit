@@ -1,6 +1,7 @@
 ﻿import * as LoginModal from "../account/loginModal";
 import * as AccountService from "../account/accountService";
 import * as Routes from "../../routing/routes";
+import { htmlEncode } from "../htmlUtils/htmlEncoder";
 
 export function initialize() {
     refresh();
@@ -23,7 +24,7 @@ export function refresh() {
     if (userAccount) {
         $("#topnavAccount").show();
         $("#topnavLogin").hide();
-        $("#topnavAccountDisplayName").text(userAccount.displayName);
+        $("#topnavAccountDisplayName").text(htmlEncode(userAccount.displayName));
     } else {
         $("#topnavAccount").hide();
         $("#topnavLogin").show();

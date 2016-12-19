@@ -1,10 +1,11 @@
 ﻿import * as AccountService from "../../modules/account/accountService";
+import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 
 export function getView(message) {
     return `
         <li data-stamp="${message.Stamp}" class="messageContainer ${userType(message)}">
             ${displayName(message)}
-            <span class="body">${message.Body}</span>
+            <span class="body">${htmlEncode(message.Body)}</span>
             ${messageHasBeenRead(message)}
             <span class="date" data-message-status>${moment(message.SentOn).calendar()}</span>
         </li>
@@ -37,6 +38,6 @@ function displayName(message) {
     if (!message.Sender) return false;
     const userIsNotCurrentUser = message.Sender.AccountId !== parseInt(currentUserId());
 
-    if(userIsNotCurrentUser) return `<span class="displayName">${message.Sender.DisplayName}</span>`;
+    if(userIsNotCurrentUser) return `<span class="displayName">${htmlEncode(message.Sender.DisplayName)}</span>`;
     return "";
 }
