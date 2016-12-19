@@ -3,9 +3,6 @@
 export function getView(options) {
     return `
         <div id="yourVenues" class="container">
-            <div id="yourVenuesHeading">
-                <h2 id="mainHeading"><i class="fa fa-map-marker" aria-hidden="true"></i>Your venues</h2>
-            </div>
             ${getVenues(options)}
         </div>
         `;

@@ -7,22 +7,37 @@ html, body {
 	height: 100%;
 	width:100%;
     margin:0;
+    background:@background;
 }
 h1,h2,h3,h4,h5,h6 {
     color:@logo;
 }
-h2#mainHeading {
-    color:@nav-bg;
-    .fa {
-        margin-right:10px !important;
-        
-    }
-    font-size:36px !important;
-    padding:10px;
-    display:inline;
-    float:left;
-    font-weight:normal;
+
+
+#home > .contentContainer > .row.header {
+    border-bottom: 1px solid @bar-border;
 }
+
+@media (min-width: 1200px){
+    .container {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px){
+    .container {
+        width: 100%;
+    }
+
+}
+
+@media (min-width: 768px){
+    .container {
+        width: 100%;
+    }
+}
+
+
 
 .contentContainer {
     display: flex;
@@ -42,38 +57,49 @@ h2#mainHeading {
     .row.footer {
         flex: 0 1 30px;
         background-color:@nav-bg;
-        color:#fff;
+        color:@dark-text;
         text-align:center;
-        footer {
-            padding-top:5px;
-        }
+        border:1px solid @bar-border;
+        line-height:2.5;
     }    
 }
 
+.row.search {
+    width:75%;
+    margin:0px auto;
+}
+
 #mainContent {	
-	background: @map-background;
+	
     overflow: auto;
     height: 100%;
+    width:75%;
+    margin:5px auto;
+}
+
+.header {
+    background:@nav-bg;
 }
 
 #mainNav.navbar {
 	margin-bottom: 0px;
 	border-radius: 0;
-	border: 1px solid @nav-bar-border;
 	background: @nav-bg;
     position: relative;
-    top: 0;
-    left:0;
-    width:100%;
+    margin:0 auto;
+    width:75%;
     z-index: 2;
+    border:none;
+    
+    li a {
+	    color:@text-link;
+        font-size:18px;
+    }
     li.active a {
 	    background: @nav-button-bg;
 	    border: 1px solid @nav-divider;
 	    border-width: 0px 1px;
-    }
-    a {
-	    color:@text-link;
-        font-size:18px;
+        color:@highlight-text-link;
     }
     a span{
 	    color:@text-link;
@@ -81,21 +107,14 @@ h2#mainHeading {
     }
     .navbar-header {
         //width:65%;
+        
         a {
 	        color: @logo;
 	        font-size: 30px;
         }
-        #search {
-            max-width: 450px;
-            .input-group {
-                //width:100%;
-                .input-group-btn {
-                    width:1%;
-                }
-            }
-        }  
+         
     }   
-    
+   
     .input-group {
         .search-panel {
             a {
@@ -103,15 +122,6 @@ h2#mainHeading {
                 font-size:15px;
             }
         }
-    }
-
-    .navbar-form {
-        padding: 0;
-        margin-right: 0;
-        margin-left: 0;
-        border: 0;
-        -webkit-box-shadow: none;
-        box-shadow: none;
     }
 
     @media (min-width: 768px) and (max-width: 1024px) {
@@ -128,6 +138,24 @@ h2#mainHeading {
             float:none;
         }
     }
+}
+
+#search {
+    width:100%;
+    margin-top:15px;
+    .input-group {
+        .input-group-btn {
+            width:1%;
+        }
+    }
+} 
+.navbar-form {
+    padding: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 #loginModal{
@@ -236,7 +264,7 @@ h2#mainHeading {
 
       position: fixed;
       z-index: 2;
-      top: 52px;
+      top: 50px;
       left: 0;
 
       width: 100%;

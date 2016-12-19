@@ -15,24 +15,6 @@
                     </button>
                     <a class="navbar-brand hidden-xs" href="#">zavit</a>
                     <a class="navbar-brand visible-xs" href="#">z</a>
-                    <div class="navbar-form pull-left" id="search">
-                        <div class="input-group">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Venue</span> <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#" data-type="Area" data-placeHolderText="Choose another area by name or postcode...">Area search</a></li>
-                                    <li><a href="#" data-type="Venue" data-placeHolderText="Search for a sports venue in this area by name...">Venue search</a></li>
-                                </ul>
-                            </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control" name="x" placeholder="Search for a sports venue in this area by name..." id="search_input">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="searchButton"><span class="glyphicon glyphicon-search"></span></button>
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right" id="topnavLinks">
@@ -49,7 +31,28 @@
                         </li>
                     </ul>
                 </div>
+
                 <!--/.navbar-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="row search">
+        <div class="navbar-form pull-left" id="search">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span id="search_concept">Venue</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" data-type="Area" data-placeHolderText="Choose another area by name or postcode...">Area search</a></li>
+                        <li><a href="#" data-type="Venue" data-placeHolderText="Search for a sports venue in this area by name...">Venue search</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">
+                <input type="text" class="form-control" name="x" placeholder="Search for a sports venue in this area by name..." id="search_input">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="searchButton"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
             </div>
         </div>
     </div>

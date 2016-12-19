@@ -16,7 +16,7 @@ export function adjustHeightOfMainContainer($messagesContainer) {
 
     const topOfMessages = $messagesContainer.offset().top,
         heightOfControls = $("#controls").height(),
-        heightOfMargin = parseInt($('#controls').css("margin-top")),
+        heightOfMargin = parseInt($('#controls').css("margin-top")) + 10,
         heightOfFooter = $(".footer").height(),
         heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin;
 

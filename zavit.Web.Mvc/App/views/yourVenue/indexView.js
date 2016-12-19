@@ -3,9 +3,6 @@
 export function getView(membership) {
     return `
         <div id="yourVenue" class="container">
-            <div id="yourVenueHeading">
-                <h2 id="mainHeading">${membership.Venue.Name}</h2>
-            </div>
             ${venueDetails(membership.Venue)}
             ${VenueActivitiesPartial.getView(membership.Venue.Activities, membership.Activities)}
             ${venueMembers()}
