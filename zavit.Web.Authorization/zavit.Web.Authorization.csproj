@@ -111,7 +111,15 @@
     <Compile Include="ExternalLogins\AuthenticationOptionsFactory.cs" />
     <Compile Include="ExternalLogins\AuthenticationProviders\FacebookAuthProvider.cs" />
     <Compile Include="ExternalLogins\AuthenticationProviders\GoogleAuthProvider.cs" />
+    <Compile Include="ExternalLogins\Clients\FacebookLoginClient.cs" />
+    <Compile Include="ExternalLogins\Clients\GoogleLoginClient.cs" />
+    <Compile Include="ExternalLogins\Clients\IFacebookLoginClient.cs" />
+    <Compile Include="ExternalLogins\ExternalLoginProvider.cs" />
     <Compile Include="ExternalLogins\ExternalLoginRequestResult.cs" />
+    <Compile Include="ExternalLogins\ExternalTokenVerifiers\FacebookAccessTokenVerifier.cs" />
+    <Compile Include="ExternalLogins\ExternalTokenVerifiers\GoogleAccessTokenVerifier.cs" />
+    <Compile Include="ExternalLogins\ExternalTokenVerifiers\IExternalAccessTokenVerifier.cs" />
+    <Compile Include="ExternalLogins\Clients\IGoogleLoginClient.cs" />
     <Compile Include="ExternalLogins\IAuthenticationOptionsFactory.cs" />
     <Compile Include="ExternalLogins\IExternalLoginsSettings.cs" />
     <Compile Include="ExternalLogins\LoginData\ExternalLoginData.cs" />

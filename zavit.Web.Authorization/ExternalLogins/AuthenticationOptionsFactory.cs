@@ -15,12 +15,14 @@ namespace zavit.Web.Authorization.ExternalLogins
 
         public GoogleOAuth2AuthenticationOptions CreateGoogleOAuth2AuthenticationOptions()
         {
-            return new GoogleOAuth2AuthenticationOptions()
+            var googleOptions = new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = _externalLoginsSettings.GoogleClientId,
                 ClientSecret = _externalLoginsSettings.GoogleClientSecret,
                 Provider = new GoogleAuthProvider()
             };
+
+            return googleOptions;
         }
 
         public FacebookAuthenticationOptions CreateFacebookAuthenticationOptions()
