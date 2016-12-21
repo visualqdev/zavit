@@ -4,9 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using zavit.Infrastructure.Core.Serialization;
 
-namespace zavit.Web.Authorization.ExternalLogins.Clients
+namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
 {
     public class FacebookLoginClient : IFacebookLoginClient
     {
@@ -32,6 +31,18 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients
             {
                 return JObject.Load(jsonReader);
             }
+        }
+
+        public async Task<FacebookUserInfoDto> GetUserInfo(string accessToken)
+        {
+            var message = new HttpRequestMessage();
+            message.Headers.Add("Authorization", $"Bearer {accessToken}");
+            message.RequestUri = new Uri($"{_externalLoginsSettings.FacebookGraphApiUrl}/me?fields=email,name,id,gender");
+            message.Method = HttpMethod.Get;
+
+            var response = await _client.SendAsync(message);
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<FacebookUserInfoDto>(json);
         }
     }
 }

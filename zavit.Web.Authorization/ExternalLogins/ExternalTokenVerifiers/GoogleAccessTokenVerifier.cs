@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using zavit.Web.Api.Dtos.ExternalAccounts;
 using zavit.Web.Authorization.ExternalLogins.Clients;
+using zavit.Web.Authorization.ExternalLogins.Clients.Google;
 
 namespace zavit.Web.Authorization.ExternalLogins.ExternalTokenVerifiers
 {

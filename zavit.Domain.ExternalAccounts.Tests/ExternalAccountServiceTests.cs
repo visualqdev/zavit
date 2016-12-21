@@ -12,7 +12,7 @@ namespace zavit.Domain.ExternalAccounts.Tests
     {
         class When_creating_an_external_account
         {
-            Because of = () => _result = Subject.CreateExternalAccount(LoginProvider, ExternalUserId, DisplayName, Email);
+            Because of = () => _result = Subject.CreateExternalAccount(_accountRegistration);
 
             It should_save_the_new_external_account =
                 () => Injected<IExternalAccountsRepository>().AssertWasCalled(r => r.Save(_externalAccount));
@@ -21,24 +21,22 @@ namespace zavit.Domain.ExternalAccounts.Tests
 
             Establish context = () =>
             {
-                var accountRegistration = NewInstanceOf<IAccountRegistration>();
-                Injected<IExternalAccountRegistrationFactory>().Stub(f => f.CreateItem(ExternalUserId, DisplayName, Email)).Return(accountRegistration);
+                _accountRegistration = NewInstanceOf<ExternalAccountRegistration>();
+                _accountRegistration.Provider = "Provider";
+                _accountRegistration.Username = "User Name";
 
                 var accountRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
                 accountRegistrationResult.Success = true;
                 accountRegistrationResult.Account = NewInstanceOf<Account>();
-                Injected<IAccountService>().Stub(s => s.Register(accountRegistration)).Return(accountRegistrationResult);
+                Injected<IAccountService>().Stub(s => s.Register(_accountRegistration)).Return(accountRegistrationResult);
 
                 _externalAccount = NewInstanceOf<ExternalAccount>();
-                Injected<INewExternalAccountProvider>().Stub(p => p.Provide(accountRegistrationResult.Account, LoginProvider, ExternalUserId)).Return(_externalAccount);
+                Injected<INewExternalAccountProvider>().Stub(p => p.Provide(accountRegistrationResult.Account, _accountRegistration.Provider, _accountRegistration.Username)).Return(_externalAccount);
             };
 
             static ExternalAccount _result;
             static ExternalAccount _externalAccount;
-            const string LoginProvider = "Provider";
-            const string ExternalUserId = "User ID";
-            const string DisplayName = "Display Name";
-            const string Email = "email@emai.com";
+            static ExternalAccountRegistration _accountRegistration;
         }
     }
 }

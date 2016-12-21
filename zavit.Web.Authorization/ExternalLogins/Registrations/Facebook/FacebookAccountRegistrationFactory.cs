@@ -1,0 +1,36 @@
+﻿using System.Threading.Tasks;
+using zavit.Domain.ExternalAccounts.Registrations;
+using zavit.Web.Authorization.ExternalLogins.Clients.Facebook;
+
+namespace zavit.Web.Authorization.ExternalLogins.Registrations.Facebook
+{
+    public class FacebookAccountRegistrationFactory : IExternalAccountRegistrationFactory
+    {
+        readonly IFacebookLoginClient _facebookLoginClient;
+        
+        public FacebookAccountRegistrationFactory(IFacebookLoginClient facebookLoginClient)
+        {
+            _facebookLoginClient = facebookLoginClient;
+        }
+
+        public async Task<ExternalAccountRegistration> CreateRegistration(string provider, string accessToken)
+        {
+            var userInfo = await _facebookLoginClient.GetUserInfo(accessToken);
+
+            var externalAccountRegistration = new ExternalAccountRegistration
+            {
+                Provider = provider,
+                DisplayName = userInfo.name,
+                Email = userInfo.email,
+                Username = userInfo.id
+            };
+
+            return externalAccountRegistration;
+        }
+
+        public bool CanCreate(string provider)
+        {
+            return provider == ExternalLoginProvider.Facebook;
+        }
+    }
+}

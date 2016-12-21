@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace zavit.Web.Authorization.ExternalLogins.Clients
+namespace zavit.Web.Authorization.ExternalLogins.Clients.Google
 {
     public class GoogleLoginClient : IGoogleLoginClient
     {
@@ -20,7 +20,7 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients
 
         public async Task<JObject> GetTokenInfo(string accessToken)
         {
-            var uri = new Uri($"{_externalLoginsSettings.GoogleOauth2ApiUrl}/tokeninfo?input_token={accessToken}");
+            var uri = new Uri($"{_externalLoginsSettings.GoogleOauth2ApiUrl}/tokeninfo?access_token={accessToken}");
             var response = await _client.GetAsync(uri);
 
             if (!response.IsSuccessStatusCode) return null;
@@ -31,6 +31,18 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients
             {
                 return JObject.Load(jsonReader);
             }
+        }
+
+        public async Task<GoogleUserInfoDto> GetUserInfo(string accessToken)
+        {
+            var message = new HttpRequestMessage();
+            message.Headers.Add("Authorization", $"Bearer {accessToken}");
+            message.RequestUri = new Uri($"{_externalLoginsSettings.GoogleOauth2ApiUrl}/userinfo");
+            message.Method = HttpMethod.Get;
+
+            var response = await _client.SendAsync(message);
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<GoogleUserInfoDto>(json);
         }
     }
 }

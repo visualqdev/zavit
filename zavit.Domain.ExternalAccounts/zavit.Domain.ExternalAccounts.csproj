@@ -42,12 +42,10 @@
   <ItemGroup>
     <Compile Include="ExternalAccount.cs" />
     <Compile Include="IExternalAccountService.cs" />
-    <Compile Include="Registrations\ExternalAccountRegistration.cs" />
     <Compile Include="ExternalAccountService.cs" />
     <Compile Include="IExternalAccountsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registrations\ExternalAccountRegistrationFactory.cs" />
-    <Compile Include="Registrations\IExternalAccountRegistrationFactory.cs" />
+    <Compile Include="Registrations\ExternalAccountRegistration.cs" />
     <Compile Include="Registrations\INewExternalAccountProvider.cs" />
     <Compile Include="Registrations\NewExternalAccountProvider.cs" />
   </ItemGroup>

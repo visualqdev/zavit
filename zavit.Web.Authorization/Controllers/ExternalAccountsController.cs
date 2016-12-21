@@ -12,9 +12,11 @@ using Newtonsoft.Json.Linq;
 using zavit.Domain.Clients;
 using zavit.Domain.ExternalAccounts;
 using zavit.Web.Api.Dtos.ExternalAccounts;
+using zavit.Web.Authorization.Dtos.ExternalAccounts;
 using zavit.Web.Authorization.ExternalLogins;
 using zavit.Web.Authorization.ExternalLogins.ExternalTokenVerifiers;
 using zavit.Web.Authorization.ExternalLogins.LoginData;
+using zavit.Web.Authorization.ExternalLogins.Registrations;
 using zavit.Web.Authorization.HttpActionResults;
 
 namespace zavit.Web.Authorization.Controllers
@@ -23,21 +25,21 @@ namespace zavit.Web.Authorization.Controllers
     {
         readonly IClientRepository _clientRepository;
         readonly IExternalAccountsRepository _externalAccountsRepository;
-        readonly IExternalLoginsSettings _externalLoginsSettings;
         readonly IExternalAccountService _externalAccountService;
         readonly ILocalAccessTokenProvider _localAccessTokenProvider;
         readonly IExternalLoginDataProvider _externalLoginDataProvider;
         readonly IEnumerable<IExternalAccessTokenVerifier> _externalAccessTokenVerifiers;
+        readonly IEnumerable<IExternalAccountRegistrationFactory> _externalAccountRegistrationFactories;
 
-        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider, IExternalLoginDataProvider externalLoginDataProvider, IEnumerable<IExternalAccessTokenVerifier> externalAccessTokenVerifiers)
+        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider, IExternalLoginDataProvider externalLoginDataProvider, IEnumerable<IExternalAccessTokenVerifier> externalAccessTokenVerifiers, IEnumerable<IExternalAccountRegistrationFactory> externalAccountRegistrationFactories)
         {
             _clientRepository = clientRepository;
             _externalAccountsRepository = externalAccountsRepository;
-            _externalLoginsSettings = externalLoginsSettings;
             _externalAccountService = externalAccountService;
             _localAccessTokenProvider = localAccessTokenProvider;
             _externalLoginDataProvider = externalLoginDataProvider;
             _externalAccessTokenVerifiers = externalAccessTokenVerifiers;
+            _externalAccountRegistrationFactories = externalAccountRegistrationFactories;
         }
 
         [OverrideAuthentication]
@@ -105,7 +107,15 @@ namespace zavit.Web.Authorization.Controllers
                 return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "External user is already registered", this);
             }
 
-            var externalAccount = _externalAccountService.CreateExternalAccount(model.Provider, verifiedAccessToken.user_id, model.DisplayName, model.Email);
+            var externalAccountRegistrationFactory = _externalAccountRegistrationFactories.FirstOrDefault(f => f.CanCreate(model.Provider));
+
+            if (externalAccountRegistrationFactory == null)
+            {
+                return BadRequest("Invalid Provider");
+            }
+
+            var registration = await externalAccountRegistrationFactory.CreateRegistration(model.Provider, model.ExternalAccessToken);
+            var externalAccount = _externalAccountService.CreateExternalAccount(registration);
 
             var accessTokenResponse = _localAccessTokenProvider.GenerateLocalAccessTokenResponse(
                 externalAccount.Account,

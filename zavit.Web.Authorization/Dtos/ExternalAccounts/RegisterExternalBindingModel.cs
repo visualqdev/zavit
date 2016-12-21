@@ -1,4 +1,4 @@
-﻿namespace zavit.Web.Api.Dtos.ExternalAccounts
+﻿namespace zavit.Web.Authorization.Dtos.ExternalAccounts
 {
     public class RegisterExternalBindingModel
     {
