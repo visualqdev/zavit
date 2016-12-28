@@ -13,6 +13,7 @@ using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
 using zavit.Web.Api.DtoFactories.Venues;
+using zavit.Web.Api.DtoServices.Accounts;
 using zavit.Web.Api.DtoServices.MessageRecipients;
 using zavit.Web.Api.DtoServices.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads;
@@ -66,7 +67,9 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IMessageRecipientCollectionDtoFactory>().ImplementedBy<MessageRecipientCollectionDtoFactory>().LifestyleTransient(),
                 Component.For<IProfileDtoService>().ImplementedBy<ProfileDtoService>().LifestyleTransient(),
                 Component.For<IProfileDtoFactory>().ImplementedBy<ProfileDtoFactory>().LifestyleTransient(),
-                Component.For<IProfileUpdateFactory>().ImplementedBy<ProfileUpdateFactory>().LifestyleTransient()
+                Component.For<IProfileUpdateFactory>().ImplementedBy<ProfileUpdateFactory>().LifestyleTransient(),
+                Component.For<IAccountProfileRegistrationFactory>().ImplementedBy<AccountProfileRegistrationFactory>().LifestyleTransient(),
+                Component.For<IAccountRegistrationDtoService>().ImplementedBy<AccountRegistrationDtoService>().LifestyleTransient()
                 );
         }
     }

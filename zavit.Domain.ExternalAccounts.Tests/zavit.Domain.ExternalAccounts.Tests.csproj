@@ -73,6 +73,10 @@
       <Project>{7edfe7c9-2268-43af-a262-30650b626e0a}</Project>
       <Name>zavit.Domain.ExternalAccounts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Domain.Profiles\zavit.Domain.Profiles.csproj">
+      <Project>{6144e0cf-88dd-4dba-89cd-3098a9e99202}</Project>
+      <Name>zavit.Domain.Profiles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>

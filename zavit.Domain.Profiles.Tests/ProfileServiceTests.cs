@@ -3,6 +3,8 @@ using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
+using zavit.Domain.Profiles.Registration;
 using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Domain.Profiles.Tests 
@@ -62,6 +64,68 @@ namespace zavit.Domain.Profiles.Tests
             static ProfileUpdate _profileUpdate;
             static Profile _result;
             static Profile _profile;
+        }
+
+        class When_registering_account_profile_successfully
+        {
+            Because of = () => _result = Subject.Register(_accountProfileRegistration);
+
+            It should_return_the_successful_account_registration_result = () => _result.ShouldEqual(_accountRegistrationResult);
+
+            It should_save_the_newly_created_profile_for_the_newly_registered_account =
+                () => Injected<IProfileRepository>().AssertWasCalled(r => r.Save(_profile));
+
+            Establish context = () =>
+            {
+                _accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
+                
+                _accountRegistrationResult = new AccountRegistrationResult
+                {
+                    Success = true,
+                    Account = NewInstanceOf<Account>()
+                };
+
+                Injected<IAccountService>()
+                    .Stub(s => s.Register(_accountProfileRegistration))
+                    .Return(_accountRegistrationResult);
+
+                _profile = NewInstanceOf<Profile>();
+                Injected<IProfileCreator>()
+                    .Stub(c => c.CreateProfile(_accountRegistrationResult.Account, _accountProfileRegistration))
+                    .Return(_profile);
+            };
+
+            static IAccountProfileRegistration _accountProfileRegistration;
+            static AccountRegistrationResult _accountRegistrationResult;
+            static AccountRegistrationResult _result;
+            static Profile _profile;
+        }
+
+        class When_registering_account_and_account_cannot_be_registered
+        {
+            Because of = () => _result = Subject.Register(_accountProfileRegistration);
+
+            It should_return_the_unsuccessful_account_registration_result = () => _result.ShouldEqual(_accountRegistrationResult);
+
+            It should_not_try_to_create_a_profile = () => Injected<IProfileCreator>().AssertWasNotCalled(r => r.CreateProfile(Arg<Account>.Is.Anything, Arg<IAccountProfileRegistration>.Is.Anything));
+
+            Establish context = () =>
+            {
+                _accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
+
+                _accountRegistrationResult = new AccountRegistrationResult
+                {
+                    Success = false
+                };
+
+                Injected<IAccountService>()
+                    .Stub(s => s.Register(_accountProfileRegistration))
+                    .Return(_accountRegistrationResult);
+            };
+
+            static IAccountProfileRegistration _accountProfileRegistration;
+            static AccountRegistrationResult _accountRegistrationResult;
+            static AccountRegistrationResult _result;
         }
     }
 }

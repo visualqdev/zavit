@@ -46,8 +46,8 @@
     <Compile Include="Profile.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registration\IAccountProfileRegistration.cs" />
     <Compile Include="Registration\IProfileCreator.cs" />
-    <Compile Include="Registration\ProfileAccountRegistrationObserver.cs" />
     <Compile Include="Registration\ProfileCreator.cs" />
     <Compile Include="Updating\IProfileUpdater.cs" />
     <Compile Include="Updating\ProfileUpdate.cs" />

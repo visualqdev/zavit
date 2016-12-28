@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using zavit.Domain.ExternalAccounts.Registrations;
+using zavit.Domain.Profiles;
 using zavit.Web.Authorization.ExternalLogins.Clients.Google;
 
 namespace zavit.Web.Authorization.ExternalLogins.Registrations.Google
@@ -17,12 +19,17 @@ namespace zavit.Web.Authorization.ExternalLogins.Registrations.Google
         {
             var userInfo = await _googleLoginClient.GetUserInfo(accessToken);
 
+            Gender gender;
+            if (!Enum.TryParse(userInfo.gender, out gender))
+                gender = Gender.NotSpecified;
+
             var externalAccountRegistration = new ExternalAccountRegistration
             {
                 Provider = provider,
                 DisplayName = userInfo.name,
                 Email = userInfo.email,
-                Username = userInfo.id
+                Username = userInfo.id,
+                Gender = gender
             };
 
             return externalAccountRegistration;

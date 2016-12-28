@@ -1,22 +1,22 @@
 ﻿using System.Web.Http;
-using zavit.Domain.Accounts;
 using zavit.Web.Api.Dtos.Accounts;
+using zavit.Web.Api.DtoServices.Accounts;
 
 namespace zavit.Web.Api.Controllers
 {
     public class AccountsController : ApiController
     {
-        readonly IAccountService _accountService;
+        readonly IAccountRegistrationDtoService _accountRegistrationDtoService;
 
-        public AccountsController(IAccountService accountService)
+        public AccountsController(IAccountRegistrationDtoService accountRegistrationDtoService)
         {
-            _accountService = accountService;
+            _accountRegistrationDtoService = accountRegistrationDtoService;
         }
 
         [HttpPost]
         public IHttpActionResult Post(AccountRegistrationDto accountDto)
         {
-            var registrationResult = _accountService.Register(accountDto);
+            var registrationResult = _accountRegistrationDtoService.Register(accountDto);
 
             if (registrationResult.Success) return Ok();
 
