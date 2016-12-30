@@ -12,5 +12,6 @@ namespace zavit.Web.Api.DtoServices.Accounts
         public string Email { get; set; }
         public AccountType AccountType { get; set; }
         public Gender Gender { get; set; }
+        public byte[] ProfileImage => null;
     }
 }

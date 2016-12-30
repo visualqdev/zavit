@@ -41,14 +41,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Gender.cs" />
+    <Compile Include="IProfileImageRepository.cs" />
     <Compile Include="IProfileRepository.cs" />
     <Compile Include="IProfileService.cs" />
     <Compile Include="Profile.cs" />
+    <Compile Include="ProfileImage.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\IAccountProfileRegistration.cs" />
     <Compile Include="Registration\IProfileCreator.cs" />
+    <Compile Include="Registration\IProfileImageCreator.cs" />
     <Compile Include="Registration\ProfileCreator.cs" />
+    <Compile Include="Registration\ProfileImageCreator.cs" />
     <Compile Include="Updating\IProfileUpdater.cs" />
     <Compile Include="Updating\ProfileUpdate.cs" />
     <Compile Include="Updating\Updaters\AboutUpdater.cs" />

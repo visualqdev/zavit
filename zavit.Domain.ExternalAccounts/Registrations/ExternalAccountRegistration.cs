@@ -13,5 +13,6 @@ namespace zavit.Domain.ExternalAccounts.Registrations
         public string Password => null;
         public AccountType AccountType => AccountType.External;
         public Gender Gender { get; set; }
+        public byte[] ProfileImage { get; set; }
     }
 }

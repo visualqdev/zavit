@@ -17,16 +17,23 @@ namespace zavit.Domain.Profiles.Tests.Registration
 
             It should_set_the_gender_to_value_not_specified = () => _result.Gender.ShouldEqual(_accountProfileRegistration.Gender);
 
+            It should_set_the_profile_image_tp_the_new_profile_image_instance =
+                () => _result.ProfileImage.ShouldEqual(_profileImage);
+
             Establish context = () =>
             {
                 _account = NewInstanceOf<Account>();
                 _accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
                 _accountProfileRegistration.Stub(r => r.Gender).Return(Gender.Female);
+
+                _profileImage = NewInstanceOf<ProfileImage>();
+                Injected<IProfileImageCreator>().Stub(c => c.Create(_accountProfileRegistration)).Return(_profileImage);
             };
 
             static Account _account;
             static Profile _result;
             static IAccountProfileRegistration _accountProfileRegistration;
+            static ProfileImage _profileImage;
         }
     }
 }

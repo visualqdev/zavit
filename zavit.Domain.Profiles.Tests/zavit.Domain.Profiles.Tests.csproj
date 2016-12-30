@@ -61,6 +61,7 @@
     <Compile Include="ProfileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration\ProfileCreatorTests.cs" />
+    <Compile Include="Registration\ProfileImageCreatorTests.cs" />
     <Compile Include="Updating\Updaters\AboutUpdaterTests.cs" />
     <Compile Include="Updating\Updaters\EmailUpdaterTests.cs" />
     <Compile Include="Updating\Updaters\GenderUpdaterTests.cs" />

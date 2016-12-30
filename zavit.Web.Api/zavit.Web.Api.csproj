@@ -135,6 +135,7 @@
     <Compile Include="Controllers\MessageRecipientSuggestionsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
+    <Compile Include="Controllers\ProfileImagesController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />

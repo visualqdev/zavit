@@ -14,7 +14,8 @@ namespace zavit.Infrastructure.Ioc.DomainInstallers
             container.Register(
                 Component.For<IProfileService>().ImplementedBy<ProfileService>().LifestyleTransient(),
                 Component.For<IProfileCreator>().ImplementedBy<ProfileCreator>().LifestyleTransient(),
-                Classes.FromAssemblyContaining<IProfileUpdater>().BasedOn<IProfileUpdater>().WithServiceFirstInterface().LifestyleTransient()
+                Classes.FromAssemblyContaining<IProfileUpdater>().BasedOn<IProfileUpdater>().WithServiceFirstInterface().LifestyleTransient(),
+                Component.For<IProfileImageCreator>().ImplementedBy<ProfileImageCreator>().LifestyleTransient()
             );
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
@@ -7,5 +8,6 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
     {
         Task<JObject> GetTokenInfo(string accessToken);
         Task<FacebookUserInfoDto> GetUserInfo(string accessToken);
+        Task<byte[]> GetProfileImage(string userId);
     }
 }

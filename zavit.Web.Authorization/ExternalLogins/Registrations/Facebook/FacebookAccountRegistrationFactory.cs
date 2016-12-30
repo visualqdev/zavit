@@ -32,6 +32,9 @@ namespace zavit.Web.Authorization.ExternalLogins.Registrations.Facebook
                 Gender = gender
             };
 
+            var image = await _facebookLoginClient.GetProfileImage(userInfo.id);
+            externalAccountRegistration.ProfileImage = image;
+
             return externalAccountRegistration;
         }
 
