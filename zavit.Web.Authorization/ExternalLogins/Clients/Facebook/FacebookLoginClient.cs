@@ -49,7 +49,7 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
         {
             var message = new HttpRequestMessage
             {
-                RequestUri = new Uri($"{_externalLoginsSettings.FacebookGraphApiUrl}/{userId}/picture/type=large"),
+                RequestUri = new Uri($"{_externalLoginsSettings.FacebookGraphApiUrl}/{userId}/picture?type=large"),
                 Method = HttpMethod.Get
             };
 

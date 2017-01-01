@@ -32,6 +32,9 @@ namespace zavit.Web.Authorization.ExternalLogins.Registrations.Google
                 Gender = gender
             };
 
+            var image = await _googleLoginClient.GetProfileImage(userInfo.picture);
+            externalAccountRegistration.ProfileImage = image;
+
             return externalAccountRegistration;
         }
 

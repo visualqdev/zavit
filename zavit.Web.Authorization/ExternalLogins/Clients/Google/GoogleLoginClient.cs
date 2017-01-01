@@ -44,5 +44,18 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Google
             var json = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<GoogleUserInfoDto>(json);
         }
+
+        public async Task<byte[]> GetProfileImage(string pictureUrl)
+        {
+            var message = new HttpRequestMessage
+            {
+                RequestUri = new Uri(pictureUrl),
+                Method = HttpMethod.Get
+            };
+
+            var response = await _client.SendAsync(message);
+            var imageStream = await response.Content.ReadAsByteArrayAsync();
+            return imageStream;
+        }
     }
 }
