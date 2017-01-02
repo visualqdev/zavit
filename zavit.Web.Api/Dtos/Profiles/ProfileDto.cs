@@ -8,5 +8,7 @@ namespace zavit.Web.Api.Dtos.Profiles
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public string About { get; set; }
+        public int AccountId { get; set; }
+        public string ProfileImageUrl { get; set; }
     }
 }

@@ -3,5 +3,6 @@
     public interface IProfileImageRepository
     {
         ProfileImage Get(int accountId);
+        ProfileImage GetByAccountId(int profileImageId);
     }
 }

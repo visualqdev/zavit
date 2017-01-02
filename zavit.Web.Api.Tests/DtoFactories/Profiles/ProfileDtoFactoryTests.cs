@@ -1,9 +1,11 @@
 ﻿using Machine.Specifications;
+using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Profiles;
 using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.Dtos.Profiles;
+using zavit.Web.Api.DtoServices.Profiles;
 
 namespace zavit.Web.Api.Tests.DtoFactories.Profiles 
 {
@@ -26,17 +28,25 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
             It should_set_the_about_property_to_be_same_as_the_profile =
                () => _result.About.ShouldEqual(_profile.About);
 
+            It should_set_the_id_to_be_the_profile_id = () => _result.AccountId.ShouldEqual(_profile.Account.Id);
+
+            It should_set_the_profile_image_url_to_be_url_provided_by_builder = () => _result.ProfileImageUrl.ShouldEqual(ProfileImageUrl);
+
             Establish context = () =>
             {
                 _profile = NewInstanceOf<Profile>();
                 _profile.Gender = Gender.Male;
 
                 _profile.Account = NewInstanceOf<Account>();
+                _profile.Account.Id = 123;
                 _profile.Account.DisplayName = "Display Name";
                 _profile.Account.Email = "test@email.com";
                 _profile.About = "This is my bio";
+
+                Injected<IProfileImageUrlBuilder>().Stub(b => b.Build(_profile)).Return(ProfileImageUrl);
             };
 
+            const string ProfileImageUrl = "/profile/image/url";
             static Profile _profile;
             static ProfileDto _result;
         }

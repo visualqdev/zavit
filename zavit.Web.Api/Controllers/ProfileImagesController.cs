@@ -18,9 +18,23 @@ namespace zavit.Web.Api.Controllers
 
         [HttpGet]
         [Route("~/api/accounts/{accountId}/profileimage")]
-        public HttpResponseMessage Get(int accountId)
+        public HttpResponseMessage GetByAccountId(int accountId)
         {
-            var profileImage = _profileImageRepository.Get(accountId);
+            var profileImage = _profileImageRepository.GetByAccountId(accountId);
+
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(profileImage.ImageFile)
+            };
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
+            return response;
+        }
+
+        [HttpGet]
+        [Route("~/api/profileimages/{profileImageId}")]
+        public HttpResponseMessage Get(int profileImageId)
+        {
+            var profileImage = _profileImageRepository.Get(profileImageId);
 
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {

@@ -192,8 +192,10 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Profiles\IProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\IProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\IProfileUpdateFactory.cs" />
     <Compile Include="DtoServices\Profiles\ProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\ProfileUpdateFactory.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDtoService.cs" />

@@ -69,7 +69,8 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IProfileDtoFactory>().ImplementedBy<ProfileDtoFactory>().LifestyleTransient(),
                 Component.For<IProfileUpdateFactory>().ImplementedBy<ProfileUpdateFactory>().LifestyleTransient(),
                 Component.For<IAccountProfileRegistrationFactory>().ImplementedBy<AccountProfileRegistrationFactory>().LifestyleTransient(),
-                Component.For<IAccountRegistrationDtoService>().ImplementedBy<AccountRegistrationDtoService>().LifestyleTransient()
+                Component.For<IAccountRegistrationDtoService>().ImplementedBy<AccountRegistrationDtoService>().LifestyleTransient(),
+                Component.For<IProfileImageUrlBuilder>().ImplementedBy<ProfileImageUrlBuilder>().LifestyleTransient()
                 );
         }
     }

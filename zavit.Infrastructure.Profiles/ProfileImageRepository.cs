@@ -1,5 +1,4 @@
 ﻿using NHibernate;
-using NHibernate.SqlCommand;
 using zavit.Domain.Profiles;
 
 namespace zavit.Infrastructure.Profiles
@@ -13,11 +12,18 @@ namespace zavit.Infrastructure.Profiles
             _session = session;
         }
 
-        public ProfileImage Get(int accountId)
+        public ProfileImage GetByAccountId(int accountId)
         {
             return _session.QueryOver<Profile>()
                 .Where(p => p.Account.Id == accountId)
                 .Select(p => p.ProfileImage)
+                .SingleOrDefault<ProfileImage>();
+        }
+
+        public ProfileImage Get(int profileImageId)
+        {
+            return _session.QueryOver<ProfileImage>()
+                .Where(p => p.Id == profileImageId)
                 .SingleOrDefault<ProfileImage>();
         }
     }
