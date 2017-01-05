@@ -1,4 +1,7 @@
-﻿using zavit.Domain.Accounts.Registrations;
+﻿using System.Collections.Generic;
+using zavit.Domain.Accounts.Registrations;
+using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.Updating;
 using zavit.Domain.Shared;
 
 namespace zavit.Domain.Accounts
@@ -13,12 +16,25 @@ namespace zavit.Domain.Accounts
 
         public virtual AccountType AccountType { get; set; }
 
+        public virtual Profile Profile { get; set; }
+
         public virtual bool VerifyPassword(string password, IAccountSecurity accountSecurity)
         {
             if (AccountType == AccountType.External)
                 return false;
 
             return accountSecurity.ValidatePassword(password, Password);
+        }
+
+        public virtual bool AcceptUpdate(ProfileUpdate profileUpdate, IEnumerable<IProfileUpdater> profileUpdaters)
+        {
+            var updated = false;
+            foreach (var profileUpdater in profileUpdaters)
+            {
+                updated = profileUpdater.Update(this, profileUpdate) || updated;
+            }
+
+            return updated;
         }
     }
 }

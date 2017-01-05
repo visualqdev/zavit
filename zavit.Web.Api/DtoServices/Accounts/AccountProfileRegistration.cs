@@ -4,7 +4,7 @@ using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Web.Api.DtoServices.Accounts
 {
-    public class AccountProfileRegistration : IAccountProfileRegistration
+    public class AccountProfileRegistration : IProfileRegistration
     {
         public string DisplayName { get; set; }
         public string Username { get; set; }

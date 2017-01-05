@@ -2,8 +2,8 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Updating;
 using zavit.Domain.Profiles;
-using zavit.Domain.Profiles.Updating;
 using zavit.Web.Api.Dtos.Profiles;
 using zavit.Web.Api.DtoServices.Profiles;
 using zavit.Web.Core.Context;

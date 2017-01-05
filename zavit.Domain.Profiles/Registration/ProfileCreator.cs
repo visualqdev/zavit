@@ -1,6 +1,4 @@
-﻿using zavit.Domain.Accounts;
-
-namespace zavit.Domain.Profiles.Registration
+﻿namespace zavit.Domain.Profiles.Registration
 {
     public class ProfileCreator : IProfileCreator
     {
@@ -11,13 +9,12 @@ namespace zavit.Domain.Profiles.Registration
             _profileImageCreator = profileImageCreator;
         }
 
-        public Profile CreateProfile(Account account, IAccountProfileRegistration accountProfileRegistration)
+        public Profile CreateProfile(IProfileRegistration accountProfileRegistration)
         {
             var profileImage = _profileImageCreator.Create(accountProfileRegistration);
 
             return new Profile
             {
-                Account = account,
                 Gender = accountProfileRegistration.Gender,
                 ProfileImage = profileImage
             };

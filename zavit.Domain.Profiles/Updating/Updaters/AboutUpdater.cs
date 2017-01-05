@@ -1,12 +1,14 @@
-﻿namespace zavit.Domain.Profiles.Updating.Updaters
+﻿using zavit.Domain.Accounts;
+
+namespace zavit.Domain.Profiles.Updating.Updaters
 {
     public class AboutUpdater : IProfileUpdater
     {
-        public bool Update(Profile profile, ProfileUpdate profileUpdate)
+        public bool Update(Account account, ProfileUpdate profileUpdate)
         {
-            if (profile.About == profileUpdate.About) return false;
+            if (account.Profile.About == profileUpdate.About) return false;
 
-            profile.About = profileUpdate.About;
+            account.Profile.About = profileUpdate.About;
             return true;
         }
     }

@@ -2,6 +2,6 @@
 {
     public interface IProfileImageCreator
     {
-        ProfileImage Create(IAccountProfileRegistration accountProfileRegistration);
+        ProfileImage Create(IProfileRegistration accountProfileRegistration);
     }
 }

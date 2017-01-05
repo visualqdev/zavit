@@ -1,4 +1,4 @@
-﻿using zavit.Domain.Profiles.Updating;
+﻿using zavit.Domain.Accounts.Updating;
 using zavit.Web.Api.Dtos.Profiles;
 using zavit.Web.Core.Context;
 

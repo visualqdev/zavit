@@ -4,7 +4,7 @@ using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Domain.ExternalAccounts.Registrations
 {
-    public class ExternalAccountRegistration : IAccountProfileRegistration
+    public class ExternalAccountRegistration : IProfileRegistration
     {
         public string Provider { get; set; }
         public string DisplayName { get; set; }

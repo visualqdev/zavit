@@ -1,12 +1,14 @@
-﻿namespace zavit.Domain.Profiles.Updating.Updaters
+﻿using zavit.Domain.Profiles;
+
+namespace zavit.Domain.Accounts.Updating.Updaters
 {
     public class GenderUpdater : IProfileUpdater
     {
-        public bool Update(Profile profile, ProfileUpdate profileUpdate)
+        public bool Update(Account account, ProfileUpdate profileUpdate)
         {
-            if (profile.Gender == profileUpdate.Gender) return false;
+            if (account.Profile.Gender == profileUpdate.Gender) return false;
 
-            profile.Gender = profileUpdate.Gender;
+            account.Profile.Gender = profileUpdate.Gender;
             return true;
         }
     }

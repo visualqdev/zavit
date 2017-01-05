@@ -18,11 +18,11 @@ namespace zavit.Domain.Profiles.Tests.Registration
             {
                 _imageFile = new byte[] {1, 0, 1};
 
-                _accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
+                _accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
                 _accountProfileRegistration.Stub(r => r.ProfileImage).Return(_imageFile);
             };
 
-            static IAccountProfileRegistration _accountProfileRegistration;
+            static IProfileRegistration _accountProfileRegistration;
             static ProfileImage _result;
             static byte[] _imageFile;
         }
@@ -35,10 +35,10 @@ namespace zavit.Domain.Profiles.Tests.Registration
 
             Establish context = () =>
             {
-                _accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
+                _accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
             };
 
-            static IAccountProfileRegistration _accountProfileRegistration;
+            static IProfileRegistration _accountProfileRegistration;
             static ProfileImage _result;
         }
     }

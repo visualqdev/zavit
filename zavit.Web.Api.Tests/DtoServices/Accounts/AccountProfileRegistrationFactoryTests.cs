@@ -38,7 +38,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Accounts
             };
 
             static AccountRegistrationDto _accountRegistrationDto;
-            static IAccountProfileRegistration _result;
+            static IProfileRegistration _result;
         }
     }
 }

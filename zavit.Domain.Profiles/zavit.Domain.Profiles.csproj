@@ -48,7 +48,7 @@
     <Compile Include="ProfileImage.cs" />
     <Compile Include="ProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registration\IAccountProfileRegistration.cs" />
+    <Compile Include="Registration\IProfileRegistration.cs" />
     <Compile Include="Registration\IProfileCreator.cs" />
     <Compile Include="Registration\IProfileImageCreator.cs" />
     <Compile Include="Registration\ProfileCreator.cs" />
@@ -61,10 +61,6 @@
     <Compile Include="Updating\Updaters\GenderUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\zavit.Domain.Accounts\zavit.Domain.Accounts.csproj">
-      <Project>{259c3e7d-116d-4f3d-ac24-53c4d44f308a}</Project>
-      <Name>zavit.Domain.Accounts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>

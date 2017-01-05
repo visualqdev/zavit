@@ -5,6 +5,6 @@ namespace zavit.Web.Api.DtoServices.Accounts
 {
     public interface IAccountProfileRegistrationFactory
     {
-        IAccountProfileRegistration CreateItem(AccountRegistrationDto accountRegistrationDto);
+        IProfileRegistration CreateItem(AccountRegistrationDto accountRegistrationDto);
     }
 }

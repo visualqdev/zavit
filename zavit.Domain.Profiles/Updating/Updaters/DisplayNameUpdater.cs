@@ -1,4 +1,6 @@
-﻿namespace zavit.Domain.Profiles.Updating.Updaters
+﻿using zavit.Domain.Profiles;
+
+namespace zavit.Domain.Accounts.Updating.Updaters
 {
     public class DisplayNameUpdater : IProfileUpdater
     {

@@ -22,7 +22,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Accounts
             {
                 _accountRegistrationDto = NewInstanceOf<AccountRegistrationDto>();
 
-                var accountProfileRegistration = NewInstanceOf<IAccountProfileRegistration>();
+                var accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
                 Injected<IAccountProfileRegistrationFactory>()
                     .Stub(f => f.CreateItem(_accountRegistrationDto))
                     .Return(accountProfileRegistration);
