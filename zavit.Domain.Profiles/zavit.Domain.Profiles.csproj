@@ -56,8 +56,8 @@
     <Compile Include="Updating\IProfileUpdater.cs" />
     <Compile Include="Updating\ProfileUpdate.cs" />
     <Compile Include="Updating\Updaters\AboutUpdater.cs" />
-    <Compile Include="Updating\Updaters\EmailUpdater.cs" />
     <Compile Include="Updating\Updaters\DisplayNameUpdater.cs" />
+    <Compile Include="Updating\Updaters\EmailUpdater.cs" />
     <Compile Include="Updating\Updaters\GenderUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
