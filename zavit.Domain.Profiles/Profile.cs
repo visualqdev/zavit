@@ -10,6 +10,8 @@ namespace zavit.Domain.Profiles
         public virtual Gender Gender { get; set; }
         public virtual string About { get; set; }
         public virtual ProfileImage ProfileImage { get; set; }
+        public virtual string DisplayName { get; set; }
+        public virtual string Email { get; set; }
 
         public virtual bool AcceptUpdate(ProfileUpdate profileUpdate, IEnumerable<IProfileUpdater> profileUpdaters)
         {

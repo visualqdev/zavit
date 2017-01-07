@@ -3,6 +3,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
+using zavit.Domain.Profiles;
 using zavit.Domain.VenueMemberships;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.Venues;
@@ -19,7 +20,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
             Because of = () => _result = Subject.CreateItem(_venueMembership);
 
             It should_set_the_display_name_to_be_the_same_as_membership_account_dipslay_name = 
-                () => _result.DisplayName.ShouldEqual(_venueMembership.Account.DisplayName);
+                () => _result.DisplayName.ShouldEqual(_venueMembership.Account.Profile.DisplayName);
 
             It should_set_the_account_id_to_be_the_same_as_membership_account_id =
                 () => _result.AccountId.ShouldEqual(_venueMembership.Account.Id);
@@ -32,7 +33,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
                 _venueMembership = NewInstanceOf<VenueMembership>();
                 _venueMembership.Account = NewInstanceOf<Account>();
                 _venueMembership.Account.Id = 123;
-                _venueMembership.Account.DisplayName = "Test display name";
+                _venueMembership.Account.Profile = NewInstanceOf<Profile>();
+                _venueMembership.Account.Profile.DisplayName = "Test display name";
 
                 var activity = NewInstanceOf<Activity>();
                 var otherActivity = NewInstanceOf<Activity>();

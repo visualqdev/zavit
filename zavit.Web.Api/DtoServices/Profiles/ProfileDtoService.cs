@@ -10,29 +10,28 @@ namespace zavit.Web.Api.DtoServices.Profiles
         readonly IProfileUpdateFactory _profileUpdateFactory;
         readonly IProfileService _profileService;
         readonly IProfileDtoFactory _profileDtoFactory;
-        readonly IProfileRepository _profileRepository;
         readonly IUserContext _userContext;
 
-        public ProfileDtoService(IProfileUpdateFactory profileUpdateFactory, IProfileService profileService, IProfileDtoFactory profileDtoFactory, IProfileRepository profileRepository, IUserContext userContext)
+        public ProfileDtoService(IProfileUpdateFactory profileUpdateFactory, IProfileService profileService, IProfileDtoFactory profileDtoFactory, IUserContext userContext)
         {
             _profileUpdateFactory = profileUpdateFactory;
             _profileService = profileService;
             _profileDtoFactory = profileDtoFactory;
-            _profileRepository = profileRepository;
             _userContext = userContext;
         }
 
         public ProfileDto Update(ProfileDto profiledDto)
         {
+            var account = _userContext.Account;
             var profileUpdate = _profileUpdateFactory.CreateItem(profiledDto);
-            var updatedProfile = _profileService.Update(profileUpdate);
-            return _profileDtoFactory.CreateItem(updatedProfile);
+            var updatedProfile = _profileService.UpdateProfile(profileUpdate, account.Profile);
+            return _profileDtoFactory.CreateItem(updatedProfile, account.Id);
         }
 
         public ProfileDto GetMyProfile()
         {
-            var profile = _profileRepository.GetForAccount(_userContext.Account.Id);
-            return _profileDtoFactory.CreateItem(profile);
+            var account = _userContext.Account;
+            return _profileDtoFactory.CreateItem(account.Profile, account.Id);
         }
     }
 }

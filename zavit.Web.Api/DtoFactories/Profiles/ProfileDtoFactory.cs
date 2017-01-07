@@ -13,17 +13,17 @@ namespace zavit.Web.Api.DtoFactories.Profiles
             _profileImageUrlBuilder = profileImageUrlBuilder;
         }
 
-        public ProfileDto CreateItem(Profile profile)
+        public ProfileDto CreateItem(Profile profile, int accountId)
         {
             var profileImageUrl = _profileImageUrlBuilder.Build(profile);
             
             return new ProfileDto
             {
-                DisplayName = profile.Account.DisplayName,
-                Email = profile.Account.Email,
+                DisplayName = profile.DisplayName,
+                Email = profile.Email,
                 Gender = profile.Gender,
                 About = profile.About,
-                AccountId = profile.Account.Id,
+                AccountId = accountId,
                 ProfileImageUrl = profileImageUrl
             };
         }

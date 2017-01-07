@@ -11,15 +11,7 @@ namespace zavit.Infrastructure.Profiles
         {
             _session = session;
         }
-
-        public ProfileImage GetByAccountId(int accountId)
-        {
-            return _session.QueryOver<Profile>()
-                .Where(p => p.Account.Id == accountId)
-                .Select(p => p.ProfileImage)
-                .SingleOrDefault<ProfileImage>();
-        }
-
+        
         public ProfileImage Get(int profileImageId)
         {
             return _session.QueryOver<ProfileImage>()

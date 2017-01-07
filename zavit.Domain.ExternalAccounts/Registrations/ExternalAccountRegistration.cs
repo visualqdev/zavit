@@ -1,10 +1,11 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
 using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Domain.ExternalAccounts.Registrations
 {
-    public class ExternalAccountRegistration : IProfileRegistration
+    public class ExternalAccountRegistration : IAccountRegistration
     {
         public string Provider { get; set; }
         public string DisplayName { get; set; }

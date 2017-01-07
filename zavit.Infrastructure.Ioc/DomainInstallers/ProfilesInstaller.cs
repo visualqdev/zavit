@@ -1,9 +1,9 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using zavit.Domain.Accounts.Updating;
 using zavit.Domain.Profiles;
 using zavit.Domain.Profiles.Registration;
+using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Infrastructure.Ioc.DomainInstallers
 {

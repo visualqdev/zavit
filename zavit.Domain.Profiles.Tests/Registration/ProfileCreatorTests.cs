@@ -17,10 +17,19 @@ namespace zavit.Domain.Profiles.Tests.Registration
             It should_set_the_profile_image_tp_the_new_profile_image_instance =
                 () => _result.ProfileImage.ShouldEqual(_profileImage);
 
+            It should_set_the_display_name_to_be_the_same_as_registration_display_name =
+                () => _result.DisplayName.ShouldEqual(_accountProfileRegistration.DisplayName);
+
+            It should_set_the_email_to_be_the_same_as_registration_email =
+                () => _result.Email.ShouldEqual(_accountProfileRegistration.Email);
+
+
             Establish context = () =>
             {
                 _accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
                 _accountProfileRegistration.Stub(r => r.Gender).Return(Gender.Female);
+                _accountProfileRegistration.Stub(r => r.DisplayName).Return("Display name");
+                _accountProfileRegistration.Stub(r => r.Email).Return("Email");
 
                 _profileImage = NewInstanceOf<ProfileImage>();
                 Injected<IProfileImageCreator>().Stub(c => c.Create(_accountProfileRegistration)).Return(_profileImage);

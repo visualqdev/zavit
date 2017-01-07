@@ -1,16 +1,14 @@
-﻿using zavit.Domain.Profiles;
-
-namespace zavit.Domain.Accounts.Updating.Updaters
+﻿namespace zavit.Domain.Profiles.Updating.Updaters
 {
     public class EmailUpdater : IProfileUpdater
     {
-        public bool Update(Account account, ProfileUpdate profileUpdate)
+        public bool Update(Profile profile, ProfileUpdate profileUpdate)
         {
             if (string.IsNullOrWhiteSpace(profileUpdate.Email) ||
-                profileUpdate.Email == account.Email)
+                profileUpdate.Email == profile.Email)
                 return false;
 
-            account.Email = profileUpdate.Email;
+            profile.Email = profileUpdate.Email;
             return true;
         }
     }

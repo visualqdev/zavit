@@ -1,7 +1,6 @@
 ﻿using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Accounts;
 using zavit.Domain.Profiles;
 using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.Dtos.Profiles;
@@ -14,13 +13,13 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
     {
         class When_creating_profile_dto
         {
-            Because of = () => _result = Subject.CreateItem(_profile);
+            Because of = () => _result = Subject.CreateItem(_profile, AccountId);
 
             It should_set_the_display_name_to_be_same_as_the_account = 
-                () => _result.DisplayName.ShouldEqual(_profile.Account.DisplayName);
+                () => _result.DisplayName.ShouldEqual(_profile.DisplayName);
 
             It should_set_the_email_address_to_be_same_as_the_account =
-                () => _result.Email.ShouldEqual(_profile.Account.Email);
+                () => _result.Email.ShouldEqual(_profile.Email);
 
             It should_set_the_gender_to_be_same_as_the_profile =
                 () => _result.Gender.ShouldEqual(_profile.Gender);
@@ -28,7 +27,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
             It should_set_the_about_property_to_be_same_as_the_profile =
                () => _result.About.ShouldEqual(_profile.About);
 
-            It should_set_the_id_to_be_the_profile_id = () => _result.AccountId.ShouldEqual(_profile.Account.Id);
+            It should_set_the_id_to_be_the_profile_id = () => _result.AccountId.ShouldEqual(AccountId);
 
             It should_set_the_profile_image_url_to_be_url_provided_by_builder = () => _result.ProfileImageUrl.ShouldEqual(ProfileImageUrl);
 
@@ -37,10 +36,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
                 _profile = NewInstanceOf<Profile>();
                 _profile.Gender = Gender.Male;
 
-                _profile.Account = NewInstanceOf<Account>();
-                _profile.Account.Id = 123;
-                _profile.Account.DisplayName = "Display Name";
-                _profile.Account.Email = "test@email.com";
+                _profile.DisplayName = "Display Name";
+                _profile.Email = "test@email.com";
                 _profile.About = "This is my bio";
 
                 Injected<IProfileImageUrlBuilder>().Stub(b => b.Build(_profile)).Return(ProfileImageUrl);
@@ -49,6 +46,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
             const string ProfileImageUrl = "/profile/image/url";
             static Profile _profile;
             static ProfileDto _result;
+            const int AccountId = 123456;
         }
     }
 }

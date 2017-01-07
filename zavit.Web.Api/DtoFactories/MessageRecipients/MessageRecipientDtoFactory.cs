@@ -9,7 +9,7 @@ namespace zavit.Web.Api.DtoFactories.MessageRecipients
         {
             return new MessageRecipientDto
             {
-                DisplayName = account.DisplayName,
+                DisplayName = account.Profile.DisplayName,
                 AccountId = account.Id
             };
         }

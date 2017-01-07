@@ -1,10 +1,10 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
-using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Web.Api.DtoServices.Accounts
 {
-    public class AccountProfileRegistration : IProfileRegistration
+    public class AccountProfileRegistration : IAccountRegistration
     {
         public string DisplayName { get; set; }
         public string Username { get; set; }

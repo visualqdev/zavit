@@ -1,6 +1,4 @@
-﻿using zavit.Domain.Profiles;
-
-namespace zavit.Domain.Accounts.Updating
+﻿namespace zavit.Domain.Profiles.Updating
 {
     public class ProfileUpdate
     {

@@ -2,7 +2,6 @@
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Profiles.Registration;
 using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Domain.Profiles.Tests 
@@ -52,27 +51,6 @@ namespace zavit.Domain.Profiles.Tests
             };
 
             static ProfileUpdate _profileUpdate;
-            static Profile _result;
-            static Profile _profile;
-        }
-
-        class When_registering_account_profile_successfully
-        {
-            Because of = () => _result = Subject.CreateProfile(_profileRegistration);
-
-            It should_return_the_created_profile = () => _result.ShouldEqual(_profile);
-
-            Establish context = () =>
-            {
-                _profileRegistration = NewInstanceOf<IProfileRegistration>();
-                
-                _profile = NewInstanceOf<Profile>();
-                Injected<IProfileCreator>()
-                    .Stub(c => c.CreateProfile(_profileRegistration))
-                    .Return(_profile);
-            };
-
-            static IProfileRegistration _profileRegistration;
             static Profile _result;
             static Profile _profile;
         }

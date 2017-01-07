@@ -21,7 +21,7 @@ namespace zavit.Web.Api.DtoFactories.VenueMembers
             return new VenueMemberDto
             {
                 AccountId = venueMembership.Account.Id,
-                DisplayName = venueMembership.Account.DisplayName,
+                DisplayName = venueMembership.Account.Profile.DisplayName,
                 Activities = venueActivityDtos
             };
         }

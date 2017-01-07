@@ -1,6 +1,7 @@
 ﻿using Machine.Specifications;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Profiles;
 using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.Dtos.MessageRecipients;
 
@@ -14,7 +15,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.MessageRecipients
             Because of = () => _result = Subject.CreateItem(_account);
 
             It should_set_the_display_name_to_be_the_same_as_account = 
-                () => _result.DisplayName.ShouldEqual(_account.DisplayName);
+                () => _result.DisplayName.ShouldEqual(_account.Profile.DisplayName);
 
             It should_set_the_account_id_to_be_the_same_as_account =
                 () => _result.AccountId.ShouldEqual(_account.Id);
@@ -23,7 +24,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.MessageRecipients
             {
                 _account = NewInstanceOf<Account>();
                 _account.Id = 123;
-                _account.DisplayName = "Test display name";
+                _account.Profile = NewInstanceOf<Profile>();
+                _account.Profile.DisplayName = "Test display name";
             };
 
             static Account _account;

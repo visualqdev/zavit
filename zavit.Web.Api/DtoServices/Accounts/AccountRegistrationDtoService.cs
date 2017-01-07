@@ -1,5 +1,5 @@
+using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
-using zavit.Domain.Profiles;
 using zavit.Web.Api.Dtos.Accounts;
 
 namespace zavit.Web.Api.DtoServices.Accounts
@@ -7,19 +7,19 @@ namespace zavit.Web.Api.DtoServices.Accounts
     public class AccountRegistrationDtoService : IAccountRegistrationDtoService
     {
         readonly IAccountProfileRegistrationFactory _accountProfileRegistrationFactory;
-        readonly IProfileService _profileService;
+        readonly IAccountService _accountService;
 
-        public AccountRegistrationDtoService(IAccountProfileRegistrationFactory accountProfileRegistrationFactory, IProfileService profileService)
+        public AccountRegistrationDtoService(IAccountProfileRegistrationFactory accountProfileRegistrationFactory, IAccountService accountService)
         {
             _accountProfileRegistrationFactory = accountProfileRegistrationFactory;
-            _profileService = profileService;
+            _accountService = accountService;
         }
 
         public AccountRegistrationResult Register(AccountRegistrationDto accountRegistrationDto)
         {
             var accountProfileRegistration = _accountProfileRegistrationFactory.CreateItem(accountRegistrationDto);
 
-            var accountRegistrationResult = _profileService.Register(accountProfileRegistration);
+            var accountRegistrationResult = _accountService.Register(accountProfileRegistration);
             return accountRegistrationResult;
         }
     }

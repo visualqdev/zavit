@@ -1,8 +1,8 @@
 ﻿using Machine.Specifications;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
-using zavit.Domain.Profiles.Registration;
 using zavit.Web.Api.Dtos.Accounts;
 using zavit.Web.Api.DtoServices.Accounts;
 
@@ -38,7 +38,7 @@ namespace zavit.Web.Api.Tests.DtoServices.Accounts
             };
 
             static AccountRegistrationDto _accountRegistrationDto;
-            static IProfileRegistration _result;
+            static IAccountRegistration _result;
         }
     }
 }

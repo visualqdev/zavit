@@ -4,7 +4,6 @@ using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.ExternalAccounts.Registrations;
-using zavit.Domain.Profiles;
 
 namespace zavit.Domain.ExternalAccounts.Tests 
 {
@@ -29,7 +28,7 @@ namespace zavit.Domain.ExternalAccounts.Tests
                 var accountRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
                 accountRegistrationResult.Success = true;
                 accountRegistrationResult.Account = NewInstanceOf<Account>();
-                Injected<IProfileService>().Stub(s => s.Register(_accountRegistration)).Return(accountRegistrationResult);
+                Injected<IAccountService>().Stub(s => s.Register(_accountRegistration)).Return(accountRegistrationResult);
 
                 _externalAccount = NewInstanceOf<ExternalAccount>();
                 Injected<INewExternalAccountProvider>().Stub(p => p.Provide(accountRegistrationResult.Account, _accountRegistration.Provider, _accountRegistration.Username)).Return(_externalAccount);

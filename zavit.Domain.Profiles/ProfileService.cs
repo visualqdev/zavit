@@ -26,11 +26,5 @@ namespace zavit.Domain.Profiles
 
             return profile;
         }
-        
-        public Profile CreateProfile(IProfileRegistration profileRegistration)
-        {
-            var profile = _profileCreator.CreateProfile(profileRegistration);
-            return profile;
-        }
     }
 }

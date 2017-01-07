@@ -16,7 +16,9 @@
             return new Profile
             {
                 Gender = accountProfileRegistration.Gender,
-                ProfileImage = profileImage
+                ProfileImage = profileImage,
+                DisplayName = accountProfileRegistration.DisplayName,
+                Email = accountProfileRegistration.Email
             };
         }
     }

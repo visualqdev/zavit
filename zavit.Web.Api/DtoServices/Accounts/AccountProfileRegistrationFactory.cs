@@ -1,13 +1,13 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
-using zavit.Domain.Profiles.Registration;
 using zavit.Web.Api.Dtos.Accounts;
 
 namespace zavit.Web.Api.DtoServices.Accounts
 {
     public class AccountProfileRegistrationFactory : IAccountProfileRegistrationFactory
     {
-        public IProfileRegistration CreateItem(AccountRegistrationDto accountRegistrationDto)
+        public IAccountRegistration CreateItem(AccountRegistrationDto accountRegistrationDto)
         {
             return new AccountProfileRegistration
             {

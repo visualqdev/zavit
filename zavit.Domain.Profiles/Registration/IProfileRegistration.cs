@@ -4,5 +4,7 @@
     {
         Gender Gender { get; }
         byte[] ProfileImage { get; }
+        string Email { get; }
+        string DisplayName { get; }
     }
 }

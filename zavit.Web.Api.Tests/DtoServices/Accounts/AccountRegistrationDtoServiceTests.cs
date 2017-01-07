@@ -1,6 +1,7 @@
 ﻿using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
+using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
 using zavit.Domain.Profiles.Registration;
@@ -22,13 +23,13 @@ namespace zavit.Web.Api.Tests.DtoServices.Accounts
             {
                 _accountRegistrationDto = NewInstanceOf<AccountRegistrationDto>();
 
-                var accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
+                var accountProfileRegistration = NewInstanceOf<IAccountRegistration>();
                 Injected<IAccountProfileRegistrationFactory>()
                     .Stub(f => f.CreateItem(_accountRegistrationDto))
                     .Return(accountProfileRegistration);
 
                 _accountRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
-                Injected<IProfileService>()
+                Injected<IAccountService>()
                     .Stub(s => s.Register(accountProfileRegistration))
                     .Return(_accountRegistrationResult);
             };
