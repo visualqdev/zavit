@@ -1,4 +1,5 @@
 ﻿import * as ProfileGender from "../../modules/profile/profileGender";
+import * as ApiSettings from "../../modules/settings/apiSettings";
 import { html } from "../../modules/htmlUtils/htmlUtil";
 
 export function getView(profile) {
@@ -9,7 +10,9 @@ export function getView(profile) {
             </div>
             <div class="profileDetailsContainer">
                 <div class="profileImageContainer">
-                    <div class="profileImage"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>
+                    <div class="profileImage">                        
+                        ${profileImage(profile)}
+                    </div>
                 </div>
                 <div class="profileDetails">
                     ${profileDetailsRow("Display name", profile.DisplayName, "DisplayName")}
@@ -35,4 +38,15 @@ function profileDetailsRow(label, value, name) {
             </div>
         </div>
         `;
+}
+
+function profileImage(profile) {
+    if (profile.ProfileImageUrl == null) {
+        return `
+            <div><i class="fa fa-user" aria-hidden="true"></i></div>`;
+    }
+    return `
+        <div>
+            <div class="profileImageHolder" style='background: url("${profile.ProfileImageUrl}") 50% 50% no-repeat;'></div>
+        </div>`;
 }

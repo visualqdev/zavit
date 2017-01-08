@@ -5,25 +5,22 @@ namespace zavit.Domain.ExternalAccounts
 {
     public class ExternalAccountService : IExternalAccountService
     {
-        readonly IExternalAccountRegistrationFactory _externalAccountRegistrationFactory;
         readonly IAccountService _accountService;
         readonly INewExternalAccountProvider _newExternalAccountProvider;
         readonly IExternalAccountsRepository _externalAccountsRepository;
 
-        public ExternalAccountService(IExternalAccountRegistrationFactory externalAccountRegistrationFactory, IAccountService accountService, INewExternalAccountProvider newExternalAccountProvider, IExternalAccountsRepository externalAccountsRepository)
+        public ExternalAccountService(IAccountService accountService, INewExternalAccountProvider newExternalAccountProvider, IExternalAccountsRepository externalAccountsRepository)
         {
-            _externalAccountRegistrationFactory = externalAccountRegistrationFactory;
             _accountService = accountService;
             _newExternalAccountProvider = newExternalAccountProvider;
             _externalAccountsRepository = externalAccountsRepository;
         }
 
-        public ExternalAccount CreateExternalAccount(string loginProvider, string externalUserId, string displayName, string email)
+        public ExternalAccount CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration)
         {
-            var accountRegistration = _externalAccountRegistrationFactory.CreateItem(externalUserId, displayName, email);
-            var accountRegistrationResult = _accountService.Register(accountRegistration);
+            var accountRegistrationResult = _accountService.Register(externalAccountRegistration);
 
-            var externalAccount = _newExternalAccountProvider.Provide(accountRegistrationResult.Account, loginProvider, externalUserId);
+            var externalAccount = _newExternalAccountProvider.Provide(accountRegistrationResult.Account, externalAccountRegistration.Provider, externalAccountRegistration.Username);
             _externalAccountsRepository.Save(externalAccount);
             return externalAccount;
         }

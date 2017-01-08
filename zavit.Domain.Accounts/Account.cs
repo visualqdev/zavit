@@ -1,4 +1,5 @@
 ﻿using zavit.Domain.Accounts.Registrations;
+using zavit.Domain.Profiles;
 using zavit.Domain.Shared;
 
 namespace zavit.Domain.Accounts
@@ -7,11 +8,11 @@ namespace zavit.Domain.Accounts
     {
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
-        public virtual string Email { get; set; }
         public virtual string Password { get; set; }
-        public virtual string DisplayName { get; set; }
 
         public virtual AccountType AccountType { get; set; }
+
+        public virtual Profile Profile { get; set; }
 
         public virtual bool VerifyPassword(string password, IAccountSecurity accountSecurity)
         {

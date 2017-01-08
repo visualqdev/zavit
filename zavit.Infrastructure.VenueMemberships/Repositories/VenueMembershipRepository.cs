@@ -52,6 +52,7 @@ namespace zavit.Infrastructure.VenueMemberships.Repositories
                 .JoinAlias(m => m.Activities, () => activityAlias, JoinType.LeftOuterJoin)
                 .Fetch(m => m.Activities).Eager
                 .Fetch(m => m.Account).Eager
+                .Fetch(m => m.Account.Profile).Eager
                 .Where(m => m.Venue.Id == venueId);
 
             if (excludeAccountId.HasValue)

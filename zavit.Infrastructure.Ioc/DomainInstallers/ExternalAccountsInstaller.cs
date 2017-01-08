@@ -12,8 +12,7 @@ namespace zavit.Infrastructure.Ioc.DomainInstallers
         {
             container.Register(
                 Component.For<IExternalAccountService>().ImplementedBy<ExternalAccountService>().LifestyleTransient(),
-                Component.For<INewExternalAccountProvider>().ImplementedBy<NewExternalAccountProvider>().LifestyleTransient(),
-                Component.For<IExternalAccountRegistrationFactory>().ImplementedBy<ExternalAccountRegistrationFactory>().LifestyleTransient()
+                Component.For<INewExternalAccountProvider>().ImplementedBy<NewExternalAccountProvider>().LifestyleTransient()
                 );
         }
     }

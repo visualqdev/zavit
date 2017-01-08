@@ -101,7 +101,7 @@ namespace zavit.Web.Authorization
                 {
                     { "as:client_id", context.ClientId ?? string.Empty },
                     { "userName", context.UserName },
-                    { "displayName", account.DisplayName },
+                    { "displayName", account.Profile.DisplayName },
                     { "accountId", account.Id.ToString() }
                 });
             context.Validated(new AuthenticationTicket(identity, authenticationProperties));

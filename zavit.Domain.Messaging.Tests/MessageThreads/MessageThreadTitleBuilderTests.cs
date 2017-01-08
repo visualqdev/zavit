@@ -2,6 +2,7 @@
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Messaging.MessageThreads;
+using zavit.Domain.Profiles;
 
 namespace zavit.Domain.Messaging.Tests.MessageThreads 
 {
@@ -17,15 +18,18 @@ namespace zavit.Domain.Messaging.Tests.MessageThreads
         {
             var ownerAccount = NewInstanceOf<Account>();
             ownerAccount.Id = RequestedByAccountId;
-            ownerAccount.DisplayName = "Owner";
+            ownerAccount.Profile = NewInstanceOf<Profile>();
+            ownerAccount.Profile.DisplayName = "Owner";
 
             var participantAccount = NewInstanceOf<Account>();
             participantAccount.Id = 234;
-            participantAccount.DisplayName = "User 1";
+            participantAccount.Profile = NewInstanceOf<Profile>();
+            participantAccount.Profile.DisplayName = "User 1";
 
             var otherParticipantAccount = NewInstanceOf<Account>();
             otherParticipantAccount.Id = 345;
-            otherParticipantAccount.DisplayName = "User 2";
+            otherParticipantAccount.Profile = NewInstanceOf<Profile>();
+            otherParticipantAccount.Profile.DisplayName = "User 2";
 
             _messageThread = NewInstanceOf<MessageThread>();
             _messageThread.Participants = new[] { ownerAccount, participantAccount, otherParticipantAccount };

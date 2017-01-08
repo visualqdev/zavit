@@ -5,10 +5,10 @@
         public bool Update(Profile profile, ProfileUpdate profileUpdate)
         {
             if (string.IsNullOrWhiteSpace(profileUpdate.DisplayName) ||
-                profileUpdate.DisplayName == profile.Account.DisplayName)
+                profileUpdate.DisplayName == profile.DisplayName)
                 return false;
 
-            profile.Account.DisplayName = profileUpdate.DisplayName;
+            profile.DisplayName = profileUpdate.DisplayName;
             return true;
         }
     }

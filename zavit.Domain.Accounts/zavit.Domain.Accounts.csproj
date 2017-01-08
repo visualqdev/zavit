@@ -51,7 +51,6 @@
     <Compile Include="Registrations\AccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountCreator.cs" />
     <Compile Include="Registrations\IAccountRegistration.cs" />
-    <Compile Include="Registrations\IAccountRegistrationObserver.cs" />
     <Compile Include="Registrations\IAccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountSecurity.cs" />
     <Compile Include="Registrations\Validators\DisplayNameValidator.cs" />
@@ -60,6 +59,10 @@
     <Compile Include="Registrations\Validators\IAccountRegistrationValidator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\zavit.Domain.Profiles\zavit.Domain.Profiles.csproj">
+      <Project>{6144e0cf-88dd-4dba-89cd-3098a9e99202}</Project>
+      <Name>zavit.Domain.Profiles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>

@@ -17,7 +17,6 @@ namespace zavit.Web.Api.DtoServices.Profiles
         {
             return new ProfileUpdate
             {
-                Account = _userContext.Account,
                 DisplayName = profileDto.DisplayName,
                 Gender = profileDto.Gender,
                 About = profileDto.About,

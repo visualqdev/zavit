@@ -7,5 +7,7 @@
         string FacebookAppId { get; }
         string FacebookAppSecret { get; }
         string FacebookAppToken { get; }
+        string FacebookGraphApiUrl { get; }
+        string GoogleOauth2ApiUrl { get; }
     }
 }

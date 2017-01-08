@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -11,8 +12,11 @@ using Newtonsoft.Json.Linq;
 using zavit.Domain.Clients;
 using zavit.Domain.ExternalAccounts;
 using zavit.Web.Api.Dtos.ExternalAccounts;
+using zavit.Web.Authorization.Dtos.ExternalAccounts;
 using zavit.Web.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins.ExternalTokenVerifiers;
 using zavit.Web.Authorization.ExternalLogins.LoginData;
+using zavit.Web.Authorization.ExternalLogins.Registrations;
 using zavit.Web.Authorization.HttpActionResults;
 
 namespace zavit.Web.Authorization.Controllers
@@ -21,19 +25,21 @@ namespace zavit.Web.Authorization.Controllers
     {
         readonly IClientRepository _clientRepository;
         readonly IExternalAccountsRepository _externalAccountsRepository;
-        readonly IExternalLoginsSettings _externalLoginsSettings;
         readonly IExternalAccountService _externalAccountService;
         readonly ILocalAccessTokenProvider _localAccessTokenProvider;
         readonly IExternalLoginDataProvider _externalLoginDataProvider;
+        readonly IEnumerable<IExternalAccessTokenVerifier> _externalAccessTokenVerifiers;
+        readonly IEnumerable<IExternalAccountRegistrationFactory> _externalAccountRegistrationFactories;
 
-        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalLoginsSettings externalLoginsSettings, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider, IExternalLoginDataProvider externalLoginDataProvider)
+        public ExternalAccountsController(IClientRepository clientRepository, IExternalAccountsRepository externalAccountsRepository, IExternalAccountService externalAccountService, ILocalAccessTokenProvider localAccessTokenProvider, IExternalLoginDataProvider externalLoginDataProvider, IEnumerable<IExternalAccessTokenVerifier> externalAccessTokenVerifiers, IEnumerable<IExternalAccountRegistrationFactory> externalAccountRegistrationFactories)
         {
             _clientRepository = clientRepository;
             _externalAccountsRepository = externalAccountsRepository;
-            _externalLoginsSettings = externalLoginsSettings;
             _externalAccountService = externalAccountService;
             _localAccessTokenProvider = localAccessTokenProvider;
             _externalLoginDataProvider = externalLoginDataProvider;
+            _externalAccessTokenVerifiers = externalAccessTokenVerifiers;
+            _externalAccountRegistrationFactories = externalAccountRegistrationFactories;
         }
 
         [OverrideAuthentication]
@@ -101,7 +107,15 @@ namespace zavit.Web.Authorization.Controllers
                 return new NegotiatedContentResult<string>(HttpStatusCode.Conflict, "External user is already registered", this);
             }
 
-            var externalAccount = _externalAccountService.CreateExternalAccount(model.Provider, verifiedAccessToken.user_id, model.DisplayName, model.Email);
+            var externalAccountRegistrationFactory = _externalAccountRegistrationFactories.FirstOrDefault(f => f.CanCreate(model.Provider));
+
+            if (externalAccountRegistrationFactory == null)
+            {
+                return BadRequest("Invalid Provider");
+            }
+
+            var registration = await externalAccountRegistrationFactory.CreateRegistration(model.Provider, model.ExternalAccessToken);
+            var externalAccount = _externalAccountService.CreateExternalAccount(registration);
 
             var accessTokenResponse = _localAccessTokenProvider.GenerateLocalAccessTokenResponse(
                 externalAccount.Account,
@@ -210,62 +224,10 @@ namespace zavit.Web.Authorization.Controllers
 
         async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
         {
-            ParsedExternalAccessToken parsedToken = null;
+            var verifier = _externalAccessTokenVerifiers.FirstOrDefault(v => v.CanVerify(provider));
+            if (verifier == null) return null;
 
-            string verifyTokenEndPoint;
-
-            if (provider == "Facebook")
-            {
-                //You can get it from here: https://developers.facebook.com/tools/accesstoken/
-                //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
-
-                var appToken = _externalLoginsSettings.FacebookAppToken;
-                verifyTokenEndPoint = $"https://graph.facebook.com/debug_token?input_token={accessToken}&access_token={appToken}";
-            }
-            else if (provider == "Google")
-            {
-                verifyTokenEndPoint = $"https://www.googleapis.com/oauth2/v1/tokeninfo?access_token={accessToken}";
-            }
-            else
-            {
-                return null;
-            }
-
-            var client = new HttpClient();
-            var uri = new Uri(verifyTokenEndPoint);
-            var response = await client.GetAsync(uri);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-
-                dynamic jObj = (JObject)Newtonsoft.Json.JsonConvert.DeserializeObject(content);
-
-                parsedToken = new ParsedExternalAccessToken();
-
-                if (provider == "Facebook")
-                {
-                    parsedToken.user_id = jObj["data"]["user_id"];
-                    parsedToken.app_id = jObj["data"]["app_id"];
-
-                    if (!string.Equals(_externalLoginsSettings.FacebookAppId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return null;
-                    }
-                }
-                else if (provider == "Google")
-                {
-                    parsedToken.user_id = jObj["user_id"];
-                    parsedToken.app_id = jObj["audience"];
-
-                    if (!string.Equals(_externalLoginsSettings.GoogleClientId, parsedToken.app_id, StringComparison.OrdinalIgnoreCase))
-                    {
-                        return null;
-                    }
-                }
-            }
-
-            return parsedToken;
+            return await verifier.Verify(accessToken);
         }
     }
 }

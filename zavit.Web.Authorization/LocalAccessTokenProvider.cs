@@ -38,7 +38,7 @@ namespace zavit.Web.Authorization
 
             var tokenResponse = new JObject(
                                         new JProperty("userName", account.Username),
-                                        new JProperty("displayName", account.DisplayName),
+                                        new JProperty("displayName", account.Profile.DisplayName),
                                         new JProperty("access_token", accessToken),
                                         new JProperty("accountId", account.Id.ToString()),
                                         new JProperty("token_type", "bearer"),

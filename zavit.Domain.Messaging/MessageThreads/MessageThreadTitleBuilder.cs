@@ -8,8 +8,8 @@ namespace zavit.Domain.Messaging.MessageThreads
         public string BuildTitle(MessageThread messageThread, int requestedByAccountId)
         {
             return string.Join(", ", messageThread.Participants
-                .Where(p => p.Id != requestedByAccountId)
-                .Select(p => p.DisplayName));
+                .Where(a => a.Id != requestedByAccountId)
+                .Select(a => a.Profile.DisplayName));
         }
     }
 }

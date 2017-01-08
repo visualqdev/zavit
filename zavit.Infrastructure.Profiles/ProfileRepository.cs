@@ -18,15 +18,6 @@ namespace zavit.Infrastructure.Profiles
             _session.Flush();
         }
 
-        public Profile GetForAccount(int accountId)
-        {
-            var profile = _session.QueryOver<Profile>()
-                .Where(p => p.Account.Id == accountId)
-                .SingleOrDefault();
-
-            return profile;
-        }
-
         public void Save(Profile profile)
         {
             _session.Save(profile);

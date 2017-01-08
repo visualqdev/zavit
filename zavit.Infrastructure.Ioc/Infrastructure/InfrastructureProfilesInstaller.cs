@@ -11,7 +11,8 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IProfileRepository>().ImplementedBy<ProfileRepository>().LifestyleTransient());
+                Component.For<IProfileRepository>().ImplementedBy<ProfileRepository>().LifestyleTransient(),
+                Component.For<IProfileImageRepository>().ImplementedBy<ProfileImageRepository>().LifestyleTransient());
         }
     }
 }

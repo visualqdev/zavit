@@ -1,11 +1,11 @@
-﻿namespace zavit.Domain.Accounts.Registrations
+﻿using zavit.Domain.Profiles.Registration;
+
+namespace zavit.Domain.Accounts.Registrations
 {
-    public interface IAccountRegistration
+    public interface IAccountRegistration : IProfileRegistration
     {
-        string DisplayName { get; }
         string Username { get; }
         string Password { get; }
-        string Email { get; }
         AccountType AccountType { get; }
     }
 }

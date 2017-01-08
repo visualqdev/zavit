@@ -3,10 +3,10 @@ using System.Web.Http.Results;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Web.Api.Controllers;
 using zavit.Web.Api.Dtos.Accounts;
+using zavit.Web.Api.DtoServices.Accounts;
 
 namespace zavit.Web.Api.Tests.Controllers 
 {
@@ -25,7 +25,7 @@ namespace zavit.Web.Api.Tests.Controllers
 
                 var registrationResult = NewInstanceOf<AccountRegistrationResult>();
                 registrationResult.Success = true;
-                Injected<IAccountService>().Stub(s => s.Register(_accountDto)).Return(registrationResult);
+                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(registrationResult);
             };
 
             static AccountRegistrationDto _accountDto;
@@ -48,7 +48,7 @@ namespace zavit.Web.Api.Tests.Controllers
                 _registrationResult = NewInstanceOf<AccountRegistrationResult>();
                 _registrationResult.Success = false;
                 _registrationResult.ErrorMessage = "Test Error message";
-                Injected<IAccountService>().Stub(s => s.Register(_accountDto)).Return(_registrationResult);
+                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(_registrationResult);
             };
 
             static AccountRegistrationDto _accountDto;

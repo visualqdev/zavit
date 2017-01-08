@@ -19,9 +19,6 @@ namespace zavit.Domain.Accounts.Tests
 
             It should_return_a_success_regsitration_result = () => _result.ShouldEqual(_successRegistrationResult);
 
-            It should_notify_the_observers_that_the_account_has_been_registered =
-                () => _accountRegistrationObserver.AssertWasCalled(o => o.AccountRegsitered(_account));
-
             Establish context = () =>
             {
                 _accountRegistration = NewInstanceOf<IAccountRegistration>();
@@ -33,17 +30,12 @@ namespace zavit.Domain.Accounts.Tests
                 Injected<IAccountRegistrationResultFactory>()
                     .Stub(f => f.CreateSuccessful(_account))
                     .Return(_successRegistrationResult);
-
-                _accountRegistrationObserver = NewInstanceOf<IAccountRegistrationObserver>();
-                var observers = (List<IAccountRegistrationObserver>)Injected<IEnumerable<IAccountRegistrationObserver>>();
-                observers.Add(_accountRegistrationObserver);
             };
 
             static AccountRegistrationResult _result;
             static IAccountRegistration _accountRegistration;
             static AccountRegistrationResult _successRegistrationResult;
             static Account _account;
-            static IAccountRegistrationObserver _accountRegistrationObserver;
         }
 
         class When_registering_a_new_account_that_is_not_passing_validation
