@@ -9,6 +9,7 @@ using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.Venues;
 using zavit.Web.Api.Dtos.VenueMembers;
 using zavit.Web.Api.Dtos.Venues;
+using zavit.Web.Api.DtoServices.Profiles;
 
 namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers 
 {
@@ -28,6 +29,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
             It should_add_a_venue_activity_dto_for_each_membership_activity =
                 () => _result.Activities.ShouldContainOnly(_activityDto, _otherActivityDto);
 
+            It should_set_the_profile_image_url_to_be_the_url_provided_by_the_builder =
+                () => _result.ProfileImageUrl.ShouldEqual(ProfileImageUrl);
+
             Establish context = () =>
             {
                 _venueMembership = NewInstanceOf<VenueMembership>();
@@ -45,12 +49,17 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
 
                 _otherActivityDto = NewInstanceOf<VenueActivityDto>();
                 Injected<IVenueActivityDtoFactory>().Stub(f => f.CreateItem(otherActivity)).Return(_otherActivityDto);
+
+                Injected<IProfileImageUrlBuilder>()
+                    .Stub(b => b.Build(_venueMembership.Account.Profile))
+                    .Return(ProfileImageUrl);
             };
 
             static VenueMembership _venueMembership;
             static VenueMemberDto _result;
             static VenueActivityDto _activityDto;
             static VenueActivityDto _otherActivityDto;
+            const string ProfileImageUrl = "profile/image/url";
         }
     }
 }

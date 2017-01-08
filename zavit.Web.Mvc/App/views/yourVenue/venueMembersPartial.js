@@ -9,7 +9,9 @@ export function getView(venueMembers) {
 
         venueMembersMarkup += `
             <div class="col-sm-6 yourVenueMember ${spacingClass}">
-                <div class="memberImage"><div><i class="fa fa-user" aria-hidden="true"></i></div></div>
+                <div class="memberImage">
+                    ${memberImage(venueMember)}
+                </div>
                 <div class="memberDetails">
                     <div class="content">
                        <h3>${htmlEncode(venueMember.DisplayName)}</h3>
@@ -40,4 +42,15 @@ function activitiesMarkup(activities) {
             ${activitiesListItems}
         </ul>
         `;
+}
+
+function memberImage(venueMember) {
+    if (venueMember.ProfileImageUrl == null) {
+        return `
+        <div><i class="fa fa-user" aria-hidden="true"></i></div>`;
+    }
+
+    return`
+        <div class="profileImageHolder" style='background: url("${venueMember.ProfileImageUrl}") 50% 50% no-repeat;'></div>`;
+    
 }

@@ -21,7 +21,9 @@ namespace zavit.Infrastructure.Accounts.Repositories
 
         public Account Get(string userName)
         {
-            return _session.QueryOver<Account>().Where(a => a.Username == userName).SingleOrDefault();
+            return _session.QueryOver<Account>()
+                .Fetch(a => a.Profile).Eager
+                .Where(a => a.Username == userName).SingleOrDefault();
         }
 
         public void Save(Account account)
