@@ -1,7 +1,7 @@
 ﻿@import '.\libraries\colours';
 
 #messageThreads {
-
+    margin-top:10px;
     .col-md-4 {
         padding:0;
     }
@@ -42,12 +42,13 @@
     }
     
     #controls {
-        height:50px;
+        
         float:left;
         width:100%;
         margin-top:10px;
         input#messageTextInput {
             width:84%;
+            height:33px;
         }
         input#messageTextSend {
             width:15%;
@@ -74,7 +75,7 @@
         .fa {
             height:45px;
             width:45px;
-            background-color:@plus-button-bg;
+            background-color:@background;
             margin:0;
             padding:0;
             display:block;
@@ -83,6 +84,9 @@
             text-indent:10px;
             line-height:1.5;
         }
+    }
+    a#arrangeNew:hover, a#arrangeNew:active, a#arrangeNew:visited {
+        color:@call-to-action-hover-bg;
     }
 
     @media (max-width: 990px) {
@@ -95,27 +99,25 @@
         a#arrangeNew {
             width:100%;
             margin-bottom:15px;
-            .fa {
-            
-        }
+            .fa {}
         }
     }
 
     #threadTitle {
         h4 {
-            font-size:16px;
-            font-weight:bold;
+            font-size:12px;
             width:100%;
             background-color:@page-bg;
             height:45px;
             text-indent:10px;
-            line-height:2.7;
+            line-height:3.7;
             float:left;
             padding:0;
             margin:0;
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+            color:@default-text;
         }
     }
 
@@ -159,7 +161,7 @@
                 }
                 .body {
                     width:100%;
-                    background-color:@map-background;
+                    background-color:@message-bubble-participant;
                     float:left;
                     padding:10px;
                     margin:0;
@@ -196,7 +198,7 @@
                 margin-right:20px;
 
                 .body{
-                    background-color:@text-link;
+                    background-color:@message-bubble-owner;
                 }
             }
         }
