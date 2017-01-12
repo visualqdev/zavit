@@ -24,7 +24,7 @@ export function threadSelected(selectedThread) {
     $(selectedThread).addClass("selected");
     $("#messageThreads").addClass("threadSelected");
     if (window.matchMedia("(max-width: 990px)").matches) {
-        $("#arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox");
+        $("#arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox").addClass("returnToInbox");
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
     adjustInboxThreadListLayout();
@@ -36,8 +36,11 @@ export function adjustHeightOfMainContainer($messagesContainer) {
     const topOfMessages = $messagesContainer.offset().top,
         heightOfControls = $("#controls").height(),
         heightOfMargin = parseInt($("#controls").css("margin-top")),
-        heightOfFooter = $(".footer").height(),
-        heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin;
+        heightOfContainerMargin = parseInt($("#messagesContainer").css("margin-top")),
+        heightOfFooter = $(".footer").height();
+        let heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin - heightOfContainerMargin;
+
+        if (window.matchMedia("(max-width: 990px)").matches) heightOfMessagesContainer = heightOfMessagesContainer - parseInt($("#arrangeNew").css("margin-top"));
 
     $messagesContainer.height(heightOfMessagesContainer);
 }
@@ -88,12 +91,13 @@ export function adjustCssPositioningForMessagesContainer($messagesContainer) {
 }
 
 function adjustHeightOfMessageThreadColumn() {
-    if(!window.matchMedia("(max-width: 990px)").matches)  $("#messageThreadsContainer").css("max-height", $("#controls").position().top + $("#controls").height() - parseInt($("#controls").css("margin-top")));
+    if(!window.matchMedia("(max-width: 990px)").matches)  $("#messageThreadsContainer").css("max-height", $("#controls").position().top + $("#controls").height() + parseInt($("#controls").css("margin-top") + parseInt($("#controls").css("margin-bottom"))));
 
 }
 
 function adjustInboxThreadListLayout() {
     $(".inboxThreadInfo").each(function(index, container) {
+
         const jContainer = $(container);
         const containerWidth = jContainer.width();
         const dateWidth = jContainer.find(".inboxThreadDate").width();
@@ -121,10 +125,10 @@ function setMediaQueryWatch() {
 
     const handleMediaChange = function (mediaQueryList) {
         if (mediaQueryList.matches) {
-            $(".threadSelected #arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox");
+            $(".threadSelected #arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox").addClass('returnToInbox');
             
         } else {
-            $("#arrangeNew").html("<i class='fa fa-plus-circle' aria-hidden='true'></i>Arrange new");
+            $("#arrangeNew").html("<i class='fa fa-plus-circle' aria-hidden='true'></i>Arrange new").removeClass('returnToInbox');
         }
     }
 

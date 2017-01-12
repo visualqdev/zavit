@@ -3,9 +3,11 @@
         content = "";
 
     $("[data-redirect-remove]").remove();
+
     const mainContent = $(`<div id="mainContent" class="row content" data-page="${pageName}">${content}</div>`);
     $("#mainContent").replaceWith(mainContent);
-    if (pageName !== "") $('.search').remove();
+
+    pageName !== "" ? $('.search').hide() : $('.search').show();
 }
 
 export function isOnPage(pageName) {

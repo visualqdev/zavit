@@ -1,5 +1,12 @@
 ﻿@import '.\libraries\colours';
 
+#search {
+    input, button {
+        z-index:1;
+    }
+
+}
+
 .map-popup{
     position: absolute;
 	background: @map-popup-bg;
@@ -42,8 +49,8 @@
         float:left;
         width:100%;
         height: 80px;
-            font-weight: bold;
-    font-size: 18px;
+        font-weight: bold;
+        font-size: 18px;
     }    
 }
 
@@ -53,7 +60,7 @@
 }
 
 #exploreList{
-
+    
     height: 100%;
     overflow: auto;
     padding: 0px;
@@ -68,7 +75,7 @@
                 padding:10px;
             }
             address {
-                margin:0;
+                margin:5px 0 0 0;
                 font-size:15px;
             }
         }
@@ -87,7 +94,7 @@
 
             }
             ul.venueActivities{
-                margin:10px 0 0 0;
+                margin:5px 0 0 0;
                 >li{
                         border: 0;
                         background-color: inherit;
@@ -97,6 +104,11 @@
                         display: inline-block;      
                     label{
                         font-weight: 400;
+                        border:1px solid #ddd;
+                        padding:2px;
+                        background:#f8f8f8;
+                        border-radius:5px;
+                        font-size:10px;
                     }
                 }
             }
@@ -115,3 +127,12 @@
         }
     }
 }
+@media (max-width: 990px) {
+            #exploreList{
+                height: 30%;
+                border-bottom:5px solid @background;
+                }
+            #exploreMap {
+                height: 70% !important;
+            }
+        }

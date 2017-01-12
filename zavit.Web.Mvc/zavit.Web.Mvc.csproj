@@ -297,6 +297,7 @@
     <Content Include="CSS\messages.less" />
     <Content Include="CSS\explore.less" />
     <Content Include="CSS\profile.less" />
+    <Content Include="package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

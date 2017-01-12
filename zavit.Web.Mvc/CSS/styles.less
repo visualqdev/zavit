@@ -10,10 +10,39 @@ html, body {
     margin:0;
     background:@background;
 }
+
 h1,h2,h3,h4,h5,h6 {
     color:@logo;
 }
 
+a, a:hover {
+    color:@call-to-action;
+}
+
+.btn-primary {
+    background-color:@call-to-action;
+    border:@call-to-action;
+    color:@nav-bg; 
+    &:hover{
+        color: @call-to-action-hover-color;
+        background-color: @call-to-action-hover-bg;
+        border: @call-to-action-hover-bg;
+    }
+}
+
+
+.navbar-inverse .navbar-toggle
+, .navbar-inverse .navbar-toggle {
+    background-color:@nav-button-bg;
+    border-color:@nav-button-bg;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    background-color:@nav-button-bg;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color:@nav-button-bg;
+}
 
 #home > .contentContainer > .row.header {
     border-bottom: 1px solid @bar-border;
@@ -93,8 +122,9 @@ h1,h2,h3,h4,h5,h6 {
     border:none;
     
     li a {
-	    color:@text-link;
+	    color:@nav-text;
         font-size:18px;
+        
     }
     li.active a {
 	    background: @nav-button-bg;
@@ -102,8 +132,8 @@ h1,h2,h3,h4,h5,h6 {
 	    border-width: 0px 1px;
         color:@highlight-text-link;
     }
-    a span{
-	    color:@text-link;
+    .open a span{
+	    color:@nav-text-selected;
         font-size:18px;
     }
     .navbar-header {

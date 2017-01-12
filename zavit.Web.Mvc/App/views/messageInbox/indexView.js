@@ -16,7 +16,7 @@ export function getView(messageThreads) {
                         <div id="messages"></div>
                         <div id="controls">
                             <input id="messageTextInput" type="text"/>
-                            <input id="messageTextSend" type="button" value="Send" />
+                            <input id="messageTextSend" type="button" class="btn btn-primary" value="Send" />
                         </div>
                     </div>  
                 </div>

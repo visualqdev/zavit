@@ -49,18 +49,17 @@
         }
 
         button {
-            background-color:@call-to-action;
-            border:@call-to-action;
+            
             margin:30px 0 0 0;
-            color:@nav-bg; 
             max-width:200px;
             position:relative;
             float:right;
-
-            &:hover{
-                color: @call-to-action-hover-color;
-                background-color: @call-to-action-hover-bg;
-                border: @call-to-action-hover-bg;
+        }
+        @media (max-width: 996px) {
+            button {
+            
+                margin:10px 0 10px 0;
+            
             }
         }
         .yourVenueMap, > a {
@@ -103,10 +102,16 @@
             border:1px solid #ccc;
             border-left:0px;
 
+            h3 {
+                a {
+                    color:@logo;
+                }
+            }
+
            .content {
                h3, address, span {
                     padding:0;
-                   margin-bottom:10px;
+                    margin-bottom:10px;
                }
                address, span {
                    font-size:16px;
@@ -179,12 +184,13 @@
         min-height: 200px;
         float: left;
         background-color: @page-bg;
+        border:1px solid #ccc;
         
         address{
             margin: 10px;
         }            
         .yourVenueMap {
-            border:1px solid #ccc;
+            
             border-width:1px 1px 0px 1px;
         }
         .yourVenueMap, > a {
