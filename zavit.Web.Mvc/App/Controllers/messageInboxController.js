@@ -66,15 +66,25 @@ function attachInboxEvents() {
                 MessageLayout.adjustHeightOfMainContainer($("#messages"));
             });
     });
+
+    function removeInboxClass() {
+        $('#arrangeNew').removeClass('returnToInbox');
+    }
+
     $("#mainContent").delegate(".threadSelected #arrangeNew", "click", (e) => {
         e.preventDefault();
         $("#messageThreads").removeClass("threadSelected");
         $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
+        setTimeout(removeInboxClass, 100);
     });
-    $("#arrangeNew").click(function(e) {
+
+    $("#mainContent").delegate("#arrangeNew", "click", (e) => {
         e.preventDefault();
-        MessageRecipientSearchModal.show();
+        if (!$(e.currentTarget).hasClass('returnToInbox')) {
+            MessageRecipientSearchModal.show();
+        }
     });
+
     NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
 }
 
