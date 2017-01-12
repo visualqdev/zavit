@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using zavit.Domain.Profiles.Registration;
 using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Domain.Profiles
@@ -7,16 +8,17 @@ namespace zavit.Domain.Profiles
     {
         readonly IProfileRepository _profileRepository;
         readonly IEnumerable<IProfileUpdater> _profileUpdaters;
+        readonly IProfileCreator _profileCreator;
 
-        public ProfileService(IProfileRepository profileRepository, IEnumerable<IProfileUpdater> profileUpdaters)
+        public ProfileService(IProfileRepository profileRepository, IEnumerable<IProfileUpdater> profileUpdaters, IProfileCreator profileCreator)
         {
             _profileRepository = profileRepository;
             _profileUpdaters = profileUpdaters;
+            _profileCreator = profileCreator;
         }
 
-        public Profile Update(ProfileUpdate profileUpdate)
+        public Profile UpdateProfile(ProfileUpdate profileUpdate, Profile profile)
         {
-            var profile = _profileRepository.GetForAccount(profileUpdate.Account.Id);
             if (profile.AcceptUpdate(profileUpdate, _profileUpdaters))
             {
                 _profileRepository.Update(profile);

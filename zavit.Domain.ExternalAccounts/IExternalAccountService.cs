@@ -1,7 +1,9 @@
-﻿namespace zavit.Domain.ExternalAccounts
+﻿using zavit.Domain.ExternalAccounts.Registrations;
+
+namespace zavit.Domain.ExternalAccounts
 {
     public interface IExternalAccountService
     {
-        ExternalAccount CreateExternalAccount(string loginProvider, string externalUserId, string displayName, string email);
+        ExternalAccount CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration);
     }
 }

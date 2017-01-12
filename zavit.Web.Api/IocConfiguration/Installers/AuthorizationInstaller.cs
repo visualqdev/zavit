@@ -7,7 +7,12 @@ using zavit.Web.Api.Authorization.ClaimsIdentities;
 using zavit.Web.Api.Authorization.ResourcesAuthorization;
 using zavit.Web.Authorization;
 using zavit.Web.Authorization.ExternalLogins;
+using zavit.Web.Authorization.ExternalLogins.Clients;
+using zavit.Web.Authorization.ExternalLogins.Clients.Facebook;
+using zavit.Web.Authorization.ExternalLogins.Clients.Google;
+using zavit.Web.Authorization.ExternalLogins.ExternalTokenVerifiers;
 using zavit.Web.Authorization.ExternalLogins.LoginData;
+using zavit.Web.Authorization.ExternalLogins.Registrations;
 using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.IocConfiguration.Installers
@@ -29,7 +34,11 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IAuthenticationOptionsFactory>().ImplementedBy<AuthenticationOptionsFactory>().LifestyleSingleton(),
                 Component.For<IExternalLoginDataProvider>().ImplementedBy<ExternalLoginDataProvider>().LifestyleSingleton(),
                 Classes.FromAssemblyContaining<IResourceAuthorization>().BasedOn<IResourceAuthorization>().WithServiceFirstInterface().LifestyleTransient(),
-                Component.For<IResourceAuthorizationsProvider>().AsFactory()
+                Component.For<IResourceAuthorizationsProvider>().AsFactory(),
+                Component.For<IFacebookLoginClient>().ImplementedBy<FacebookLoginClient>().LifestyleSingleton(),
+                Component.For<IGoogleLoginClient>().ImplementedBy<GoogleLoginClient>().LifestyleSingleton(),
+                Classes.FromAssemblyContaining<IExternalAccessTokenVerifier>().BasedOn<IExternalAccessTokenVerifier>().WithServiceFirstInterface().LifestyleTransient(),
+                Classes.FromAssemblyContaining<IExternalAccountRegistrationFactory>().BasedOn<IExternalAccountRegistrationFactory>().WithServiceFirstInterface().LifestyleTransient()
                 );
         }
     }

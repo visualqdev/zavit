@@ -2,6 +2,8 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts.Registrations;
+using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Domain.Accounts.Tests.Registrations 
 {
@@ -18,14 +20,10 @@ namespace zavit.Domain.Accounts.Tests.Registrations
             It should_set_the_password_to_be_the_hashed_password_with_salt =
                 () => _result.Password.ShouldEqual(HashedPassword);
 
-            It should_set_the_display_name_to_be_the_same_as_registration_display_name =
-                () => _result.DisplayName.ShouldEqual(_accountRegistration.DisplayName);
-
-            It should_set_the_email_to_be_the_same_as_registration_email =
-                () => _result.Email.ShouldEqual(_accountRegistration.Email);
-
             It should_set_the_account_type_to_be_the_same_as_registration_account_type =
                 () => _result.AccountType.ShouldEqual(_accountRegistration.AccountType);
+
+            It should_create_a_new_profile = () => _result.Profile.ShouldEqual(_profile);
 
             Establish context = () =>
             {
@@ -39,11 +37,15 @@ namespace zavit.Domain.Accounts.Tests.Registrations
                 Injected<IAccountSecurity>()
                     .Stub(h => h.HashPassword(_accountRegistration.Password))
                     .Return(HashedPassword);
+
+                _profile = NewInstanceOf<Profile>();
+                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(_profile);
             };
 
             static IAccountRegistration _accountRegistration;
             static Account _result;
             static string HashedPassword = "Hashed Password";
+            static Profile _profile;
         }
 
         class When_creating_an_external_account
@@ -56,14 +58,10 @@ namespace zavit.Domain.Accounts.Tests.Registrations
             It should_set_the_password_to_be_null =
                 () => _result.Password.ShouldBeNull();
 
-            It should_set_the_display_name_to_be_the_same_as_registration_display_name =
-                () => _result.DisplayName.ShouldEqual(_accountRegistration.DisplayName);
-
-            It should_set_the_email_to_be_the_same_as_registration_email =
-                () => _result.Email.ShouldEqual(_accountRegistration.Email);
-
             It should_set_the_account_type_to_be_the_same_as_registration_account_type =
                 () => _result.AccountType.ShouldEqual(_accountRegistration.AccountType);
+
+            It should_create_a_new_profile = () => _result.Profile.ShouldEqual(_profile);
 
             Establish context = () =>
             {
@@ -76,11 +74,15 @@ namespace zavit.Domain.Accounts.Tests.Registrations
                 Injected<IAccountSecurity>()
                     .Stub(h => h.HashPassword(_accountRegistration.Password))
                     .Return(HashedPassword);
+
+                _profile = NewInstanceOf<Profile>();
+                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(_profile);
             };
 
             static IAccountRegistration _accountRegistration;
             static Account _result;
             static string HashedPassword = "Hashed Password";
+            static Profile _profile;
         }
     }
 }

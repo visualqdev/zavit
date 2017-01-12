@@ -19,5 +19,11 @@ namespace zavit.Web.Mvc.Settings
 
         string _facebookAppToken;
         public string FacebookAppToken => _facebookAppToken ?? (_facebookAppToken = ConfigurationManager.AppSettings["Facebook.Auth.AppToken"]);
+
+        string _facebookGraphApiUrl;
+        public string FacebookGraphApiUrl => _facebookGraphApiUrl ?? (_facebookGraphApiUrl = ConfigurationManager.AppSettings["Facebook.Auth.GraphApiUrl"]);
+
+        string _googleOauth2ApiUrl;
+        public string GoogleOauth2ApiUrl => _googleOauth2ApiUrl ?? (_googleOauth2ApiUrl = ConfigurationManager.AppSettings["Google.Auth.OAuth2ApiUrl"]);
     }
 }

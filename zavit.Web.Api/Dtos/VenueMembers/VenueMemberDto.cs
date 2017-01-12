@@ -8,5 +8,6 @@ namespace zavit.Web.Api.Dtos.VenueMembers
         public string DisplayName { get; set; }
         public int AccountId { get; set; }
         public IEnumerable<VenueActivityDto> Activities { get; set; }
+        public string ProfileImageUrl { get; set; }
     }
 }

@@ -135,6 +135,7 @@
     <Compile Include="Controllers\MessageRecipientSuggestionsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\MessageThreadsController.cs" />
+    <Compile Include="Controllers\ProfileImagesController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\VenueMembersController.cs" />
     <Compile Include="Controllers\VenueMembershipsController.cs" />
@@ -175,6 +176,11 @@
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDetailsDtoFactory.cs" />
     <Compile Include="DtoFactories\Venues\VenueDtoFactory.cs" />
+    <Compile Include="DtoServices\Accounts\AccountProfileRegistration.cs" />
+    <Compile Include="DtoServices\Accounts\AccountProfileRegistrationFactory.cs" />
+    <Compile Include="DtoServices\Accounts\AccountRegistrationDtoService.cs" />
+    <Compile Include="DtoServices\Accounts\IAccountProfileRegistrationFactory.cs" />
+    <Compile Include="DtoServices\Accounts\IAccountRegistrationDtoService.cs" />
     <Compile Include="DtoServices\MessageRecipients\IMessageRecipientDtoService.cs" />
     <Compile Include="DtoServices\MessageRecipients\MessageRecipientDtoService.cs" />
     <Compile Include="DtoServices\Messaging\Messages\IMessageDtoService.cs" />
@@ -186,8 +192,10 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Profiles\IProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\IProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\IProfileUpdateFactory.cs" />
     <Compile Include="DtoServices\Profiles\ProfileDtoService.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\ProfileUpdateFactory.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDetailsDtoService.cs" />
     <Compile Include="DtoServices\VenueMemberships\IVenueMembershipDtoService.cs" />

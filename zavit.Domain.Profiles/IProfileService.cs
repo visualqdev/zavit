@@ -4,6 +4,6 @@ namespace zavit.Domain.Profiles
 {
     public interface IProfileService
     {
-        Profile Update(ProfileUpdate profileUpdate);
+        Profile UpdateProfile(ProfileUpdate profileUpdate, Profile profile);
     }
 }

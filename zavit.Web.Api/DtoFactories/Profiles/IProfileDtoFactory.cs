@@ -5,6 +5,6 @@ namespace zavit.Web.Api.DtoFactories.Profiles
 {
     public interface IProfileDtoFactory
     {
-        ProfileDto CreateItem(Profile profile);
+        ProfileDto CreateItem(Profile profile, int accountId);
     }
 }

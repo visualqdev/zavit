@@ -28,10 +28,15 @@ namespace zavit.Web.Api.Tests.DtoServices.Profiles
                 var profileUpdate = NewInstanceOf<ProfileUpdate>();
                 Injected<IProfileUpdateFactory>().Stub(f => f.CreateItem(_profileDto)).Return(profileUpdate);
 
-                var updatedProfile = NewInstanceOf<Profile>();
-                Injected<IProfileService>().Stub(s => s.Update(profileUpdate)).Return(updatedProfile);
+                var account = NewInstanceOf<Account>();
+                account.Id = 123456;
+                account.Profile = NewInstanceOf<Profile>();
+                Injected<IUserContext>().Stub(c => c.Account).Return(account);
 
-                Injected<IProfileDtoFactory>().Stub(f => f.CreateItem(updatedProfile)).Return(_updatedProfileDto);
+                var updatedProfile = NewInstanceOf<Profile>();
+                Injected<IProfileService>().Stub(s => s.UpdateProfile(profileUpdate, account.Profile)).Return(updatedProfile);
+
+                Injected<IProfileDtoFactory>().Stub(f => f.CreateItem(updatedProfile, account.Id)).Return(_updatedProfileDto);
             };
 
             static ProfileDto _profileDto;
@@ -48,13 +53,12 @@ namespace zavit.Web.Api.Tests.DtoServices.Profiles
             Establish context = () =>
             {
                 var account = NewInstanceOf<Account>();
+                account.Id = 123456;
+                account.Profile = NewInstanceOf<Profile>();
                 Injected<IUserContext>().Stub(c => c.Account).Return(account);
-
-                var profile = NewInstanceOf<Profile>();
-                Injected<IProfileRepository>().Stub(r => r.GetForAccount(account.Id)).Return(profile);
-
+                
                 _profileDto = NewInstanceOf<ProfileDto>();
-                Injected<IProfileDtoFactory>().Stub(f => f.CreateItem(profile)).Return(_profileDto);
+                Injected<IProfileDtoFactory>().Stub(f => f.CreateItem(account.Profile, account.Id)).Return(_profileDto);
             };
 
             static ProfileDto _result;

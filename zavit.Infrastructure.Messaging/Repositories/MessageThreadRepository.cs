@@ -98,7 +98,7 @@ namespace zavit.Infrastructure.Messaging.Repositories
                             .Take(1)))
                 .Future<object[]>();
 
-            var latestThreadMessageIds = latestThreadMessageIdsFuture.Where(v => v[1] != null).ToDictionary(k => (int)k[0], v => (int)v[1]);
+            var latestThreadMessageIds = latestThreadMessageIdsFuture.Where(v => v?[1] != null).ToDictionary(k => (int)k[0], v => (int)v[1]);
 
             var latestMessages = _session.QueryOver<Message>()
                 .WhereRestrictionOn(m => m.Id).IsIn(latestThreadMessageIds.Values)

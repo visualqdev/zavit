@@ -100,12 +100,15 @@
     <Compile Include="DtoFactories\VenueMemberships\VenueMembershipDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMembers\VenueMemberCollectionDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMembers\VenueMemberDtoFactoryTests.cs" />
+    <Compile Include="DtoServices\Accounts\AccountProfileRegistrationFactoryTests.cs" />
+    <Compile Include="DtoServices\Accounts\AccountRegistrationDtoServiceTests.cs" />
     <Compile Include="DtoServices\MessageRecipients\MessageRecipientDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\Messages\MessageDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProviderTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProviderTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileDtoServiceTests.cs" />
+    <Compile Include="DtoServices\Profiles\ProfileImageUrlBuilderTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileUpdateFactoryTests.cs" />
     <Compile Include="DtoServices\VenueMembers\VenueMemberDtoServiceTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />

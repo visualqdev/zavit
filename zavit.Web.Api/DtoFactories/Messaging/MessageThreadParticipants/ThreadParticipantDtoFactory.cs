@@ -10,7 +10,7 @@ namespace zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants
             return new ThreadParticipantDto
             {
                 AccountId = participant.Id,
-                DisplayName = participant.DisplayName
+                DisplayName = participant.Profile.DisplayName
             };
         }
     }

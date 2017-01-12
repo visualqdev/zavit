@@ -5,10 +5,10 @@
         public bool Update(Profile profile, ProfileUpdate profileUpdate)
         {
             if (string.IsNullOrWhiteSpace(profileUpdate.Email) ||
-                profileUpdate.Email == profile.Account.Email)
+                profileUpdate.Email == profile.Email)
                 return false;
 
-            profile.Account.Email = profileUpdate.Email;
+            profile.Email = profileUpdate.Email;
             return true;
         }
     }

@@ -1,15 +1,24 @@
-﻿using zavit.Domain.Accounts;
-
-namespace zavit.Domain.Profiles.Registration
+﻿namespace zavit.Domain.Profiles.Registration
 {
     public class ProfileCreator : IProfileCreator
     {
-        public Profile CreateProfile(Account account)
+        readonly IProfileImageCreator _profileImageCreator;
+
+        public ProfileCreator(IProfileImageCreator profileImageCreator)
         {
+            _profileImageCreator = profileImageCreator;
+        }
+
+        public Profile CreateProfile(IProfileRegistration accountProfileRegistration)
+        {
+            var profileImage = _profileImageCreator.Create(accountProfileRegistration);
+
             return new Profile
             {
-                Account = account,
-                Gender = Gender.NotSpecified
+                Gender = accountProfileRegistration.Gender,
+                ProfileImage = profileImage,
+                DisplayName = accountProfileRegistration.DisplayName,
+                Email = accountProfileRegistration.Email
             };
         }
     }
