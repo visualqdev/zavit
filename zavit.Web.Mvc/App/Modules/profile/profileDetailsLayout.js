@@ -39,6 +39,20 @@ export function attachEvents(options) {
 
         options.onValueChanged(name, value);
     });
+
+    $("#profile").on("click", ".profileImageContainer", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var $fileInput = $("#profileImageFileInput");
+        //if (browserIsIeAndLessThanVersion9) return alert("Unfortunatly this feature is not supported on this browser version. \n Please considering upgrading for a better experience.");
+        //typeOfFileUploading = image;
+        //$fileInput.attr({ "accept": ".jpeg, .jpg, .gif, .png, .tiff, .bmp" });
+        $fileInput.trigger("click");
+    });
+
+    $("#profileImageFileInput").change(function(e) {
+        $("#profileImageFileForm").submit();
+    });
 }
 
 export function finishEditing(name, value) {
