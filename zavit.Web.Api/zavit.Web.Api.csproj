@@ -158,6 +158,8 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\ProfileImages\IProfileImageUploadDtoFactory.cs" />
+    <Compile Include="DtoFactories\ProfileImages\ProfileImageUploadDtoFactory.cs" />
     <Compile Include="DtoFactories\Profiles\IProfileDtoFactory.cs" />
     <Compile Include="DtoFactories\Profiles\ProfileDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
@@ -191,6 +193,8 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\ProfileImages\IProfileImageDtoService.cs" />
+    <Compile Include="DtoServices\ProfileImages\ProfileImageDtoService.cs" />
     <Compile Include="DtoServices\Profiles\IProfileDtoService.cs" />
     <Compile Include="DtoServices\Profiles\IProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\IProfileUpdateFactory.cs" />
@@ -221,6 +225,7 @@
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadsCollectionDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
+    <Compile Include="Dtos\ProfileImages\ProfileImageUploadDto.cs" />
     <Compile Include="Dtos\Profiles\ProfileDto.cs" />
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />

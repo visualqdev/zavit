@@ -1,7 +1,9 @@
-﻿namespace zavit.Domain.Profiles.Registration
+﻿using System.IO;
+
+namespace zavit.Domain.Profiles.Registration
 {
     public interface IProfileImageCreator
     {
-        ProfileImage Create(IProfileRegistration accountProfileRegistration);
+        ProfileImage Create(Stream image);
     }
 }

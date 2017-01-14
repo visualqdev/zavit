@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace zavit.Web.Authorization.ExternalLogins.Clients.Google
@@ -7,6 +8,6 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Google
     {
         Task<JObject> GetTokenInfo(string accessToken);
         Task<GoogleUserInfoDto> GetUserInfo(string accessToken);
-        Task<byte[]> GetProfileImage(string pictureUrl);
+        Task<Stream> GetProfileImage(string pictureUrl);
     }
 }

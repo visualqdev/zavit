@@ -17,7 +17,7 @@ export function getView(profile) {
                     </div>
                 </div>
                 <div>
-                    <form id="profileImageFileForm" enctype="multipart/form-data" target="profileImageFileTarget" method="post" action="profileimages">
+                    <form id="profileImageFileForm" enctype="multipart/form-data" target="profileImageFileTarget" method="post" action="/profileimages">
                         <input type="file" name="profileImageFile" id="profileImageFileInput" accept=".jpeg, .jpg, .gif, .png, .tiff, .bmp" class="hidden"/>
                     </form>
                     <iframe id="profileImageFileTarget" name="profileImageFileTarget" style="width:0;height:0;border:0px solid #fff;">

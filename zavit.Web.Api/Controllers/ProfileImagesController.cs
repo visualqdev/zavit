@@ -2,9 +2,14 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web.Http;
 using zavit.Domain.Accounts;
 using zavit.Domain.Profiles;
+using zavit.Web.Api.Authorization.AccessAuthorization;
+using zavit.Web.Api.Dtos.ProfileImages;
+using zavit.Web.Api.DtoServices.ProfileImages;
+using zavit.Web.Core.Context;
 
 namespace zavit.Web.Api.Controllers
 {
@@ -12,11 +17,17 @@ namespace zavit.Web.Api.Controllers
     {
         readonly IProfileImageRepository _profileImageRepository;
         readonly IAccountRepository _accountRepository;
-        
-        public ProfileImagesController(IProfileImageRepository profileImageRepository, IAccountRepository accountRepository)
+        readonly IUserContext _userContext;
+        readonly IProfileService _profileService;
+        readonly IProfileImageDtoService _profileImageDtoService;
+
+        public ProfileImagesController(IProfileImageRepository profileImageRepository, IAccountRepository accountRepository, IUserContext userContext, IProfileService profileService, IProfileImageDtoService profileImageDtoService)
         {
             _profileImageRepository = profileImageRepository;
             _accountRepository = accountRepository;
+            _userContext = userContext;
+            _profileService = profileService;
+            _profileImageDtoService = profileImageDtoService;
         }
 
         [HttpGet]
@@ -45,6 +56,24 @@ namespace zavit.Web.Api.Controllers
             };
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
             return response;
+        }
+
+        [HttpPost]
+        [AccessAuthorize]
+        [Route("~/api/profileimages")]
+        public async Task<ProfileImageUploadDto> Post()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+
+            var streamProvider = await Request.Content.ReadAsMultipartAsync();
+            if (streamProvider.Contents.Count < 1) return null;
+            
+            var file = streamProvider.Contents[0];
+            var image = await file.ReadAsStreamAsync();
+            var profileImageUploadDto = _profileImageDtoService.ChangeProfileImage(image);
+
+            return profileImageUploadDto;
         }
     }
 }

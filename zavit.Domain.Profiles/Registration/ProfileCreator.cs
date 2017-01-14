@@ -11,7 +11,7 @@
 
         public Profile CreateProfile(IProfileRegistration accountProfileRegistration)
         {
-            var profileImage = _profileImageCreator.Create(accountProfileRegistration);
+            var profileImage = _profileImageCreator.Create(accountProfileRegistration.ProfileImage);
 
             return new Profile
             {

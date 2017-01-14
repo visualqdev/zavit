@@ -9,6 +9,7 @@ using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.DtoFactories.Messaging.Messages;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreadParticipants;
 using zavit.Web.Api.DtoFactories.Messaging.MessageThreads;
+using zavit.Web.Api.DtoFactories.ProfileImages;
 using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.VenueMemberships;
@@ -19,6 +20,7 @@ using zavit.Web.Api.DtoServices.Messaging.Messages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessages;
 using zavit.Web.Api.DtoServices.Messaging.MessageThreads.NewMessageThreads;
+using zavit.Web.Api.DtoServices.ProfileImages;
 using zavit.Web.Api.DtoServices.Profiles;
 using zavit.Web.Api.DtoServices.VenueMembers;
 using zavit.Web.Api.DtoServices.VenueMemberships;
@@ -70,7 +72,9 @@ namespace zavit.Web.Api.IocConfiguration.Installers
                 Component.For<IProfileUpdateFactory>().ImplementedBy<ProfileUpdateFactory>().LifestyleTransient(),
                 Component.For<IAccountProfileRegistrationFactory>().ImplementedBy<AccountProfileRegistrationFactory>().LifestyleTransient(),
                 Component.For<IAccountRegistrationDtoService>().ImplementedBy<AccountRegistrationDtoService>().LifestyleTransient(),
-                Component.For<IProfileImageUrlBuilder>().ImplementedBy<ProfileImageUrlBuilder>().LifestyleTransient()
+                Component.For<IProfileImageUrlBuilder>().ImplementedBy<ProfileImageUrlBuilder>().LifestyleTransient(),
+                Component.For<IProfileImageDtoService>().ImplementedBy<ProfileImageDtoService>().LifestyleTransient(),
+                Component.For<IProfileImageUploadDtoFactory>().ImplementedBy<ProfileImageUploadDtoFactory>().LifestyleTransient()
                 );
         }
     }

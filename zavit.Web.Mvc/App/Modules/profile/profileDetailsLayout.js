@@ -43,15 +43,15 @@ export function attachEvents(options) {
     $("#profile").on("click", ".profileImageContainer", function(e) {
         e.stopPropagation();
         e.preventDefault();
-        var $fileInput = $("#profileImageFileInput");
-        //if (browserIsIeAndLessThanVersion9) return alert("Unfortunatly this feature is not supported on this browser version. \n Please considering upgrading for a better experience.");
-        //typeOfFileUploading = image;
-        //$fileInput.attr({ "accept": ".jpeg, .jpg, .gif, .png, .tiff, .bmp" });
+        const $fileInput = $("#profileImageFileInput");
         $fileInput.trigger("click");
     });
 
-    $("#profileImageFileInput").change(function(e) {
-        $("#profileImageFileForm").submit();
+    $("#profileImageFileInput").on("change", function(e) {
+        if (e.target.files.length > 0) {
+            const imageData = e.target.files[0];
+            options.onProfileImageSelected(imageData);
+        }
     });
 }
 
@@ -63,6 +63,13 @@ export function finishEditing(name, value) {
         label.find(".value").text(value);
         editContainer.remove();
         label.show();
+    }
+}
+
+export function updateProfileImage(url) {
+    const profileImage = $("#profile .profileImageHolder");
+    if (profileImage.length) {
+        profileImage.replaceWith(`<div class="profileImageHolder" style='background: url("${url}") 50% 50% no-repeat;'></div>`)
     }
 }
 

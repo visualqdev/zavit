@@ -45,7 +45,7 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
             return JsonConvert.DeserializeObject<FacebookUserInfoDto>(json);
         }
 
-        public async Task<byte[]> GetProfileImage(string userId)
+        public async Task<Stream> GetProfileImage(string userId)
         {
             var message = new HttpRequestMessage
             {
@@ -54,7 +54,7 @@ namespace zavit.Web.Authorization.ExternalLogins.Clients.Facebook
             };
 
             var response = await _client.SendAsync(message);
-            var imageStream = await response.Content.ReadAsByteArrayAsync();
+            var imageStream = await response.Content.ReadAsStreamAsync();
             return imageStream;
         }
     }
