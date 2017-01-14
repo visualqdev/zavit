@@ -3,5 +3,6 @@
     public interface IProfileImageRepository
     {
         ProfileImage Get(int accountId);
+        void RemoveImage(ProfileImage profileImage);
     }
 }

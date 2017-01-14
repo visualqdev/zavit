@@ -4,6 +4,7 @@ import * as MainContent from "../layout/mainContent";
 import * as ProfileClient from "../modules/profile/profileClient";
 import * as ProfileDetailsLayout from "../modules/profile/profileDetailsLayout";
 import * as PostLoginRedirect from "../modules/account/postLoginRedirect";
+import * as Progress from "../modules/loading/progress";
 
 let profile;
 
@@ -35,6 +36,18 @@ function attachEditEvents() {
                 .then(() => {
                     ProfileDetailsLayout.finishEditing(name, value);
                 });
-        }
+        },
+        onProfileImageSelected: changeProfileImage
     });
+}
+
+function changeProfileImage(imageData) {
+    Progress.start();
+    ProfileClient
+        .updateProfileImage(imageData)
+        .then(uploadedImage => {
+            Progress.done();
+            ProfileDetailsLayout.updateProfileImage(uploadedImage.ProfileImageUrl);
+        })
+        .catch(Progress.done);
 }

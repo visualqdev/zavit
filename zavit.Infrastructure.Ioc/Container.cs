@@ -42,7 +42,8 @@ namespace zavit.Infrastructure.Ioc
                 new MessagingInstaller(),
                 new InfrastructureMessagingInstaller(),
                 new ProfilesInstaller(),
-                new InfrastructureProfilesInstaller());
+                new InfrastructureProfilesInstaller(),
+                new InfrastructureImagesInstaller());
         }
 
         public static Container Instance

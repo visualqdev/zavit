@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.IO;
+using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
 
@@ -12,6 +13,6 @@ namespace zavit.Web.Api.DtoServices.Accounts
         public string Email { get; set; }
         public AccountType AccountType { get; set; }
         public Gender Gender { get; set; }
-        public byte[] ProfileImage => null;
+        public Stream ProfileImage => null;
     }
 }

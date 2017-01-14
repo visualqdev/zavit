@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.IO;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Profiles.Registration;
@@ -30,9 +31,10 @@ namespace zavit.Domain.Profiles.Tests.Registration
                 _accountProfileRegistration.Stub(r => r.Gender).Return(Gender.Female);
                 _accountProfileRegistration.Stub(r => r.DisplayName).Return("Display name");
                 _accountProfileRegistration.Stub(r => r.Email).Return("Email");
+                _accountProfileRegistration.Stub(r => r.ProfileImage).Return(new MemoryStream());
 
                 _profileImage = NewInstanceOf<ProfileImage>();
-                Injected<IProfileImageCreator>().Stub(c => c.Create(_accountProfileRegistration)).Return(_profileImage);
+                Injected<IProfileImageCreator>().Stub(c => c.Create(_accountProfileRegistration.ProfileImage)).Return(_profileImage);
             };
 
             static Profile _result;
