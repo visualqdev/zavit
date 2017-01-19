@@ -3,6 +3,7 @@ using System.Web.Routing;
 using Microsoft.Owin;
 using Owin;
 using zavit.Infrastructure.Ioc;
+using zavit.Infrastructure.Logging;
 using zavit.Web.Api;
 using zavit.Web.Mvc.IocConfiguration.Installers;
 
@@ -15,6 +16,7 @@ namespace zavit.Web.Mvc
         {
             var container = Container.Instance;
             container.Install(new WebMvcInstaller());
+            LoggingConfig.Configure(container.Resolve<ILoggingSettings>());
 
             var apiStartup = container.Resolve<ApiStartup>();
             apiStartup.Configuration(app);

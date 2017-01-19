@@ -138,6 +138,10 @@
       <Project>{9f7c4d82-d36e-4455-aab0-9b9554b48115}</Project>
       <Name>zavit.Infrastructure.Images</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Logging\zavit.Infrastructure.Logging.csproj">
+      <Project>{6e1d7ac9-a3a0-4045-881e-d66409858170}</Project>
+      <Name>zavit.Infrastructure.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Messaging\zavit.Infrastructure.Messaging.csproj">
       <Project>{c934a74e-f5a1-45f1-8444-b943ca0dd521}</Project>
       <Name>zavit.Infrastructure.Messaging</Name>
