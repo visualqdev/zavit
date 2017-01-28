@@ -1,4 +1,5 @@
 ﻿using Castle.MicroKernel.Facilities;
+using Castle.MicroKernel.Registration;
 
 namespace zavit.Infrastructure.Logging.Ioc
 {
@@ -6,7 +7,8 @@ namespace zavit.Infrastructure.Logging.Ioc
     {
         protected override void Init()
         {
-            Kernel.Resolver.AddSubResolver(new LoggerDependencyResolver());
+            Kernel.Register(Component.For<ILoggerFactory>().ImplementedBy<LoggerFactory>().LifestyleSingleton());
+            Kernel.Resolver.AddSubResolver(new LoggerDependencyResolver(Kernel.Resolve<ILoggerFactory>()));
         }
     }
 }

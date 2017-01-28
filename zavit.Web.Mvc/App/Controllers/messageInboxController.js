@@ -31,7 +31,10 @@ export function index(options) {
             return MessageThreadService.getInboxThread(options, messageThreads);
         })
         .then(inboxThread => {
-            
+            if (!inboxThread) {
+                Routes.goTo(Routes.messageInbox);
+            }
+
             const threadView = MessageThreadPartial.getView(inboxThread);
             setThreadTitle(inboxThread.ThreadTitle);
             $("#messages").html(threadView);
@@ -54,6 +57,10 @@ function attachInboxEvents() {
                 threadId
             })
             .then(inboxThread => {
+                if (!inboxThread) {
+                    Routes.goTo(Routes.messageInbox);
+                }
+
                 const threadView = MessageThreadPartial.getView(inboxThread);
 
                 setThreadTitle(inboxThread.ThreadTitle);

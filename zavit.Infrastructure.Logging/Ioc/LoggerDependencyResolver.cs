@@ -9,11 +9,11 @@ namespace zavit.Infrastructure.Logging.Ioc
     public class LoggerDependencyResolver : ISubDependencyResolver
     {
         readonly Type _loggerType;
-        readonly LoggerFactory _loggerFactory;
+        readonly ILoggerFactory _loggerFactory;
 
-        public LoggerDependencyResolver()
+        public LoggerDependencyResolver(ILoggerFactory loggerFactory)
         {
-            _loggerFactory = new LoggerFactory();
+            _loggerFactory = loggerFactory;
             _loggerType = typeof(ILogger);
         }
 

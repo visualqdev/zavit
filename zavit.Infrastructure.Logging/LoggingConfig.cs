@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NLog.Config;
 using NLog.Targets;
+using NLog.Targets.Wrappers;
 
 namespace zavit.Infrastructure.Logging
 {
@@ -12,11 +13,13 @@ namespace zavit.Infrastructure.Logging
 
             var debuggerTarget = new DebuggerTarget();
             
+
             if (loggingSettings.DebuggerLogEnabled)
             {
-                config.AddTarget("debugger", debuggerTarget);
                 debuggerTarget.Layout = @"${date:universalTime=true:format=yyyy-MM-dd HH\:mm\:ss.fff} | ${level} | ${logger} | ${message}";
-                var debuggerLogRule = new LoggingRule("*", LogLevel.Debug, debuggerTarget);
+                var asyncDebuggerWrapper = new AsyncTargetWrapper(debuggerTarget);
+                config.AddTarget("debugger", asyncDebuggerWrapper);
+                var debuggerLogRule = new LoggingRule("*", LogLevel.Debug, asyncDebuggerWrapper);
                 config.LoggingRules.Add(debuggerLogRule);
             }
 

@@ -15,12 +15,10 @@ namespace zavit.Web.Api.Controllers
         const string GetSingleRoute = "VenuesGet";
 
         readonly IVenueDtoService _venueDtoService;
-        readonly ILogger _logger;
-
+        
         public VenuesController(IVenueDtoService venueDtoService, ILogger logger)
         {
             _venueDtoService = venueDtoService;
-            _logger = logger;
         }
 
         [HttpGet]
