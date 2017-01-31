@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using zavit.Domain.Shared;
 using zavit.Web.Api.Authorization.AccessAuthorization;
 using zavit.Web.Api.Dtos.Venues;
 using zavit.Web.Api.DtoServices.Venues;
@@ -14,8 +15,8 @@ namespace zavit.Web.Api.Controllers
         const string GetSingleRoute = "VenuesGet";
 
         readonly IVenueDtoService _venueDtoService;
-
-        public VenuesController(IVenueDtoService venueDtoService)
+        
+        public VenuesController(IVenueDtoService venueDtoService, ILogger logger)
         {
             _venueDtoService = venueDtoService;
         }

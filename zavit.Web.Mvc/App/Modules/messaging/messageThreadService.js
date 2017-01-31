@@ -15,6 +15,10 @@ export function getInboxThread(options, messageThreads) {
             MessageRecipientsClient
                 .getRecipientsById(options.accountIds)
                 .then(recipients => {
+                    if (!recipients || recipients.length <= 0) {
+                        resolve();
+                    }
+
                     const emptyNewThread = createEmptyThread(recipients);
                     resolve(emptyNewThread);
                 });

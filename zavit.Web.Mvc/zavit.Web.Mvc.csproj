@@ -322,6 +322,7 @@
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
+    <Compile Include="Settings\LoggingSettings.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IInboxMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\InboxMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IReadMessagesBroadcastDtoFactory.cs" />
@@ -369,6 +370,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
       <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>
       <Name>zavit.Infrastructure.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Logging\zavit.Infrastructure.Logging.csproj">
+      <Project>{6E1D7AC9-A3A0-4045-881E-D66409858170}</Project>
+      <Name>zavit.Infrastructure.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
       <Project>{67C23B94-0318-4507-AD94-08BD1E288FB9}</Project>
