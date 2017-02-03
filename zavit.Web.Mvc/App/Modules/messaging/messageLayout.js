@@ -157,6 +157,33 @@ export function setThreadTitle(title) {
     $("#threadTitle h4").text(htmlEncode(title));
 }
 
+export function disableSending() {
+    $("#messageTextSend").prop("disabled", true);
+}
+
+export function isMessageOnThread(messageStamp) {
+    return $(`[data-stamp='${messageStamp}']`).length;
+}
+
+export function addMessageToThread(messageView) {
+    $("#messages ul").append(messageView);
+}
+
+export function replaceMessageOnThread(messageStamp, messageView) {
+    $(`[data-stamp='${messageStamp}']`).replaceWith(messageView);
+    setScrollPositionToBottom();
+}
+
+export function markMessageAsRead(messageStamp) {
+    var indicator = $(`[data-stamp='${messageStamp}'] span.sent`);
+    indicator.removeClass("sent");
+    indicator.addClass("read");
+}
+
+export function replaceMessageThreadList(messageThreadListView) {
+    $("#messageThreadsContainer").html(messageThreadListView);
+}
+
 function attachEvents(options) {
     $("#messageThreads").delegate("#arrangeNew", "click", (e) => {
         e.preventDefault();
@@ -179,4 +206,30 @@ function attachEvents(options) {
         threadSelected(this);
         adjustHeightOfMainContainer($("#messages"));
     });
+
+    $("#messageThreads").on("click", "#messageTextSend", function(e) {
+        e.preventDefault();
+        sendMessage(options);
+    });
+
+    $("#messageThreads").on("keydown", "#messageTextInput", function (e) {            
+        if (e.which === 13) {
+            e.preventDefault();
+            if(inputHasText($(this))) {
+                sendMessage(options);
+            }           
+        }
+    });
+}
+
+function inputHasText(inputControl) {
+    return inputControl.val().trim().length > 0;
+}
+
+function sendMessage(options) {
+    const messageInput = $("#messageTextInput");
+    const messageText = messageInput.val();
+    messageInput.val("");
+
+    options.onSend(messageText);
 }
