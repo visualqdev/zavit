@@ -33,15 +33,18 @@ export function explore(position) {
         });
 }
 
-function getPlaces() {
+function getPlaces(venueName) {
     Progress.start();
 
-    VenueService.getVenues({ map })
-        .then(venues => {
-            mapPlaces.addPlaces(venues);
-            createExploreList(venues);
-            Progress.done();
-        });
+    VenueService.getVenues({
+        map,
+        name: venueName
+    })
+    .then(venues => {
+        createExploreList(venues);
+        mapPlaces.addPlaces(venues);
+        Progress.done();
+    });
 }
 
 function loadMap() {
