@@ -8,7 +8,6 @@ export class Places {
     constructor(options = {}) {
         this.map = options.map || null,
         this.radius = options.radius || 3000;
-        this.name = "";
         this.getPlaces = options.getPlaces;
         this.onPlaceSelected = options.onPlaceSelected;
     }

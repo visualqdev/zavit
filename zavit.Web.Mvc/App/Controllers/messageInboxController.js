@@ -27,7 +27,7 @@ export function index(options) {
             const view = IndexView.getView(messageThreads);
             MainContent.append(view);
 
-            attachInboxEvents();
+            NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
             return MessageThreadService.getInboxThread(options, messageThreads);
         })
         .then(inboxThread => {
@@ -36,11 +36,16 @@ export function index(options) {
             }
 
             const threadView = MessageThreadPartial.getView(inboxThread);
-            setThreadTitle(inboxThread.ThreadTitle);
-            $("#messages").html(threadView);
-            attachNewMessageEvents(inboxThread);
+            MessageLayout.setThreadTitle(inboxThread.ThreadTitle);
+            MessageLayout.setMessageThreadView(threadView);
+            currentInboxThread = inboxThread;
             showInboxThread(inboxThread);
-            MessageLayout.setUp(inboxThread.ThreadId);
+            MessageLayout.setUp({
+                selectedThreadId: inboxThread.ThreadId,
+                onArrangeNew: MessageRecipientSearchModal.show,
+                onThreadSelected: threadSelected,
+                onSend: sendMessage
+            });
         })
         .catch((error) => {
             checkUnauthorised(error);
@@ -48,58 +53,30 @@ export function index(options) {
         .then(Progress.done);
 }
 
-function attachInboxEvents() {
-    $("#messageThreadsContainer").on("click", "[data-thread-id]", function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const threadId = $(this).attr("data-thread-id");
-        MessageThreadService.getInboxThread({
-                threadId
-            })
-            .then(inboxThread => {
-                if (!inboxThread) {
-                    Routes.goTo(Routes.messageInbox);
-                }
-
-                const threadView = MessageThreadPartial.getView(inboxThread);
-
-                setThreadTitle(inboxThread.ThreadTitle);
-                
-                $("#messages").html(threadView);
-                attachNewMessageEvents(inboxThread);
-                showInboxThread(inboxThread);
-                MessageLayout.threadSelected(this);
-                
-                MessageLayout.adjustHeightOfMainContainer($("#messages"));
-            });
-    });
-
-    function removeInboxClass() {
-        $('#arrangeNew').removeClass('returnToInbox');
-    }
-
-    $("#mainContent").delegate(".threadSelected #arrangeNew", "click", (e) => {
-        e.preventDefault();
-        $("#messageThreads").removeClass("threadSelected");
-        $('#arrangeNew').html('<i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new');
-        setTimeout(removeInboxClass, 100);
-    });
-
-    $("#mainContent").delegate("#arrangeNew", "click", (e) => {
-        e.preventDefault();
-        if (!$(e.currentTarget).hasClass('returnToInbox')) {
-            MessageRecipientSearchModal.show();
+function threadSelected(threadId) {
+    MessageThreadService.getInboxThread({
+        threadId
+    })
+    .then(inboxThread => {
+        if (!inboxThread) {
+            Routes.goTo(Routes.messageInbox);
         }
-    });
 
-    NotificationReceiver.observeInbox(messageInboxObserverId, messageInboxHasChanged);
+        MessageLayout.setThreadTitle(inboxThread.ThreadTitle);
+
+        const threadView = MessageThreadPartial.getView(inboxThread);
+        MessageLayout.setMessageThreadView(threadView);
+
+        currentInboxThread = inboxThread;
+        showInboxThread(inboxThread);
+    });
 }
 
 function showInboxThread(inboxThread) {
     const threadView = MessageThreadPartial.getView(inboxThread);
-    setThreadTitle(inboxThread.ThreadTitle);
-    $("#messages").html(threadView);
-    attachNewMessageEvents(inboxThread);
+    MessageLayout.setThreadTitle(inboxThread.ThreadTitle);
+    MessageLayout.setMessageThreadView(threadView);
+    currentInboxThread = inboxThread;
     NotificationReceiver.observeThread({
         threadId: inboxThread.ThreadId,
         threadNewMessage: receivedNewMessageOnThread,
@@ -107,53 +84,35 @@ function showInboxThread(inboxThread) {
     });
 }
 
-function attachNewMessageEvents(inboxThread) {
-    currentInboxThread = inboxThread;
+function sendMessage(messageText) {
+    if (!currentInboxThread.ThreadId) {
+        MessageLayout.disableSending();
+    }
 
-    const sendButton = $("#messageTextSend");
-    sendButton.off("click");
-    sendButton.on("click", () => {
-        const messageInput = $("#messageTextInput");
-        const messageText = messageInput.val();
-        messageInput.val("");
+    const newMessage = NewMessageFactory.createMessage(messageText);
+    addMessageToThread(newMessage);
 
-        if (!currentInboxThread.ThreadId) {
-            sendButton.prop("disabled", true);
-        }
+    MessageThreadService
+        .sendMessage({
+            inboxThread: currentInboxThread,
+            message: newMessage
+        })
+        .then(sendMessageResponse => {
+            if (!currentInboxThread.ThreadId) {
+                Routes.goTo(`${Routes.messageInbox}?threadid=${sendMessageResponse.inboxThread.ThreadId}`);
+            }
+            currentInboxThread = sendMessageResponse.inboxThread;
 
-        const newMessage = NewMessageFactory.createMessage(messageText);
-        addMessageToThread(newMessage);
-
-        MessageThreadService
-            .sendMessage({
-                inboxThread: currentInboxThread,
-                message: newMessage
-            })
-            .then(sendMessageResponse => {
-                if (!currentInboxThread.ThreadId) {
-                    Routes.goTo(`${Routes.messageInbox}?threadid=${sendMessageResponse.inboxThread.ThreadId}`);
-                }
-                currentInboxThread = sendMessageResponse.inboxThread;
-                replaceMessageOnThread(sendMessageResponse.message);
-            });
-    });
-}
-
-function setThreadTitle(title) {
-    $("#threadTitle h4").text(htmlEncode(title));
-}
-
-function replaceMessageOnThread(message) {
-    const sentMessageView = MessagePartial.getView(message);
-    $(`[data-stamp='${message.Stamp}']`).replaceWith(sentMessageView);
-    MessageLayout.setScrollPositionToBottom();
+            const sentMessageView = MessagePartial.getView(sendMessageResponse.message);
+            MessageLayout.replaceMessageOnThread(sendMessageResponse.message.Stamp, sentMessageView);
+        });
 }
 
 function addMessageToThread(message) {
-    if ($(`[data-stamp='${message.Stamp}']`).length) return;
+    if (MessageLayout.isMessageOnThread(message.Stamp)) return;
 
     const messageView = MessagePartial.getView(message);
-    $("#messages ul").append(messageView);
+    MessageLayout.addMessageToThread(messageView);
 }
 
 function receivedNewMessageOnThread(message) {
@@ -165,9 +124,7 @@ function receivedNewMessageOnThread(message) {
 
 function markMessagesAsRead(messagesRead) {
     messagesRead.ReadMessageStamps.forEach(messageStamp => {
-        var indicator = $(`[data-stamp='${messageStamp}'] span.sent`);
-        indicator.removeClass("sent");
-        indicator.addClass("read");
+        MessageLayout.markMessageAsRead(messageStamp);
     });
 }
 
@@ -185,7 +142,7 @@ function messageInboxHasChanged() {
             var currentlySelectedThread = MessageLayout.currentlySelectedThreadId();
 
             const threadView = MessageThreadListPartial.getView(messageThreads);
-            $("#messageThreadsContainer").html(threadView);
+            MessageLayout.replaceMessageThreadList(threadView);
             MessageLayout.selectThreadId(currentlySelectedThread);
         });
 }

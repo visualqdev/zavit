@@ -23,8 +23,7 @@ function searchByVenueName(inputValue, places) {
     places.removeMarkers();
     places.clearPlaceInfo();
 
-    places.name = inputValue;
-    places.getPlaces();
+    places.getPlaces(inputValue);
 }
 
 function registerEvents(places) {
@@ -52,6 +51,13 @@ function registerEvents(places) {
 
         if (searchConcept === "Venue") searchByVenueName(inputValue, places);
 
+    });
+
+    $("#search_input").on("keydown", function (e) {            
+        if (e.which === 13) {
+            e.preventDefault();
+            $("#searchButton").click();
+        }
     });
 }
 
