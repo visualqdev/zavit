@@ -177,7 +177,6 @@
     <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
-    <Content Include="app\modules\places\placesOld.js" />
     <Content Include="app\modules\places\placesClient.js" />
     <Content Include="app\modules\profile\profileClient.js" />
     <Content Include="app\modules\profile\profileDetailsLayout.js" />
