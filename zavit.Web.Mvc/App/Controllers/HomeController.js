@@ -1,14 +1,14 @@
 ﻿import { Map } from "../modules/map/map";
-import { Places } from "../modules/places/places";
+import * as Places from "../modules/places/places";
 import * as MainContent from "../layout/mainContent";
 import * as Routes from "../routing/routes";
 import * as IndexView from "../views/home/index";
 import * as ExploreListPartial from "../views/home/exploreListPartial";
 import * as Progress from "../modules/loading/progress";
 import * as VenueService from "../modules/venues/venueService";
+import * as HomeLayout from "../modules/home/homeLayout";
 
 let map;
-let mapPlaces;
 
 export function explore(position) {
     const view = IndexView.getView();
@@ -19,15 +19,19 @@ export function explore(position) {
     loadMap()
         .then(() => VenueService.getVenues({ map }))
         .then(venues => {
-            mapPlaces = new Places({
+            
+            Places.initialise({
                 map,
                 getPlaces,
                 onPlaceSelected: venueSelected
             });
-            mapPlaces.initialise();
 
             createExploreList(venues);
-            mapPlaces.addPlaces(venues);
+            Places.addPlaces(venues);
+
+            HomeLayout.showLoadPlacesHere({
+                onLoadPlaces: Places.loadPlacesAtCurrentLocation
+            });
 
             Progress.done();
         });
@@ -42,7 +46,7 @@ function getPlaces(venueName) {
     })
     .then(venues => {
         createExploreList(venues);
-        mapPlaces.addPlaces(venues);
+        Places.addPlaces(venues);
         Progress.done();
     });
 }
@@ -83,7 +87,7 @@ function createExploreList(venues) {
         $("#exploreList li.selected").removeClass("selected");
         const venueItem = $(this);
         venueItem.addClass("selected");
-        mapPlaces.selectPlace(venueItem.attr("data-marker-index"));
+        Places.selectPlace(venueItem.attr("data-marker-index"));
     });
 }
 

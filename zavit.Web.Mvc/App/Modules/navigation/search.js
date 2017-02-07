@@ -1,32 +1,10 @@
 ﻿import * as Geocode from "../map/geocode";
 
-function searchByArea(inputValue, places) {
-
-    function load(position) {
-
-        places.map.map.markers = [];
-        places.removeMarkers();
-        places.clearPlaceInfo();
-
-        places.name = "";
-        places.map.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-        places.map.position = position;
-        places.getPlaces();
-    }
-
-    if (inputValue !== "") Geocode.getGeoCodeByAddress(inputValue, load);
+export function initialise(options) {
+    registerEvents(options);
 }
 
-function searchByVenueName(inputValue, places) {
-
-    places.map.map.markers = [];
-    places.removeMarkers();
-    places.clearPlaceInfo();
-
-    places.getPlaces(inputValue);
-}
-
-function registerEvents(places) {
+function registerEvents(options) {
 
     $("a[data-type]").on("click", function(e) {
         e.preventDefault();
@@ -47,9 +25,9 @@ function registerEvents(places) {
         const inputValue = $(this).closest("span").prev("input").val(),
             searchConcept = $(this).closest("div.input-group").find("#search_concept").text();
 
-        if (searchConcept === "Area") searchByArea(inputValue, places);
+        if (searchConcept === "Area") options.sarchForArea(inputValue);
 
-        if (searchConcept === "Venue") searchByVenueName(inputValue, places);
+        if (searchConcept === "Venue") options.searchForVenue(inputValue, options);
 
     });
 
@@ -59,9 +37,5 @@ function registerEvents(places) {
             $("#searchButton").click();
         }
     });
-}
-
-export function initialise(places) {
-    registerEvents(places);
 }
 

@@ -156,6 +156,7 @@
     <Content Include="app\controllers\venueController.js" />
     <Content Include="app\modules\activities\activityClient.js" />
     <Content Include="app\modules\clients\authorizedClient.js" />
+    <Content Include="app\modules\home\homeLayout.js" />
     <Content Include="app\modules\htmlUtils\htmlEncoder.js" />
     <Content Include="app\modules\htmlUtils\htmlUtil.js" />
     <Content Include="app\modules\loading\info.js" />
@@ -176,6 +177,7 @@
     <Content Include="app\modules\notifications\notificationReceiver.js" />
     <Content Include="app\modules\places\placePopup.js" />
     <Content Include="app\modules\places\places.js" />
+    <Content Include="app\modules\places\placesOld.js" />
     <Content Include="app\modules\places\placesClient.js" />
     <Content Include="app\modules\profile\profileClient.js" />
     <Content Include="app\modules\profile\profileDetailsLayout.js" />
