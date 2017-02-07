@@ -156,6 +156,7 @@
     <Content Include="app\controllers\venueController.js" />
     <Content Include="app\modules\activities\activityClient.js" />
     <Content Include="app\modules\clients\authorizedClient.js" />
+    <Content Include="app\modules\home\homeLayout.js" />
     <Content Include="app\modules\htmlUtils\htmlEncoder.js" />
     <Content Include="app\modules\htmlUtils\htmlUtil.js" />
     <Content Include="app\modules\loading\info.js" />
