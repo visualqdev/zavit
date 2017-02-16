@@ -23,3 +23,19 @@ export function saveProfile(profile) {
             data: JSON.stringify(profile)
         });
 }
+
+export function updateProfileImage(imageData) {
+    const postProfileImageUrl = `${ApiSettings.apiUrl}api/profileimages`;
+
+    const data = new FormData();
+    data.append("profileImageFile", imageData);
+
+    return AuthorizedClient
+        .send({
+            url: postProfileImageUrl,
+            type: "post",
+            contentType: false,
+            processData: false,
+            data: data
+        });
+}

@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.IO;
+using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
 using zavit.Domain.Profiles.Registration;
@@ -14,6 +15,6 @@ namespace zavit.Domain.ExternalAccounts.Registrations
         public string Password => null;
         public AccountType AccountType => AccountType.External;
         public Gender Gender { get; set; }
-        public byte[] ProfileImage { get; set; }
+        public Stream ProfileImage { get; set; }
     }
 }

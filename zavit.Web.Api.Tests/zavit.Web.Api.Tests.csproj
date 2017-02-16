@@ -93,6 +93,7 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\InboxThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactoryTests.cs" />
+    <Compile Include="DtoFactories\ProfileImages\ProfileImageUploadDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\Profiles\ProfileDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\MembershipVenueDtoFactoryTests.cs" />
     <Compile Include="DtoFactories\VenueMemberships\NewVenueMemberships\NewVenueMembershipProviderTests.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\MessageThreadDtoServiceTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProviderTests.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProviderTests.cs" />
+    <Compile Include="DtoServices\ProfileImages\ProfileImageDtoServiceTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileDtoServiceTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileImageUrlBuilderTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileUpdateFactoryTests.cs" />
@@ -152,6 +154,10 @@
     <ProjectReference Include="..\zavit.Domain.Venues\zavit.Domain.Venues.csproj">
       <Project>{7a07d33b-2647-47d3-a948-baa42e78b1e9}</Project>
       <Name>zavit.Domain.Venues</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Api\zavit.Web.Api.csproj">
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>

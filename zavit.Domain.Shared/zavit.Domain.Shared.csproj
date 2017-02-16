@@ -43,6 +43,8 @@
     <Compile Include="IDateTime.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IGuid.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Images\IImageResizer.cs" />
     <Compile Include="ResultCollections\IResultCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

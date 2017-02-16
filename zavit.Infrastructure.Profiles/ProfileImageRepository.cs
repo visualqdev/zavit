@@ -18,5 +18,11 @@ namespace zavit.Infrastructure.Profiles
                 .Where(p => p.Id == profileImageId)
                 .SingleOrDefault<ProfileImage>();
         }
+
+        public void RemoveImage(ProfileImage profileImage)
+        {
+            _session.Delete(profileImage);
+            _session.Flush();
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿import * as ProfileGender from "../../modules/profile/profileGender";
-import * as ApiSettings from "../../modules/settings/apiSettings";
 import { html } from "../../modules/htmlUtils/htmlUtil";
 
 export function getView(profile) {
@@ -13,6 +12,16 @@ export function getView(profile) {
                     <div class="profileImage">                        
                         ${profileImage(profile)}
                     </div>
+                    <div>
+                        
+                    </div>
+                </div>
+                <div>
+                    <form id="profileImageFileForm" enctype="multipart/form-data" target="profileImageFileTarget" method="post" action="/profileimages">
+                        <input type="file" name="profileImageFile" id="profileImageFileInput" accept=".jpeg, .jpg, .gif, .png, .tiff, .bmp" class="hidden"/>
+                    </form>
+                    <iframe id="profileImageFileTarget" name="profileImageFileTarget" style="width:0;height:0;border:0px solid #fff;">
+                    </iframe>
                 </div>
                 <div class="profileDetails">
                     ${profileDetailsRow("Display name", profile.DisplayName, "DisplayName")}
@@ -47,6 +56,6 @@ function profileImage(profile) {
     }
     return `
         <div>
-            <div class="profileImageHolder" style='background: url("${profile.ProfileImageUrl}") 50% 50% no-repeat;'></div>
+            <div class="profileImageHolder" style='background: url("${profile.ProfileImageUrl}") 50% 50% no-repeat;'></div>            
         </div>`;
 }

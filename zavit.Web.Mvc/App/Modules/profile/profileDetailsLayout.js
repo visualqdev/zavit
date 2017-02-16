@@ -39,6 +39,20 @@ export function attachEvents(options) {
 
         options.onValueChanged(name, value);
     });
+
+    $("#profile").on("click", ".profileImageContainer", function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        const $fileInput = $("#profileImageFileInput");
+        $fileInput.trigger("click");
+    });
+
+    $("#profileImageFileInput").on("change", function(e) {
+        if (e.target.files.length > 0) {
+            const imageData = e.target.files[0];
+            options.onProfileImageSelected(imageData);
+        }
+    });
 }
 
 export function finishEditing(name, value) {
@@ -49,6 +63,13 @@ export function finishEditing(name, value) {
         label.find(".value").text(value);
         editContainer.remove();
         label.show();
+    }
+}
+
+export function updateProfileImage(url) {
+    const profileImage = $("#profile .profileImageHolder");
+    if (profileImage.length) {
+        profileImage.replaceWith(`<div class="profileImageHolder" style='background: url("${url}") 50% 50% no-repeat;'></div>`)
     }
 }
 

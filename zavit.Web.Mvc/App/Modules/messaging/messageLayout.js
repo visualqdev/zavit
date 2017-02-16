@@ -1,12 +1,15 @@
-﻿export function setUp(threadId) {
+﻿import { htmlEncode } from "../htmlUtils/htmlEncoder";
+
+export function setUp(options) {
     const $messagesContainer = $("#messages");
-    selectThreadId(threadId);
+    selectThreadId(options.selectedThreadId);
     setWindowResizeWatch($messagesContainer);
     adjustHeightOfMainContainer($messagesContainer);
     adjustCssPositioningForMessagesContainer($messagesContainer);
     adjustHeightOfMessageThreadColumn();
     setMediaQueryWatch();
     adjustInboxThreadListLayout();
+    attachEvents(options);
 }
 
 export function currentlySelectedThreadId() {
@@ -24,7 +27,7 @@ export function threadSelected(selectedThread) {
     $(selectedThread).addClass("selected");
     $("#messageThreads").addClass("threadSelected");
     if (window.matchMedia("(max-width: 990px)").matches) {
-        $("#arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox").addClass("returnToInbox");
+        showBackToInbox();
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
     adjustInboxThreadListLayout();
@@ -125,13 +128,108 @@ function setMediaQueryWatch() {
 
     const handleMediaChange = function (mediaQueryList) {
         if (mediaQueryList.matches) {
-            $(".threadSelected #arrangeNew").html("<i class='fa fa-chevron-left' aria-hidden='true'></i>Back to inbox").addClass('returnToInbox');
-            
+            showBackToInbox();
+
         } else {
-            $("#arrangeNew").html("<i class='fa fa-plus-circle' aria-hidden='true'></i>Arrange new").removeClass('returnToInbox');
+            hideBackToInbox();
         }
     }
 
     mql.addListener(handleMediaChange);
     handleMediaChange(mql);
+}
+
+function showBackToInbox() {
+    $("#arrangeNew").hide();
+    $("#backToInbox").show();
+}
+
+function hideBackToInbox() {
+    $("#backToInbox").hide();
+    $("#arrangeNew").show();
+}
+
+export function setMessageThreadView(threadHtml) {
+    $("#messages").html(threadHtml);
+}
+
+export function setThreadTitle(title) {
+    $("#threadTitle h4").text(htmlEncode(title));
+}
+
+export function disableSending() {
+    $("#messageTextSend").prop("disabled", true);
+}
+
+export function isMessageOnThread(messageStamp) {
+    return $(`[data-stamp='${messageStamp}']`).length;
+}
+
+export function addMessageToThread(messageView) {
+    $("#messages ul").append(messageView);
+}
+
+export function replaceMessageOnThread(messageStamp, messageView) {
+    $(`[data-stamp='${messageStamp}']`).replaceWith(messageView);
+    setScrollPositionToBottom();
+}
+
+export function markMessageAsRead(messageStamp) {
+    var indicator = $(`[data-stamp='${messageStamp}'] span.sent`);
+    indicator.removeClass("sent");
+    indicator.addClass("read");
+}
+
+export function replaceMessageThreadList(messageThreadListView) {
+    $("#messageThreadsContainer").html(messageThreadListView);
+}
+
+function attachEvents(options) {
+    $("#messageThreads").delegate("#arrangeNew", "click", (e) => {
+        e.preventDefault();
+        options.onArrangeNew();
+    });
+
+    $("#messageThreads").delegate("#backToInbox", "click", (e) => {
+        e.preventDefault();
+        hideBackToInbox();
+        $("#messageThreads").removeClass("threadSelected");
+    });
+
+    $("#messageThreadsContainer").on("click", "[data-thread-id]", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const threadId = $(this).attr("data-thread-id");
+
+        options.onThreadSelected(threadId);
+        threadSelected(this);
+        adjustHeightOfMainContainer($("#messages"));
+    });
+
+    $("#messageThreads").on("click", "#messageTextSend", function(e) {
+        e.preventDefault();
+        sendMessage(options);
+    });
+
+    $("#messageThreads").on("keydown", "#messageTextInput", function (e) {            
+        if (e.which === 13) {
+            e.preventDefault();
+            if(inputHasText($(this))) {
+                sendMessage(options);
+            }           
+        }
+    });
+}
+
+function inputHasText(inputControl) {
+    return inputControl.val().trim().length > 0;
+}
+
+function sendMessage(options) {
+    const messageInput = $("#messageTextInput");
+    const messageText = messageInput.val();
+    messageInput.val("");
+
+    options.onSend(messageText);
 }

@@ -158,6 +158,8 @@
     <Compile Include="DtoFactories\Messaging\MessageThreads\INewMessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\MessageThreadDtoFactory.cs" />
     <Compile Include="DtoFactories\Messaging\MessageThreads\NewMessageThreadDtoFactory.cs" />
+    <Compile Include="DtoFactories\ProfileImages\IProfileImageUploadDtoFactory.cs" />
+    <Compile Include="DtoFactories\ProfileImages\ProfileImageUploadDtoFactory.cs" />
     <Compile Include="DtoFactories\Profiles\IProfileDtoFactory.cs" />
     <Compile Include="DtoFactories\Profiles\ProfileDtoFactory.cs" />
     <Compile Include="DtoFactories\VenueMemberships\IMembershipVenueDtoFactory.cs" />
@@ -191,6 +193,8 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessages\NewMessageRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\INewMessageThreadRequestProvider.cs" />
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProvider.cs" />
+    <Compile Include="DtoServices\ProfileImages\IProfileImageDtoService.cs" />
+    <Compile Include="DtoServices\ProfileImages\ProfileImageDtoService.cs" />
     <Compile Include="DtoServices\Profiles\IProfileDtoService.cs" />
     <Compile Include="DtoServices\Profiles\IProfileImageUrlBuilder.cs" />
     <Compile Include="DtoServices\Profiles\IProfileUpdateFactory.cs" />
@@ -221,6 +225,7 @@
     <Compile Include="Dtos\Messaging\MessageThreads\MessageThreadsCollectionDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\NewMessageThreadDto.cs" />
     <Compile Include="Dtos\Messaging\MessageThreads\ThreadParticipantDto.cs" />
+    <Compile Include="Dtos\ProfileImages\ProfileImageUploadDto.cs" />
     <Compile Include="Dtos\Profiles\ProfileDto.cs" />
     <Compile Include="Dtos\VenueMemberships\MembershipVenueDto.cs" />
     <Compile Include="Dtos\VenueMemberships\VenueMembershipDetailsDto.cs" />
@@ -231,6 +236,7 @@
     <Compile Include="Dtos\Venues\VenueActivityDto.cs" />
     <Compile Include="Dtos\Venues\VenueDetailsDto.cs" />
     <Compile Include="Dtos\Venues\VenueDto.cs" />
+    <Compile Include="ExceptionHandling\ApiExceptionLogger.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyResolver.cs" />
     <Compile Include="IocConfiguration\DependencyResolving\WindsorDependencyScope.cs" />
     <Compile Include="IocConfiguration\Installers\AuthorizationInstaller.cs" />
@@ -288,6 +294,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Ioc\zavit.Infrastructure.Ioc.csproj">
       <Project>{bb621111-7038-4e5d-b88b-1a54580f28f4}</Project>
       <Name>zavit.Infrastructure.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Logging\zavit.Infrastructure.Logging.csproj">
+      <Project>{6e1d7ac9-a3a0-4045-881e-d66409858170}</Project>
+      <Name>zavit.Infrastructure.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
       <Project>{67c23b94-0318-4507-ad94-08bd1e288fb9}</Project>

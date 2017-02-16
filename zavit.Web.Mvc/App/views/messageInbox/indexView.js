@@ -4,7 +4,10 @@ export function getView(messageThreads) {
     return `
         <div id="messageThreads" class="container">
             <div class="row">
-                <div class="col-md-4"><a href="#" id="arrangeNew"><i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new</a></div>
+                <div class="col-md-4">
+                    <a href="#" id="arrangeNew"><i class="fa fa-plus-circle" aria-hidden="true"></i>Arrange new</a>
+                    <a href="#" id="backToInbox" style="display:none;"><i class="fa fa-chevron-left returnToInbox" aria-hidden="true"></i>Back to inbox</a>
+                </div>
                 <div class="col-md-8 noColPaddingLeft" id="threadTitle"> <h4></h4></div>
             </div>
             <div class="row" id="messagesContainer">

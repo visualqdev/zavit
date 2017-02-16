@@ -6,6 +6,7 @@ using Castle.Windsor;
 using zavit.Infrastructure.Core;
 using zavit.Infrastructure.Ioc.DomainInstallers;
 using zavit.Infrastructure.Ioc.Infrastructure;
+using zavit.Infrastructure.Logging.Ioc;
 
 namespace zavit.Infrastructure.Ioc
 {
@@ -17,6 +18,7 @@ namespace zavit.Infrastructure.Ioc
         Container()
         {
             AddFacility<TypedFactoryFacility>();
+            AddFacility<LoggerFacility>();
             Kernel.Resolver.AddSubResolver(new CollectionResolver(Kernel));
 
             Register(
@@ -42,7 +44,8 @@ namespace zavit.Infrastructure.Ioc
                 new MessagingInstaller(),
                 new InfrastructureMessagingInstaller(),
                 new ProfilesInstaller(),
-                new InfrastructureProfilesInstaller());
+                new InfrastructureProfilesInstaller(),
+                new InfrastructureImagesInstaller());
         }
 
         public static Container Instance
