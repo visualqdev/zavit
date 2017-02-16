@@ -20,7 +20,7 @@ export function index(options) {
     VenueMembershipService
         .getVenueMembership(options)
         .then(membership => {
-            const view = IndexView.getView(membership);
+            const view = IndexView.getView(membership.membershipDetails, membership.allOtherActivities);
             MainContent.append(view);
             YourVenueMap.addMapTo(".yourVenueMap");
             AttachActivityEvents(membership);
@@ -81,16 +81,21 @@ function AttachActivityEvents(membership) {
         });
     });
 
-    $("#yourVenue").on("change", "[name='venueActivities']", () => {
-        const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
-        const activities = activitiCheckboxes
-            .map((index, checkbox) => $(checkbox).val())
-            .get();
-        
-        VenueService.joinVenue({
-            activities,
-            venueId: membership.Venue.Id,
-            placeId: membership.Venue.PublicPlaceId
-        });
-    });
+    $("#yourVenue")
+        .on("change",
+            "[name='venueActivities']",
+            () => {
+
+                const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
+                const activities = activitiCheckboxes
+                    .map((index, checkbox) => $(checkbox).val())
+                    .get();
+
+                    VenueService.joinVenue({
+                        activities,
+                        venueId: membership.membershipDetails.Venue.Id,
+                        placeId: membership.membershipDetails.Venue.PublicPlaceId
+                    });
+            });
+
 }

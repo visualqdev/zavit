@@ -262,21 +262,41 @@
             }
         }
     }
+    #exTab1 .tab-content {
+      color : white;
+      padding : 5px 15px;
+      background-color: @nav-bg;
+    }
 
+    #exTab2 h3 {
+      color : white;
+      background-color: @nav-bg;
+      padding : 5px 15px;
+    }
+
+    /* remove border radius for the tab */
+
+    #exTab1 .nav-pills > li > a {
+      border-radius: 0;
+    }
+    .nav-pills>li.active>a {
+        background-color:@nav-button-bg;
+    }
     .yourVenueActivities{
         padding: 20px;
-        margin-bottom:10px;
-        width: 100%;        
+        margin-bottom:10px;   
         float: left;
         background-color: @page-bg;
+        min-height:240px;
+        max-height:240px;
         h3{
-            margin: 0 0 10px 0;
+            margin: 10px 0 10px 0;
         }
         .list-group{
             padding-left: 6px;
-            max-height: 400px;
+            max-height: 120px;
             overflow: auto;
-
+            margin-top:10px;
             .list-group-item{
                 border: 0px;
                 padding: 0px 15px;
@@ -284,6 +304,21 @@
                     font-weight: 400;
                 }
             }
+        }
+    }
+    .selectedActivities {
+        h3{
+            margin: 10px;
+        }
+        padding-right:0px;
+        div.inner {
+            
+            width:100%;
+            min-height:100%;
+            background-color: @page-bg;
+            float:left;
+            min-height:240px;
+            max-height:240px;
         }
     }
     #yourVenueMembers{

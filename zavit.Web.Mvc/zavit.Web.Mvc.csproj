@@ -204,6 +204,8 @@
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\oie_transparent.png" />
     <Content Include="Images\tennis-pic.jpg" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />
