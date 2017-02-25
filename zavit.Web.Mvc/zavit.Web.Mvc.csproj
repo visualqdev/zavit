@@ -161,7 +161,6 @@
     <Content Include="app\modules\htmlUtils\htmlUtil.js" />
     <Content Include="app\modules\loading\info.js" />
     <Content Include="app\modules\loading\progress.js" />
-    <Content Include="app\modules\map\geocode.js" />
     <Content Include="app\modules\map\mapPositionAdjuster.js" />
     <Content Include="app\modules\messaging\messageClient.js" />
     <Content Include="app\modules\messaging\messageInboxService.js" />
@@ -172,6 +171,7 @@
     <Content Include="app\modules\messaging\messageThreadService.js" />
     <Content Include="app\modules\messaging\newMessageFactory.js" />
     <Content Include="app\modules\messaging\messageLayout.js" />
+    <Content Include="app\modules\map\placeSuggester.js" />
     <Content Include="app\modules\navigation\search.js" />
     <Content Include="app\modules\navigation\topNav.js" />
     <Content Include="app\modules\notifications\notificationReceiver.js" />

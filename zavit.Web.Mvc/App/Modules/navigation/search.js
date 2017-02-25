@@ -1,41 +1,38 @@
-﻿import * as Geocode from "../map/geocode";
+﻿import * as PlaceSuggester from "../map/placeSuggester";
 
 export function initialise(options) {
-    registerEvents(options);
-}
-
-function registerEvents(options) {
-
-    $("a[data-type]").on("click", function(e) {
+    $("a[data-input-id]").on("click", function(e) {
         e.preventDefault();
-        
-        $("#search_input").val("");
 
-        const searchType = $(this).attr("data-type"),
-             searchTypePlaceholderText = $(this).attr("data-placeHolderText");
+        const selectedOption = $(this);
 
-        $("#search_concept").text(searchType);
-        $("#search_input").attr('placeholder', searchTypePlaceholderText);
+        const searchShortLabel = selectedOption.attr("data-short-label");
 
+        $("#search_concept").text(searchShortLabel);
+        $("[name='searchInputControl']").hide();
+        $("#venue_search_input").val("");
+
+        const inputId = selectedOption.attr("data-input-id");
+        $(`#${inputId}`).show();
     });
 
     $("#searchButton").on("click", function(e) {
         e.preventDefault();
 
-        const inputValue = $(this).closest("span").prev("input").val(),
-            searchConcept = $(this).closest("div.input-group").find("#search_concept").text();
-
-        if (searchConcept === "Area") options.sarchForArea(inputValue);
-
-        if (searchConcept === "Venue") options.searchForVenue(inputValue, options);
-
+        const inputValue = $("#venue_search_input").val();
+        options.searchForVenue(inputValue, options);
     });
 
-    $("#search_input").on("keydown", function (e) {            
+    $("#venue_search_input").on("keydown", function (e) {
         if (e.which === 13) {
             e.preventDefault();
             $("#searchButton").click();
         }
+    });
+
+    PlaceSuggester.initialise({
+        onNewAreaSelected: options.sarchForArea,
+        inputElementId: "area_search_input"
     });
 }
 
