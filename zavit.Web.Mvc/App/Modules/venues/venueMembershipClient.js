@@ -14,15 +14,13 @@ export function joinVenue(venueId, activities) {
         activities: activityDtos
     };
 
-    return new Promise((resolve, reject) =>
-        AuthorizedClient
-            .send({
-                url: postVenueMembershipUrl,
-                type: "post",
-                data: JSON.stringify(data)
-            })
-            .then(resolve)
-            .catch(reject));
+    
+    return AuthorizedClient
+        .send({
+            url: postVenueMembershipUrl,
+            type: "post",
+            data: JSON.stringify(data)
+        });
 }
 
 export function getVenueMemberships() {
