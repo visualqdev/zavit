@@ -7,16 +7,16 @@ import * as ActivitiesClient from "../activities/activityClient";
 
 
 export function getVenueMembership(options) {
-    let memebershipPromise = null;
+    let membershipPromise = null;
     if (options.venueId) {
-        memebershipPromise = VenueMembershipClient.getMembershipForVenue(options.venueId);
+        membershipPromise = VenueMembershipClient.getMembershipForVenue(options.venueId);
     }
 
     if (options.publicPlaceId) {
-        memebershipPromise = VenueMembershipClient.getMembershipForPlace(options.publicPlaceId);
+        membershipPromise = VenueMembershipClient.getMembershipForPlace(options.publicPlaceId);
     }
 
-    if (memebershipPromise == null) return;
+    if (membershipPromise == null) return;
     
     function sortActivities(membership, allActivities) {
         var venueActivityIds = membership.Venue.Activities.map(activity => { return activity.Id }),
@@ -25,7 +25,7 @@ export function getVenueMembership(options) {
     }
 
     return new Promise((resolve, reject) => {
-        Promise.all([memebershipPromise, ActivitiesClient.getAllActivities()])  
+        Promise.all([membershipPromise, ActivitiesClient.getAllActivities()])  
         .then(results => resolve({
           membershipDetails : results[0],
           allOtherActivities : sortActivities(results[0], results[1])

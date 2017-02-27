@@ -7,8 +7,7 @@ export function getView(venueActivities, allOtherActivities, memberActivities) {
         <div class="yourVenueActivities col-md-8" id="exTab1">
             <div class="tab-content clearfix">
                 <ul class="nav nav-pills">
-                    <li class="active"><a href="#1a" data-toggle="tab">Member activities</a><li>
-                    <li><a href="#2a" data-toggle="tab">All other activites</a></li>
+                    ${getTabs(memberActivities.length > 0)}
                 </ul>
                 <ul class="list-group row tab-pane active" id="1a">
                     ${activityCheckboxes(venueActivities, memberActivityIds)}
@@ -22,16 +21,22 @@ export function getView(venueActivities, allOtherActivities, memberActivities) {
             
             <div class="inner">
                 <h3>Your activities</h3>
-                <ul>${activities(memberActivities, memberActivityIds)}</ul>
+                <ul>${memberActivityList(memberActivities)}</ul>
             </div>
         </div>
         `;
 }
 
+function getTabs(hasMemberActivities) {
+    if (hasMemberActivities)
+        return `<li class="active"><a href="#1a" data-toggle="tab">Member activities</a><li>
+                        <li><a href="#2a" data-toggle="tab">All other activites</a></li>`;
+    return `<li class="active"><a href="#1a" data-toggle="tab">Suggested activities</a><li>
+                        <li><a href="#2a" data-toggle="tab">All other activites</a></li>`;
+}
+
 export function updateActivities(memberActivities) {
-    console.log(memberActivities);
-    $("div.selectedActivities").find('ul').empty();
-    $("div.selectedActivities").find('ul').append(activities(memberActivities));
+    $("div.selectedActivities").find('ul').replaceWith('<ul>' + memberActivityList(memberActivities) + '</ul>');
 }
 
 function activityCheckboxes(activities, memberActivityIds) {
@@ -51,12 +56,11 @@ function activityCheckboxes(activities, memberActivityIds) {
     return activitiesMarkup;
 }
 
-function activities(activities) {
+function memberActivityList(activities) {
    
     let activitiesMarkup = "";
     activities.forEach(activity => {
         activitiesMarkup += html`<li> ${activity.Name} <a href="#" data-id="${activity.Id}">remove</a></li>`;
     });
-    console.log(activitiesMarkup);
     return activitiesMarkup;
 }

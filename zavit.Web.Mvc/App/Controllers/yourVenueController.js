@@ -80,22 +80,27 @@ function AttachActivityEvents(membership) {
             $(".yourVenueActivities").replaceWith(allActivitiesMarkup);
         });
     });
-
+    $('.selectedActivities').delegate('a', 'click', e => {
+        e.preventDefault();;
+        $('input:checkbox[value="' + $(e.currentTarget).attr('data-id') + '"]').trigger('click');
+    });
     $("#yourVenue")
         .on("change",
             "[name='venueActivities']",
             () => {
 
-                const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
-                const activities = activitiCheckboxes
-                    .map((index, checkbox) => $(checkbox).val())
-                    .get();
+        const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
+        const activities = activitiCheckboxes
+            .map((index, checkbox) => $(checkbox).val())
+            .get();
 
-                    VenueService.joinVenue({
-                        activities,
-                        venueId: membership.membershipDetails.Venue.Id,
-                        placeId: membership.membershipDetails.Venue.PublicPlaceId
-                    });
-            });
+        VenueService.joinVenue({
+                activities,
+                venueId: membership.membershipDetails.Venue.Id,
+                placeId: membership.membershipDetails.Venue.PublicPlaceId
+        }).then(updatedMembership => {
+            VenueActivitiesPartial.updateActivities(updatedMembership.Activities);
+        });
+    });
 
 }
