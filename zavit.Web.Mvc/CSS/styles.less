@@ -9,6 +9,7 @@ html, body {
 	width:100%;
     margin:0;
     background:@background;
+    background-repeat:repeat;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -143,7 +144,16 @@ a, a:hover {
 	        color: @logo;
 	        font-size: 30px;
         }
-         
+         a.navbar-brand {
+            letter-spacing: -2px;
+            font-size: 50px;
+            background: @logo;
+            color: white;
+             font-family:'Bauhaus 93';
+            }
+         a:first-letter {
+             color:lightgrey;
+         }
     }   
    
     .input-group {
@@ -152,6 +162,7 @@ a, a:hover {
                 font-weight:normal;
                 font-size:15px;
             }
+            
         }
     }
 
