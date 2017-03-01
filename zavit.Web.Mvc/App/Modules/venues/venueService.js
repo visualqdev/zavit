@@ -32,36 +32,37 @@ export function getVenue(venueId) {
 }
 
 export function joinVenue(options) {
-    if (AccountService.currentUserAccount()) {
-        if (options.venueId && options.venueId > 0) {
-            letUserJoinVenue(options);
+    return new Promise((resolve, reject) => {
+        if (AccountService.currentUserAccount()) {
+            if (options.venueId && options.venueId > 0) {
+                VenueMembershipClient.joinVenue(options.venueId, options.activities)
+                .then(result => {
+                        resolve(result);
+                    })
+                .catch((error) => rejectOrAuthorize(error, reject));
+            } else {
+                VenueClient
+                    .addVenue(options.placeId, null, options.activities)
+                    .then((venue) => {
+                        options.venueId = venue.Id;
+                        return VenueMembershipClient.joinVenue(options.venueId, options.activities);
+                    })
+                    .then(() => Routes.goTo(`${Routes.yourVenue}/${options.venueId}`))
+                    .catch((error) => rejectOrAuthorize(error, reject));
+            }
         } else {
-            VenueClient
-                .addVenue(options.placeId, null, options.activities)
-                .then((venue) => {
-                    options.venueId = venue.Id;
-                    letUserJoinVenue(options);
-                })
-                .catch((error) => {
-                    if (error && error.status && error.status === 401) {
-                        redirectToLogin(options);
-                    }
-                });
-        }
-    } else {
-        redirectToLogin(options);
-    }
+            redirectToLogin(options);
+            reject();
+        } 
+    });
 }
 
-function letUserJoinVenue(options) {
-    VenueMembershipClient
-        .joinVenue(options.venueId, options.activities)
-        .then(() => Routes.goTo(`${Routes.yourVenue}/${options.venueId}`))
-        .catch((error) => {
-            if (error && error.status && error.status === 401) {
-                redirectToLogin(options);
-            }
-        });
+function rejectOrAuthorize(error, reject) {
+    if (error && error.status && error.status === 401) {
+        redirectToLogin(options);
+    } else {
+        reject(error);
+    }
 }
 
 function redirectToLogin(options) {

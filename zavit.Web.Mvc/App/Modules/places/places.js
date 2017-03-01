@@ -2,7 +2,6 @@
 import * as Search from "../navigation/search";
 import * as Info from "../loading/info";
 import * as Routes from "../../routing/routes";
-import * as Geocode from "../map/geocode";
 
 let map;
 let onPlaceSelected;
@@ -47,16 +46,11 @@ export function removeMarkers() {
     clearPlaceInfo();
 }
 
-function sarchForArea(areaName) {
-    function load(position) {
-
-        removeMarkers();
-        map.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-        map.position = position;
-        getPlaces();
-    }
-
-    if (areaName !== "") Geocode.getGeoCodeByAddress(areaName, load);
+function sarchForArea(position) {
+    removeMarkers();
+    map.map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+    map.position = position;
+    getPlaces();
 }
 
 function searchForVenue(venueName) {
