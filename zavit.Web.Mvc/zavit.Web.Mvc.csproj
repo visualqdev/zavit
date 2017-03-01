@@ -231,7 +231,6 @@
     <Content Include="CSS\bootstrap\js\npm.js" />
     <Content Include="CSS\production\styles.css" />
     <Content Include="gulpfile.js" />
-    <Content Include="libraries\jQueryEmoji.min.js" />
     <Content Include="libraries\moment.js" />
     <Content Include="libraries\nprogress.js" />
     <Content Include="packages.config" />
@@ -258,7 +257,9 @@
     <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="CSS\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="CSS\libraries\colours.less" />
-    <Content Include="AppSettings\appSettings.config" />
+    <Content Include="AppSettings\appSettings.Release.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Fonts\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -297,6 +298,9 @@
     <Content Include="CSS\explore.less" />
     <Content Include="CSS\profile.less" />
     <Content Include="package.json" />
+    <Content Include="AppSettings\appSettings.Debug.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
