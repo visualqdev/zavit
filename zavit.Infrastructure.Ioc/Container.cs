@@ -3,9 +3,8 @@ using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
+using Castle.Windsor.Installer;
 using zavit.Infrastructure.Core;
-using zavit.Infrastructure.Ioc.DomainInstallers;
-using zavit.Infrastructure.Ioc.Infrastructure;
 using zavit.Infrastructure.Logging.Ioc;
 
 namespace zavit.Infrastructure.Ioc
@@ -26,26 +25,7 @@ namespace zavit.Infrastructure.Ioc
                 Component.For<IWindsorContainer>().Instance(this)
             );
 
-            Install(
-                new VenuesInstaller(),
-                new InfrastructurePlacesInstaller(),
-                new InfrastructureCoreInstaller(),
-                new NhibernateWebInstaller(),
-                new AccountsInstaller(),
-                new InfrastructureAccountsInstaller(),
-                new ClientsInstaller(),
-                new InfrastructureClientsInstaller(),
-                new InfrastructureExternalAccountsInstaller(),
-                new ExternalAccountsInstaller(),
-                new InfrastructureActivitiesInstaller(),
-                new InfrastructureVenuesInstaller(),
-                new InfrastructureVenueMembershipsInstaller(),
-                new VenueMembershipsInstaller(),
-                new MessagingInstaller(),
-                new InfrastructureMessagingInstaller(),
-                new ProfilesInstaller(),
-                new InfrastructureProfilesInstaller(),
-                new InfrastructureImagesInstaller());
+            Install(FromAssembly.This());
         }
 
         public static Container Instance

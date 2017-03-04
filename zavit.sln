@@ -95,6 +95,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Infrastructure.Images
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Infrastructure.Logging", "zavit.Infrastructure.Logging\zavit.Infrastructure.Logging.csproj", "{6E1D7AC9-A3A0-4045-881E-D66409858170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zavit.Infrastructure.Storage", "zavit.Infrastructure.Storage\zavit.Infrastructure.Storage.csproj", "{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -729,6 +731,22 @@ Global
 		{6E1D7AC9-A3A0-4045-881E-D66409858170}.Release|x64.Build.0 = Release|Any CPU
 		{6E1D7AC9-A3A0-4045-881E-D66409858170}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E1D7AC9-A3A0-4045-881E-D66409858170}.Release|x86.Build.0 = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|ARM.Build.0 = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|x64.Build.0 = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Debug|x86.Build.0 = Debug|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|ARM.ActiveCfg = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|ARM.Build.0 = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|x64.ActiveCfg = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|x64.Build.0 = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|x86.ActiveCfg = Release|Any CPU
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -776,5 +794,6 @@ Global
 		{F8B2F575-E38E-430D-AE42-7742530A55B3} = {B6124150-90BB-4DE1-87F6-925197544E2C}
 		{9F7C4D82-D36E-4455-AAB0-9B9554B48115} = {B6124150-90BB-4DE1-87F6-925197544E2C}
 		{6E1D7AC9-A3A0-4045-881E-D66409858170} = {B6124150-90BB-4DE1-87F6-925197544E2C}
+		{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6} = {B6124150-90BB-4DE1-87F6-925197544E2C}
 	EndGlobalSection
 EndGlobal

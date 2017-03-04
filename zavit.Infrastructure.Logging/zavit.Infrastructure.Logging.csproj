@@ -34,12 +34,12 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.1\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -60,14 +60,26 @@
     <Compile Include="LoggerWrapper.cs" />
     <Compile Include="LoggingConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Targets\LogEntry.cs" />
+    <Compile Include="Targets\TableStorageTarget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Core\zavit.Infrastructure.Core.csproj">
+      <Project>{0197d1c2-74b2-4b94-8db7-97af3976f1e1}</Project>
+      <Name>zavit.Infrastructure.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Storage\zavit.Infrastructure.Storage.csproj">
+      <Project>{29dfa3a9-119a-4e96-bd0f-df9f8e9d9ed6}</Project>
+      <Name>zavit.Infrastructure.Storage</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
