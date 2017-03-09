@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using zavit.Domain.Profiles;
 using zavit.Web.Api.DtoFactories.ProfileImages;
 using zavit.Web.Api.Dtos.ProfileImages;
@@ -19,10 +20,10 @@ namespace zavit.Web.Api.DtoServices.ProfileImages
             _profileImageUploadDtoFactory = profileImageUploadDtoFactory;
         }
 
-        public ProfileImageUploadDto ChangeProfileImage(Stream imageFile)
+        public async Task<ProfileImageUploadDto> ChangeProfileImage(Stream imageFile)
         {
             var profile = _userContext.Account.Profile;
-            var profileImage = _profileService.UpdateProfileImage(imageFile, profile);
+            var profileImage = await _profileService.UpdateProfileImage(imageFile, profile);
             var profileImageUploadDto = _profileImageUploadDtoFactory.CreateItem(profileImage);
 
             return profileImageUploadDto;

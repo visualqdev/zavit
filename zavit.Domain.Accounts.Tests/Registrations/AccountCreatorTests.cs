@@ -1,4 +1,5 @@
-﻿using Machine.Specifications;
+﻿using System.Threading.Tasks;
+using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts.Registrations;
@@ -12,7 +13,7 @@ namespace zavit.Domain.Accounts.Tests.Registrations
     {
         class When_creating_an_internal_account
         {
-            Because of = () => _result = Subject.Create(_accountRegistration);
+            Because of = () => _result = Subject.Create(_accountRegistration).Result;
 
             It should_set_the_username_to_be_the_same_as_the_registration_username = 
                 () => _result.Username.ShouldEqual(_accountRegistration.Username);
@@ -39,7 +40,7 @@ namespace zavit.Domain.Accounts.Tests.Registrations
                     .Return(HashedPassword);
 
                 _profile = NewInstanceOf<Profile>();
-                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(_profile);
+                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(Task.FromResult(_profile));
             };
 
             static IAccountRegistration _accountRegistration;
@@ -50,7 +51,7 @@ namespace zavit.Domain.Accounts.Tests.Registrations
 
         class When_creating_an_external_account
         {
-            Because of = () => _result = Subject.Create(_accountRegistration);
+            Because of = () => _result = Subject.Create(_accountRegistration).Result;
 
             It should_set_the_username_to_be_the_same_as_the_registration_username =
                 () => _result.Username.ShouldEqual(_accountRegistration.Username);
@@ -76,7 +77,7 @@ namespace zavit.Domain.Accounts.Tests.Registrations
                     .Return(HashedPassword);
 
                 _profile = NewInstanceOf<Profile>();
-                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(_profile);
+                Injected<IProfileCreator>().Stub(c => c.CreateProfile(_accountRegistration)).Return(Task.FromResult(_profile));
             };
 
             static IAccountRegistration _accountRegistration;

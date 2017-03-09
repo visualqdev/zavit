@@ -4,6 +4,7 @@ using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Activities;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Domain.VenueMemberships;
 using zavit.Web.Api.DtoFactories.VenueMembers;
 using zavit.Web.Api.DtoFactories.Venues;
@@ -39,6 +40,7 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
                 _venueMembership.Account.Id = 123;
                 _venueMembership.Account.Profile = NewInstanceOf<Profile>();
                 _venueMembership.Account.Profile.DisplayName = "Test display name";
+                _venueMembership.Account.Profile.ProfileImage = "profileImage";
 
                 var activity = NewInstanceOf<Activity>();
                 var otherActivity = NewInstanceOf<Activity>();
@@ -50,8 +52,8 @@ namespace zavit.Web.Api.Tests.DtoFactories.VenueMembers
                 _otherActivityDto = NewInstanceOf<VenueActivityDto>();
                 Injected<IVenueActivityDtoFactory>().Stub(f => f.CreateItem(otherActivity)).Return(_otherActivityDto);
 
-                Injected<IProfileImageUrlBuilder>()
-                    .Stub(b => b.Build(_venueMembership.Account.Profile))
+                Injected<IProfileImageStorage>()
+                    .Stub(b => b.ImageUrl(_venueMembership.Account.Profile.ProfileImage))
                     .Return(ProfileImageUrl);
             };
 

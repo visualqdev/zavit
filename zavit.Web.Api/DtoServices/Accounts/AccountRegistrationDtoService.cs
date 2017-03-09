@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using zavit.Domain.Accounts;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Web.Api.Dtos.Accounts;
@@ -15,11 +16,11 @@ namespace zavit.Web.Api.DtoServices.Accounts
             _accountService = accountService;
         }
 
-        public AccountRegistrationResult Register(AccountRegistrationDto accountRegistrationDto)
+        public async Task<AccountRegistrationResult> Register(AccountRegistrationDto accountRegistrationDto)
         {
             var accountProfileRegistration = _accountProfileRegistrationFactory.CreateItem(accountRegistrationDto);
 
-            var accountRegistrationResult = _accountService.Register(accountProfileRegistration);
+            var accountRegistrationResult = await _accountService.Register(accountProfileRegistration);
             return accountRegistrationResult;
         }
     }

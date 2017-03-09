@@ -8,7 +8,7 @@ namespace zavit.Infrastructure.Images
 {
     public class ImageResizer : IImageResizer
     {
-        public byte[] ResizeImageToMinimum(Stream imageStream, int targetMinWidth, int targetMinHeight)
+        public Stream ResizeImageToMinimum(Stream imageStream, int targetMinWidth, int targetMinHeight)
         {
             using (var image = Image.FromStream(imageStream))
             {
@@ -27,7 +27,7 @@ namespace zavit.Infrastructure.Images
                     newImage.Save(stream, ImageFormat.Png);
 
                     var byteArray = stream.ToArray();
-                    return byteArray;
+                    return new MemoryStream(byteArray);
                 }
             }
         }

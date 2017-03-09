@@ -52,9 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Overrides\ProfileImageOverride.cs" />
-    <Compile Include="Overrides\ProfileOverride.cs" />
-    <Compile Include="ProfileImageRepository.cs" />
+    <Compile Include="ProfileImages\ProfileImageStorage.cs" />
     <Compile Include="ProfileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,6 +68,10 @@
     <ProjectReference Include="..\zavit.Domain.Shared\zavit.Domain.Shared.csproj">
       <Project>{1ad7901a-c93a-4b3b-af9b-e48a30aeee28}</Project>
       <Name>zavit.Domain.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Storage\zavit.Infrastructure.Storage.csproj">
+      <Project>{29dfa3a9-119a-4e96-bd0f-df9f8e9d9ed6}</Project>
+      <Name>zavit.Infrastructure.Storage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

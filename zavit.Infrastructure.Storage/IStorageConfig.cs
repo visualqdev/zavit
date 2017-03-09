@@ -4,5 +4,6 @@
     {
         string AzureStorageConnectionString { get; }
         int QueueMessageVisibilityTimeoutSeconds { get; }
+        string StorageUrl { get; }
     }
 }

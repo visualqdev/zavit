@@ -1,8 +1,10 @@
 ﻿
+using System.Threading.Tasks;
+
 namespace zavit.Domain.Profiles.Registration
 {
     public interface IProfileCreator
     {
-        Profile CreateProfile(IProfileRegistration accountProfileRegistration);
+        Task<Profile> CreateProfile(IProfileRegistration accountProfileRegistration);
     }
 }

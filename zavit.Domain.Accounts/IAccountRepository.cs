@@ -11,7 +11,6 @@ namespace zavit.Domain.Accounts
         bool AccountExists(string username);
         IList<Account> GetAccounts(IEnumerable<int> accountIds);
         IResultCollection<Account> Search(string searchTerm, int skip, int take, int requestedByAccountId);
-        byte[] GetProfileImage(int accountId);
         Profile GetProfile(int accountId);
     }
 }

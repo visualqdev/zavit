@@ -1,4 +1,7 @@
-﻿namespace zavit.Domain.Profiles.Registration
+﻿using System.Threading.Tasks;
+using zavit.Domain.Profiles.ProfileImages;
+
+namespace zavit.Domain.Profiles.Registration
 {
     public class ProfileCreator : IProfileCreator
     {
@@ -9,9 +12,9 @@
             _profileImageCreator = profileImageCreator;
         }
 
-        public Profile CreateProfile(IProfileRegistration accountProfileRegistration)
+        public async Task<Profile> CreateProfile(IProfileRegistration accountProfileRegistration)
         {
-            var profileImage = _profileImageCreator.Create(accountProfileRegistration.ProfileImage);
+            var profileImage = await _profileImageCreator.Create(accountProfileRegistration.ProfileImage);
 
             return new Profile
             {

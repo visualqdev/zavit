@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using zavit.Web.Api.Dtos.Accounts;
 using zavit.Web.Api.DtoServices.Accounts;
 
@@ -14,9 +15,9 @@ namespace zavit.Web.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Post(AccountRegistrationDto accountDto)
+        public async Task<IHttpActionResult> Post(AccountRegistrationDto accountDto)
         {
-            var registrationResult = _accountRegistrationDtoService.Register(accountDto);
+            var registrationResult = await _accountRegistrationDtoService.Register(accountDto);
 
             if (registrationResult.Success) return Ok();
 

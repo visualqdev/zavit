@@ -110,7 +110,6 @@
     <Compile Include="DtoServices\Messaging\MessageThreads\NewMessageThreads\NewMessageThreadRequestProviderTests.cs" />
     <Compile Include="DtoServices\ProfileImages\ProfileImageDtoServiceTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileDtoServiceTests.cs" />
-    <Compile Include="DtoServices\Profiles\ProfileImageUrlBuilderTests.cs" />
     <Compile Include="DtoServices\Profiles\ProfileUpdateFactoryTests.cs" />
     <Compile Include="DtoServices\VenueMembers\VenueMemberDtoServiceTests.cs" />
     <Compile Include="DtoFactories\Venues\VenueActivityDtoFactoryTests.cs" />

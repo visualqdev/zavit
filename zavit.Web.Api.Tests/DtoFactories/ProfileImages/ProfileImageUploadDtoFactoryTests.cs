@@ -2,9 +2,9 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.DtoFactories.ProfileImages;
 using zavit.Web.Api.Dtos.ProfileImages;
-using zavit.Web.Api.DtoServices.Profiles;
 
 namespace zavit.Web.Api.Tests.DtoFactories.ProfileImages 
 {
@@ -20,8 +20,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.ProfileImages
             Establish context = () =>
             {
                 _profile = NewInstanceOf<Profile>();
+                _profile.ProfileImage = "ProfileImage";
 
-                Injected<IProfileImageUrlBuilder>().Stub(b => b.Build(_profile)).Return(ProfileImageUrl);
+                Injected<IProfileImageStorage>().Stub(b => b.ImageUrl(_profile.ProfileImage)).Return(ProfileImageUrl);
             };
 
             static Profile _profile;

@@ -19,5 +19,8 @@ namespace zavit.Web.Mvc.Settings
                 return _queueMessageVisibilityTimeoutSeconds.Value;
             }
         }
+
+        string _storageUrl;
+        public string StorageUrl => _storageUrl ?? (_storageUrl = ConfigurationManager.AppSettings["Azure.Storage.Url"]);
     }
 }

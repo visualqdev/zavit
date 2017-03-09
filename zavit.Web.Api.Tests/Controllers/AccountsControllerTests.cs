@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Specifications;
 using Rhino.Mocks;
@@ -15,7 +16,7 @@ namespace zavit.Web.Api.Tests.Controllers
     {
         class When_registering_a_new_account_successfully
         {
-            Because of = () => _result = Subject.Post(_accountDto);
+            Because of = () => _result = Subject.Post(_accountDto).Result;
 
             It should_return_an_ok_result = () => _result.ShouldBeAssignableTo<OkResult>();
 
@@ -25,7 +26,7 @@ namespace zavit.Web.Api.Tests.Controllers
 
                 var registrationResult = NewInstanceOf<AccountRegistrationResult>();
                 registrationResult.Success = true;
-                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(registrationResult);
+                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(Task.FromResult(registrationResult));
             };
 
             static AccountRegistrationDto _accountDto;
@@ -34,7 +35,7 @@ namespace zavit.Web.Api.Tests.Controllers
 
         class When_registering_a_new_account_unsuccessfully
         {
-            Because of = () => _result = Subject.Post(_accountDto);
+            Because of = () => _result = Subject.Post(_accountDto).Result;
 
             It should_return_an_bad_request_result = () => _result.ShouldBeAssignableTo<BadRequestErrorMessageResult>();
 
@@ -48,7 +49,7 @@ namespace zavit.Web.Api.Tests.Controllers
                 _registrationResult = NewInstanceOf<AccountRegistrationResult>();
                 _registrationResult.Success = false;
                 _registrationResult.ErrorMessage = "Test Error message";
-                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(_registrationResult);
+                Injected<IAccountRegistrationDtoService>().Stub(s => s.Register(_accountDto)).Return(Task.FromResult(_registrationResult));
             };
 
             static AccountRegistrationDto _accountDto;

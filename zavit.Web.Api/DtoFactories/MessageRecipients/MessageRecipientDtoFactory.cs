@@ -1,4 +1,5 @@
 ﻿using zavit.Domain.Accounts;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.Dtos.MessageRecipients;
 using zavit.Web.Api.DtoServices.Profiles;
 
@@ -6,11 +7,11 @@ namespace zavit.Web.Api.DtoFactories.MessageRecipients
 {
     public class MessageRecipientDtoFactory : IMessageRecipientDtoFactory
     {
-        readonly IProfileImageUrlBuilder _profileImageUrlBuilder;
+        readonly IProfileImageStorage _profileImageStorage;
 
-        public MessageRecipientDtoFactory(IProfileImageUrlBuilder profileImageUrlBuilder)
+        public MessageRecipientDtoFactory(IProfileImageStorage profileImageStorage)
         {
-            _profileImageUrlBuilder = profileImageUrlBuilder;
+            _profileImageStorage = profileImageStorage;
         }
 
         public MessageRecipientDto CreateItem(Account account)
@@ -19,7 +20,7 @@ namespace zavit.Web.Api.DtoFactories.MessageRecipients
             {
                 DisplayName = account.Profile.DisplayName,
                 AccountId = account.Id,
-                ProfileImageUrl = _profileImageUrlBuilder.Build(account.Profile)
+                ProfileImageUrl = _profileImageStorage.ImageUrl(account.Profile.ProfileImage)
             };
         }
     }

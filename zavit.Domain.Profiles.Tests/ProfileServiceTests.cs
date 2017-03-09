@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
-using zavit.Domain.Profiles.Registration;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Domain.Profiles.Tests 
@@ -59,12 +60,9 @@ namespace zavit.Domain.Profiles.Tests
 
         class When_updating_profile_image
         {
-            Because of = () => _result = Subject.UpdateProfileImage(Image, _profile);
+            Because of = () => _result = Subject.UpdateProfileImage(Image, _profile).Result;
 
-            It should_add_new_profile_image_to_an_existing_profile = () => _profile.ProfileImage.ShouldEqual(_profileImage);
-
-            It should_tell_the_profile_image_repository_to_remove_the_old_image =
-                () => Injected<IProfileImageRepository>().AssertWasCalled(r => r.RemoveImage(_oldProfileImage));
+            It should_add_new_profile_image_to_an_existing_profile = () => _profile.ProfileImage.ShouldEqual(ProfileImage);
 
             It should_save_the_updated_profile = () => Injected<IProfileRepository>().AssertWasCalled(r => r.Update(_profile));
 
@@ -73,42 +71,15 @@ namespace zavit.Domain.Profiles.Tests
             Establish context = () =>
             {
                 _profile = NewInstanceOf<Profile>();
-                _oldProfileImage = NewInstanceOf<ProfileImage>();
-                _profile.ProfileImage = _oldProfileImage;
+                _profile.ProfileImage = "oldimage";
 
-                _profileImage = NewInstanceOf<ProfileImage>();
-                Injected<IProfileImageCreator>().Stub(c => c.Create(Image)).Return(_profileImage);
-            };
-
-            static ProfileImage _profileImage;
-            static Profile _profile;
-            static readonly Stream Image = new MemoryStream();
-            static Profile _result;
-            static ProfileImage _oldProfileImage;
-        }
-
-        class When_adding_a_new_image_to_an_existing_profile
-        {
-            Because of = () => _result = Subject.UpdateProfileImage(Image, _profile);
-
-            It should_add_new_profile_image_to_an_existing_profile = () => _profile.ProfileImage.ShouldEqual(_profileImage);
-
-            It should_save_the_updated_profile = () => Injected<IProfileRepository>().AssertWasCalled(r => r.Update(_profile));
-
-            It should_return_the_updated_profile = () => _result.ShouldEqual(_profile);
-
-            Establish context = () =>
-            {
-                _profile = NewInstanceOf<Profile>();
-
-                _profileImage = NewInstanceOf<ProfileImage>();
-                Injected<IProfileImageCreator>().Stub(c => c.Create(Image)).Return(_profileImage);
+                Injected<IProfileImageCreator>().Stub(c => c.Create(Image)).Return(Task.FromResult(ProfileImage));
             };
 
             static Profile _profile;
             static readonly Stream Image = new MemoryStream();
             static Profile _result;
-            static ProfileImage _profileImage;
+            const string ProfileImage = "NewProfileImage";
         }
     }
 }

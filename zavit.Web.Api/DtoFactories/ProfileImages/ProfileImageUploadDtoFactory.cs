@@ -1,21 +1,21 @@
 ﻿using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.Dtos.ProfileImages;
-using zavit.Web.Api.DtoServices.Profiles;
 
 namespace zavit.Web.Api.DtoFactories.ProfileImages
 {
     public class ProfileImageUploadDtoFactory : IProfileImageUploadDtoFactory
     {
-        readonly IProfileImageUrlBuilder _profileImageUrlBuilder;
+        readonly IProfileImageStorage _profileImageStorage;
 
-        public ProfileImageUploadDtoFactory(IProfileImageUrlBuilder profileImageUrlBuilder)
+        public ProfileImageUploadDtoFactory(IProfileImageStorage profileImageStorage)
         {
-            _profileImageUrlBuilder = profileImageUrlBuilder;
+            _profileImageStorage = profileImageStorage;
         }
 
         public ProfileImageUploadDto CreateItem(Profile profile)
         {
-            var profileImageUrl = _profileImageUrlBuilder.Build(profile);
+            var profileImageUrl = _profileImageStorage.ImageUrl(profile.ProfileImage);
 
             return new ProfileImageUploadDto
             {

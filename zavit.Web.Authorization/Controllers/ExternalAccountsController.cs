@@ -115,7 +115,7 @@ namespace zavit.Web.Authorization.Controllers
             }
 
             var registration = await externalAccountRegistrationFactory.CreateRegistration(model.Provider, model.ExternalAccessToken);
-            var externalAccount = _externalAccountService.CreateExternalAccount(registration);
+            var externalAccount = await _externalAccountService.CreateExternalAccount(registration);
 
             var accessTokenResponse = _localAccessTokenProvider.GenerateLocalAccessTokenResponse(
                 externalAccount.Account,

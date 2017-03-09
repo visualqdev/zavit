@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Machine.Specifications.Model;
 using Rhino.Mocks;
@@ -13,7 +14,7 @@ namespace zavit.Domain.Accounts.Tests
     {
         class When_registering_a_new_account
         {
-            Because of = () => _result = Subject.Register(_accountRegistration);
+            Because of = () => _result = Subject.Register(_accountRegistration).Result;
 
             It should_store_the_new_account_in_the_repository =
                 () => Injected<IAccountRepository>().AssertWasCalled(r => r.Save(_account));
@@ -25,7 +26,7 @@ namespace zavit.Domain.Accounts.Tests
                 _accountRegistration = NewInstanceOf<IAccountRegistration>();
 
                 _account = NewInstanceOf<Account>();
-                Injected<IAccountCreator>().Stub(c => c.Create(_accountRegistration)).Return(_account);
+                Injected<IAccountCreator>().Stub(c => c.Create(_accountRegistration)).Return(Task.FromResult(_account));
 
                 _successRegistrationResult = NewInstanceOf<AccountRegistrationResult>();
                 Injected<IAccountRegistrationResultFactory>()
@@ -41,7 +42,7 @@ namespace zavit.Domain.Accounts.Tests
 
         class When_registering_a_new_account_that_is_not_passing_validation
         {
-            Because of = () => _result = Subject.Register(_accountRegistration);
+            Because of = () => _result = Subject.Register(_accountRegistration).Result;
 
             It should_return_an_error_result_provided_by_validator = () => _result.ShouldEqual(_errorRegistrationResult);
 

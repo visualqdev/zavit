@@ -3,6 +3,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.DtoFactories.MessageRecipients;
 using zavit.Web.Api.Dtos.MessageRecipients;
 using zavit.Web.Api.DtoServices.Profiles;
@@ -31,9 +32,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.MessageRecipients
                 _account.Id = 123;
                 _account.Profile = NewInstanceOf<Profile>();
                 _account.Profile.DisplayName = "Test display name";
-                _account.Profile.ProfileImage = NewInstanceOf<ProfileImage>();
+                _account.Profile.ProfileImage = "ProfileImage";
 
-                Injected<IProfileImageUrlBuilder>().Stub(b => b.Build(_account.Profile)).Return(ProfileUrl);
+                Injected<IProfileImageStorage>().Stub(b => b.ImageUrl(_account.Profile.ProfileImage)).Return(ProfileUrl);
             };
 
             static Account _account;

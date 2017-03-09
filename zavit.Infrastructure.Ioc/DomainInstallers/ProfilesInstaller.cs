@@ -2,6 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Domain.Profiles.Registration;
 using zavit.Domain.Profiles.Updating;
 

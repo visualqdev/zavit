@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using zavit.Domain.Profiles.Registration;
+using System.Threading.Tasks;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Domain.Profiles.Updating;
 
 namespace zavit.Domain.Profiles
@@ -10,14 +11,12 @@ namespace zavit.Domain.Profiles
         readonly IProfileRepository _profileRepository;
         readonly IEnumerable<IProfileUpdater> _profileUpdaters;
         readonly IProfileImageCreator _profileImageCreator;
-        readonly IProfileImageRepository _profileImageRepository;
-
-        public ProfileService(IProfileRepository profileRepository, IEnumerable<IProfileUpdater> profileUpdaters, IProfileImageCreator profileImageCreator, IProfileImageRepository profileImageRepository)
+        
+        public ProfileService(IProfileRepository profileRepository, IEnumerable<IProfileUpdater> profileUpdaters, IProfileImageCreator profileImageCreator)
         {
             _profileRepository = profileRepository;
             _profileUpdaters = profileUpdaters;
             _profileImageCreator = profileImageCreator;
-            _profileImageRepository = profileImageRepository;
         }
 
         public Profile UpdateProfile(ProfileUpdate profileUpdate, Profile profile)
@@ -30,19 +29,12 @@ namespace zavit.Domain.Profiles
             return profile;
         }
 
-        public Profile UpdateProfileImage(Stream image, Profile profile)
+        public async Task<Profile> UpdateProfileImage(Stream image, Profile profile)
         {
-            var oldProfileImageId = profile.ProfileImage;
-
-            var profileImage = _profileImageCreator.Create(image);
+            var profileImage = await _profileImageCreator.Create(image);
             profile.ProfileImage = profileImage;
             _profileRepository.Update(profile);
-
-            if (oldProfileImageId != null)
-            {
-                _profileImageRepository.RemoveImage(oldProfileImageId);
-            }
-
+            
             return profile;
         }
     }

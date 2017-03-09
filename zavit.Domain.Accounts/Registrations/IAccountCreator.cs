@@ -1,7 +1,9 @@
-﻿namespace zavit.Domain.Accounts.Registrations
+﻿using System.Threading.Tasks;
+
+namespace zavit.Domain.Accounts.Registrations
 {
     public interface IAccountCreator
     {
-        Account Create(IAccountRegistration accountRegistration);
+        Task<Account> Create(IAccountRegistration accountRegistration);
     }
 }

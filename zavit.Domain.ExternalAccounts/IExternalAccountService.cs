@@ -1,9 +1,10 @@
-﻿using zavit.Domain.ExternalAccounts.Registrations;
+﻿using System.Threading.Tasks;
+using zavit.Domain.ExternalAccounts.Registrations;
 
 namespace zavit.Domain.ExternalAccounts
 {
     public interface IExternalAccountService
     {
-        ExternalAccount CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration);
+        Task<ExternalAccount> CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration);
     }
 }

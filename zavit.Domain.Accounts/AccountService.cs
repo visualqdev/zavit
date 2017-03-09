@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Accounts.Registrations.Validators;
 using zavit.Domain.Shared;
@@ -22,7 +23,7 @@ namespace zavit.Domain.Accounts
             _logger = logger;
         }
 
-        public AccountRegistrationResult Register(IAccountRegistration accountRegistration)
+        public async Task<AccountRegistrationResult> Register(IAccountRegistration accountRegistration)
         {
             foreach (var accountRegistrationValidator in _accountRegistrationValidators)
             {
@@ -30,7 +31,7 @@ namespace zavit.Domain.Accounts
                 if (validationResult != null) return validationResult;
             }
 
-            var account = _accountCreator.Create(accountRegistration);
+            var account = await _accountCreator.Create(accountRegistration);
             _accountRepository.Save(account);
             _logger.Info($"Account registered Id:{account.Id} Username:{account.Username}");
 
