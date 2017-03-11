@@ -2,7 +2,6 @@
 
 export function setUp(options) {
     const $messagesContainer = $("#messages");
-    selectThreadId(options.selectedThreadId);
     setWindowResizeWatch($messagesContainer);
     adjustHeightOfMainContainer($messagesContainer);
     adjustCssPositioningForMessagesContainer($messagesContainer);
