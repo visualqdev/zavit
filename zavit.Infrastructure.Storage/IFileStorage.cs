@@ -5,10 +5,9 @@ namespace zavit.Infrastructure.Storage
 {
     public interface IFileStorage
     {
-        MemoryStream Download(string containerName, string path);
-        void Upload(string containerName, string path, byte[] file);
-        void Upload(string containerName, string path, Stream file);
-        Task UploadAsync(string containerName, string path, Stream file);
-        void Delete(string containerName, string path);
+        Task<MemoryStream> Download(string containerName, string path);
+        Task Upload(string containerName, string path, byte[] file);
+        Task Upload(string containerName, string path, Stream file);
+        Task Delete(string containerName, string path);
     }
 }

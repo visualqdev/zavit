@@ -16,14 +16,14 @@ namespace zavit.Infrastructure.Profiles.Tests.ProfileImages
             Because of = () => Subject.SaveImage(ImageName, _imageFile).Wait();
 
             It should_store_the_image_in_an_image_container_under_profile_images_path = 
-                () => Injected<IFileStorage>().AssertWasCalled(s => s.UploadAsync(ProfileImageStorage.ContainerName, ImageName + ".jpg", _imageFile));
+                () => Injected<IFileStorage>().AssertWasCalled(s => s.Upload(ProfileImageStorage.ContainerName, ImageName + ".jpg", _imageFile));
 
             Establish context = () =>
             {
                 _imageFile = new MemoryStream();
 
                 Injected<IFileStorage>()
-                    .Stub(s => s.UploadAsync(ProfileImageStorage.ContainerName, ImageName + ".jpg", _imageFile))
+                    .Stub(s => s.Upload(ProfileImageStorage.ContainerName, ImageName + ".jpg", _imageFile))
                     .Return(Task.FromResult(0));
             };
 

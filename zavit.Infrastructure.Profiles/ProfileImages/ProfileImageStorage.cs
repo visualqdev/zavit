@@ -19,7 +19,7 @@ namespace zavit.Infrastructure.Profiles.ProfileImages
 
         public async Task SaveImage(string imageName, Stream image)
         {
-            await _fileStorage.UploadAsync(ContainerName, $"{imageName}.jpg", image);
+            await _fileStorage.Upload(ContainerName, $"{imageName}.jpg", image);
         }
 
         public string ImageUrl(string imageName)
