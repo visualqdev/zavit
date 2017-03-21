@@ -21,7 +21,7 @@ function getVenues(memberships) {
                     <div class="content">
                         <h3><a href="#/${Routes.yourVenue}/${membership.Venue.Id}">${membership.Venue.Name}</a></h3>
                         <address>${membership.Venue.Address}</address>
-                        <span><a href="#">View players</a>  available to play here</span>
+                        <span><a href="#/${Routes.yourVenue}/${membership.Venue.Id}">View players</a>  available to play here</span>
                         <button type="button" class="btn btn-primary" id="yourVenuesView">Invite others to play here</button>
                     </div>
                 </div>

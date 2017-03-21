@@ -4,6 +4,10 @@ import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 export function getView(venueMembers) {
     let venueMembersMarkup = "";
 
+    if (venueMembers.length === 0) {
+        return noMembers();
+    }
+
     $.each(venueMembers, (index, venueMember) => {
         const spacingClass = index % 2 === 0 ? "yourVenueMemberRightPadding" : "yourVenueMemberLeftPadding";
 
@@ -53,4 +57,12 @@ function memberImage(venueMember) {
     return`
         <div class="profileImageHolder" style='background: url("${venueMember.ProfileImageUrl}") 50% 50% no-repeat;'></div>`;
     
+}
+
+function noMembers() {
+    return `
+        <div class="col-sm-12 venueNoMembersMessage">
+            Currently there are no other members who have joined this venue yet. Select your activities above to indicate what are you interested in.
+        </div>
+        `;
 }
