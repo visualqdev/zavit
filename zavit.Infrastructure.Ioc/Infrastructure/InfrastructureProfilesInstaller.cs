@@ -2,7 +2,9 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Infrastructure.Profiles;
+using zavit.Infrastructure.Profiles.ProfileImages;
 
 namespace zavit.Infrastructure.Ioc.Infrastructure
 {
@@ -12,7 +14,7 @@ namespace zavit.Infrastructure.Ioc.Infrastructure
         {
             container.Register(
                 Component.For<IProfileRepository>().ImplementedBy<ProfileRepository>().LifestyleTransient(),
-                Component.For<IProfileImageRepository>().ImplementedBy<ProfileImageRepository>().LifestyleTransient());
+                Component.For<IProfileImageStorage>().ImplementedBy<ProfileImageStorage>().LifestyleTransient());
         }
     }
 }

@@ -31,21 +31,22 @@ export function index(options) {
             return MessageThreadService.getInboxThread(options, messageThreads);
         })
         .then(inboxThread => {
-            if (!inboxThread) {
-                Routes.goTo(Routes.messageInbox);
-            }
-
             const threadView = MessageThreadPartial.getView(inboxThread);
-            MessageLayout.setThreadTitle(inboxThread.ThreadTitle);
             MessageLayout.setMessageThreadView(threadView);
-            currentInboxThread = inboxThread;
-            showInboxThread(inboxThread);
             MessageLayout.setUp({
-                selectedThreadId: inboxThread.ThreadId,
                 onArrangeNew: MessageRecipientSearchModal.show,
                 onThreadSelected: threadSelected,
                 onSend: sendMessage
             });
+
+            if (!inboxThread) {
+                Routes.goTo(Routes.messageInbox);
+            } else {
+                MessageLayout.setThreadTitle(inboxThread.ThreadTitle);
+                currentInboxThread = inboxThread;
+                showInboxThread(inboxThread);
+                MessageLayout.selectThreadId(inboxThread.ThreadId);
+            }
         })
         .catch((error) => {
             checkUnauthorised(error);

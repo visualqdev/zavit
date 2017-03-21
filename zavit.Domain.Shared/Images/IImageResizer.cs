@@ -4,6 +4,6 @@ namespace zavit.Domain.Shared.Images
 {
     public interface IImageResizer
     {
-        byte[] ResizeImageToMinimum(Stream imageStream, int targetMinWidth, int targetMinHeight);
+        Stream ResizeImageToMinimum(Stream imageStream, int targetMinWidth, int targetMinHeight);
     }
 }

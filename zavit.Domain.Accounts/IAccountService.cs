@@ -1,9 +1,10 @@
-﻿using zavit.Domain.Accounts.Registrations;
+﻿using System.Threading.Tasks;
+using zavit.Domain.Accounts.Registrations;
 
 namespace zavit.Domain.Accounts
 {
     public interface IAccountService
     {
-        AccountRegistrationResult Register(IAccountRegistration accountRegistration);
+        Task<AccountRegistrationResult> Register(IAccountRegistration accountRegistration);
     }
 }

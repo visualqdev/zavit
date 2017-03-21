@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Profiles.Registration;
+﻿using System.Threading.Tasks;
+using zavit.Domain.Profiles.Registration;
 
 namespace zavit.Domain.Accounts.Registrations
 {
@@ -13,13 +14,13 @@ namespace zavit.Domain.Accounts.Registrations
             _profileCreator = profileCreator;
         }
 
-        public Account Create(IAccountRegistration accountRegistration)
+        public async Task<Account> Create(IAccountRegistration accountRegistration)
         {
             var account = new Account
             {
                 Username = accountRegistration.Username,
                 AccountType = accountRegistration.AccountType,
-                Profile = _profileCreator.CreateProfile(accountRegistration)
+                Profile = await _profileCreator.CreateProfile(accountRegistration)
             };
 
             if (accountRegistration.AccountType == AccountType.Internal)

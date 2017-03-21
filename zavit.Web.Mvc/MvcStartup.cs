@@ -16,7 +16,7 @@ namespace zavit.Web.Mvc
         {
             var container = Container.Instance;
             container.Install(new WebMvcInstaller());
-            LoggingConfig.Configure(container.Resolve<ILoggingSettings>());
+            LoggingConfig.Configure(container);
 
             var apiStartup = container.Resolve<ApiStartup>();
             apiStartup.Configuration(app);

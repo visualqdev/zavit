@@ -9,7 +9,7 @@ namespace zavit.Domain.Profiles
         public virtual int Id { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual string About { get; set; }
-        public virtual ProfileImage ProfileImage { get; set; }
+        public virtual string ProfileImage { get; set; }
         public virtual string DisplayName { get; set; }
         public virtual string Email { get; set; }
 

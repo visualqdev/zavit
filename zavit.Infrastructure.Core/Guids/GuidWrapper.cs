@@ -9,5 +9,10 @@ namespace zavit.Infrastructure.Core.Guids
         {
             return Guid.NewGuid();
         }
+
+        public string NewGuidString(string format = "N")
+        {
+            return Guid.NewGuid().ToString(format);
+        }
     }
 }

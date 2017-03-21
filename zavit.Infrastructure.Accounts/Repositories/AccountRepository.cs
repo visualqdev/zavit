@@ -64,19 +64,6 @@ namespace zavit.Infrastructure.Accounts.Repositories
             return new ResultCollection<Account>(results, take);
         }
 
-        public byte[] GetProfileImage(int accountId)
-        {
-            Profile profileAlias = null;
-            ProfileImage profileImageAlias = null;
-
-            return _session.QueryOver<Account>()
-                .JoinAlias(a => a.Profile, () => profileAlias, JoinType.InnerJoin)
-                .JoinAlias(() => profileAlias.ProfileImage, () => profileImageAlias, JoinType.InnerJoin)
-                .Where(a => a.Id == accountId)
-                .SelectList(list => list.Select(() => profileImageAlias.ImageFile))
-                .SingleOrDefault<byte[]>();
-        }
-
         public Profile GetProfile(int accountId)
         {
             var profile = _session.QueryOver<Account>()

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using Machine.Specifications;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
@@ -16,7 +17,7 @@ namespace zavit.Web.Api.Tests.DtoServices.ProfileImages
     {
         class When_changing_profile_image
         {
-            Because of = () => _result = Subject.ChangeProfileImage(_imageFile);
+            Because of = () => _result = Subject.ChangeProfileImage(_imageFile).Result;
 
             It should_return_profile_image_upload_dto_for_the_updated_profile = () => _result.ShouldEqual(_profileImageUploadDto);
 
@@ -31,7 +32,7 @@ namespace zavit.Web.Api.Tests.DtoServices.ProfileImages
                 var profile = NewInstanceOf<Profile>();
                 Injected<IProfileService>()
                     .Stub(s => s.UpdateProfileImage(_imageFile, account.Profile))
-                    .Return(profile);
+                    .Return(Task.FromResult(profile));
                 
                 _profileImageUploadDto = NewInstanceOf<ProfileImageUploadDto>();
                 Injected<IProfileImageUploadDtoFactory>().Stub(f => f.CreateItem(profile)).Return(_profileImageUploadDto);

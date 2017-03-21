@@ -2,9 +2,9 @@
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.DtoFactories.Profiles;
 using zavit.Web.Api.Dtos.Profiles;
-using zavit.Web.Api.DtoServices.Profiles;
 
 namespace zavit.Web.Api.Tests.DtoFactories.Profiles 
 {
@@ -39,8 +39,9 @@ namespace zavit.Web.Api.Tests.DtoFactories.Profiles
                 _profile.DisplayName = "Display Name";
                 _profile.Email = "test@email.com";
                 _profile.About = "This is my bio";
+                _profile.ProfileImage = "ProfileImage";
 
-                Injected<IProfileImageUrlBuilder>().Stub(b => b.Build(_profile)).Return(ProfileImageUrl);
+                Injected<IProfileImageStorage>().Stub(b => b.ImageUrl(_profile.ProfileImage)).Return(ProfileImageUrl);
             };
 
             const string ProfileImageUrl = "/profile/image/url";

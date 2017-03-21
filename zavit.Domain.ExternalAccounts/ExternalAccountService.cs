@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts;
+﻿using System.Threading.Tasks;
+using zavit.Domain.Accounts;
 using zavit.Domain.ExternalAccounts.Registrations;
 
 namespace zavit.Domain.ExternalAccounts
@@ -16,9 +17,9 @@ namespace zavit.Domain.ExternalAccounts
             _externalAccountsRepository = externalAccountsRepository;
         }
 
-        public ExternalAccount CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration)
+        public async Task<ExternalAccount> CreateExternalAccount(ExternalAccountRegistration externalAccountRegistration)
         {
-            var accountRegistrationResult = _accountService.Register(externalAccountRegistration);
+            var accountRegistrationResult = await _accountService.Register(externalAccountRegistration);
 
             var externalAccount = _newExternalAccountProvider.Provide(accountRegistrationResult.Account, externalAccountRegistration.Provider, externalAccountRegistration.Username);
             _externalAccountsRepository.Save(externalAccount);

@@ -1,4 +1,5 @@
 ﻿using zavit.Domain.Profiles;
+using zavit.Domain.Profiles.ProfileImages;
 using zavit.Web.Api.Dtos.Profiles;
 using zavit.Web.Api.DtoServices.Profiles;
 
@@ -6,16 +7,16 @@ namespace zavit.Web.Api.DtoFactories.Profiles
 {
     public class ProfileDtoFactory : IProfileDtoFactory
     {
-        readonly IProfileImageUrlBuilder _profileImageUrlBuilder;
+        readonly IProfileImageStorage _profileImageStorage;
 
-        public ProfileDtoFactory(IProfileImageUrlBuilder profileImageUrlBuilder)
+        public ProfileDtoFactory(IProfileImageStorage profileImageStorage)
         {
-            _profileImageUrlBuilder = profileImageUrlBuilder;
+            _profileImageStorage = profileImageStorage;
         }
 
         public ProfileDto CreateItem(Profile profile, int accountId)
         {
-            var profileImageUrl = _profileImageUrlBuilder.Build(profile);
+            var profileImageUrl = _profileImageStorage.ImageUrl(profile.ProfileImage);
             
             return new ProfileDto
             {

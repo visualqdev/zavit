@@ -3,17 +3,19 @@
 export function getView(messageThread) {
     return `            
         <ul>
-            ${getMessages(messageThread.MessagesCollection.Messages)}
+            ${getMessages(messageThread)}
         </ul>            
         `;
 }
 
-function getMessages(messages) {
+function getMessages(messageThread) {
     let messagesMarkup = "";
 
-    messages.forEach(message => {
-        messagesMarkup = MessagePartial.getView(message) + messagesMarkup;
-    });
+    if (messageThread) {
+        messageThread.MessagesCollection.Messages.forEach(message => {
+            messagesMarkup = MessagePartial.getView(message) + messagesMarkup;
+        });
+    }
 
     return messagesMarkup;
 }

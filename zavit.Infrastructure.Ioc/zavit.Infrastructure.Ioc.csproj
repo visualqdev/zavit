@@ -34,12 +34,16 @@
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Castle.Windsor, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    <Reference Include="Castle.Windsor, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.1.1.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -62,6 +66,7 @@
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureImagesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureMessagingInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureStorage.cs" />
     <Compile Include="Infrastructure\InfrastructureVenueMembershipsInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureProfilesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureVenuesInstaller.cs" />
@@ -75,6 +80,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +163,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Profiles\zavit.Infrastructure.Profiles.csproj">
       <Project>{f8b2f575-e38e-430d-ae42-7742530a55b3}</Project>
       <Name>zavit.Infrastructure.Profiles</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Storage\zavit.Infrastructure.Storage.csproj">
+      <Project>{29dfa3a9-119a-4e96-bd0f-df9f8e9d9ed6}</Project>
+      <Name>zavit.Infrastructure.Storage</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.VenueMemberships\zavit.Infrastructure.VenueMemberships.csproj">
       <Project>{26f89347-9092-4ec6-8858-4e08e8918592}</Project>
