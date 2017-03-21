@@ -23,7 +23,7 @@ const form = `
                             <input type='submit' value='Register'>
                         </form>
                         <div class='registerHelp'>
-                            <a href='#' id='registerLoginLink'>Login</a>
+                            <a href='#' id='registerLoginLink'>Already registered? Login</a>
                         </div>
                     </div>
                 </div>

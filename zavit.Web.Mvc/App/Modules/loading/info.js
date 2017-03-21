@@ -7,5 +7,7 @@
 
     $infoPopUp.css({ 'margin-left': `-${adjustMarginLeft}px`, 'margin-top': `-${adjustMarginTop}px`, visibility: "visible" });
 
-    setTimeout(() => $infoPopUp.fadeOut("200", function() { $infoPopUp.remove(); }), 2000);
+    setTimeout(() => $infoPopUp.fadeOut("200", function() {
+         $infoPopUp.remove();
+    }), 2000);
 }
