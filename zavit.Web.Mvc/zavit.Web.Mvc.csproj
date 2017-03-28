@@ -151,6 +151,7 @@
     <Content Include="app\controllers\profileController.js" />
     <Content Include="app\controllers\yourVenueController.js" />
     <Content Include="app\controllers\yourVenuesController.js" />
+    <Content Include="app\events\event.js" />
     <Content Include="app\layout\mainContent.js" />
     <Content Include="app\modules\account\postLoginRedirect.js" />
     <Content Include="app\controllers\venueController.js" />
