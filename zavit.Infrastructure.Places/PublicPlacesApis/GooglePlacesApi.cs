@@ -55,7 +55,7 @@ namespace zavit.Infrastructure.Places.PublicPlacesApis
             var message = new HttpRequestMessage();
             message.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             message.Method = HttpMethod.Get;
-            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={venueSearchCriteria.Latitude},{venueSearchCriteria.Longitude}&name={venueSearchCriteria.Name}");
+            message.RequestUri = new Uri($"{_googleApiSearchSettings.PlaceUri}{NearbySearchPath}?key={_googleApiSearchSettings.ServerKey}&location={venueSearchCriteria.Latitude},{venueSearchCriteria.Longitude}&name={venueSearchCriteria.Name}&rankby=distance");
             var httpResponse = await _httpClient.SendAsync(message);
             var json = await httpResponse.Content.ReadAsStringAsync();
             var result = _jsonSerializer.Deserialize<GooglePlaceSearchResult>(json);
