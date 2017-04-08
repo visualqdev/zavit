@@ -15,3 +15,7 @@ export function processRedirect() {
 export function storeRedirectUrl(url) {
     Storage.storeSessionString(urlStorageKey, url);
 }
+
+export function clearRedirects() {
+    Storage.removeSessionItem(urlStorageKey);
+}

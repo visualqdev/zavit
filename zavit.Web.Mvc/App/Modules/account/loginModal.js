@@ -1,5 +1,6 @@
 ﻿import * as AccountService from "./accountService";
 import * as RegisterModal from "./registerModal";
+import * as PostLoginRedirect from "./postLoginRedirect";
 import * as ExternalAccountService from "./externalAccountService";
 import * as LoginModalView from "../../views/account/loginModalView";
 
@@ -11,6 +12,7 @@ export function show(userHasLoggedInCallback) {
 
     modalForm.on("hidden.bs.modal", () => {
         modalForm.remove();
+        PostLoginRedirect.clearRedirects();
     });
     modalForm.on("shown.bs.modal", () => {
         $("#loginEmail").focus();

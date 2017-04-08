@@ -18,7 +18,7 @@ export function getView(messageThreads) {
                     <div class="col-md-8 noColPaddingLeft">
                         <div id="messages"></div>
                         <div id="controls">
-                            <input id="messageTextInput" type="text"/>
+                            <input id="messageTextInput" placeholder="Type your message here"  type="text"/>
                             <input id="messageTextSend" type="button" class="btn btn-primary" value="Send" />
                         </div>
                     </div>  

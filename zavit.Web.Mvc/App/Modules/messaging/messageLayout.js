@@ -9,6 +9,7 @@ export function setUp(options) {
     setMediaQueryWatch();
     adjustInboxThreadListLayout();
     attachEvents(options);
+    focusInput();
 }
 
 export function currentlySelectedThreadId() {
@@ -30,6 +31,7 @@ export function threadSelected(selectedThread) {
     }
     adjustCssPositioningForMessagesContainer($('#messages'));
     adjustInboxThreadListLayout();
+    focusInput();
     fadeOutUnreadCount(selectedThread);
 }
 
@@ -223,6 +225,10 @@ function attachEvents(options) {
 
 function inputHasText(inputControl) {
     return inputControl.val().trim().length > 0;
+}
+
+function focusInput() {
+    $("#messageTextInput").focus();
 }
 
 function sendMessage(options) {
