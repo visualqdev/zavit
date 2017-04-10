@@ -1,6 +1,7 @@
 ﻿import * as AccountService from "./accountService";
 import * as ExternalAccountService from "./externalAccountService";
 import * as LoginModal from "./loginModal";
+import * as PostLoginRedirect from "./postLoginRedirect";
 
 const form = `
             <div class='modal fade' id='registerModal' tabindex='-1' role='dialog'>
@@ -36,6 +37,7 @@ export function show(userHasLoggedInCallback) {
 
     modalForm.on("hidden.bs.modal", () => {
         modalForm.remove();
+        PostLoginRedirect.clearRedirects();
     });
     modalForm.on("shown.bs.modal", () => {
         $("#registerDisplayName").focus();

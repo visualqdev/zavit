@@ -4,35 +4,20 @@ export function getView(venueActivities, allOtherActivities, memberActivities) {
     
     const memberActivityIds = memberActivities.map((activity) => activity.Id);
     return `
-        <div class="yourVenueActivities col-md-8" id="exTab1">
-            <div class="tab-content clearfix">
-                <ul class="nav nav-pills">
-                    ${getTabs(memberActivities.length > 0)}
-                </ul>
-                <ul class="list-group row tab-pane active" id="1a">
-                    ${activityCheckboxes(venueActivities, memberActivityIds)}
-                </ul>
-                <ul class="list-group row tab-pane" id="2a">
-                    ${activityCheckboxes(allOtherActivities, memberActivityIds)}
-                </ul>   
-            </div>
+        <div class="yourVenueActivities col-xs-12 col-sm-12 col-md-8">
+            <h3>Activities</h3>
+            <ul class="list-group row">
+                ${activityCheckboxes(venueActivities, memberActivityIds)}
+                ${activityCheckboxes(allOtherActivities, memberActivityIds)}
+            </ul>
         </div>
-        <div class="col-md-4 selectedActivities">
-            
+        <div class="col-xs-12 col-sm-12 col-md-4 selectedActivities">
+            <h3>Your activities</h3>
             <div class="inner">
-                <h3>Your activities</h3>
                 <ul>${memberActivityList(memberActivities)}</ul>
             </div>
         </div>
         `;
-}
-
-function getTabs(hasMemberActivities) {
-    if (hasMemberActivities)
-        return `<li class="active"><a href="#1a" data-toggle="tab">Member activities</a><li>
-                        <li><a href="#2a" data-toggle="tab">All other activites</a></li>`;
-    return `<li class="active"><a href="#1a" data-toggle="tab">Suggested activities</a><li>
-                        <li><a href="#2a" data-toggle="tab">All other activites</a></li>`;
 }
 
 export function updateActivities(memberActivities) {
@@ -46,7 +31,7 @@ function activityCheckboxes(activities, memberActivityIds) {
         const isChecked = memberActivityIds.includes(activity.Id) ? "checked" : "";
 
         activitiesMarkup += html`
-            <li class="list-group-item col-xs-6 col-sm-4 col-md-3">
+            <li class="list-group-item col-xs-6 col-sm-6 col-md-6 col-lg-4">
                 <label class="checkbox">
                     <input type="checkbox" name="venueActivities" value="${activity.Id}" ${isChecked}>${activity.Name}
                 </label>

@@ -5,7 +5,7 @@ import { htmlEncode } from "../../modules/htmlUtils/htmlEncoder";
 export function getView(membership, allOtherActivities) {
     return `
         <div id="yourVenue" class="container">
-            <div id="yourVenueHeading">
+            <div class="yourVenueHeading">
                 <h2 id="mainHeading">${htmlEncode(membership.Venue.Name)}</h2>
             </div>
             ${venueDetails(membership.Venue)}
@@ -29,6 +29,9 @@ function venueDetails(venue) {
 
 function venueMembers(parameters) {
     return `
+        <div class="yourVenueHeading">
+            <h3>Members</h3>
+        </div>
         <div id="yourVenueMembers">
         </div>
         `;

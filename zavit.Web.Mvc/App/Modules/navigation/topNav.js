@@ -17,6 +17,8 @@ export function initialize() {
         refresh();
         Routes.goTo(Routes.home);
     });
+
+    $(".navbar-collapse a:not('.dropdown-toggle')").click (() => $(".navbar-collapse").collapse('hide'));
 }
 
 export function refresh() {

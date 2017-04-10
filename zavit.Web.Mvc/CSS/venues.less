@@ -173,7 +173,7 @@
         color: @default-text;
         font-size:16px;
     }
-    #yourVenueHeading {
+    .yourVenueHeading {
         float:left;
         width:100%;
         margin-bottom:20px;
@@ -294,7 +294,7 @@
         }
         .list-group{
             padding-left: 6px;
-            max-height: 120px;
+            max-height: 200px;
             overflow: auto;
             margin-top:10px;
             .list-group-item{
@@ -311,8 +311,7 @@
             margin: 10px;
         }
         padding-right:0px;
-        div.inner {
-            
+        div.inner {            
             width:100%;
             min-height:100%;
             background-color: @page-bg;
@@ -321,6 +320,12 @@
             max-height:240px;
         }
     }
+    @media (max-width: 991px) {
+        .selectedActivities {
+            padding-left: 0px;
+        }
+    }
+
     #yourVenueMembers{
         float: left;
         width: 100%;
