@@ -1,4 +1,8 @@
 ﻿export function provide(html) {
+    let t;
+
+    $("#infoPopUp").remove();
+
     $("body").append(`<div id="infoPopUp">${html}</div>`);
 
     const $infoPopUp = $("#infoPopUp"),
@@ -7,7 +11,7 @@
 
     $infoPopUp.css({ 'margin-left': `-${adjustMarginLeft}px`, 'margin-top': `-${adjustMarginTop}px`, visibility: "visible" });
 
-    setTimeout(() => $infoPopUp.fadeOut("200", function() {
+    t = setTimeout(() => $infoPopUp.fadeOut("200", function() {
          $infoPopUp.remove();
     }), 3000);
 }
