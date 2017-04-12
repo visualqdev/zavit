@@ -283,20 +283,15 @@
         background-color:@nav-button-bg;
     }
     .yourVenueActivities{
-        padding: 20px;
-        margin-bottom:10px;   
-        float: left;
-        background-color: @page-bg;
-        min-height:240px;
-        max-height:240px;
-        h3{
-            margin: 10px 0 10px 0;
-        }
+        padding-left:0;
+        margin-bottom:10px; 
+
         .list-group{
-            padding-left: 6px;
+            padding-left: 25px;
             max-height: 200px;
             overflow: auto;
             margin-top:10px;
+
             .list-group-item{
                 border: 0px;
                 padding: 0px 15px;
@@ -306,18 +301,46 @@
             }
         }
     }
-    .selectedActivities {
+    .selectedActivities, .yourVenueActivities {
         h3{
-            margin: 10px;
+            margin: 10px 0 10px 0;
         }
+
         padding-right:0px;
+
         div.inner {            
             width:100%;
             min-height:100%;
             background-color: @page-bg;
             float:left;
             min-height:240px;
-            max-height:240px;
+            
+        }
+    }
+    .selectedActivities {
+        div.inner {
+            ul {
+                margin:20px;
+                padding:5px;
+                list-style:none;
+                max-height:200px;
+                overflow-y:auto;
+
+                li {
+                    font-size:18px;
+                    font-weight: 400;
+                    border: 1px solid #ddd;
+                    padding: 2px;
+                    background: #f8f8f8;
+                    border-radius: 5px;
+                    margin-bottom:10px;
+                    text-indent:10px;
+                    a {
+                        float:right;
+                        margin-right:10px;
+                    }
+                }
+            }
         }
     }
     @media (max-width: 991px) {
