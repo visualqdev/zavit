@@ -5,11 +5,13 @@ export function getView(venueActivities, allOtherActivities, memberActivities) {
     const memberActivityIds = memberActivities.map((activity) => activity.Id);
     return `
         <div class="yourVenueActivities col-xs-12 col-sm-12 col-md-8">
-            <h3>Activities</h3>
-            <ul class="list-group row">
-                ${activityCheckboxes(venueActivities, memberActivityIds)}
-                ${activityCheckboxes(allOtherActivities, memberActivityIds)}
-            </ul>
+            <h3>Choose an activity</h3>
+            <div class="inner">
+                <ul class="list-group row">
+                    ${activityCheckboxes(venueActivities, memberActivityIds)}
+                    ${activityCheckboxes(allOtherActivities, memberActivityIds)}
+                </ul>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-4 selectedActivities">
             <h3>Your activities</h3>

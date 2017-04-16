@@ -13,6 +13,8 @@ import * as ProfileController from "../controllers/profileController";
 
 export function registerRoutes() {
     crossroads.addRoute(`/${Routes.home}`, () => {
+        if (window.location.pathname !== "/") return;
+
         if (PostLoginRedirect.processRedirect()) return;
 
         TopNav.navigatedToRoute(Routes.home);

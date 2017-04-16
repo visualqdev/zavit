@@ -9,6 +9,7 @@ import * as VenueMembershipService from "../modules/venues/venueMembershipServic
 import * as Progress from "../modules/loading/progress";
 import * as ActivityClient from "../modules/activities/activityClient";
 import * as VenueService from "../modules/venues/venueService";
+import * as Info from "../modules/loading/info";
 
 const venueMembersTake = 20;
 
@@ -71,6 +72,7 @@ function checkUnauthorised(error) {
 }
 
 function AttachActivityEvents(membership) {
+
     $("#yourVenueOtherActivities").click(e => {
         e.preventDefault();
         ActivityClient
@@ -80,15 +82,29 @@ function AttachActivityEvents(membership) {
             $(".yourVenueActivities").replaceWith(allActivitiesMarkup);
         });
     });
+
     $('.selectedActivities').delegate('a', 'click', e => {
         e.preventDefault();;
         $('input:checkbox[value="' + $(e.currentTarget).attr('data-id') + '"]').trigger('click');
     });
+
+    function informUser(event) {
+        if ($(event.currentTarget).is(':checked')) {
+            const activitySelected = $(event.currentTarget).parent().text();
+            Info.provide(`<p><strong>Other members can now find you for ${activitySelected}</strong></p>`);
+        } else {
+            const activityDeselected = $(event.currentTarget).parent().text();
+            Info.provide(`<p><strong>Other members can no longer find you for ${activityDeselected}</strong></p>`);
+        }
+    }
+
+    $("#yourVenue [name='venueActivities']").on("change", (e) => { informUser(e) });
+
     $("#yourVenue")
         .on("change",
             "[name='venueActivities']",
-            () => {
-
+            (e) => {
+                
         const activitiCheckboxes = $("#yourVenue [name='venueActivities']:checked");
         const activities = activitiCheckboxes
             .map((index, checkbox) => $(checkbox).val())
