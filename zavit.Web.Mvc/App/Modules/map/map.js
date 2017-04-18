@@ -18,6 +18,7 @@
         this.mapIsFixed = options.thisMapIsFixed || false;
         this.mapContainer = options.mapContainer || false;
         this.zoomControl = options.zoomControl || true;
+        this.controlsAreDisabled = true;
     }
    
     initialise() {
