@@ -66,6 +66,29 @@ namespace zavit.Domain.Accounts.Tests
             static IAccountSecurity _accountSecurity;
             const string Password = "Test Password";
         }
+
+        class When_checking_if_account_needs_verification_and_verification_code_is_not_set
+        {
+            Because of = () => _result = Subject.NeedsVerification;
+
+            It should_return_false = () => _result.ShouldBeFalse();
+            
+            static bool _result;
+        }
+
+        class When_checking_if_account_needs_verification_and_verification_code_is_set
+        {
+            Because of = () => _result = Subject.NeedsVerification;
+
+            It should_return_false = () => _result.ShouldBeTrue();
+
+            Establish context = () =>
+            {
+                Subject.VerificationCode = "Test Code";
+            };
+
+            static bool _result;
+        }
     }
 }
 

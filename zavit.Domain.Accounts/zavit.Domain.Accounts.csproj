@@ -53,6 +53,7 @@
     <Compile Include="Registrations\IAccountRegistration.cs" />
     <Compile Include="Registrations\IAccountRegistrationResultFactory.cs" />
     <Compile Include="Registrations\IAccountSecurity.cs" />
+    <Compile Include="Registrations\IVerifyEmailMailer.cs" />
     <Compile Include="Registrations\Validators\DisplayNameValidator.cs" />
     <Compile Include="Registrations\Validators\PasswordValidator.cs" />
     <Compile Include="Registrations\Validators\UsernameValidator.cs" />

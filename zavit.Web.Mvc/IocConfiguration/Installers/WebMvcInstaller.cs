@@ -3,6 +3,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Messaging.MessageReads;
 using zavit.Domain.Messaging.Messages;
+using zavit.Mailing.EmailTemplates;
 using zavit.Web.Api;
 using zavit.Web.Mvc.Settings;
 using zavit.Web.Mvc.SignalR.ConnectionIds;
@@ -30,7 +31,8 @@ namespace zavit.Web.Mvc.IocConfiguration.Installers
                 Component.For<IReadMessagesBroadcastDtoFactory>().ImplementedBy<ReadMessagesBroadcastDtoFactory>().LifestyleTransient(),
                 Component.For<IReadMessagesDtoFactory>().ImplementedBy<ReadMessagesDtoFactory>().LifestyleTransient(),
                 Component.For<IThreadGroupIdProvider>().ImplementedBy<ThreadGroupIdProvider>().LifestyleSingleton(),
-                Component.For<IInboxGroupIdProvider>().ImplementedBy<InboxGroupIdProvider>().LifestyleSingleton()
+                Component.For<IInboxGroupIdProvider>().ImplementedBy<InboxGroupIdProvider>().LifestyleSingleton(),
+                Classes.FromAssemblyNamed("zavit.Mailing").BasedOn<MailerBase>().WithService.AllInterfaces()
             );
         }
     }

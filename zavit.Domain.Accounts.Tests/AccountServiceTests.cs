@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Machine.Specifications;
-using Machine.Specifications.Model;
 using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts.Registrations;
@@ -21,6 +20,9 @@ namespace zavit.Domain.Accounts.Tests
 
             It should_return_a_success_regsitration_result = () => _result.ShouldEqual(_successRegistrationResult);
 
+            It should_send_an_email_verification_mail =
+                () => Injected<IVerifyEmailMailer>().AssertWasCalled(m => m.SendMail(_account));
+
             Establish context = () =>
             {
                 _accountRegistration = NewInstanceOf<IAccountRegistration>();
@@ -32,6 +34,8 @@ namespace zavit.Domain.Accounts.Tests
                 Injected<IAccountRegistrationResultFactory>()
                     .Stub(f => f.CreateSuccessful(_account))
                     .Return(_successRegistrationResult);
+
+                Injected<IVerifyEmailMailer>().Stub(m => m.SendMail(_account)).Return(Task.FromResult(0));
             };
 
             static AccountRegistrationResult _result;
