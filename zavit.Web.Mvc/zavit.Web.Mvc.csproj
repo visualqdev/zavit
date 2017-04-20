@@ -201,6 +201,7 @@
     <Content Include="app\views\messageInbox\messageThreadListPartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\messageRecipientSearch\messageRecipientsListPartial.js" />
+    <Content Include="app\views\navigation\infoModalView.js" />
     <Content Include="app\views\profile\indexView.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
