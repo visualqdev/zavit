@@ -12,5 +12,6 @@ namespace zavit.Domain.Accounts
         IList<Account> GetAccounts(IEnumerable<int> accountIds);
         IResultCollection<Account> Search(string searchTerm, int skip, int take, int requestedByAccountId);
         Profile GetProfile(int accountId);
+        Account GetByVerificationCode(string verificationCode);
     }
 }

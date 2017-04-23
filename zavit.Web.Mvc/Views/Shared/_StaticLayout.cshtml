@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ZAVIT</title>
+    <!-- Google Tag Manager -->
+    <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window, document, 'script', 'dataLayer', 'GTM-M4NDKT');
+    </script>
+    <!-- End Google Tag Manager -->
+    <link rel="stylesheet" href="/Fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/CSS/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/CSS/production/styles.css" />
+</head>
+<body id="home">
+    <div class="contentContainer">
+        <div class="row header">
+            <div class="navbar navbar-inverse navbar-fixed-top" id="mainNav">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" id="topnavBurger">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand hidden-xs" href="/">zavit</a>
+                        <a class="navbar-brand visible-xs" href="/">z</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row content">
+            @RenderBody()
+        </div>
+        <div class="row footer">
+            <footer>&copy; zavit 2017 | <a href="@Url.Action("Index", "TermsAndConditions")">Terms & Conditions</a></footer>
+        </div>
+    </div>
+<script src="/libraries/jquery-3.1.0.min.js"></script>
+<script src="/CSS/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

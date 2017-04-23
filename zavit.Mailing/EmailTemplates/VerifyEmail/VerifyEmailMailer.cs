@@ -26,7 +26,7 @@ namespace zavit.Mailing.EmailTemplates.VerifyEmail
             var model = new VerifyEmailModel
             {
                 RecipientDisplayName = account.Profile.DisplayName,
-                VerifyAccountUrl = $"{_mailSettings.WebsiteUrl}/accountverification/{account.VerificationCode}"
+                VerifyAccountUrl = $"{_mailSettings.WebsiteUrl}/accountverification/verify/{account.VerificationCode}"
             };
 
             var path = Path.Combine(ViewBasePath, "VerifyEmail", "VerifyEmailTemplate.cshtml");

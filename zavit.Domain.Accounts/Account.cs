@@ -26,5 +26,11 @@ namespace zavit.Domain.Accounts
 
             return accountSecurity.ValidatePassword(password, Password);
         }
+
+        public virtual void Verify(IDateTime dateTime)
+        {
+            VerificationCode = null;
+            DateVerified = dateTime.UtcNow;
+        }
     }
 }

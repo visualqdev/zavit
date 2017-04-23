@@ -73,5 +73,14 @@ namespace zavit.Infrastructure.Accounts.Repositories
 
             return profile;
         }
+
+        public Account GetByVerificationCode(string verificationCode)
+        {
+            var account = _session.QueryOver<Account>()
+                .Where(a => a.VerificationCode == verificationCode)
+                .SingleOrDefault<Account>();
+
+            return account;
+        }
     }
 }

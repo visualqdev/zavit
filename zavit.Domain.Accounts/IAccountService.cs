@@ -6,5 +6,6 @@ namespace zavit.Domain.Accounts
     public interface IAccountService
     {
         Task<AccountRegistrationResult> Register(IAccountRegistration accountRegistration);
+        bool VerifyAccount(string verificationCode);
     }
 }

@@ -14,8 +14,9 @@ namespace zavit.Domain.Accounts
         readonly IEnumerable<IAccountRegistrationValidator> _accountRegistrationValidators;
         readonly ILogger _logger;
         readonly IVerifyEmailMailer _verifyEmailMailer;
+        readonly IDateTime _dateTime;
 
-        public AccountService(IAccountRegistrationResultFactory accountRegistrationResultFactory, IAccountCreator accountCreator, IAccountRepository accountRepository, IEnumerable<IAccountRegistrationValidator> accountRegistrationValidators, ILogger logger, IVerifyEmailMailer verifyEmailMailer)
+        public AccountService(IAccountRegistrationResultFactory accountRegistrationResultFactory, IAccountCreator accountCreator, IAccountRepository accountRepository, IEnumerable<IAccountRegistrationValidator> accountRegistrationValidators, ILogger logger, IVerifyEmailMailer verifyEmailMailer, IDateTime dateTime)
         {
             _accountRegistrationResultFactory = accountRegistrationResultFactory;
             _accountCreator = accountCreator;
@@ -23,6 +24,7 @@ namespace zavit.Domain.Accounts
             _accountRegistrationValidators = accountRegistrationValidators;
             _logger = logger;
             _verifyEmailMailer = verifyEmailMailer;
+            _dateTime = dateTime;
         }
 
         public async Task<AccountRegistrationResult> Register(IAccountRegistration accountRegistration)
@@ -41,6 +43,17 @@ namespace zavit.Domain.Accounts
 
             var result = _accountRegistrationResultFactory.CreateSuccessful(account);
             return result;
+        }
+
+        public bool VerifyAccount(string verificationCode)
+        {
+            var account = _accountRepository.GetByVerificationCode(verificationCode);
+            if (account == null) return false;
+
+            account.Verify(_dateTime);
+            _accountRepository.Save(account);
+
+            return true;
         }
     }
 }

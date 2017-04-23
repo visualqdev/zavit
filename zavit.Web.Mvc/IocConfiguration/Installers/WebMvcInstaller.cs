@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using System.Web.Mvc;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using zavit.Domain.Messaging.MessageReads;
@@ -19,6 +20,7 @@ namespace zavit.Web.Mvc.IocConfiguration.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
+                Classes.FromThisAssembly().BasedOn<Controller>().LifestyleTransient(),
                 Classes.FromThisAssembly().InSameNamespaceAs<GoogleApiSettings>().WithServiceFirstInterface().LifestyleSingleton(),
                 Component.For<IMessageSentObserver>().ImplementedBy<MessageSentSignalRObserver>().LifestyleTransient(),
                 Component.For<ApiStartup>().LifestyleTransient(),

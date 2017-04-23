@@ -5,6 +5,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Accounts.Registrations.Validators;
+using zavit.Domain.Shared;
 
 namespace zavit.Domain.Accounts.Tests 
 {
@@ -64,6 +65,44 @@ namespace zavit.Domain.Accounts.Tests
             static IAccountRegistration _accountRegistration;
             static AccountRegistrationResult _result;
             static AccountRegistrationResult _errorRegistrationResult;
+        }
+
+        class When_verifying_an_account_and_the_provided_verification_code_is_valid
+        {
+            Because of = () => _result = Subject.VerifyAccount(VerificationCode);
+
+            It should_verify_the_account = () => _account.AssertWasCalled(a => a.Verify(Injected<IDateTime>()));
+
+            It should_save_the_verified_account =
+                () => Injected<IAccountRepository>().AssertWasCalled(r => r.Save(_account));
+
+            It should_return_true_to_indicate_account_has_been_verified = () => _result.ShouldBeTrue();
+
+            Establish context = () =>
+            {
+                _account = NewInstanceOf<Account>();
+
+                Injected<IAccountRepository>().Stub(r => r.GetByVerificationCode(VerificationCode)).Return(_account);
+            };
+
+            static bool _result;
+            static Account _account;
+            const string VerificationCode = "Verification Code";
+        }
+
+        class When_verifying_an_account_and_the_provided_verification_code_is_not_valid
+        {
+            Because of = () => _result = Subject.VerifyAccount(VerificationCode);
+
+            It should_return_false_to_indicate_account_has_not_been_verified = () => _result.ShouldBeFalse();
+
+            Establish context = () =>
+            {
+                Injected<IAccountRepository>().Stub(r => r.GetByVerificationCode(VerificationCode)).Return(null);
+            };
+
+            static bool _result;
+            const string VerificationCode = "Verification Code";
         }
     }
 }
