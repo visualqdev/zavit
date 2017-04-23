@@ -201,6 +201,7 @@
     <Content Include="app\views\messageInbox\messageThreadListPartial.js" />
     <Content Include="app\views\messageInbox\messageThreadPartial.js" />
     <Content Include="app\views\messageRecipientSearch\messageRecipientsListPartial.js" />
+    <Content Include="app\views\navigation\infoModalView.js" />
     <Content Include="app\views\profile\indexView.js" />
     <Content Include="app\views\yourVenues\indexView.js" />
     <Content Include="app\views\yourVenue\indexView.js" />
@@ -308,6 +309,9 @@
     <Content Include="Views\TermsAndConditions\Index.cshtml" />
     <Content Include="Views\AccountVerification\Index.cshtml" />
     <Content Include="Views\Shared\_StaticLayout.cshtml" />
+    <Content Include="Views\Sitemap\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -327,6 +331,7 @@
     <Compile Include="Controllers\AccountVerificationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TermsAndConditionsController.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
