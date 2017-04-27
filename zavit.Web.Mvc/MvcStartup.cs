@@ -5,6 +5,7 @@ using Owin;
 using zavit.Infrastructure.Ioc;
 using zavit.Infrastructure.Logging;
 using zavit.Web.Api;
+using zavit.Web.Mvc.IocConfiguration;
 using zavit.Web.Mvc.IocConfiguration.Installers;
 
 [assembly: OwinStartup("MvcStartup", typeof(zavit.Web.Mvc.MvcStartup))]
@@ -16,6 +17,9 @@ namespace zavit.Web.Mvc
         {
             var container = Container.Instance;
             container.Install(new WebMvcInstaller());
+            var controllerFactory = new WindsorControllerFactory(container.Kernel);
+            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
+
             LoggingConfig.Configure(container);
 
             var apiStartup = container.Resolve<ApiStartup>();

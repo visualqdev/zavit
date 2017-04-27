@@ -178,3 +178,4 @@ node_modules/
 /zavit.Web.Mvc/bundle.js
 /zavit.Web.Mvc/CSS/production/styles.css
 /zavit.Web.Mvc/npm-debug.log.*
+/zavit.Infrastructure.Database/LIVE.DBDeployment.bat

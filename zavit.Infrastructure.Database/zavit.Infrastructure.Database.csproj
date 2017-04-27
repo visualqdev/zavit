@@ -42,16 +42,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="up\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="RoundhousE\rh.exe" />
     <Content Include="runAfterCreateDatabase\LOCAL.0002.populate_lookup_tables.sql" />
     <Content Include="runAfterCreateDatabase\0001.create_tables.sql" />
+    <Content Include="up\0001.account_verification.sql" />
     <Content Include="_BuildInfo.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LIVE.DBDeployment.bat" />
     <None Include="LOCAL.DBDeployment.bat" />
     <None Include="LOCAL.DBDropAndDeployment.bat" />
   </ItemGroup>

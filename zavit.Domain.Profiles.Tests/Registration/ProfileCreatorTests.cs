@@ -5,6 +5,7 @@ using Rhino.Mocks;
 using Rhino.Mspec.Contrib;
 using zavit.Domain.Profiles.ProfileImages;
 using zavit.Domain.Profiles.Registration;
+using zavit.Domain.Shared;
 
 namespace zavit.Domain.Profiles.Tests.Registration 
 {
@@ -26,7 +27,6 @@ namespace zavit.Domain.Profiles.Tests.Registration
             It should_set_the_email_to_be_the_same_as_registration_email =
                 () => _result.Email.ShouldEqual(_accountProfileRegistration.Email);
 
-
             Establish context = () =>
             {
                 _accountProfileRegistration = NewInstanceOf<IProfileRegistration>();
@@ -40,6 +40,7 @@ namespace zavit.Domain.Profiles.Tests.Registration
 
             static Profile _result;
             static IProfileRegistration _accountProfileRegistration;
+            const string EmailVerificationCode = "RandomGuid";
             const string ProfileImage = "profileImage";
         }
     }

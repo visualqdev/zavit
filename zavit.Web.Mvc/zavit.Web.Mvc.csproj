@@ -207,6 +207,8 @@
     <Content Include="app\views\yourVenue\indexView.js" />
     <Content Include="app\views\yourVenue\venueActivitiesPartial.js" />
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />
+    <Content Include="Images\mail\hero_1_600x230.png" />
+    <Content Include="Images\mail\logo_50x125.png" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />
     <Content Include="app\modules\account\externalAccountClient.js" />
@@ -302,8 +304,11 @@
     <Content Include="package.json" />
     <Content Include="AppSettings\appSettings.Debug.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\TermsAndConditions\Index.cshtml" />
+    <Content Include="Views\AccountVerification\Index.cshtml" />
+    <Content Include="Views\Shared\_StaticLayout.cshtml" />
     <Content Include="Views\Sitemap\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -316,11 +321,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalRConfig.cs" />
+    <Compile Include="Controllers\AccountVerificationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TermsAndConditionsController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
@@ -328,12 +336,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IocConfiguration\Installers\WebMvcInstaller.cs" />
+    <Compile Include="IocConfiguration\WindsorControllerFactory.cs" />
     <Compile Include="MvcStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\DatabaseSettings.cs" />
     <Compile Include="Settings\ExternalLoginsSettings.cs" />
     <Compile Include="Settings\GoogleApiSettings.cs" />
     <Compile Include="Settings\LoggingSettings.cs" />
+    <Compile Include="Settings\MailSettings.cs" />
     <Compile Include="Settings\StorageConfig.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\IInboxMessageBroadcastRequestFactory.cs" />
     <Compile Include="SignalR\Messaging\Broadcasting\DtoFactories\InboxMessageBroadcastRequestFactory.cs" />
@@ -360,7 +370,6 @@
     <Compile Include="SignalR\Messaging\Observers\MessageSentSignalRObserver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +397,10 @@
       <Project>{6E1D7AC9-A3A0-4045-881E-D66409858170}</Project>
       <Name>zavit.Infrastructure.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Mailing\zavit.Infrastructure.Mailing.csproj">
+      <Project>{E0B2C8A2-F89B-43DC-918E-101012DA47D6}</Project>
+      <Name>zavit.Infrastructure.Mailing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Orm\zavit.Infrastructure.Orm.csproj">
       <Project>{67C23B94-0318-4507-AD94-08BD1E288FB9}</Project>
       <Name>zavit.Infrastructure.Orm</Name>
@@ -399,6 +412,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Storage\zavit.Infrastructure.Storage.csproj">
       <Project>{29DFA3A9-119A-4E96-BD0F-DF9F8E9D9ED6}</Project>
       <Name>zavit.Infrastructure.Storage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Mailing\zavit.Mailing.csproj">
+      <Project>{95b05036-5ec4-4331-99f2-b4c407f5df89}</Project>
+      <Name>zavit.Mailing</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Web.Api\zavit.Web.Api.csproj">
       <Project>{9444ebba-5391-418a-8d38-fd7de96435c8}</Project>

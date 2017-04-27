@@ -65,6 +65,7 @@
     <Compile Include="DomainInstallers\ProfilesInstaller.cs" />
     <Compile Include="DomainInstallers\VenuesInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureImagesInstaller.cs" />
+    <Compile Include="Infrastructure\InfrastructureMailingInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureMessagingInstaller.cs" />
     <Compile Include="Infrastructure\InfrastructureStorage.cs" />
     <Compile Include="Infrastructure\InfrastructureVenueMembershipsInstaller.cs" />
@@ -147,6 +148,10 @@
     <ProjectReference Include="..\zavit.Infrastructure.Logging\zavit.Infrastructure.Logging.csproj">
       <Project>{6e1d7ac9-a3a0-4045-881e-d66409858170}</Project>
       <Name>zavit.Infrastructure.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zavit.Infrastructure.Mailing\zavit.Infrastructure.Mailing.csproj">
+      <Project>{e0b2c8a2-f89b-43dc-918e-101012da47d6}</Project>
+      <Name>zavit.Infrastructure.Mailing</Name>
     </ProjectReference>
     <ProjectReference Include="..\zavit.Infrastructure.Messaging\zavit.Infrastructure.Messaging.csproj">
       <Project>{c934a74e-f5a1-45f1-8444-b943ca0dd521}</Project>

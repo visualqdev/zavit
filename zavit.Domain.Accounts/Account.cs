@@ -1,4 +1,5 @@
-﻿using zavit.Domain.Accounts.Registrations;
+﻿using System;
+using zavit.Domain.Accounts.Registrations;
 using zavit.Domain.Profiles;
 using zavit.Domain.Shared;
 
@@ -13,6 +14,10 @@ namespace zavit.Domain.Accounts
         public virtual AccountType AccountType { get; set; }
 
         public virtual Profile Profile { get; set; }
+        public virtual DateTime DateCreated { get; set; }
+        public virtual string VerificationCode { get; set; }
+        public virtual DateTime? DateVerified { get; set; }
+        public virtual bool NeedsVerification => !string.IsNullOrWhiteSpace(VerificationCode);
 
         public virtual bool VerifyPassword(string password, IAccountSecurity accountSecurity)
         {
@@ -20,6 +25,12 @@ namespace zavit.Domain.Accounts
                 return false;
 
             return accountSecurity.ValidatePassword(password, Password);
+        }
+
+        public virtual void Verify(IDateTime dateTime)
+        {
+            VerificationCode = null;
+            DateVerified = dateTime.UtcNow;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿import * as AccountService from "./accountService";
+﻿    import * as AccountService from "./accountService";
 import * as ExternalAccountService from "./externalAccountService";
 import * as LoginModal from "./loginModal";
 import * as PostLoginRedirect from "./postLoginRedirect";
@@ -23,6 +23,9 @@ const form = `
                             <input type='password' id='registerPassword' placeholder='Password'>
                             <input type='submit' value='Register'>
                         </form>
+                        <div class='registerHelp'>
+                            By registering you agree to <a href="/termsandconditions">Terms & Conditions</a>
+                        </div>
                         <div class='registerHelp'>
                             <a href='#' id='registerLoginLink'>Already registered? Login</a>
                         </div>
