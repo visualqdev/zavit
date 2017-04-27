@@ -15,7 +15,15 @@ html, body {
 h1,h2,h3,h4,h5,h6 {
     color:@logo;
 }
-
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: @scrollbar-color;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
 a, a:hover {
     color:@call-to-action;
 }
@@ -67,8 +75,6 @@ a, a:hover {
         width: 100%;
     }
 }
-
-
 
 .contentContainer {
     display: flex;
@@ -157,14 +163,15 @@ a, a:hover {
 	        font-size: 30px;
         }
          a.navbar-brand {
-            letter-spacing: -2px;
-            font-size: 50px;
+            
+            font-size: 42px;
             background: @logo;
             color: white;
-             font-family:'Bauhaus 93';
+             font-family: 'Signika', sans-serif;
             }
          a:first-letter {
-             color:lightgrey;
+             color:@logo-firstletter;
+
          }
     }   
    

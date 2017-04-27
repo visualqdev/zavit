@@ -13,7 +13,7 @@
         this.markers = [];
         this.pannedBy = { x: 0, y: 0 };
         this.mapCanScroll = options.mapCanScroll || true;
-        this.controlsAreDisabled = options.controlsAreDisabled || false;
+        this.controlsAreDisabled = options.controlsAreDisabled || true;
         this.mapIsDraggable = options.mapIsDraggable || true;
         this.mapIsFixed = options.thisMapIsFixed || false;
         this.mapContainer = options.mapContainer || false;
