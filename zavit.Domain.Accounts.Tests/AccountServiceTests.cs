@@ -19,7 +19,7 @@ namespace zavit.Domain.Accounts.Tests
             It should_store_the_new_account_in_the_repository =
                 () => Injected<IAccountRepository>().AssertWasCalled(r => r.Save(_account));
 
-            It should_return_a_success_regsitration_result = () => _result.ShouldEqual(_successRegistrationResult);
+            It should_return_a_success_registration_result = () => _result.ShouldEqual(_successRegistrationResult);
 
             It should_send_an_email_verification_mail =
                 () => Injected<IVerifyEmailMailer>().AssertWasCalled(m => m.SendMail(_account));
