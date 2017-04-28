@@ -39,8 +39,10 @@ export function threadSelected(selectedThread) {
 export function adjustHeightOfMainContainer($messagesContainer) {
 
     const topOfMessages = $messagesContainer.offset().top,
-        heightOfControls = $("#controls").height(),
-        heightOfMargin = parseInt($("#controls").css("margin-top")),
+        $controls = $("#controls"),
+        $threadTitle = $("#threadTitle"),
+        heightOfControls = $controls.height(),
+        heightOfMargin = parseInt($controls.css("margin-top")),
         heightOfContainerMargin = parseInt($("#messagesContainer").css("margin-top")),
         heightOfFooter = $(".footer").height();
 
@@ -49,8 +51,8 @@ export function adjustHeightOfMainContainer($messagesContainer) {
     if (window.matchMedia("(max-width: 990px)").matches) {
 
         heightOfMessagesContainer = heightOfMessagesContainer -
-            $("#threadTitle").position().top -
-            $("#threadTitle").height() -
+            $threadTitle.position().top -
+            $threadTitle.height() -
             $("#backToInbox").height() +
             parseInt($("#backToInbox").css("margin-bottom")) +
             parseInt($("#threadTitle").css("margin-bottom"));
@@ -108,8 +110,9 @@ export function adjustCssPositioningForMessagesContainer($messagesContainer) {
 }
 
 function adjustHeightOfMessageThreadColumn() {
+    const $controls = $("#controls");
     if(!window.matchMedia("(max-width: 990px)").matches)  
-        $("#messageThreadsContainer").css("max-height", $("#controls").position().top + $("#controls").height() + parseInt($("#controls").css("margin-top") + parseInt($("#controls").css("margin-bottom"))));
+        $("#messageThreadsContainer").css("max-height", $controls.position().top + $controls.height() + parseInt($controls.css("margin-top") + parseInt($controls.css("margin-bottom"))));
 
 }
 
