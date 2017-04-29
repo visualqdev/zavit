@@ -3,8 +3,9 @@
 export function setUp(options) {
     const $messagesContainer = $("#messages");
     setWindowResizeWatch($messagesContainer);
-    adjustHeightOfMainContainer($messagesContainer);
+    
     adjustCssPositioningForMessagesContainer($messagesContainer);
+    adjustHeightOfMainContainer($messagesContainer);
     adjustHeightOfMessageThreadColumn();
     setMediaQueryWatch();
     adjustInboxThreadListLayout();
@@ -38,13 +39,27 @@ export function threadSelected(selectedThread) {
 export function adjustHeightOfMainContainer($messagesContainer) {
 
     const topOfMessages = $messagesContainer.offset().top,
-        heightOfControls = $("#controls").height(),
-        heightOfMargin = parseInt($("#controls").css("margin-top")),
+        $controls = $("#controls"),
+        $threadTitle = $("#threadTitle"),
+        heightOfControls = $controls.height(),
+        heightOfMargin = parseInt($controls.css("margin-top")),
         heightOfContainerMargin = parseInt($("#messagesContainer").css("margin-top")),
         heightOfFooter = $(".footer").height();
-        let heightOfMessagesContainer = $(window).height() - topOfMessages - heightOfControls - heightOfFooter - heightOfMargin - heightOfContainerMargin;
 
-        if (window.matchMedia("(max-width: 990px)").matches) heightOfMessagesContainer = heightOfMessagesContainer - parseInt($("#arrangeNew").css("margin-top"));
+    let heightOfMessagesContainer = $(window).height() - heightOfControls - heightOfFooter - heightOfMargin - heightOfContainerMargin;
+
+    if (window.matchMedia("(max-width: 990px)").matches) {
+
+        heightOfMessagesContainer = heightOfMessagesContainer -
+            $threadTitle.position().top -
+            $threadTitle.height() -
+            $("#backToInbox").height() +
+            parseInt($("#backToInbox").css("margin-bottom")) +
+            parseInt($("#threadTitle").css("margin-bottom"));
+
+    } else {
+        heightOfMessagesContainer = heightOfMessagesContainer - topOfMessages;
+    }
 
     $messagesContainer.height(heightOfMessagesContainer);
 }
@@ -95,7 +110,9 @@ export function adjustCssPositioningForMessagesContainer($messagesContainer) {
 }
 
 function adjustHeightOfMessageThreadColumn() {
-    if(!window.matchMedia("(max-width: 990px)").matches)  $("#messageThreadsContainer").css("max-height", $("#controls").position().top + $("#controls").height() + parseInt($("#controls").css("margin-top") + parseInt($("#controls").css("margin-bottom"))));
+    const $controls = $("#controls");
+    if(!window.matchMedia("(max-width: 990px)").matches)  
+        $("#messageThreadsContainer").css("max-height", $controls.position().top + $controls.height() + parseInt($controls.css("margin-top") + parseInt($controls.css("margin-bottom"))));
 
 }
 
