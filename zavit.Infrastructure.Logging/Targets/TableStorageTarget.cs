@@ -2,6 +2,7 @@
 using NLog;
 using NLog.Common;
 using NLog.Targets;
+using zavit.Domain.Shared;
 using zavit.Infrastructure.Storage;
 
 namespace zavit.Infrastructure.Logging.Targets
@@ -10,19 +11,25 @@ namespace zavit.Infrastructure.Logging.Targets
     {
         readonly ILoggingSettings _loggingSettings;
         readonly ITableStorage _tableStorage;
+        readonly IDateTime _dateTime;
+        readonly IGuid _guid;
 
-        public TableStorageTarget(ILoggingSettings loggingSettings, ITableStorage tableStorage)
+        public TableStorageTarget(ILoggingSettings loggingSettings, ITableStorage tableStorage, IDateTime dateTime, IGuid guid)
         {
             _loggingSettings = loggingSettings;
             _tableStorage = tableStorage;
+            _dateTime = dateTime;
+            _guid = guid;
         }
 
         protected override void Write(LogEventInfo loggingEvent)
         {
             try
             {
-                var logEntry = new LogEntry
+                var logEntry = new LogEntry()
                 {
+                    PartitionKey = _dateTime.UtcNow.ToString("yyyy-MM"),
+                    RowKey = $"{(DateTime.MaxValue.Ticks - _dateTime.UtcNow.Ticks):D19}-{_guid.NewGuidString()}",
                     Timestamp = loggingEvent.TimeStamp,
                     Message = $"{loggingEvent.FormattedMessage}",
                     Level = loggingEvent.Level.Name,

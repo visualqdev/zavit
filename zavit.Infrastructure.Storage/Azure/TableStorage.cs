@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage;
@@ -18,7 +19,7 @@ namespace zavit.Infrastructure.Storage.Azure
 
         public async Task<T> GetTableEntity<T>(string tableName, string partition, string rowKey) where T : TableStorageEntityBase, new()
         {
-            var table = GetStorageTable(tableName);
+            var table = await GetStorageTable(tableName);
 
             var retrieveOperation = TableOperation.Retrieve<TableStorageEntityAdapter<T>>(partition, rowKey);
             
@@ -29,7 +30,7 @@ namespace zavit.Infrastructure.Storage.Azure
 
         public async Task<IEnumerable<T>> GetTableEntities<T>(string tableName, string partition, int take, string query = null) where T : TableStorageEntityBase, new()
         {
-            var table = GetStorageTable(tableName);
+            var table = await GetStorageTable(tableName);
 
             var partitionQuery = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partition);
 
@@ -45,14 +46,14 @@ namespace zavit.Infrastructure.Storage.Azure
 
         public async Task SaveTableEntity<T>(T tableEntity, string tableName) where T : TableStorageEntityBase, new()
         {
-            var table = GetStorageTable(tableName);
+            var table = await GetStorageTable(tableName);
 
             var tableEntityAdapter = new TableStorageEntityAdapter<T>(tableEntity);
             var insertOperation = TableOperation.Insert(tableEntityAdapter);
             await table.ExecuteAsync(insertOperation);
         }
 
-        CloudTable GetStorageTable(string tableName)
+        async Task<CloudTable> GetStorageTable(string tableName)
         {
             // Retrieve the storage account from the connection string.
             var storageAccount = CloudStorageAccount.Parse(_storageConfig.AzureStorageConnectionString);
@@ -62,6 +63,9 @@ namespace zavit.Infrastructure.Storage.Azure
 
             // Create the CloudTable object that represents the table.
             var table = tableClient.GetTableReference(tableName);
+
+            // Create the table if it doesn't exist.
+            await table.CreateIfNotExistsAsync();
 
             return table;
         }

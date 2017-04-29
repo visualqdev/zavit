@@ -2,6 +2,7 @@
 using NLog.Config;
 using NLog.Targets;
 using NLog.Targets.Wrappers;
+using zavit.Domain.Shared;
 using zavit.Infrastructure.Core;
 using zavit.Infrastructure.Logging.Targets;
 using zavit.Infrastructure.Storage;
@@ -31,7 +32,7 @@ namespace zavit.Infrastructure.Logging
 
             if (loggingSettings.TableStorageLogEnabled)
             {
-                var tableStorageTarget = new TableStorageTarget(loggingSettings, container.Resolve<ITableStorage>());
+                var tableStorageTarget = new TableStorageTarget(loggingSettings, container.Resolve<ITableStorage>(), container.Resolve<IDateTime>(), container.Resolve<IGuid>());
 
                 var asyncDebuggerWrapper = new AsyncTargetWrapper(tableStorageTarget);
                 config.AddTarget("tableStorageTarget", asyncDebuggerWrapper);

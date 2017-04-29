@@ -34,7 +34,7 @@ namespace zavit.Mailing.EmailTemplates.VerifyEmail
             var body = Engine.Razor.RunCompile(template, "verifyEmailTemplate", typeof(VerifyEmailModel), model);
             var plainText = PlainTextBody(model);
 
-            await _mailer.SendMail("Verify email", body, plainText, "richard.vidis@live.co.uk");
+            await _mailer.SendMail("Verify email", body, plainText, account.Profile.Email);
         }
 
         static string PlainTextBody(VerifyEmailModel verifyEmailModel)
