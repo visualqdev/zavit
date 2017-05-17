@@ -2,10 +2,6 @@
 import * as VenueService from "./venueService";
 import * as ActivitiesClient from "../activities/activityClient";
 
-
-
-
-
 export function getVenueMembership(options) {
     let membershipPromise = null;
     if (options.venueId) {
@@ -30,7 +26,7 @@ export function getVenueMembership(options) {
           membershipDetails : results[0],
           allOtherActivities : sortActivities(results[0], results[1])
         }))
-        .catch(function(err) { /* ... */ console.log(err) });
+        .catch(reject);
     });
 }
 
