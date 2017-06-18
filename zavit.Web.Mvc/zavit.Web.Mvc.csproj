@@ -248,6 +248,7 @@
     <Content Include="app\modules\map\map.js" />
     <Content Include="libraries\jquery.signalR-2.2.1.js" />
     <Content Include="libraries\jquery.signalR-2.2.1.min.js" />
+    <Content Include="sitemap.xml" />
     <Content Include="test-context.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -313,7 +314,6 @@
     <Content Include="Views\TermsAndConditions\Index.cshtml" />
     <Content Include="Views\AccountVerification\Index.cshtml" />
     <Content Include="Views\Shared\_StaticLayout.cshtml" />
-    <Content Include="Views\Sitemap\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\About\Index.cshtml" />
@@ -338,7 +338,6 @@
     <Compile Include="Controllers\AccountVerificationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TermsAndConditionsController.cs" />
-    <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -436,6 +435,9 @@
       <Project>{0E38A1F3-78ED-4F45-B696-A71E178878EF}</Project>
       <Name>zavit.Web.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
