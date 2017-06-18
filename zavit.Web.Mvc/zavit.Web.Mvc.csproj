@@ -209,6 +209,10 @@
     <Content Include="app\views\yourVenue\venueMembersPartial.js" />
     <Content Include="Images\mail\hero_1_600x230.png" />
     <Content Include="Images\mail\logo_50x125.png" />
+    <Content Include="Images\web\banner_add.png" />
+    <Content Include="Images\web\banner_chat.png" />
+    <Content Include="Images\web\banner_search.png" />
+    <Content Include="Images\web\hero_about.jpg" />
     <Content Include="libraries\fetch-ie8.js" />
     <Content Include="app\modules\account\accountClient.js" />
     <Content Include="app\modules\account\externalAccountClient.js" />
@@ -312,6 +316,8 @@
     <Content Include="Views\Sitemap\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="CSS\about.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -328,6 +334,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalRConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountVerificationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TermsAndConditionsController.cs" />

@@ -1,0 +1,84 @@
+﻿@import '.\libraries\colours';
+
+.aboutHeading{
+    text-align: center;
+    margin: 20px 0px 20px 0px; 
+}
+
+#aboutBanner {
+    background-repeat: no-repeat;
+    background-image: url('/Images/web/hero_about.jpg');
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    overflow: auto;   
+
+    .aboutSteps{
+        width: 90%;  
+        display: block;     
+
+        @media (min-width: 992px){
+            width: 80%;
+        }
+
+        @media (min-width: 1200px){
+            width: 60%
+        }
+
+        .aboutStep{
+            margin: 0 auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 200px;
+            min-height: 300px;
+            background-color: @logo;   
+            overflow: auto;         
+
+            img{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 30px;
+                margin-bottom: 20px;
+                width: 128px;
+                height: 128px;                
+            }
+
+            p{
+                text-align: center;
+            }
+
+            h3{
+                color: @call-to-action;
+                text-align: center;
+                font-weight: bold;
+            }
+        } 
+        
+        .exploreContainer{
+            text-align: center;
+
+            a{
+                margin: 30px 0;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }       
+    }    
+}
+
+#descriptionContainer{
+    width: 90%;  
+    display: block;
+    margin: 30px auto; 
+    font-size: 18px;
+    color: @logo;   
+
+    @media (min-width: 992px){
+        width: 80%;
+    }
+
+    @media (min-width: 1200px){
+        width: 60%
+    }
+}
